@@ -43,6 +43,7 @@ public class doctorSignIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 500));
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new Color(60, 60, 60, 80));
@@ -135,12 +136,13 @@ public class doctorSignIn extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(160, 50, 510, 310);
+        jPanel2.setBounds(250, 110, 510, 310);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/doctor.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 500));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(-60, 0, 940, 460);
+        jLabel1.setBounds(0, 0, 1000, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

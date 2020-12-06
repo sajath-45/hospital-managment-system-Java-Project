@@ -36,27 +36,28 @@ public class home extends javax.swing.JFrame {
         patientButton = new javax.swing.JButton();
         receptionistButton = new javax.swing.JButton();
         adminButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 500));
         jPanel2.setLayout(null);
 
         doctorIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/doctor (1).png"))); // NOI18N
         jPanel2.add(doctorIcon);
-        doctorIcon.setBounds(530, 120, 120, 140);
+        doctorIcon.setBounds(550, 40, 120, 150);
 
         patientIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/patient.png"))); // NOI18N
         jPanel2.add(patientIcon);
-        patientIcon.setBounds(790, 120, 130, 130);
+        patientIcon.setBounds(790, 40, 130, 130);
 
         receptionistIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/receptionist.png"))); // NOI18N
         jPanel2.add(receptionistIcon);
-        receptionistIcon.setBounds(530, 350, 120, 120);
+        receptionistIcon.setBounds(570, 250, 120, 130);
 
         adminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/unauthorized-person.png"))); // NOI18N
         jPanel2.add(adminIcon);
-        adminIcon.setBounds(790, 360, 130, 110);
+        adminIcon.setBounds(800, 260, 130, 120);
 
         doctorButton.setBackground(new java.awt.Color(204, 204, 204));
         doctorButton.setText("Doctor");
@@ -66,27 +67,31 @@ public class home extends javax.swing.JFrame {
             }
         });
         jPanel2.add(doctorButton);
-        doctorButton.setBounds(550, 270, 81, 25);
+        doctorButton.setBounds(570, 200, 81, 25);
 
         patientButton.setBackground(new java.awt.Color(204, 204, 204));
         patientButton.setText("Patient");
         jPanel2.add(patientButton);
-        patientButton.setBounds(830, 270, 86, 25);
+        patientButton.setBounds(830, 200, 86, 25);
 
         receptionistButton.setBackground(new java.awt.Color(204, 204, 204));
         receptionistButton.setText("Receptionist");
+        receptionistButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                receptionistButtonActionPerformed(evt);
+            }
+        });
         jPanel2.add(receptionistButton);
-        receptionistButton.setBounds(540, 480, 123, 25);
+        receptionistButton.setBounds(570, 400, 123, 25);
 
         adminButton.setBackground(new java.awt.Color(204, 204, 204));
         adminButton.setText("Admin");
         jPanel2.add(adminButton);
-        adminButton.setBounds(810, 480, 94, 25);
+        adminButton.setBounds(820, 400, 94, 25);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/shutterstock_1021932094 (1).jpg"))); // NOI18N
-        jLabel4.setOpaque(true);
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(0, 0, 1000, 560);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/home.png"))); // NOI18N
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1000, 460);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,7 +101,10 @@ public class home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -106,6 +114,10 @@ public class home extends javax.swing.JFrame {
     private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorButtonActionPerformed
+
+    private void receptionistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receptionistButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_receptionistButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,7 +160,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel adminIcon;
     private javax.swing.JButton doctorButton;
     private javax.swing.JLabel doctorIcon;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton patientButton;
     private javax.swing.JLabel patientIcon;
