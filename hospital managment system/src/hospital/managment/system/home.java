@@ -61,6 +61,11 @@ public class home extends javax.swing.JFrame {
 
         doctorButton.setBackground(new java.awt.Color(204, 204, 204));
         doctorButton.setText("Doctor");
+        doctorButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                doctorButtonMousePressed(evt);
+            }
+        });
         doctorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doctorButtonActionPerformed(evt);
@@ -71,11 +76,21 @@ public class home extends javax.swing.JFrame {
 
         patientButton.setBackground(new java.awt.Color(204, 204, 204));
         patientButton.setText("Patient");
+        patientButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                patientButtonMousePressed(evt);
+            }
+        });
         jPanel2.add(patientButton);
         patientButton.setBounds(830, 200, 86, 25);
 
         receptionistButton.setBackground(new java.awt.Color(204, 204, 204));
         receptionistButton.setText("Receptionist");
+        receptionistButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                receptionistButtonMousePressed(evt);
+            }
+        });
         receptionistButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 receptionistButtonActionPerformed(evt);
@@ -86,6 +101,11 @@ public class home extends javax.swing.JFrame {
 
         adminButton.setBackground(new java.awt.Color(204, 204, 204));
         adminButton.setText("Admin");
+        adminButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                adminButtonMousePressed(evt);
+            }
+        });
         jPanel2.add(adminButton);
         adminButton.setBounds(820, 400, 94, 25);
 
@@ -117,7 +137,36 @@ public class home extends javax.swing.JFrame {
 
     private void receptionistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receptionistButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_receptionistButtonActionPerformed
+
+    private void doctorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorButtonMousePressed
+        // TODO add your handling code here:
+        int type=1;
+        Login doctorSignIn= new Login(type);
+        doctorSignIn.setVisible(true);
+    }//GEN-LAST:event_doctorButtonMousePressed
+
+    private void receptionistButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistButtonMousePressed
+        // TODO add your handling code here:
+        int type=2;
+         Login login= new Login(type);
+        login.setVisible(true);
+    }//GEN-LAST:event_receptionistButtonMousePressed
+
+    private void adminButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminButtonMousePressed
+        // TODO add your handling code here:
+        int type=3;
+        Login login= new Login(type);
+        login.setVisible(true);
+    }//GEN-LAST:event_adminButtonMousePressed
+
+    private void patientButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientButtonMousePressed
+        // TODO add your handling code here:
+        int type=4;
+        Login login= new Login(type);
+        login.setVisible(true);
+    }//GEN-LAST:event_patientButtonMousePressed
 
     /**
      * @param args the command line arguments

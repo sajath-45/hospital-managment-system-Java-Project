@@ -6,19 +6,34 @@
 package hospital.managment.system;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author sajath
  */
-public class doctorSignIn extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
+    private final String USER_FILE_PATH = "files/users.txt";
+    private final File USER_FILE = new File(USER_FILE_PATH);
+    private final String imagePath="src/resources/new/";
 
     /**
      * Creates new form doctorSignIn
+     * @param type
      */
-    public doctorSignIn() {
+    public Login(int type) {
         initComponents();
-        createUi();
+        createUi(type);
+    }
+
+    private Login() {
+        
     }
 
     /**
@@ -33,13 +48,13 @@ public class doctorSignIn extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        userNameField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        loginBtn = new javax.swing.JButton();
+        imgLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,18 +71,19 @@ public class doctorSignIn extends javax.swing.JFrame {
         jLabel2.setText("Medical Officer Login");
         jLabel2.setOpaque(true);
 
-        jTextField1.setBorder(null);
-        jTextField1.setOpaque(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userNameField.setBorder(null);
+        userNameField.setPreferredSize(new java.awt.Dimension(4, 19));
+        userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                userNameFieldActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        passwordField.setBorder(null);
+        passwordField.setMinimumSize(new java.awt.Dimension(4, 19));
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                passwordFieldActionPerformed(evt);
             }
         });
 
@@ -78,13 +94,18 @@ public class doctorSignIn extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/lock (1).png"))); // NOI18N
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 51));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setBackground(new java.awt.Color(0, 153, 51));
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("Login");
+        loginBtn.setBorder(null);
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginBtnMousePressed(evt);
+            }
+        });
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
@@ -104,11 +125,11 @@ public class doctorSignIn extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(124, Short.MAX_VALUE)
@@ -122,27 +143,26 @@ public class doctorSignIn extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(60, 60, 60)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(250, 110, 510, 310);
+        jPanel2.setBounds(170, 70, 510, 310);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/doctor.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 500));
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 500);
+        imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/doctor.jpg"))); // NOI18N
+        imgLabel.setPreferredSize(new java.awt.Dimension(1000, 500));
+        jPanel1.add(imgLabel);
+        imgLabel.setBounds(0, 0, 1000, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,19 +181,110 @@ public class doctorSignIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_userNameFieldActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-    private void  createUi(){
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void loginBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMousePressed
+        // TODO add your handling code here:
+                if(this.validateFields()){
+                    if(this.validateLogin()){
+                         JOptionPane.showMessageDialog(null, "login sucessful");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Inavlid creditials");
+                    }
+                    
+                    
+                }
+        
+        
+    }//GEN-LAST:event_loginBtnMousePressed
+    private void  createUi(int type){
         jPanel2.setBackground(new Color(60, 60, 60, 80));
+        if(type==1){
+          
+            String imageName = "src/resources/new/doctor.jpg";
+            ImageIcon icon = new ImageIcon(imageName);
+            icon.getImage().flush();
+            imgLabel.setIcon(icon);
+            jLabel2.setText("Medical Officer Login");
+        
+        }
+        else if(type==2){
+             jLabel2.setText("Receptionist Login");
+             String imageName = "src/resources/new/r1.jpg";
+            ImageIcon icon = new ImageIcon(imageName);
+            icon.getImage().flush();
+            imgLabel.setIcon(icon);            
+        }
+        else if(type==3){
+             jLabel2.setText("Admin Login");
+             String imageName = "src/resources/new/admin.jpg";
+            ImageIcon icon = new ImageIcon(imageName);
+            icon.getImage().flush();
+            imgLabel.setIcon(icon);
+            
+        }
+        else if(type==4){
+             jLabel2.setText("Patient Login");
+               String imageName = "src/resources/new/pat.jpg";
+            ImageIcon icon = new ImageIcon(imageName);
+            icon.getImage().flush();
+            imgLabel.setIcon(icon);
+            
+        }
+        
+    }
+    
+    
+    public boolean validateLogin(){
+        boolean isUserValid=false;
+        
+         try {
+             BufferedReader reader = new BufferedReader(new FileReader(USER_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                 
+                String[] data = line.split(","); //username, password, email, etc
+                System.out.println("username"+data[0]);
+                 System.out.println("pass"+data[1]);
+               if(data[0].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[1])){
+                    isUserValid=true;
+               }
+            }
+            reader.close();
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return isUserValid;
+        
+        
+    }
+    public  boolean validateFields(){
+        if(passwordField.getText().length()!=0 && userNameField.getText().length()!=0){
+             return true;
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please enter all fileds");
+            return false;
+        }
+      
+      
         
     }
     /**
@@ -194,37 +305,37 @@ public class doctorSignIn extends javax.swing.JFrame {
             }
             
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(doctorSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(doctorSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(doctorSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(doctorSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new doctorSignIn()
-                        .setVisible(true);
+                new Login().setVisible(true);
                 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel imgLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 
     

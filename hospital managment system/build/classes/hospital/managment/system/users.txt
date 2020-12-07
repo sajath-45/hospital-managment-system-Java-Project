@@ -1,0 +1,4 @@
+sajath,123,sajath@gmail.com,male,22
+ruwan,077,ruwan@gmail.com,male,22
+sangee,456,sajath@gmail.com,female,22
+lathusan,500,lathusan@gmail.com,male,22
