@@ -65,12 +65,10 @@
                               <Component id="jTextField1" max="32767" attributes="0"/>
                               <Component id="jTextField2" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jDateChooser1" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" pref="198" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jComboBox1" pref="198" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jDateChooser2" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -115,7 +113,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" max="32767" attributes="0"/>
                       <Component id="jComboBox2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jDateChooser1" pref="32" max="32767" attributes="0"/>
+                      <Component id="jDateChooser2" pref="34" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -369,8 +367,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -386,6 +382,8 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
