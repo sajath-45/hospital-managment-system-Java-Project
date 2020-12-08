@@ -1,0 +1,4 @@
+DR sajath,sajath ahamed,male,077378415,199829003939,16/10/1998,wijayba mawatha,single,123456,D-001,sajathahamed@hmail.com,11/10/2015,myfile,cardio
+DR ruwan,ruwan ,male,78459521,1998200009,7/5/1998,rathnapura mawatha,single,123456,D-002,ruwan@hmail.com,11/10/2015,myfile,othopaedic
+DR sangee,sangeerthana ,female,0773785555,1998884403939,17/10/1998,jaffna mawatha,single,123456,D-003,sajathahamed2@hmail.com,11/10/2015,myfile,dental
+DR lathusan,lathusan,male,077378415,199829003939,16/8/1998,jaffna mawatha,married,123456,D-004,thusan2@hmail.com,11/10/2015,myfile,cardio
