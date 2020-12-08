@@ -40,20 +40,20 @@ public class MedicalOfficer {
     }
     
     
-    public void setStrStaffId(String i){
-        this.strStaffId=i;
+    public void setStrStaffId(String id){
+        this.strStaffId=id;
         
     }
-    public void setStrEmailAddress(String e){
-        this.strEmailAddress=e;
+    public void setStrEmailAddress(String email){
+        this.strEmailAddress=email;
     }
-    public void setStrDateOfJoining(String d){
-        this.strDateOfJoining=d;
+    public void setStrDateOfJoining(String date){
+        this.strDateOfJoining=date;
     }
-    public void setStrCv(String c){
-        this.strCv=c;
+    public void setStrCv(String cv){
+        this.strCv=cv;
     }
-    public void setStrSpecialityArea(String s){
-        this.strSpecialityArea=s;
+    public void setStrSpecialityArea(String speciality){
+        this.strSpecialityArea=speciality;
     }
 }
