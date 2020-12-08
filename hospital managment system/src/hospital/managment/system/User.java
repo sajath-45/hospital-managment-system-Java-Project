@@ -29,6 +29,8 @@ public class User {
         this.gender = "";
         this.dateOfBirth = "";
         this.address = "";
+        this.password="";
+        
     }  
     
     // Constructor with parameters
