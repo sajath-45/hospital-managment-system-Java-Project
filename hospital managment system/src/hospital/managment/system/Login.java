@@ -221,7 +221,7 @@ public class Login extends javax.swing.JFrame {
         }
         else if(type==2){
              jLabel2.setText("Receptionist Login");
-             String imageName = "src/resources/new/r1.jpg";
+             String imageName = "src/resources/new/r1.png";
             ImageIcon icon = new ImageIcon(imageName);
             icon.getImage().flush();
             imgLabel.setIcon(icon);            
@@ -236,7 +236,7 @@ public class Login extends javax.swing.JFrame {
         }
         else if(type==4){
              jLabel2.setText("Patient Login");
-               String imageName = "src/resources/new/pat.jpg";
+               String imageName = "src/resources/new/pat.png";
             ImageIcon icon = new ImageIcon(imageName);
             icon.getImage().flush();
             imgLabel.setIcon(icon);
