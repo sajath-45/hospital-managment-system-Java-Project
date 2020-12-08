@@ -9,7 +9,7 @@ package hospital.managment.system;
  *
  * @author Sangeerthana
  */
-public class MedicalOfficer {
+public class MedicalOfficer extends User {
     private String strStaffId;
     private String strEmailAddress;
     private String strDateOfJoining;
@@ -17,7 +17,13 @@ public class MedicalOfficer {
     private String strSpecialityArea;
     
     
-    public MedicalOfficer(){
+    public MedicalOfficer(String userName,String name,String gender,int mobile,int idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv,String speciality){
+        super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
+        this.setStrStaffId(id);
+        this.setStrEmailAddress(email);
+        this.setStrDateOfJoining(date);
+        this.setStrCv(cv);
+        this.setStrSpecialityArea(speciality);
         
     }
     

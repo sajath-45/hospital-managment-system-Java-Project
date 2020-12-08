@@ -18,18 +18,19 @@ public class User {
     private int idCardNo;
     private String dateOfBirth;
     private String address;
-    private boolean maritalStatus;
+    private String  maritalStatus;
     private  String password;
    
     
     // Default constructor
-    public User(){
-        this.userName = "";
-        this.name = "";
-        this.gender = "";
-        this.dateOfBirth = "";
-        this.address = "";
-        this.password="";
+    public User(String userName,String name,String gender,int mobile,int idNumber,String dob,String address,String martialStatus,String password){
+        this.setUserName(userName);
+        this.setName(name);
+        this.setGender(gender);
+        this.setphoneNumber(mobile);
+        this.setAddress(address);
+        this.setMaritalStatus(martialStatus);
+        this.setStrPassword(password);
         
     }  
     
@@ -62,8 +63,11 @@ public class User {
     public String getAddress(){
         return address;
     }
-    public boolean getMaritalStatus(){
+    public String getMaritalStatus(){
         return maritalStatus;
+    }
+    public String getPassword(){
+        return this.password;
     }
     
     
@@ -88,8 +92,11 @@ public class User {
     public void setAddress(String address){
          this.address=address;
     }
-    public void setMaritalStatus(boolean maritalstatus){
+    public void setMaritalStatus(String maritalstatus){
          this.maritalStatus=maritalStatus;
+    }
+    public void setStrPassword(String password){
+        this.password=password;
     }
     
     

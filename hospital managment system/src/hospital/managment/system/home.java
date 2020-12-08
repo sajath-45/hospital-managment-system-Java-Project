@@ -143,6 +143,7 @@ public class home extends javax.swing.JFrame {
     private void doctorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorButtonMousePressed
         // TODO add your handling code here:
         int type=1;
+         this.setVisible(false);
         Login doctorSignIn= new Login(type);
         doctorSignIn.setVisible(true);
     }//GEN-LAST:event_doctorButtonMousePressed
@@ -150,6 +151,7 @@ public class home extends javax.swing.JFrame {
     private void receptionistButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistButtonMousePressed
         // TODO add your handling code here:
         int type=2;
+         this.setVisible(false);
          Login login= new Login(type);
         login.setVisible(true);
     }//GEN-LAST:event_receptionistButtonMousePressed
@@ -157,14 +159,18 @@ public class home extends javax.swing.JFrame {
     private void adminButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminButtonMousePressed
         // TODO add your handling code here:
         int type=3;
+         this.setVisible(false);
         Login login= new Login(type);
+      
         login.setVisible(true);
     }//GEN-LAST:event_adminButtonMousePressed
 
     private void patientButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientButtonMousePressed
         // TODO add your handling code here:
         int type=4;
+         this.setVisible(false);
         Login login= new Login(type);
+       
         login.setVisible(true);
     }//GEN-LAST:event_patientButtonMousePressed
 

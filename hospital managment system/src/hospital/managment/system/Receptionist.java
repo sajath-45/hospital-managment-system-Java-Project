@@ -9,23 +9,25 @@ package hospital.managment.system;
  *
  * @author Sangeerthana
  */
-public class Receptionist {
-    private int intStaffId;
+public class Receptionist extends User {
+    private String intStaffId;
     private String strMailAddress;
     private String strDateOfJoining;
     private String strCV;
     
     
-    public Receptionist(){
-        this.strMailAddress="";
-        this.strDateOfJoining="";
-        this.strCV="";
+    public Receptionist(String userName,String name,String gender,int mobile,int idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv){
+         super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
+        this.setIntStaffId(id);
+        this.setStrMailAddress(email);
+        this.setStrDateOfJoining(date);
+        this.setStrCV(cv);
         
         
     }
      // getters setters 
     
-    public int getIntStaffId(){
+    public String getIntStaffId(){
         return intStaffId;
     }
     
@@ -43,7 +45,7 @@ public class Receptionist {
     
     
     
-    public void setIntStaffId(int id){
+    public void setIntStaffId(String id){
         this.intStaffId=id;
     }
     public void setStrMailAddress(String mail){
