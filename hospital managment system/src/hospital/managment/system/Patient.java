@@ -9,12 +9,14 @@ package hospital.managment.system;
  *
  * @author Sangeerthana
  */
-public class Patient {
+public class Patient extends User {
     private String strBloodGrp;
     private String strAllergies;
     
-    public Patient(){
-        
+    public Patient(String userName,String name,String gender,int mobile,int idNumber,String dob,String address,String martialStatus,String password,String bloodGrp, String allergies){
+         super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
+        this.setStrBloodGrp(bloodGrp);
+        this.setStrAllergies(allergies);
     }
     
     //getters and setters
