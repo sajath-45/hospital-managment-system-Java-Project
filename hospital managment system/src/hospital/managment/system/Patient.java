@@ -28,10 +28,10 @@ public class Patient {
     }
     
     
-    public void setStrBloodGrp(String b){
-        this.strBloodGrp=b;
+    public void setStrBloodGrp(String blood){
+        this.strBloodGrp=blood;
     }
-    public void setStrAllergies(String a){
-        this.strAllergies=a;
+    public void setStrAllergies(String allergy){
+        this.strAllergies=allergy;
     }
 }

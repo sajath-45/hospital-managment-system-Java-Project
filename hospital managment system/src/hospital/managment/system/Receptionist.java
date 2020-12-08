@@ -43,17 +43,17 @@ public class Receptionist {
     
     
     
-    public void setIntStaffId(int i){
-        this.intStaffId=i;
+    public void setIntStaffId(int id){
+        this.intStaffId=id;
     }
-    public void setStrMailAddress(String m){
-        this.strMailAddress=m;
+    public void setStrMailAddress(String mail){
+        this.strMailAddress=mail;
     }
-    public void setStrDateOfJoining(String d){
-        this.strDateOfJoining=d;
+    public void setStrDateOfJoining(String date){
+        this.strDateOfJoining=date;
     }
-    public void setStrCV(String c){
-        this.strCV=c;
+    public void setStrCV(String cv){
+        this.strCV=cv;
     }
     
     
