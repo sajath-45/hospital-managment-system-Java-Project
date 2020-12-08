@@ -48,8 +48,6 @@ public class adminLogIn extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/profile-user (1).png"))); // NOI18N
 
-        jTextField2.setText("ddd");
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/lock (1).png"))); // NOI18N
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
