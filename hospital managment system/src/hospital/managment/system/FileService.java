@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +23,30 @@ public class FileService {
        private static ArrayList<Receptionist> receptionistList=new ArrayList<Receptionist>();
         
        
-       private final String PATIENT_FILE_PATH = "files/patients.txt";
-         private  final File PATIENTS_FILE = new File(PATIENT_FILE_PATH);
+       private  final String PATIENT_FILE_PATH = "files/patients.txt";
+       private  final File PATIENTS_FILE = new File(PATIENT_FILE_PATH);
          
-         private final String MO_FILE_PATH = "files/medicalofficers.txt";
-         private  final File MO_FILE = new File(MO_FILE_PATH);
+         private static final String MO_FILE_PATH = "files/medicalofficers.txt";
+         private static final File MO_FILE = new File(MO_FILE_PATH);
          
-         private final String RECEPTIONIST_FILE_PATH = "files/receptionist.txt";
-         private  final File RECEPTIONIST_FILE = new File(RECEPTIONIST_FILE_PATH);
+         private static final String RECEPTIONIST_FILE_PATH = "files/receptionist.txt";
+         private static  final File RECEPTIONIST_FILE = new File(RECEPTIONIST_FILE_PATH);
+         
+         private  static final String APPOINTMENTS_FILE_PATH="files/appointments.txt";
+         
+        private static final String USER_FILE_PATH = "files/users.txt";
+        private static final File USER_FILE = new File(USER_FILE_PATH);
+        
+        private static final String VISITOR_FILE_PATH = "files/visitors.txt";
+        private static final File VISITOR_FILE = new File(VISITOR_FILE_PATH);
+        
+         private static final String COMPLAINT_FILE_PATH = "files/complaints.txt";
+        private static final File COMPLAINT_FILE = new File(COMPLAINT_FILE_PATH);
+        
+         private static final String MAIL_FILE_PATH = "files/complaints.txt";
+        private static final File MAIL_FILE = new File(MAIL_FILE_PATH);
+        
+        private static final String IMAGEPATH="src/resources/new/";
       
       
       public FileService(){
@@ -52,6 +70,47 @@ public class FileService {
       public ArrayList<Patient> getPatientList(){
           return this.patientList;
       }
+      
+      public String getUserFilePath(){
+          return USER_FILE_PATH;
+      }
+      public static File getUserFile(){
+          return USER_FILE;
+      }
+       public String getMOFilePath(){
+          return MO_FILE_PATH;
+      }
+       public File getMoFile(){
+          return MO_FILE;
+      }    
+      public String getPatientFilePath(){
+          return PATIENT_FILE_PATH;
+      }
+      public File getPatientFile(){
+          return PATIENTS_FILE;
+      }
+      public String getReceptionistFilePath(){
+          return RECEPTIONIST_FILE_PATH;
+      }
+      public File getReceptionistFile(){
+          return RECEPTIONIST_FILE;
+      }
+        
+        public String getAppointmentsFilePath(){
+          return APPOINTMENTS_FILE_PATH;
+      }
+        public String getVisitorsFilePath(){
+          return VISITOR_FILE_PATH;
+      }
+         public String getComplaintsFilePath(){
+          return COMPLAINT_FILE_PATH;
+      }
+        public String getImagePath(){
+            return IMAGEPATH;
+        }
+         public String getMailsFilePath(){
+            return MAIL_FILE_PATH;
+        }
       
       //getters here
       
@@ -100,7 +159,7 @@ public class FileService {
                return new Patient(userName,name,gender,mobile,idCard,dob,address,status,password,bldGroup,allergy);
       }
       
-   public ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
+   public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
        ArrayList<MedicalOfficer> specialityOfficer= new ArrayList<MedicalOfficer>();
          try {
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
@@ -109,7 +168,7 @@ public class FileService {
                  
                 String[] data = line.split(","); //username, password, email, etc
                 if(data[13].equals(speciality)){
-                MedicalOfficer user=this.createMOUser(data);
+                MedicalOfficer user=createMOUser(data);
                 
                 specialityOfficer.add(user);
                 }
@@ -130,7 +189,7 @@ public class FileService {
    }   
    
    
-    public MedicalOfficer createMOUser(String[] data){
+    public static MedicalOfficer createMOUser(String[] data){
           String userName=data[0];
            String name=data[1];
             String gender=data[2];
@@ -151,6 +210,38 @@ public class FileService {
                
                return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cv,speciality);
       }
+    
+    public static void addAppoinment(Appointment appointment)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(APPOINTMENTS_FILE_PATH,true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(appointment!=null){
+            out.print(appointment.getAppointmentNumber());
+            out.print(","+appointment.getStatus());
+             out.print(","+appointment.getPatient().toString());
+            out.print(","+appointment.getAppointmentDate());
+            out.print(","+appointment.getAppointmentTime());
+            out.print(","+appointment.getMedicalOfficer().toString());
+            out.print(","+appointment.getSpeciality());
+            out.println(","+appointment.getSymtomps());
+            
+
+        }    
+        writer.close();
+        out.close();
+            Appointment.increment();
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
     
     
 }
