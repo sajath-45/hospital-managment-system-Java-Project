@@ -62,4 +62,7 @@ public class MedicalOfficer extends User {
     public void setStrSpecialityArea(String speciality){
         this.strSpecialityArea=speciality;
     }
+     public String toString() {
+        return "DR."+super.toString();
+    }
 }

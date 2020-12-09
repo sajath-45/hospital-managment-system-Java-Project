@@ -1,0 +1,7 @@
+1
+sajath ahamed11/12/20201 11 A.MDR.sajath ahamedcardioSymptoms1
+sajath ahamed16/12/20201 0 A.MDR.sajath ahamedcardioSymptoms1
+,sajath ahamed,24/12/2020,1 0 A.M,DR.sajath ahamed,cardioSymptoms2
+,sajath ahamed,24/12/2020,1 0 A.M,DR.sajath ahamed,cardioSymptoms1
+,sajath ahamed,03/12/2020,1 0 A.M,DR.sajath ahamed,cardioSymptoms1
+,sajath ahamed,18/12/2020,1 0 A.M,DR.sajath ahamed,cardioSymptoms
