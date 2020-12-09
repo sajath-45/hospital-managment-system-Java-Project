@@ -17,19 +17,24 @@ public class Appointment {
     private String status;
     private int appointmentNumber;
     private String symtomps;
+    private String speciality;
+    public static int appointmentCount=1;
+
     
     
     
-    public Appointment(Patient patient,MedicalOfficer officer,String appointmentDate,String appointmentTime,String status,int appointmentNumber,String symtomps)
+    public Appointment(Patient patient,MedicalOfficer officer,String appointmentDate,String appointmentTime,String status,String symtomps,String speciality)
     {
         this.setPatient(patient);
         this.setMedicalOfficer(officer);
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
-        this.setAppointmentNumber(appointmentNumber);
+        this.setAppointmentNumber(appointmentCount);
         this.setStatus(status);
         this.setSymtomps(symtomps);
+        this.setSpeciality(speciality);
     }
+    
     
     public void setPatient(Patient patient){
         this.patient=patient;
@@ -58,6 +63,11 @@ public class Appointment {
         this.symtomps=symtomps;
         
     }
+    public void setSpeciality(String speciality){
+        this.speciality=speciality;
+    }
+    
+    
     public Patient getPatient(){
         return this.patient;
     }
@@ -78,6 +88,13 @@ public class Appointment {
     }      
      public String getSymtomps(){
         return this.symtomps;
+    }
+     public String getSpeciality(){
+         return this.speciality;
+     }
+     
+      public static void increment(){
+        appointmentCount++;
     }
      
 }

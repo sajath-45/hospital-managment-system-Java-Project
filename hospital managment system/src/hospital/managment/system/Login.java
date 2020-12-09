@@ -19,9 +19,7 @@ import javax.swing.JOptionPane;
  * @author sajath
  */
 public class Login extends javax.swing.JFrame {
-    private final String USER_FILE_PATH = "files/users.txt";
-    private final File USER_FILE = new File(USER_FILE_PATH);
-    private final String imagePath="src/resources/new/";
+   
 
     /**
      * Creates new form doctorSignIn
@@ -252,7 +250,7 @@ public class Login extends javax.swing.JFrame {
         boolean isUserValid=false;
         
          try {
-             BufferedReader reader = new BufferedReader(new FileReader(USER_FILE));
+             BufferedReader reader = new BufferedReader(new FileReader(FileService.getUserFile()));
             String line;
             while ((line = reader.readLine()) != null) {
                  
