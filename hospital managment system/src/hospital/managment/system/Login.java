@@ -258,8 +258,8 @@ public class Login extends javax.swing.JFrame {
                  
                 String[] data = line.split(","); //username, password, email, etc
                 System.out.println("username"+data[0]);
-                 System.out.println("pass"+data[1]);
-               if(data[0].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[1])){
+                 System.out.println("pass"+data[8]);
+               if(data[0].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[8])){
                     isUserValid=true;
                }
             }
