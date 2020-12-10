@@ -6,7 +6,10 @@
 package hospital.managment.system;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -19,6 +22,7 @@ public class dashboard extends javax.swing.JFrame {
      */
     public dashboard() {
         initComponents();
+        setTable();
         
     }
 
@@ -59,14 +63,14 @@ public class dashboard extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         appointmentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        appointmentTable = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        approveBtn = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
 
@@ -374,8 +378,8 @@ public class dashboard extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        appointmentTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -383,7 +387,7 @@ public class dashboard extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Appointment No", "Date", "Time", "Status", "Patient Name", "Patient Id", "Medical Officer", "Speciality", "Sysmtomps"
+                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
             }
         ) {
             Class[] types = new Class [] {
@@ -394,23 +398,28 @@ public class dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        jTable1.setRowHeight(20);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(100);
+        appointmentTable.setGridColor(new java.awt.Color(255, 255, 255));
+        appointmentTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        appointmentTable.setRowHeight(20);
+        appointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(appointmentTable);
+        if (appointmentTable.getColumnModel().getColumnCount() > 0) {
+            appointmentTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            appointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            appointmentTable.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout appointmentPanelLayout = new javax.swing.GroupLayout(appointmentPanel);
         appointmentPanel.setLayout(appointmentPanelLayout);
         appointmentPanelLayout.setHorizontalGroup(
             appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+            .addGroup(appointmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
                 .addContainerGap())
         );
         appointmentPanelLayout.setVerticalGroup(
@@ -421,7 +430,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addContainerGap(475, Short.MAX_VALUE))
         );
 
-        bgPanel.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 970, 860));
+        bgPanel.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 1020, 860));
 
         jPanel9.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -451,10 +460,10 @@ public class dashboard extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton2.setText("Approve");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        approveBtn.setText("Approve");
+        approveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                approveBtnActionPerformed(evt);
             }
         });
 
@@ -464,20 +473,20 @@ public class dashboard extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(approveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(approveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel13.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton3.setText("Edit");
+        editBtn.setText("Edit");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -485,14 +494,14 @@ public class dashboard extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -561,6 +570,29 @@ public class dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setTable(){
+        ArrayList<String> list= FileService.getPatientAppointments("199829003939");
+        TableModel tm = appointmentTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+        System.out.println("works");  
+             for(int i=0;i<list.size();i++)  
+           {  
+            System.out.println(list.get(i));  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+                    model.addRow(row);
+            
+           }  
+         approveBtn.setEnabled(false);
+                     editBtn.setEnabled(false);
+    }
+    
+    
+    
+    
+    
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
 
@@ -647,13 +679,23 @@ public class dashboard extends javax.swing.JFrame {
           appointmentPanel.setVisible(false);
     }//GEN-LAST:event_jPanel11MousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void approveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_approveBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void appointmentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTableMousePressed
+           
+        if (appointmentTable.getSelectedRow() > -1) {
+            // print first column value from selected row
+            System.out.println("works");  
+                approveBtn.setEnabled(true);
+                     editBtn.setEnabled(true);
+        }
+    }//GEN-LAST:event_appointmentTableMousePressed
 
     /**
      * @param args the command line arguments
@@ -706,10 +748,11 @@ public class dashboard extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel appointmentPanel;
+    private javax.swing.JTable appointmentTable;
+    private javax.swing.JButton approveBtn;
     private javax.swing.JPanel bgPanel;
+    private javax.swing.JButton editBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -740,7 +783,6 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel profileImg;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables

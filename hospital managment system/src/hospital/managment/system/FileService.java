@@ -33,6 +33,7 @@ public class FileService {
          private static  final File RECEPTIONIST_FILE = new File(RECEPTIONIST_FILE_PATH);
          
          private  static final String APPOINTMENTS_FILE_PATH="files/appointments.txt";
+         private static final File APPOINTMENTS_FILE = new File(APPOINTMENTS_FILE_PATH);
          
         private static final String USER_FILE_PATH = "files/users.txt";
         private static final File USER_FILE = new File(USER_FILE_PATH);
@@ -242,6 +243,36 @@ public class FileService {
 
     
     }
+    
+    public static ArrayList<String> getPatientAppointments(String id){
+         ArrayList<String> appointmentList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                if(data[3].equals(id)){
+                    
+               
+                appointmentList.add(line);
+                
+                }
+            }
+            reader.close();
+           return appointmentList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+    }
+    
+    
     
     
 }
