@@ -155,7 +155,7 @@ public class addAppointment extends javax.swing.JFrame {
 
         timeHour.setModel(new javax.swing.SpinnerNumberModel(1, 0, 23, 1));
 
-        timeMinute.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        timeMinute.setModel(new javax.swing.SpinnerNumberModel(0, 0, 45, 15));
 
         timeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A.M", "P.M" }));
 
