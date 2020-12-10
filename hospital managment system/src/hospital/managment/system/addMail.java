@@ -5,17 +5,30 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Sangeerthana
  */
 public class addMail extends javax.swing.JFrame {
-
+ private JFileChooser openFileChooser;
+    private File attachment;
     /**
      * Creates new form addMail
      */
     public addMail() {
         initComponents();
+         setFileChooser();
+         
+         Date date = new Date();
+     mailDate.setDate(date);
     }
 
     /**
@@ -37,13 +50,14 @@ public class addMail extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        refferenceField = new javax.swing.JTextField();
+        toAddressField = new javax.swing.JTextField();
+        mailDate = new com.toedter.calendar.JDateChooser();
+        toNameField = new javax.swing.JTextField();
+        sendMailBtn = new javax.swing.JButton();
+        noteField = new javax.swing.JTextField();
+        addFileBtn = new javax.swing.JButton();
+        messageField = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,18 +124,31 @@ public class addMail extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(85, 65, 118));
         jLabel6.setText("To Address");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 110, 30));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 200, 30));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 200, 80));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 200, 30));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 200, 30));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 200, 30));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 200, 30));
+        jPanel1.add(refferenceField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 200, 30));
+        jPanel1.add(toAddressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 200, 80));
+        jPanel1.add(mailDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 200, 30));
+        jPanel1.add(toNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 200, 30));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(85, 65, 118));
-        jButton2.setText("Add");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, 40));
+        sendMailBtn.setBackground(new java.awt.Color(255, 255, 255));
+        sendMailBtn.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        sendMailBtn.setForeground(new java.awt.Color(85, 65, 118));
+        sendMailBtn.setText("Add");
+        sendMailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMailBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(sendMailBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, 40));
+        jPanel1.add(noteField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 200, 80));
+
+        addFileBtn.setText("add");
+        addFileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addFileBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        jPanel1.add(messageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 110, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +165,39 @@ public class addMail extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sendMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailBtnActionPerformed
+        // TODO add your handling code here:
+        String name=toNameField.getText();
+        String address=toAddressField.getText();
+        String note=noteField.getText();
+          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+         String date=formatter.format(mailDate.getDate());  
+          File file=this.attachment;
+        DispatchedPostal mail=new DispatchedPostal(note,date,file,name,address); 
+        try {
+                FileService.writeMail(mail);
+            } catch (IOException ex) {
+                Logger.getLogger(addAppointment.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }//GEN-LAST:event_sendMailBtnActionPerformed
+
+     private void setFileChooser(){
+        openFileChooser =new JFileChooser();
+        
+    }
+    private void addFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFileBtnActionPerformed
+        // TODO add your handling code here:
+         int returnValue =openFileChooser.showOpenDialog(this);
+            if(returnValue==JFileChooser.APPROVE_OPTION){
+                attachment = openFileChooser.getSelectedFile();
+                messageField.setText(attachment.getName());
+            }
+            else{
+                 messageField.setText("no file choosen");
+            }
+    }//GEN-LAST:event_addFileBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,11 +233,11 @@ public class addMail extends javax.swing.JFrame {
             }
         });
     }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addFileBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -187,10 +247,12 @@ public class addMail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private com.toedter.calendar.JDateChooser mailDate;
+    private javax.swing.JLabel messageField;
+    private javax.swing.JTextField noteField;
+    private javax.swing.JTextField refferenceField;
+    private javax.swing.JButton sendMailBtn;
+    private javax.swing.JTextField toAddressField;
+    private javax.swing.JTextField toNameField;
     // End of variables declaration//GEN-END:variables
 }

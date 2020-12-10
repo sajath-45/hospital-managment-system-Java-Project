@@ -1,3 +1,5 @@
+package hospital.managment.system;
+
 
 import java.awt.Color;
 

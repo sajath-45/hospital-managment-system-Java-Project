@@ -209,8 +209,8 @@ public class addComplaint extends javax.swing.JFrame {
         // TODO add your handling code here:
             String complainType=complainTypeComboBox.getSelectedItem().toString();
             String complainBy=complainByText.getText();
-          int mobile=parseInt(phoneNumber.getText());
-          String description=descriptionField.getSelectedText();
+          String mobile=phoneNumber.getText();
+          String description=descriptionField.getText();
            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
          String date=formatter.format(complainDate.getDate());  
          String actionTaken=actionTakenField.getText();

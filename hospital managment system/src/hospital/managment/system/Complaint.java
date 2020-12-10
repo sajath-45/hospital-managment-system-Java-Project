@@ -15,14 +15,14 @@ import java.io.File;
 public class Complaint {
     private String strType;
     private String strComplaintBy;
-    private int intPhoneNumber;
+    private String phoneNumber;
     private String strDate;
     private String strDescription;
     private String strActionTaken;
     private String strNote;
     private File attachment;
     
-    public Complaint(String type,String date,String complainBy,int number,String description,String actionTaken,String note,File file ) {
+    public Complaint(String type,String date,String complainBy,String number,String description,String actionTaken,String note,File file ) {
         setStrType(type);
            setStrComplaintBy(complainBy);
            setIntPhoneNumber(number);
@@ -40,8 +40,8 @@ public class Complaint {
     public String getStrComplaintBy() {
         return strComplaintBy;
     }
-    public int getIntPhonrNumber() {
-            return intPhoneNumber;
+    public String getIntPhonrNumber() {
+            return phoneNumber;
     }
     public String getStrDate() {
             return strDate;
@@ -65,8 +65,8 @@ public class Complaint {
     public void setStrComplaintBy(String ComplaintBy){
         this.strComplaintBy=ComplaintBy;
     }
-    public void setIntPhoneNumber(int PhoneNumber){
-        this.intPhoneNumber=PhoneNumber;
+    public void setIntPhoneNumber(String PhoneNumber){
+        this.phoneNumber=PhoneNumber;
     }
     public void setStrDate(String Date){
         this.strDate=Date;

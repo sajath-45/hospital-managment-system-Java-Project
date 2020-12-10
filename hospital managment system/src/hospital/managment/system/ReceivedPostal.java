@@ -5,18 +5,22 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+
 /**
  *
  * @author Sangeerthana
  */
-public class ReceivedPostal {
+public class ReceivedPostal extends PostalMail{
     private String strFromName;
     private String strFromAddress;
     
     
     
-    public ReceivedPostal(){
-        
+    public ReceivedPostal(String note,String date,File file,String fromName,String address){
+         super(note,date,file);
+        this.setStrFromAddress(address);
+        this.setStrFromName(fromName);
     }
     public String getStrFromName(){
         return strFromName;
