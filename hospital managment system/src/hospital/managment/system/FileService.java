@@ -212,7 +212,7 @@ public class FileService {
                return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cv,speciality);
       }
     
-    public static void addAppoinment(Appointment appointment)throws IOException {
+    public static void writeAppoinment(Appointment appointment)throws IOException {
         
         try
         {
@@ -243,6 +243,43 @@ public class FileService {
 
     
     }
+    
+    public static void writeComplaint(Complaint compain)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(COMPLAINT_FILE_PATH,true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(compain!=null){
+            out.print(compain.getStrType());
+            out.print(","+compain.getStrDate());
+            out.print(","+compain.getStrComplaintBy());
+            out.print(","+compain.getStrDescription());
+            out.print(","+compain.getIntPhonrNumber());
+            out.print(","+compain.getStrActionTaken());
+             out.print(","+compain.getStrNote());
+             out.print(","+compain.getAttachment());
+             
+    
+           
+            
+
+        }    
+        writer.close();
+        out.close();
+            Appointment.increment();
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
+    
+    
     
     public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();

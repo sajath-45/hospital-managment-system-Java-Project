@@ -6,6 +6,8 @@
 
 package hospital.managment.system;
 
+import java.io.File;
+
 /**
  *
  * @author siva lathu
@@ -18,10 +20,18 @@ public class Complaint {
     private String strDescription;
     private String strActionTaken;
     private String strNote;
-    private String strAttachment;
+    private File attachment;
     
-    public Complaint() {
-    
+    public Complaint(String type,String date,String complainBy,int number,String description,String actionTaken,String note,File file ) {
+        setStrType(type);
+           setStrComplaintBy(complainBy);
+           setIntPhoneNumber(number);
+           setStrDate(date);
+           setStrDescription(description);
+           setStrActionTaken(actionTaken);
+           setStrNote(note);
+           setAttachment(file);
+           
     }
     
     public String getStrType() {
@@ -45,12 +55,12 @@ public class Complaint {
     public String getStrNote() {
             return strNote;
     }
-    public String getStrAttachment() {
-            return strAttachment;
+    public File getAttachment() {
+            return attachment;
     }
     
-    public void setStrType(String Type){
-        this.strType=Type;
+    public void setStrType(String type){
+        this.strType=type;
     }
     public void setStrComplaintBy(String ComplaintBy){
         this.strComplaintBy=ComplaintBy;
@@ -70,8 +80,8 @@ public class Complaint {
     public void setStrNote(String Note){
         this.strNote=Note;
     }
-    public void setStrAttachment(String Attachment){
-        this.strAttachment=Attachment;
+    public void setAttachment(File attachment){
+        this.attachment=attachment;
     }
     
 }
