@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * @author sajath
  */
 public class SpecialityRefference {
-     private final String USER_FILE_PATH = "files/specialityRefference.txt";
-    private final File USER_FILE = new File(USER_FILE_PATH);
+     private final String SPECIALITY_REFFERENCE_FILE_PATH = "files/specialityRefference.txt";
+    private final File SPECIALITY_REFFERENCE_FILE = new File(SPECIALITY_REFFERENCE_FILE_PATH);
     
     private  ArrayList<String> specialityTypes;
     
@@ -41,7 +41,7 @@ public class SpecialityRefference {
     public void loadAllRefference(){
         System.out.println("works");
          try {System.out.println("works");
-             BufferedReader reader = new BufferedReader(new FileReader(USER_FILE));
+             BufferedReader reader = new BufferedReader(new FileReader(SPECIALITY_REFFERENCE_FILE));
              
             String line;
             while ((line = reader.readLine()) != null) {

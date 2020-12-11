@@ -12,13 +12,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane; 
 
 /**
  *
  * @author sajath
  */
 public class Login extends javax.swing.JFrame {
+   private String date;
+   private String time;
+   private String role;
+   private String userName;
    
 
     /**
@@ -33,6 +37,31 @@ public class Login extends javax.swing.JFrame {
     private Login() {
         
     }
+    public void setUserName(String type){
+        
+    }
+     public void setDate(String type){
+        
+    }
+      public void setTime(String type){
+        
+    }
+       public void setRole(String type){
+        
+    }
+       public String getUserName(){
+           return userName;
+       }
+        public String getDate(){
+            return date;
+           
+       }
+         public String getTime(){
+           return time;
+       }
+          public String getRole(){
+               return role;
+       }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -191,6 +220,10 @@ public class Login extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+         this.setUserName(userNameField.getText());
+         
+        
+        
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void loginBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMousePressed
@@ -217,6 +250,9 @@ public class Login extends javax.swing.JFrame {
             icon.getImage().flush();
             imgLabel.setIcon(icon);
             jLabel2.setText("Medical Officer Login");
+            this.setRole("Medical Officer");
+           
+            
         
         }
         else if(type==2){
@@ -224,7 +260,8 @@ public class Login extends javax.swing.JFrame {
              String imageName = "src/resources/new/r1.png";
             ImageIcon icon = new ImageIcon(imageName);
             icon.getImage().flush();
-            imgLabel.setIcon(icon);            
+            imgLabel.setIcon(icon); 
+            this.setRole("Receptionist");
         }
         else if(type==3){
              jLabel2.setText("Admin Login");
@@ -232,6 +269,7 @@ public class Login extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(imageName);
             icon.getImage().flush();
             imgLabel.setIcon(icon);
+            this.setRole("Admin");
             
         }
         else if(type==4){
@@ -240,6 +278,7 @@ public class Login extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(imageName);
             icon.getImage().flush();
             imgLabel.setIcon(icon);
+            this.setRole("Patient");
             
         }
         

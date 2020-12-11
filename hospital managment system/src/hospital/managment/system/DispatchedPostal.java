@@ -5,16 +5,21 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+
 /**
  *
  * @author Sangeerthana
  */
-public class DispatchedPostal {
+public class DispatchedPostal extends PostalMail {
     private String strToName;
     private String strToAddress;
     
     
-    public DispatchedPostal(){
+    public DispatchedPostal(String note,String date,File file,String toName,String address){
+        super(note,date,file);
+        this.setStrToName(toName);
+        this.setStrToAddress(address);
         
     }
     
@@ -33,4 +38,6 @@ public class DispatchedPostal {
     public void setStrToAddress(String address){
         this.strToAddress=address;
     }
+
+   
 }

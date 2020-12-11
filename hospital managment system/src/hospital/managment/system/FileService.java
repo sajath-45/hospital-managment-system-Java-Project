@@ -23,8 +23,8 @@ public class FileService {
        private static ArrayList<Receptionist> receptionistList=new ArrayList<Receptionist>();
         
        
-       private  final String PATIENT_FILE_PATH = "files/patients.txt";
-       private  final File PATIENTS_FILE = new File(PATIENT_FILE_PATH);
+       private static final String PATIENT_FILE_PATH = "files/patients.txt";
+       private static final File PATIENTS_FILE = new File(PATIENT_FILE_PATH);
          
          private static final String MO_FILE_PATH = "files/medicalofficers.txt";
          private static final File MO_FILE = new File(MO_FILE_PATH);
@@ -44,7 +44,7 @@ public class FileService {
          private static final String COMPLAINT_FILE_PATH = "files/complaints.txt";
         private static final File COMPLAINT_FILE = new File(COMPLAINT_FILE_PATH);
         
-         private static final String MAIL_FILE_PATH = "files/complaints.txt";
+         private static final String MAIL_FILE_PATH = "files/dispatchedMail.txt";
         private static final File MAIL_FILE = new File(MAIL_FILE_PATH);
         
         private static final String IMAGEPATH="src/resources/new/";
@@ -72,7 +72,7 @@ public class FileService {
           return this.patientList;
       }
       
-      public String getUserFilePath(){
+      public static String getUserFilePath(){
           return USER_FILE_PATH;
       }
       public static File getUserFile(){
@@ -84,32 +84,32 @@ public class FileService {
        public File getMoFile(){
           return MO_FILE;
       }    
-      public String getPatientFilePath(){
+      public static String getPatientFilePath(){
           return PATIENT_FILE_PATH;
       }
-      public File getPatientFile(){
+      public static File getPatientFile(){
           return PATIENTS_FILE;
       }
-      public String getReceptionistFilePath(){
+      public static String getReceptionistFilePath(){
           return RECEPTIONIST_FILE_PATH;
       }
-      public File getReceptionistFile(){
+      public static File getReceptionistFile(){
           return RECEPTIONIST_FILE;
       }
         
-        public String getAppointmentsFilePath(){
+        public static String getAppointmentsFilePath(){
           return APPOINTMENTS_FILE_PATH;
       }
-        public String getVisitorsFilePath(){
+        public static String getVisitorsFilePath(){
           return VISITOR_FILE_PATH;
       }
-         public String getComplaintsFilePath(){
+         public static String getComplaintsFilePath(){
           return COMPLAINT_FILE_PATH;
       }
-        public String getImagePath(){
+        public static String getImagePath(){
             return IMAGEPATH;
         }
-         public String getMailsFilePath(){
+         public static String getMailsFilePath(){
             return MAIL_FILE_PATH;
         }
       
@@ -212,7 +212,7 @@ public class FileService {
                return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cv,speciality);
       }
     
-    public static void addAppoinment(Appointment appointment)throws IOException {
+    public static void writeAppoinment(Appointment appointment)throws IOException {
         
         try
         {
@@ -229,6 +229,109 @@ public class FileService {
             out.print(","+appointment.getMedicalOfficer().toString());
             out.print(","+appointment.getSpeciality());
             out.println(","+appointment.getSymtomps());
+             Appointment.increment();
+
+        }    
+        writer.close();
+        out.close();
+           
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
+    
+    public static void writeComplaint(Complaint compain)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(COMPLAINT_FILE_PATH,true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(compain!=null){
+            out.print(compain.getStrType());
+            out.print(","+compain.getStrDate());
+            out.print(","+compain.getStrComplaintBy());
+            out.print(","+compain.getStrDescription());
+            out.print(","+compain.getIntPhonrNumber());
+            out.print(","+compain.getStrActionTaken());
+             out.print(","+compain.getStrNote());
+             out.println(","+compain.getAttachment());
+             
+    
+           
+            
+
+        }    
+        writer.close();
+        out.close();
+           
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
+    
+     public static void writeMail(DispatchedPostal mail)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(getMailsFilePath(),true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(mail!=null){
+            out.print(mail.getIntReferenceNo());
+            out.print(","+mail.getStrDate());
+            out.print(","+mail.getStrToName());
+            out.print(","+mail.getStrToAddress());
+            out.print(","+mail.getStrNote());
+             out.println(","+mail.getAttachment());
+             
+    
+           PostalMail.incrementRefferenceCount();
+            
+
+        }    
+        writer.close();
+        out.close();
+           
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
+    
+     public static void writeVisitorRecord(Visitor record)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(getVisitorsFilePath(),true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(record!=null){
+            out.print(record.getStrDate());
+             out.print(","+record.getIntId());
+            out.print(","+record.getStrName());
+            out.print(","+record.getStrPurpose());
+            out.print(","+record.getIntPhoneNo());
+            out.print(","+record.getStrInTime());
+            out.print(","+record.getStrOutTime());
+             out.print(","+record.getStrNote());
+             
+    
+          
             
 
         }    

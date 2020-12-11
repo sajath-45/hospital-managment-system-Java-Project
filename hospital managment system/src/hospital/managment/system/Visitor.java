@@ -5,25 +5,35 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+
 /**
  *
  * @author Sangeerthana
  */
-public class Visitors {
+public class Visitor {
     private String strPurpose;
     private String strName;
-    private int intId;
-    private int intPhoneNo;
+    private String intId;
+    private String intPhoneNo;
     private String strDate;
     private String  strInTime;
     private String  strOutTime;
     private String  strNote;
-    private String  strAttachment;
+    private File  attachment;
     
     
     
-    public Visitors(){
-        
+    public Visitor(String purpose,String name,String date,String id,String number,String inTime,String outTime,String note,File file){
+        this.setStrPurpose(purpose);
+        this.setStrName(name);
+        this.setIntId(id);
+        this.setIntPhoneNo(number);
+        this.setStrDate(date);
+        this.setStrInTime(inTime);
+        this.setStrOutTime(outTime);
+        this.setStrNote(note);
+        this.setStrAttachment(file);
     }
     
     
@@ -36,10 +46,10 @@ public class Visitors {
     public String getStrDate(){
         return strDate;
     }
-    public int getIntId(){
+    public String getIntId(){
         return intId;
     }
-    public int getIntPhoneNo(){
+    public String getIntPhoneNo(){
         return intPhoneNo;
     }
     public String getStrInTime(){
@@ -51,8 +61,8 @@ public class Visitors {
     public String getStrNote(){
         return strNote;
     }
-    public String getStrAttachment(){
-        return strAttachment;
+    public File getAttachment(){
+        return attachment;
     }
     
     
@@ -65,10 +75,10 @@ public class Visitors {
     public void setStrDate(String date){
         this .strDate=date;
     }
-    public void setIntId(int id){
+    public void setIntId(String id){
         this. intId=id;
     }
-    public void setIntPhoneNo(int phone){
+    public void setIntPhoneNo(String phone){
         this .intPhoneNo=phone;
     }
     public void setStrInTime(String in){
@@ -80,8 +90,8 @@ public class Visitors {
     public void setStrNote(String note){
         this. strNote=note;
     }
-    public void setStrAttachment(String attach){
-        this. strAttachment=attach;
+    public void setStrAttachment(File attach){
+        this. attachment=attach;
     }
     
 }

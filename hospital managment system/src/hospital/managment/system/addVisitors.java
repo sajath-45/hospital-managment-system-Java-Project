@@ -5,17 +5,30 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Sangeerthana
  */
 public class addVisitors extends javax.swing.JFrame {
-
+    private JFileChooser openFileChooser;
+    private File attachment;
     /**
      * Creates new form addVisitors
      */
     public addVisitors() {
         initComponents();
+          setFileChooser();
+         
+         Date date = new Date();
+     dateField.setDate(date);
     }
 
     /**
@@ -32,24 +45,25 @@ public class addVisitors extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        purposeField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        idField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dateField = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        phoneNumberField = new javax.swing.JTextField();
+        inTimeField = new javax.swing.JTextField();
+        outTimeField = new javax.swing.JTextField();
+        noteField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        addFileBtn = new javax.swing.JButton();
+        fileNameLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,25 +108,25 @@ public class addVisitors extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(85, 65, 118));
         jLabel2.setText("Purpose");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 90, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 200, 30));
+        jPanel1.add(purposeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 200, 30));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(85, 65, 118));
         jLabel3.setText("Name");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 80, 20));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 200, 30));
+        jPanel1.add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 200, 30));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(85, 65, 118));
         jLabel4.setText("Id");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 80, 20));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 200, 30));
+        jPanel1.add(idField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(85, 65, 118));
         jLabel5.setText("Phone No");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 80, 20));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 200, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 100, 20));
+        jPanel1.add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 200, 30));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(85, 65, 118));
@@ -127,7 +141,7 @@ public class addVisitors extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(85, 65, 118));
         jLabel8.setText("Out Time");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 80, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 90, 20));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(85, 65, 118));
@@ -137,18 +151,31 @@ public class addVisitors extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(85, 65, 118));
         jLabel10.setText("Attachment");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 90, 20));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 200, 30));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 200, 30));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 200, 30));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 200, 90));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 200, 70));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 110, 20));
+        jPanel1.add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 200, 30));
+        jPanel1.add(inTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 200, 30));
+        jPanel1.add(outTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 200, 30));
+        jPanel1.add(noteField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 200, 90));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(85, 65, 118));
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, 40));
+
+        addFileBtn.setText("choose");
+        addFileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addFileBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
+        jPanel1.add(fileNameLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +190,42 @@ public class addVisitors extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFileBtnActionPerformed
+        // TODO add your handling code here:
+        int returnValue =openFileChooser.showOpenDialog(this);
+            if(returnValue==JFileChooser.APPROVE_OPTION){
+                attachment = openFileChooser.getSelectedFile();
+                fileNameLable.setText(attachment.getName());
+            }
+            else{
+                 fileNameLable.setText("no file choosen");
+            }
+    }//GEN-LAST:event_addFileBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+            String purpose=purposeField.getText();
+            String idCard=idField.getText();
+            String name=nameField.getText();
+            String mobile=phoneNumberField.getText();
+            String note=noteField.getText();
+             String inTime=inTimeField.getText();
+              String outTime=outTimeField.getText();
+              SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+         String date=formatter.format(dateField.getDate()); 
+         File file=this.attachment;
+         Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);
+            
+             try {
+                FileService.writeVisitorRecord(newVisitor);
+            } catch (IOException ex) {
+                Logger.getLogger(addVisitors.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,11 +261,19 @@ public class addVisitors extends javax.swing.JFrame {
             }
         });
     }
+      private void setFileChooser(){
+        openFileChooser =new JFileChooser();
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addFileBtn;
+    private com.toedter.calendar.JDateChooser dateField;
+    private javax.swing.JLabel fileNameLable;
+    private javax.swing.JTextField idField;
+    private javax.swing.JTextField inTimeField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -215,13 +286,10 @@ public class addVisitors extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField noteField;
+    private javax.swing.JTextField outTimeField;
+    private javax.swing.JTextField phoneNumberField;
+    private javax.swing.JTextField purposeField;
     // End of variables declaration//GEN-END:variables
 }

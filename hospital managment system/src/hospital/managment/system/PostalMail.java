@@ -5,22 +5,29 @@
  */
 package hospital.managment.system;
 
+import java.io.File;
+
 /**
  *
  * @author Sangeerthana
  */
 public class PostalMail {
-    private int intReferenceNo;
+    private  int intReferenceNo;
     private String strNote;
     private String strDate;
-    private String strAttachment;
+    private File strAttachment;
+    private static int refferenceCount=1;
     
     
-    public PostalMail(){
+    public PostalMail(String note,String date,File file){
+        this.setIntReferenceNo(refferenceCount);
+        this.setAttachment(file);
+        this.setStrDate(date);
+        this.setStrNote(note);
         
     }
     
-    private int getIntReferenceNo(){
+    public int getIntReferenceNo(){
         return intReferenceNo;
     }
     public String getStrNote(){
@@ -30,7 +37,7 @@ public class PostalMail {
         return strDate;
         
     }
-    public String getStrAttachment(){
+    public File getAttachment(){
         return strAttachment;
     }
   
@@ -44,8 +51,12 @@ public class PostalMail {
     public void setStrDate(String date){
         this.strDate=date;
     }
-    public void setStrAttachment(String attach){
+    public void setAttachment(File attach){
         this.strAttachment=attach;
+    }
+    
+    public static void incrementRefferenceCount(){
+        refferenceCount++;
     }
     
 }    

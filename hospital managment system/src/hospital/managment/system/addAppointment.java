@@ -288,7 +288,7 @@ public class addAppointment extends javax.swing.JFrame {
         System.out.println("time"+patient.toString());
         Appointment appointment =new Appointment(patient,doctor,appointmentDate,time,"pending",symtomps,speciality);
             try {
-                FileService.addAppoinment(appointment);
+                FileService.writeAppoinment(appointment);
             } catch (IOException ex) {
                 Logger.getLogger(addAppointment.class.getName()).log(Level.SEVERE, null, ex);
             }
