@@ -229,12 +229,12 @@ public class FileService {
             out.print(","+appointment.getMedicalOfficer().toString());
             out.print(","+appointment.getSpeciality());
             out.println(","+appointment.getSymtomps());
-            
+             Appointment.increment();
 
         }    
         writer.close();
         out.close();
-            Appointment.increment();
+           
         }
     catch(IOException exception){
         System.out.println(exception);
@@ -269,7 +269,7 @@ public class FileService {
         }    
         writer.close();
         out.close();
-            Appointment.increment();
+           
         }
     catch(IOException exception){
         System.out.println(exception);
@@ -302,7 +302,7 @@ public class FileService {
         }    
         writer.close();
         out.close();
-            Appointment.increment();
+           
         }
     catch(IOException exception){
         System.out.println(exception);
@@ -312,7 +312,40 @@ public class FileService {
     
     }
     
+     public static void writeVisitorRecord(Visitor record)throws IOException {
+        
+        try
+        {
+            System.out.println("works");
+        FileWriter writer=new FileWriter(getVisitorsFilePath(),true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(record!=null){
+            out.print(record.getStrDate());
+             out.print(","+record.getIntId());
+            out.print(","+record.getStrName());
+            out.print(","+record.getStrPurpose());
+            out.print(","+record.getIntPhoneNo());
+            out.print(","+record.getStrInTime());
+            out.print(","+record.getStrOutTime());
+             out.print(","+record.getStrNote());
+             
     
+          
+            
+
+        }    
+        writer.close();
+        out.close();
+            Appointment.increment();
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+    
+
+    
+    }
     
     public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
