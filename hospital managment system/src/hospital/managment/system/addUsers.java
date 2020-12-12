@@ -138,7 +138,7 @@ public class addUsers extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        jPanel5.setBackground(new java.awt.Color(0, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 0, 102));
         jPanel5.setPreferredSize(new java.awt.Dimension(600, 80));
         jPanel5.setLayout(null);
 
@@ -182,7 +182,7 @@ public class addUsers extends javax.swing.JFrame {
         );
 
         jPanel5.add(P1);
-        P1.setBounds(200, 0, 210, 80);
+        P1.setBounds(200, 0, 200, 80);
 
         R1.setBackground(new java.awt.Color(0, 255, 255));
         R1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,25 +209,24 @@ public class addUsers extends javax.swing.JFrame {
             .addGroup(R1Layout.createSequentialGroup()
                 .addGroup(R1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(R1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(R1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(R1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         R1Layout.setVerticalGroup(
             R1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, R1Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel2)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel5.add(R1);
-        R1.setBounds(410, 10, 200, 85);
+        R1.setBounds(400, 0, 200, 84);
 
         M1.setBackground(new java.awt.Color(0, 255, 255));
         M1.addMouseListener(new java.awt.event.MouseAdapter() {
