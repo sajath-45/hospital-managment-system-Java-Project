@@ -48,6 +48,9 @@ public class FileService {
         private static final File MAIL_FILE = new File(MAIL_FILE_PATH);
         
         private static final String IMAGEPATH="src/resources/new/";
+        
+         private static final String LOGIN_FILE_PATH = "files/userLogin.txt";
+        private static final File LOGIN_FILE = new File(LOGIN_FILE_PATH);
       
       
       public FileService(){
@@ -83,7 +86,11 @@ public class FileService {
       }
        public File getMoFile(){
           return MO_FILE;
-      }    
+      }  
+       public static File getUserLoginFile(){
+           return LOGIN_FILE;
+       }
+       
       public static String getPatientFilePath(){
           return PATIENT_FILE_PATH;
       }
@@ -112,6 +119,10 @@ public class FileService {
          public static String getMailsFilePath(){
             return MAIL_FILE_PATH;
         }
+          public static String getUserLoginFilePath(){
+            return LOGIN_FILE_PATH;
+        }
+         
       
       //getters here
       
@@ -337,7 +348,7 @@ public class FileService {
         }    
         writer.close();
         out.close();
-            Appointment.increment();
+            
         }
     catch(IOException exception){
         System.out.println(exception);
@@ -346,6 +357,27 @@ public class FileService {
 
     
     }
+     
+       public static void writeLoginRecord(String filePath,String line)throws IOException {
+             String[] lineList=line.split(",");
+           if(isRecordExist(filePath,lineList[0])){ 
+                            System.out.println("key"+lineList[0]);
+
+           removeLine(filePath,lineList[0]);
+             System.out.println("removing");
+              addLine(filePath,line);
+
+       
+       }
+       else{
+           addLine(filePath,line);
+          System.out.println("adding");
+       }
+    
+
+    
+    }
+     
     
     public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
@@ -375,7 +407,108 @@ public class FileService {
     
     }
     
-    
+   private static boolean isRecordExist(String filePath,String key){
+      boolean isExist=false;
+         try {
+             BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
+            String line;
+            while ((line = reader.readLine()) != null) { 
+              
+                String[] data = line.split(",");
+                  System.out.println("value"+data[0]);System.out.println("key"+key);
+                if(data[0].equals(key)){
+                    
+                    isExist=true;
+                    break;
+                
+                }
+            }
+            reader.close();
+          
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+            
+        }
+         return isExist;
+         
+   }
+   
+   private static void removeLine(String filePath,String lineToRemove){
+        try {
+
+      File inFile = new File(filePath);
+
+      if (!inFile.isFile()) {
+        System.out.println("Parameter is not an existing file");
+        return;
+      }
+
+      //Construct the new file that will later be renamed to the original filename.
+      File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+
+      BufferedReader br = new BufferedReader(new FileReader(filePath));
+      PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+      String line = null;
+
+      //Read from the original file and write to the new
+      //unless content matches data to be removed.
+      while ((line = br.readLine()) != null) {
+            String[] strLine=line.split(",");
+        if (!strLine[0].equals(lineToRemove)) {
+
+          pw.println(line);
+          pw.flush();
+        }
+      }
+      pw.close();
+      br.close();
+
+      //Delete the original file
+      if (!inFile.delete()) {
+        System.out.println("Could not delete file");
+        return;
+      }
+
+      //Rename the new file to the filename the original file had.
+      if (!tempFile.renameTo(inFile))
+        System.out.println("Could not rename file");
+
+    }
+    catch (FileNotFoundException ex) {
+      ex.printStackTrace();
+    }
+    catch (IOException ex) {
+      ex.printStackTrace();
+    }
+       
+   }
+   
+   private static void addLine(String filePath,String line){
+        try
+        {
+            
+        FileWriter writer=new FileWriter(filePath,true);
+        PrintWriter out =new PrintWriter(writer);
+
+        if(line!=null){
+            out.println(line);
+                                   
+        }    
+        writer.close();
+        out.close();
+          
+        }
+    catch(IOException exception){
+        System.out.println(exception);
+    }
+       
+   }
     
     
 }

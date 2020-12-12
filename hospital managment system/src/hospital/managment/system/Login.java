@@ -11,8 +11,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane; 
+import java.util.Date;
+
 
 /**
  *
@@ -37,17 +42,17 @@ public class Login extends javax.swing.JFrame {
     private Login() {
         
     }
-    public void setUserName(String type){
-        
+    public void setUserName(String name){
+        this.userName=name;
     }
-     public void setDate(String type){
-        
+     public void setDate(String date){
+        this.date=date;
     }
-      public void setTime(String type){
-        
+      public void setTime(String time){
+          this.time=time;
     }
-       public void setRole(String type){
-        
+       public void setRole(String role){
+           this.role=role;
     }
        public String getUserName(){
            return userName;
@@ -219,8 +224,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-         this.setUserName(userNameField.getText());
+    
          
         
         
@@ -231,6 +235,19 @@ public class Login extends javax.swing.JFrame {
                 if(this.validateFields()){
                     if(this.validateLogin()){
                          JOptionPane.showMessageDialog(null, "login sucessful");
+                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");  
+
+                           String date=formatter.format(new Date()); 
+                           String time=timeFormatter.format(new Date());
+                         UserLogin newLogin=new UserLogin(userNameField.getText(),this.getRole(),date,time);
+                        
+                          try {
+                                  FileService.writeLoginRecord(FileService.getUserLoginFilePath(),newLogin.toString());
+                              } catch (IOException ex) {
+                                 Logger.getLogger(addVisitors.class.getName()).log(Level.SEVERE, null, ex);
+                              }
+                          
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Inavlid creditials");
@@ -287,7 +304,7 @@ public class Login extends javax.swing.JFrame {
     
     public boolean validateLogin(){
         boolean isUserValid=false;
-        
+
          try {
              BufferedReader reader = new BufferedReader(new FileReader(FileService.getUserFile()));
             String line;
