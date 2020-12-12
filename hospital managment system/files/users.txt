@@ -1,6 +1,4 @@
 sajath,sajath ahamed,male,077378415,199829003939,16/10/1998,wijayba mawatha,single,123456,A+,no,1
 ruwan,ruwan ,male,78459521,1998200009,7/5/1998,rathnapura mawatha,single,123456,A+,yes,1
 sangee,sangeerthana ,female,0773785555,1998884403939,17/10/1998,jaffna mawatha,single,123456,A+,no,1
-lathusan,sajath ahamed,male,077378415,199829003939,16/8/1998,jaffna mawatha,married,123456,A-,yes,1
-
-
+lathusan,sajath ahamed,male,077378415,199829003939,16/8/1998,jaffna mawatha,married,123456,A-,yes,1.
