@@ -8,6 +8,9 @@ package hospital.managment.system;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +30,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         initComponents();
         setRole(role);
         setSidePanel(role);
-        setTable();
+        setTables();
+        setSideBarPanels();
         
     }
 
@@ -37,43 +41,161 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     public void setRole(String role){
         this.userRole=role;
     }
-    public String getRole(String role){
+    public String getUserRole(){
         return this.userRole;
     }
     public void setSidePanel(String role){
-        if(role.equals("Admin")){
+        if(getUserRole().equals("Admin")){
             receptionSidePanel.setVisible(false);
             adminSidePanel.setVisible(true);
             patientSidePanel.setVisible(false);
             moSidePanel.setVisible(false);
             
         }
-        else if(role.equals("Receptionist")){
+        else if(getUserRole().equals("Receptionist")){
             receptionSidePanel.setVisible(true);
             adminSidePanel.setVisible(false);
               patientSidePanel.setVisible(false);
             moSidePanel.setVisible(false);
-            jPanel32=mailBtnPanel;
+            
 
         }
-        else if(role.equals("Patient")){
+        else if(getUserRole().equals("Patient")){
              patientSidePanel.setVisible(true);
             moSidePanel.setVisible(false);
             receptionSidePanel.setVisible(false);
             adminSidePanel.setVisible(false);
 
         }
-        else if(role.equals("Medical Officer")){
+        else if(getUserRole().equals("MedicalOfficer")){
             patientSidePanel.setVisible(false);
             moSidePanel.setVisible(true);
             receptionSidePanel.setVisible(false);
             adminSidePanel.setVisible(false);
-            jPanel23=appointmentBtnPanel;
-            jPanel28=settingBtnPanel;
+            
+           
 
         }
         
     }
+    
+    
+    public void setSideBarPanels(){
+         jPanel23.addMouseListener(listener);
+        moSettingPanel.addMouseListener(listener);
+        jPanel5.addMouseListener(listener);
+        jPanel17.addMouseListener(listener);
+        patientSettingPanel.addMouseListener(listener);
+        jPanel31.addMouseListener(listener);
+        jPanel32.addMouseListener(listener);
+        jPanel33.addMouseListener(listener);
+        jPanel35.addMouseListener(listener);
+        receptionistSettingPanel.addMouseListener(listener);
+        jPanel37.addMouseListener(listener);
+        userBtnPanel.addMouseListener(listener);
+        reportBtnPanel.addMouseListener(listener);
+        appointmentBtnPanel.addMouseListener(listener);
+        mailBtnPanel.addMouseListener(listener);
+        complaintBtnPanel.addMouseListener(listener);
+        visitorBtnPanel.addMouseListener(listener);
+        settingBtnPanel.addMouseListener(listener);
+        refferenceBtnPanel.addMouseListener(listener);
+        
+        
+        jPanel31.setName("appointmentBtnPanel");//recep
+        appointmentBtnPanel.setName("appointmentBtnPanel");//admin
+        jPanel5.setName("appointmentBtnPanel");
+        jPanel23.setName("appointmentBtnPanel");
+        
+        mailBtnPanel.setName("mailBtn");
+        jPanel32.setName("mailBtn");
+       
+        
+        complaintBtnPanel.setName("complaintBtn");
+        jPanel17.setName("complaintBtn");
+        jPanel33.setName("complaintBtn");
+        
+        jPanel35.setName("visitorBtn");
+        visitorBtnPanel.setName("visitorBtn");
+        
+        settingBtnPanel.setName("settingBtn");
+        receptionistSettingPanel.setName("settingBtn");
+        moSettingPanel.setName("settingBtn");
+        patientSettingPanel.setName("settingBtn");
+        
+         userBtnPanel.setName("userBtn");
+        jPanel37.setName("userBtn");
+        
+        reportBtnPanel.setName("reportBtn");
+        
+        refferenceBtnPanel.setName("refferenceBtn");
+        
+                  
+        
+    }
+       MouseListener listener = new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        resetAllColor();
+                        resetAllMainPanels();
+                        System.out.println(((JPanel)e.getSource()).getName());
+                     if( ((JPanel)e.getSource()).getName().equals("complaintBtn")){
+                         setColor(complaintBtnPanel);
+                         setColor(jPanel17);
+                         setColor(jPanel33);
+                         complaintPanel.setVisible(true);
+                         
+                     }
+                     else if(((JPanel)e.getSource()).getName().equals("appointmentBtnPanel")){
+                          setColor(jPanel5);
+                         setColor(appointmentBtnPanel);
+                         setColor(jPanel31);
+                          setColor(jPanel23);
+                          appointmentPanel.setVisible(true);
+                         
+                     }
+                     else if(((JPanel)e.getSource()).getName().equals("mailBtn")){
+                          setColor(mailBtnPanel);
+                         setColor(jPanel32);
+                         mailPanel.setVisible(true);
+                         
+                         
+                     }
+                     else if(((JPanel)e.getSource()).getName().equals("userBtn")){
+                          setColor(userBtnPanel);
+                         setColor(jPanel37);
+                         usersPanel.setVisible(true);
+                         
+                         
+                     }
+                     else if(((JPanel)e.getSource()).getName().equals("settingBtn")){
+                           setColor(settingBtnPanel);
+                         setColor(receptionistSettingPanel);
+                         setColor(moSettingPanel);
+                          setColor(patientSettingPanel);
+                          complaintPanel.setVisible(false);
+                          settingsPanel.setVisible(true);
+                     }
+                     else if(((JPanel)e.getSource()).getName().equals("visitorBtn")){
+                         visitorsPanel.setVisible(true);
+                         complaintPanel.setVisible(false);
+                         setColor(visitorBtnPanel);
+                         setColor(jPanel35);
+                      
+                         System.out.println("visitor panel");
+                     }
+                      else if(((JPanel)e.getSource()).getName().equals("refferenceBtn")){
+                         setColor(refferenceBtnPanel);
+                         refferencePanel.setVisible(true);
+                     }
+                      else if(((JPanel)e.getSource()).getName().equals("reportBtn")){
+                         setColor(reportBtnPanel);
+                         reportsPanel.setVisible(true);
+                     }
+                     
+                    }
+                };
+    
+    
      public void actionPerformed(ActionEvent e) {
            System.out.println("event "+e);
         if(e.getSource() == jPanel23){
@@ -120,18 +242,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel22 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userNameLabel = new javax.swing.JLabel();
-        appointmentPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        appointmentTable = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        approveBtn = new javax.swing.JButton();
-        jPanel13 = new javax.swing.JPanel();
-        editBtn = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
         patientSidePanel = new javax.swing.JPanel();
         profileImg1 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -141,7 +251,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel17 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
+        patientSettingPanel = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -152,7 +262,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel23 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jPanel28 = new javax.swing.JPanel();
+        moSettingPanel = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -172,7 +282,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel35 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
-        jPanel36 = new javax.swing.JPanel();
+        receptionistSettingPanel = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         jPanel37 = new javax.swing.JPanel();
@@ -180,6 +290,76 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel56 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         userNameLabel3 = new javax.swing.JLabel();
+        adminAppointmentOptions1 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        approveBtn1 = new javax.swing.JButton();
+        jPanel18 = new javax.swing.JPanel();
+        editBtn1 = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        adminUsertOptions = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        approveBtn = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        editBtn = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        adminMailOptions = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jPanel21 = new javax.swing.JPanel();
+        approveBtn2 = new javax.swing.JButton();
+        jPanel24 = new javax.swing.JPanel();
+        editBtn2 = new javax.swing.JButton();
+        jPanel25 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        adminComplaintOptions = new javax.swing.JPanel();
+        jPanel26 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jPanel27 = new javax.swing.JPanel();
+        approveBtn3 = new javax.swing.JButton();
+        jPanel29 = new javax.swing.JPanel();
+        editBtn3 = new javax.swing.JButton();
+        jPanel34 = new javax.swing.JPanel();
+        jButton8 = new javax.swing.JButton();
+        adminReportOption = new javax.swing.JPanel();
+        jPanel38 = new javax.swing.JPanel();
+        jButton9 = new javax.swing.JButton();
+        jPanel39 = new javax.swing.JPanel();
+        approveBtn4 = new javax.swing.JButton();
+        jPanel40 = new javax.swing.JPanel();
+        editBtn4 = new javax.swing.JButton();
+        jPanel41 = new javax.swing.JPanel();
+        jButton10 = new javax.swing.JButton();
+        appointmentPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        appointmentTable = new javax.swing.JTable();
+        visitorsPanel = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        visitorTable = new javax.swing.JTable();
+        mailPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        dispatchedMailTable = new javax.swing.JTable();
+        complaintPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        complaintTable = new javax.swing.JTable();
+        reportsPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        appointmentTable3 = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
+        refferencePanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        appointmentTable5 = new javax.swing.JTable();
+        settingsPanel = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        usersPanel = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        appointmentTable7 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -290,7 +470,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         complaintBtnPanelLayout.setVerticalGroup(
             complaintBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +655,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         refferenceBtnPanelLayout.setVerticalGroup(
             refferenceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,187 +699,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         );
 
         bgPanel.add(adminSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
-
-        appointmentPanel.setBackground(new java.awt.Color(204, 204, 204));
-
-        jScrollPane1.setBorder(null);
-
-        appointmentTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        appointmentTable.setGridColor(new java.awt.Color(255, 255, 255));
-        appointmentTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        appointmentTable.setRowHeight(20);
-        appointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTableMousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(appointmentTable);
-        if (appointmentTable.getColumnModel().getColumnCount() > 0) {
-            appointmentTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-            appointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-            appointmentTable.getColumnModel().getColumn(6).setPreferredWidth(100);
-        }
-
-        javax.swing.GroupLayout appointmentPanelLayout = new javax.swing.GroupLayout(appointmentPanel);
-        appointmentPanel.setLayout(appointmentPanelLayout);
-        appointmentPanelLayout.setHorizontalGroup(
-            appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(appointmentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        appointmentPanelLayout.setVerticalGroup(
-            appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(appointmentPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
-        );
-
-        bgPanel.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 1020, 860));
-
-        jPanel9.setBackground(new java.awt.Color(153, 153, 255));
-
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel12.setBackground(new java.awt.Color(153, 153, 255));
-
-        approveBtn.setText("Approve");
-        approveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(approveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(approveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel13.setBackground(new java.awt.Color(153, 153, 255));
-
-        editBtn.setText("Edit");
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel14.setBackground(new java.awt.Color(153, 153, 255));
-
-        jButton4.setText("Delete");
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 117, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        bgPanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 860, 110));
 
         patientSidePanel.setBackground(new java.awt.Color(54, 33, 89));
 
@@ -782,11 +781,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
 
-        jPanel20.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel20.addMouseListener(new java.awt.event.MouseAdapter() {
+        patientSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
+        patientSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        patientSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel20MousePressed(evt);
+                patientSettingPanelMousePressed(evt);
             }
         });
 
@@ -796,28 +795,28 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
+        javax.swing.GroupLayout patientSettingPanelLayout = new javax.swing.GroupLayout(patientSettingPanel);
+        patientSettingPanel.setLayout(patientSettingPanelLayout);
+        patientSettingPanelLayout.setHorizontalGroup(
+            patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientSettingPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
+        patientSettingPanelLayout.setVerticalGroup(
+            patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientSettingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel15.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
+        jPanel15.add(patientSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
 
         javax.swing.GroupLayout patientSidePanelLayout = new javax.swing.GroupLayout(patientSidePanel);
         patientSidePanel.setLayout(patientSidePanelLayout);
@@ -894,11 +893,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        jPanel28.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel28.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel28.addMouseListener(new java.awt.event.MouseAdapter() {
+        moSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
+        moSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        moSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel28MousePressed(evt);
+                moSettingPanelMousePressed(evt);
             }
         });
 
@@ -908,28 +907,28 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel28Layout.createSequentialGroup()
+        javax.swing.GroupLayout moSettingPanelLayout = new javax.swing.GroupLayout(moSettingPanel);
+        moSettingPanel.setLayout(moSettingPanelLayout);
+        moSettingPanelLayout.setHorizontalGroup(
+            moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moSettingPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel28Layout.createSequentialGroup()
+        moSettingPanelLayout.setVerticalGroup(
+            moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moSettingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel22.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
+        jPanel22.add(moSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
 
         javax.swing.GroupLayout moSidePanelLayout = new javax.swing.GroupLayout(moSidePanel);
         moSidePanel.setLayout(moSidePanelLayout);
@@ -1117,11 +1116,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel30.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
 
-        jPanel36.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel36.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel36.addMouseListener(new java.awt.event.MouseAdapter() {
+        receptionistSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
+        receptionistSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        receptionistSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel36MousePressed(evt);
+                receptionistSettingPanelMousePressed(evt);
             }
         });
 
@@ -1131,28 +1130,28 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel36Layout.createSequentialGroup()
+        javax.swing.GroupLayout receptionistSettingPanelLayout = new javax.swing.GroupLayout(receptionistSettingPanel);
+        receptionistSettingPanel.setLayout(receptionistSettingPanelLayout);
+        receptionistSettingPanelLayout.setHorizontalGroup(
+            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel54)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel36Layout.createSequentialGroup()
+        receptionistSettingPanelLayout.setVerticalGroup(
+            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel30.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 50));
+        jPanel30.add(receptionistSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 50));
 
         jPanel37.setBackground(new java.awt.Color(64, 43, 100));
         jPanel37.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1226,6 +1225,1079 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         bgPanel.add(receptionSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
 
+        jPanel10.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel16.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn1.setText("Approve");
+        approveBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtn1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel18.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn1.setText("Edit");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel19.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton5.setText("Delete");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout adminAppointmentOptions1Layout = new javax.swing.GroupLayout(adminAppointmentOptions1);
+        adminAppointmentOptions1.setLayout(adminAppointmentOptions1Layout);
+        adminAppointmentOptions1Layout.setHorizontalGroup(
+            adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminAppointmentOptions1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 347, Short.MAX_VALUE))
+        );
+        adminAppointmentOptions1Layout.setVerticalGroup(
+            adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminAppointmentOptions1Layout.createSequentialGroup()
+                .addGroup(adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(adminAppointmentOptions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel9.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel12.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn.setText("Approve");
+        approveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel13.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn.setText("Edit");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel14.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton4.setText("Delete");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout adminUsertOptionsLayout = new javax.swing.GroupLayout(adminUsertOptions);
+        adminUsertOptions.setLayout(adminUsertOptionsLayout);
+        adminUsertOptionsLayout.setHorizontalGroup(
+            adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminUsertOptionsLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 347, Short.MAX_VALUE))
+        );
+        adminUsertOptionsLayout.setVerticalGroup(
+            adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminUsertOptionsLayout.createSequentialGroup()
+                .addGroup(adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(adminUsertOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel11.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton3.setText("Add");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel21.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn2.setText("Approve");
+        approveBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtn2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel24.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn2.setText("Edit");
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel25.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton6.setText("Delete");
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout adminMailOptionsLayout = new javax.swing.GroupLayout(adminMailOptions);
+        adminMailOptions.setLayout(adminMailOptionsLayout);
+        adminMailOptionsLayout.setHorizontalGroup(
+            adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminMailOptionsLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 347, Short.MAX_VALUE))
+        );
+        adminMailOptionsLayout.setVerticalGroup(
+            adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminMailOptionsLayout.createSequentialGroup()
+                .addGroup(adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(adminMailOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel26.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton7.setText("Add");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel27.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn3.setText("Approve");
+        approveBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtn3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
+        jPanel27.setLayout(jPanel27Layout);
+        jPanel27Layout.setHorizontalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel27Layout.setVerticalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel29.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn3.setText("Edit");
+
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel34.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton8.setText("Delete");
+
+        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
+        jPanel34.setLayout(jPanel34Layout);
+        jPanel34Layout.setHorizontalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel34Layout.setVerticalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout adminComplaintOptionsLayout = new javax.swing.GroupLayout(adminComplaintOptions);
+        adminComplaintOptions.setLayout(adminComplaintOptionsLayout);
+        adminComplaintOptionsLayout.setHorizontalGroup(
+            adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 347, Short.MAX_VALUE))
+        );
+        adminComplaintOptionsLayout.setVerticalGroup(
+            adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
+                .addGroup(adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel27, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel29, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(adminComplaintOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel38.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton9.setText("Add");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
+        jPanel38.setLayout(jPanel38Layout);
+        jPanel38Layout.setHorizontalGroup(
+            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel38Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel38Layout.setVerticalGroup(
+            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel38Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel39.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn4.setText("Approve");
+        approveBtn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtn4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
+        jPanel39.setLayout(jPanel39Layout);
+        jPanel39Layout.setHorizontalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel39Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel39Layout.setVerticalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel39Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel40.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn4.setText("Edit");
+
+        javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
+        jPanel40.setLayout(jPanel40Layout);
+        jPanel40Layout.setHorizontalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel40Layout.setVerticalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel41.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton10.setText("Delete");
+
+        javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
+        jPanel41.setLayout(jPanel41Layout);
+        jPanel41Layout.setHorizontalGroup(
+            jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel41Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel41Layout.setVerticalGroup(
+            jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel41Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout adminReportOptionLayout = new javax.swing.GroupLayout(adminReportOption);
+        adminReportOption.setLayout(adminReportOptionLayout);
+        adminReportOptionLayout.setHorizontalGroup(
+            adminReportOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminReportOptionLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 347, Short.MAX_VALUE))
+        );
+        adminReportOptionLayout.setVerticalGroup(
+            adminReportOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminReportOptionLayout.createSequentialGroup()
+                .addGroup(adminReportOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminReportOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel39, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(adminReportOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        appointmentPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane1.setBorder(null);
+
+        appointmentTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        appointmentTable.setGridColor(new java.awt.Color(255, 255, 255));
+        appointmentTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        appointmentTable.setRowHeight(20);
+        appointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(appointmentTable);
+        if (appointmentTable.getColumnModel().getColumnCount() > 0) {
+            appointmentTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            appointmentTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            appointmentTable.getColumnModel().getColumn(3).setPreferredWidth(130);
+            appointmentTable.getColumnModel().getColumn(4).setPreferredWidth(130);
+            appointmentTable.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
+
+        javax.swing.GroupLayout appointmentPanelLayout = new javax.swing.GroupLayout(appointmentPanel);
+        appointmentPanel.setLayout(appointmentPanelLayout);
+        appointmentPanelLayout.setHorizontalGroup(
+            appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        appointmentPanelLayout.setVerticalGroup(
+            appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(481, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        visitorsPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel17.setText("visitor table");
+
+        jScrollPane5.setBorder(null);
+
+        visitorTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        visitorTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Date", "Id Card No", "Name", "Purpose", "Mobile", "In-Time", "Out-Time", "Note", "Attachment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        visitorTable.setGridColor(new java.awt.Color(255, 255, 255));
+        visitorTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        visitorTable.setRowHeight(20);
+        visitorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                visitorTableMousePressed(evt);
+            }
+        });
+        jScrollPane5.setViewportView(visitorTable);
+        if (visitorTable.getColumnModel().getColumnCount() > 0) {
+            visitorTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            visitorTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            visitorTable.getColumnModel().getColumn(3).setPreferredWidth(130);
+            visitorTable.getColumnModel().getColumn(4).setPreferredWidth(130);
+            visitorTable.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
+
+        javax.swing.GroupLayout visitorsPanelLayout = new javax.swing.GroupLayout(visitorsPanel);
+        visitorsPanel.setLayout(visitorsPanelLayout);
+        visitorsPanelLayout.setHorizontalGroup(
+            visitorsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(visitorsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(visitorsPanelLayout.createSequentialGroup()
+                .addGap(412, 412, 412)
+                .addComponent(jLabel17)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        visitorsPanelLayout.setVerticalGroup(
+            visitorsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(visitorsPanelLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(visitorsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        mailPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane2.setBorder(null);
+
+        dispatchedMailTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        dispatchedMailTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Refference No", "Date", "To Name", "Address", "Note", "Attachment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        dispatchedMailTable.setGridColor(new java.awt.Color(255, 255, 255));
+        dispatchedMailTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        dispatchedMailTable.setRowHeight(20);
+        dispatchedMailTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dispatchedMailTableMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(dispatchedMailTable);
+        if (dispatchedMailTable.getColumnModel().getColumnCount() > 0) {
+            dispatchedMailTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            dispatchedMailTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            dispatchedMailTable.getColumnModel().getColumn(3).setPreferredWidth(130);
+            dispatchedMailTable.getColumnModel().getColumn(4).setPreferredWidth(130);
+        }
+
+        javax.swing.GroupLayout mailPanelLayout = new javax.swing.GroupLayout(mailPanel);
+        mailPanel.setLayout(mailPanelLayout);
+        mailPanelLayout.setHorizontalGroup(
+            mailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        mailPanelLayout.setVerticalGroup(
+            mailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(470, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(mailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        complaintPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane3.setBorder(null);
+
+        complaintTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        complaintTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "type", "Date", "Patient Name", "Description", "Mobile", "Action", "Note", "Attachment"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        complaintTable.setGridColor(new java.awt.Color(255, 255, 255));
+        complaintTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        complaintTable.setRowHeight(20);
+        complaintTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                complaintTableMousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(complaintTable);
+        if (complaintTable.getColumnModel().getColumnCount() > 0) {
+            complaintTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            complaintTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            complaintTable.getColumnModel().getColumn(3).setPreferredWidth(130);
+            complaintTable.getColumnModel().getColumn(5).setPreferredWidth(130);
+            complaintTable.getColumnModel().getColumn(7).setPreferredWidth(100);
+        }
+
+        javax.swing.GroupLayout complaintPanelLayout = new javax.swing.GroupLayout(complaintPanel);
+        complaintPanel.setLayout(complaintPanelLayout);
+        complaintPanelLayout.setHorizontalGroup(
+            complaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        complaintPanelLayout.setVerticalGroup(
+            complaintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(complaintPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        reportsPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane4.setBorder(null);
+
+        appointmentTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        appointmentTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        appointmentTable3.setGridColor(new java.awt.Color(255, 255, 255));
+        appointmentTable3.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        appointmentTable3.setRowHeight(20);
+        appointmentTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentTable3MousePressed(evt);
+            }
+        });
+        jScrollPane4.setViewportView(appointmentTable3);
+        if (appointmentTable3.getColumnModel().getColumnCount() > 0) {
+            appointmentTable3.getColumnModel().getColumn(0).setPreferredWidth(100);
+            appointmentTable3.getColumnModel().getColumn(2).setPreferredWidth(100);
+            appointmentTable3.getColumnModel().getColumn(3).setPreferredWidth(130);
+            appointmentTable3.getColumnModel().getColumn(4).setPreferredWidth(130);
+            appointmentTable3.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
+
+        jLabel18.setText("report panel");
+
+        javax.swing.GroupLayout reportsPanelLayout = new javax.swing.GroupLayout(reportsPanel);
+        reportsPanel.setLayout(reportsPanelLayout);
+        reportsPanelLayout.setHorizontalGroup(
+            reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(reportsPanelLayout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(jLabel18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        reportsPanelLayout.setVerticalGroup(
+            reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportsPanelLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        refferencePanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane6.setBorder(null);
+
+        appointmentTable5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        appointmentTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        appointmentTable5.setGridColor(new java.awt.Color(255, 255, 255));
+        appointmentTable5.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        appointmentTable5.setRowHeight(20);
+        appointmentTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentTable5MousePressed(evt);
+            }
+        });
+        jScrollPane6.setViewportView(appointmentTable5);
+        if (appointmentTable5.getColumnModel().getColumnCount() > 0) {
+            appointmentTable5.getColumnModel().getColumn(0).setPreferredWidth(100);
+            appointmentTable5.getColumnModel().getColumn(2).setPreferredWidth(100);
+            appointmentTable5.getColumnModel().getColumn(3).setPreferredWidth(130);
+            appointmentTable5.getColumnModel().getColumn(4).setPreferredWidth(130);
+            appointmentTable5.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
+
+        javax.swing.GroupLayout refferencePanelLayout = new javax.swing.GroupLayout(refferencePanel);
+        refferencePanel.setLayout(refferencePanelLayout);
+        refferencePanelLayout.setHorizontalGroup(
+            refferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(refferencePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        refferencePanelLayout.setVerticalGroup(
+            refferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(refferencePanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(refferencePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        settingsPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel23.setText("setting ");
+
+        javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
+        settingsPanel.setLayout(settingsPanelLayout);
+        settingsPanelLayout.setHorizontalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addGap(374, 374, 374)
+                .addComponent(jLabel23)
+                .addContainerGap(661, Short.MAX_VALUE))
+        );
+        settingsPanelLayout.setVerticalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel23)
+                .addContainerGap(833, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(settingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
+        usersPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        jScrollPane8.setBorder(null);
+
+        appointmentTable7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        appointmentTable7.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        appointmentTable7.setGridColor(new java.awt.Color(255, 255, 255));
+        appointmentTable7.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        appointmentTable7.setRowHeight(20);
+        appointmentTable7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentTable7MousePressed(evt);
+            }
+        });
+        jScrollPane8.setViewportView(appointmentTable7);
+        if (appointmentTable7.getColumnModel().getColumnCount() > 0) {
+            appointmentTable7.getColumnModel().getColumn(0).setPreferredWidth(100);
+            appointmentTable7.getColumnModel().getColumn(2).setPreferredWidth(100);
+            appointmentTable7.getColumnModel().getColumn(3).setPreferredWidth(130);
+            appointmentTable7.getColumnModel().getColumn(4).setPreferredWidth(130);
+            appointmentTable7.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
+
+        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
+        usersPanel.setLayout(usersPanelLayout);
+        usersPanelLayout.setHorizontalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        usersPanelLayout.setVerticalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usersPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(usersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1241,9 +2313,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel28MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel28MousePressed
+    private void moSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moSettingPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel28MousePressed
+    }//GEN-LAST:event_moSettingPanelMousePressed
 
     private void jPanel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel23MousePressed
         // TODO add your handling code here:
@@ -1277,86 +2349,37 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void userBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnPanelMousePressed
         // TODO add your handling code here:
-        setColor(userBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(reportBtnPanel);
-        resetColor(visitorBtnPanel);
-        resetColor(settingBtnPanel);
-        appointmentPanel.setVisible(false);
+        
     }//GEN-LAST:event_userBtnPanelMousePressed
 
     private void settingBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnPanelMousePressed
         // TODO add your handling code here:
-        setColor(settingBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(reportBtnPanel);
-        resetColor(visitorBtnPanel);
-        appointmentPanel.setVisible(false);
+     
     }//GEN-LAST:event_settingBtnPanelMousePressed
 
     private void visitorBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorBtnPanelMousePressed
         // TODO add your handling code here:
-        setColor(visitorBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(settingBtnPanel);
-        resetColor(reportBtnPanel);
-        appointmentPanel.setVisible(false);
+       
     }//GEN-LAST:event_visitorBtnPanelMousePressed
 
     private void reportBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportBtnPanelMousePressed
         // TODO add your handling code here:
-        setColor(reportBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(visitorBtnPanel);
-        resetColor(settingBtnPanel);
-        appointmentPanel.setVisible(false);
+        
     }//GEN-LAST:event_reportBtnPanelMousePressed
 
     private void complaintBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaintBtnPanelMousePressed
-        // TODO add your handling code here:
-        setColor(complaintBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(reportBtnPanel);
-        resetColor(visitorBtnPanel);
-        resetColor(settingBtnPanel);
-        appointmentPanel.setVisible(false);
+    
     }//GEN-LAST:event_complaintBtnPanelMousePressed
 
     private void mailBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailBtnPanelMousePressed
         // TODO add your handling code here:
-        setColor(mailBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(appointmentBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(reportBtnPanel);
-        resetColor(visitorBtnPanel);
-        resetColor(settingBtnPanel);
-        appointmentPanel.setVisible(false);
+       
     }//GEN-LAST:event_mailBtnPanelMousePressed
 
+  
     private void appointmentBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentBtnPanelMousePressed
 
-        setColor(appointmentBtnPanel);
-        resetColor(userBtnPanel);
-        resetColor(mailBtnPanel);
-        resetColor(complaintBtnPanel);
-        resetColor(reportBtnPanel);
-        resetColor(visitorBtnPanel);
-        resetColor(settingBtnPanel);
-        appointmentPanel.setVisible(true);
+       
 
     }//GEN-LAST:event_appointmentBtnPanelMousePressed
 
@@ -1376,28 +2399,111 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel35MousePressed
 
-    private void jPanel36MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel36MousePressed
+    private void receptionistSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistSettingPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel36MousePressed
+    }//GEN-LAST:event_receptionistSettingPanelMousePressed
 
     private void jPanel37MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel37MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel37MousePressed
 
-    private void jPanel20MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel20MousePressed
+    private void patientSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientSettingPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel20MousePressed
+    }//GEN-LAST:event_patientSettingPanelMousePressed
 
     private void refferenceBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refferenceBtnPanelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_refferenceBtnPanelMousePressed
 
-    private void setTable(){
-        ArrayList<String> list= FileService.getPatientAppointments("199829003939");
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void approveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_approveBtn1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void approveBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_approveBtn2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void approveBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_approveBtn3ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void approveBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_approveBtn4ActionPerformed
+
+    private void dispatchedMailTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dispatchedMailTableMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dispatchedMailTableMousePressed
+
+    private void complaintTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaintTableMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_complaintTableMousePressed
+
+    private void appointmentTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointmentTable3MousePressed
+
+    private void visitorTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorTableMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_visitorTableMousePressed
+
+    private void appointmentTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable5MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointmentTable5MousePressed
+
+    private void appointmentTable7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable7MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointmentTable7MousePressed
+
+    private void setTables(){
+        if(getUserRole().equals("Admin")){
+            getAllAppointment();
+            getAllComplaints();
+            getDispatchedMails();
+            getVisitorRecords();
+            getReceivedMails();
+        }
+        else if(getUserRole().equals("Receptionist")){
+        getAllAppointment();
+        getAllComplaints();
+        getDispatchedMails();
+        getVisitorRecords();
+        
+        getReceivedMails();
+    }
+        else if(getUserRole().equals("Patient")){
+            getPatientAppointmentTable("199829003939");
+            getPatientComplains("199829003939");
+            
+    }
+        else if(getUserRole().equals("MedicalOfficer")){
+        getMOAppointmentTable("dr001");
+    }
+        
+    }
+    
+    private void getPatientAppointmentTable(String id){
+        ArrayList<String> list= FileService.getPatientAppointments(id);
         TableModel tm = appointmentTable.getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
-        System.out.println("works");  
+        System.out.println("patient appointments");  
              for(int i=0;i<list.size();i++)  
            {  
             System.out.println(list.get(i));  
@@ -1410,7 +2516,114 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
          approveBtn.setEnabled(false);
                      editBtn.setEnabled(false);
     }
+    private void getMOAppointmentTable(String id){
+          ArrayList<String> list= FileService.getMOAppointments(id);
+        TableModel tm = appointmentTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+        System.out.println("Mo appoinments");  
+             for(int i=0;i<list.size();i++)  
+           {  
+            System.out.println(list.get(i));  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+                    model.addRow(row);
+            
+           }  
+         approveBtn.setEnabled(false);
+                     editBtn.setEnabled(false);
+        
+    }
+    private void getAllAppointment(){
+        ArrayList<String> list= FileService.getAllAppointments();
+        TableModel tm = appointmentTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+       System.out.println("all appointments"); 
+             for(int i=0;i<list.size();i++)  
+           {  
+            System.out.println(list.get(i));  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+                    model.addRow(row);
+            
+           }  
+        
+    }
     
+    private void getAllComplaints(){
+         ArrayList<String> list= FileService.getAllComplaints();
+        TableModel tm = complaintTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+       System.out.println("all complaints");  
+             for(int i=0;i<list.size();i++)  
+           {  
+            System.out.println(list.get(i));  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = { data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+                    model.addRow(row);
+            
+           }  
+        
+    }
+    
+    private void getPatientComplains(String id){
+          ArrayList<String> list= FileService.getPatientComplaints(id);
+        TableModel tm = complaintTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+            System.out.println("patient complaints");  
+             for(int i=0;i<list.size();i++)  
+           {  
+            System.out.println(list.get(i));  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = { data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+                    model.addRow(row);
+            
+           }  
+        
+    }
+    
+    private void getDispatchedMails(){
+         ArrayList<String> list= FileService.getDispatchedMails();
+        TableModel tm = dispatchedMailTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+            System.out.println("dispatched mails");  
+             for(int i=0;i<list.size();i++)  
+           {  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = { data[0], data[1], data[2], data[3], data[4], data[5]};
+                    model.addRow(row);
+            
+           }  
+        
+    }
+    
+    private void getReceivedMails(){
+        
+    }
+    
+    private void getVisitorRecords(){
+        ArrayList<String> list= FileService.getVisitorRecords();
+        TableModel tm = visitorTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+             for(int i=0;i<list.size();i++)  
+           {  
+            
+            String [] data=list.get(i).split(",");
+             Object[] row = { data[0], data[1], data[2], data[3], data[4], data[5],data[6], data[7], data[8]};
+                    model.addRow(row);
+            
+           }  
+    }
     
     
     
@@ -1451,31 +2664,84 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         });
     }
     
-    private void createUi(JPanel panel){
-        panel.setVisible(false);
-        
-        
-        
-        
-    }
+    
      void setColor(JPanel panel){
          panel.setBackground(new Color(85,65,118));
     }
+     
+     void resetAllMainPanels(){
+         usersPanel.setVisible(false);
+          mailPanel.setVisible(false);
+           appointmentPanel.setVisible(false);
+            reportsPanel.setVisible(false);
+             settingsPanel.setVisible(false);
+              refferencePanel.setVisible(false);
+               visitorsPanel.setVisible(false);
+     }
+      void resetAllColor(){
+         jPanel23.setBackground(new Color(64,43,100));
+        moSettingPanel.setBackground(new Color(64,43,100));
+        jPanel5.setBackground(new Color(64,43,100));
+        jPanel17.setBackground(new Color(64,43,100));
+        patientSettingPanel.setBackground(new Color(64,43,100));
+        jPanel31.setBackground(new Color(64,43,100));
+        jPanel32.setBackground(new Color(64,43,100));
+        jPanel33.setBackground(new Color(64,43,100));
+        jPanel35.setBackground(new Color(64,43,100));
+        receptionistSettingPanel.setBackground(new Color(64,43,100));
+        jPanel37.setBackground(new Color(64,43,100));
+        userBtnPanel.setBackground(new Color(64,43,100));
+        reportBtnPanel.setBackground(new Color(64,43,100));
+        appointmentBtnPanel.setBackground(new Color(64,43,100));
+        mailBtnPanel.setBackground(new Color(64,43,100));
+        complaintBtnPanel.setBackground(new Color(64,43,100));
+        visitorBtnPanel.setBackground(new Color(64,43,100));
+        settingBtnPanel.setBackground(new Color(64,43,100));
+        refferenceBtnPanel.setBackground(new Color(64,43,100));
+    }
      void resetColor(JPanel panel){
         panel.setBackground(new Color(64,43,100));
+       
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminAppointmentOptions1;
+    private javax.swing.JPanel adminComplaintOptions;
+    private javax.swing.JPanel adminMailOptions;
+    private javax.swing.JPanel adminReportOption;
     private javax.swing.JPanel adminSidePanel;
+    private javax.swing.JPanel adminUsertOptions;
     private javax.swing.JPanel appointmentBtnPanel;
     private javax.swing.JPanel appointmentPanel;
     private javax.swing.JTable appointmentTable;
+    private javax.swing.JTable appointmentTable3;
+    private javax.swing.JTable appointmentTable5;
+    private javax.swing.JTable appointmentTable7;
     private javax.swing.JButton approveBtn;
+    private javax.swing.JButton approveBtn1;
+    private javax.swing.JButton approveBtn2;
+    private javax.swing.JButton approveBtn3;
+    private javax.swing.JButton approveBtn4;
     private javax.swing.JPanel bgPanel;
     private javax.swing.JPanel complaintBtnPanel;
+    private javax.swing.JPanel complaintPanel;
+    private javax.swing.JTable complaintTable;
+    private javax.swing.JTable dispatchedMailTable;
     private javax.swing.JButton editBtn;
+    private javax.swing.JButton editBtn1;
+    private javax.swing.JButton editBtn2;
+    private javax.swing.JButton editBtn3;
+    private javax.swing.JButton editBtn4;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1484,11 +2750,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
@@ -1514,47 +2783,75 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
+    private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
+    private javax.swing.JPanel jPanel40;
+    private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JPanel mailBtnPanel;
+    private javax.swing.JPanel mailPanel;
+    private javax.swing.JPanel moSettingPanel;
     private javax.swing.JPanel moSidePanel;
+    private javax.swing.JPanel patientSettingPanel;
     private javax.swing.JPanel patientSidePanel;
     private javax.swing.JLabel profileImg;
     private javax.swing.JLabel profileImg1;
     private javax.swing.JLabel profileImg2;
     private javax.swing.JLabel profileImg3;
     private javax.swing.JPanel receptionSidePanel;
+    private javax.swing.JPanel receptionistSettingPanel;
     private javax.swing.JPanel refferenceBtnPanel;
+    private javax.swing.JPanel refferencePanel;
     private javax.swing.JPanel reportBtnPanel;
+    private javax.swing.JPanel reportsPanel;
     private javax.swing.JPanel settingBtnPanel;
+    private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JLabel userNameLabel;
     private javax.swing.JLabel userNameLabel1;
     private javax.swing.JLabel userNameLabel2;
     private javax.swing.JLabel userNameLabel3;
+    private javax.swing.JPanel usersPanel;
     private javax.swing.JPanel visitorBtnPanel;
+    private javax.swing.JTable visitorTable;
+    private javax.swing.JPanel visitorsPanel;
     // End of variables declaration//GEN-END:variables
 }
