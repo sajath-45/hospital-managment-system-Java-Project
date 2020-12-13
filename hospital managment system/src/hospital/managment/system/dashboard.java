@@ -7,6 +7,8 @@ package hospital.managment.system;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import static javafx.scene.paint.Color.color;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -61,6 +63,37 @@ public class dashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        AdminDB = new javax.swing.JPanel();
+        AdminUs = new javax.swing.JPanel();
+        userMain = new javax.swing.JPanel();
+        userView = new javax.swing.JPanel();
+        userViewpanel = new javax.swing.JPanel();
+        userViewPR = new javax.swing.JPanel();
+        userViewPRLable = new javax.swing.JLabel();
+        userViewPP = new javax.swing.JPanel();
+        userViewPPLable = new javax.swing.JLabel();
+        userViewPMO = new javax.swing.JPanel();
+        userViewPMOLable = new javax.swing.JLabel();
+        userViewMP = new javax.swing.JPanel();
+        userViewMPMo = new javax.swing.JScrollPane();
+        userViewMPMoTable = new javax.swing.JTable();
+        userViewMPR = new javax.swing.JScrollPane();
+        userViewMPRTable = new javax.swing.JTable();
+        userViewMPP = new javax.swing.JScrollPane();
+        userViewMPPTable = new javax.swing.JTable();
+        userAdd = new javax.swing.JPanel();
+        userEdit = new javax.swing.JPanel();
+        userDelete = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel17 = new javax.swing.JPanel();
+        approveBtn1 = new javax.swing.JButton();
+        jPanel18 = new javax.swing.JPanel();
+        editBtn1 = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         appointmentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
@@ -374,6 +407,412 @@ public class dashboard extends javax.swing.JFrame {
 
         bgPanel.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
 
+        AdminDB.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        AdminUs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userMain.setBackground(new java.awt.Color(204, 204, 204));
+        userMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userView.setPreferredSize(new java.awt.Dimension(1020, 860));
+        userView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userViewpanel.setBackground(new java.awt.Color(204, 255, 153));
+        userViewpanel.setPreferredSize(new java.awt.Dimension(1020, 40));
+        userViewpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userViewPR.setBackground(new java.awt.Color(255, 204, 0));
+        userViewPR.setPreferredSize(new java.awt.Dimension(200, 40));
+
+        userViewPRLable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        userViewPRLable.setText("Recipient");
+
+        javax.swing.GroupLayout userViewPRLayout = new javax.swing.GroupLayout(userViewPR);
+        userViewPR.setLayout(userViewPRLayout);
+        userViewPRLayout.setHorizontalGroup(
+            userViewPRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPRLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(userViewPRLable)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        userViewPRLayout.setVerticalGroup(
+            userViewPRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPRLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(userViewPRLable)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        userViewpanel.add(userViewPR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, -1));
+
+        userViewPP.setBackground(new java.awt.Color(255, 0, 255));
+        userViewPP.setPreferredSize(new java.awt.Dimension(200, 40));
+
+        userViewPPLable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        userViewPPLable.setText("Patient");
+
+        javax.swing.GroupLayout userViewPPLayout = new javax.swing.GroupLayout(userViewPP);
+        userViewPP.setLayout(userViewPPLayout);
+        userViewPPLayout.setHorizontalGroup(
+            userViewPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPPLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(userViewPPLable)
+                .addContainerGap(87, Short.MAX_VALUE))
+        );
+        userViewPPLayout.setVerticalGroup(
+            userViewPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(userViewPPLable)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        userViewpanel.add(userViewPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
+
+        userViewPMO.setBackground(new java.awt.Color(255, 0, 255));
+        userViewPMO.setPreferredSize(new java.awt.Dimension(200, 40));
+
+        userViewPMOLable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        userViewPMOLable.setText("Medical Officer");
+
+        javax.swing.GroupLayout userViewPMOLayout = new javax.swing.GroupLayout(userViewPMO);
+        userViewPMO.setLayout(userViewPMOLayout);
+        userViewPMOLayout.setHorizontalGroup(
+            userViewPMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPMOLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(userViewPMOLable)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        userViewPMOLayout.setVerticalGroup(
+            userViewPMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userViewPMOLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(userViewPMOLable)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        userViewpanel.add(userViewPMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        userView.add(userViewpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        userViewMPMoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "user Name", "Name", "Gender", "Phone no", "NIC no", "Date of Bith", "Address", "Marita Status", "Password", "Staff ID", "Email Addres", "Date of Joining"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        userViewMPMoTable.setPreferredSize(new java.awt.Dimension(1020, 820));
+        userViewMPMo.setViewportView(userViewMPMoTable);
+
+        userViewMPRTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "user Name", "Name", "Gender", "Phone no", "NIC no", "Date of Bith", "Address", "Marita Status", "Password", "Staff ID", "Email Addres", "Date of Joining"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        userViewMPRTable.setPreferredSize(new java.awt.Dimension(1020, 820));
+        userViewMPR.setViewportView(userViewMPRTable);
+
+        userViewMPPTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "user Name", "Name", "Gender", "Phone no", "NIC no", "Date of Bith", "Address", "Marita Status", "Password", "Staff ID", "Email Addres", "Date of Joining", "Blood Group", "Allojic"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        userViewMPPTable.setPreferredSize(new java.awt.Dimension(1020, 820));
+        userViewMPP.setViewportView(userViewMPPTable);
+
+        javax.swing.GroupLayout userViewMPLayout = new javax.swing.GroupLayout(userViewMP);
+        userViewMP.setLayout(userViewMPLayout);
+        userViewMPLayout.setHorizontalGroup(
+            userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPMo, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPR, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPP, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        userViewMPLayout.setVerticalGroup(
+            userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPMo, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPR, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(userViewMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userViewMPLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(userViewMPP, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        userView.add(userViewMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1020, 820));
+
+        userMain.add(userView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        userAdd.setPreferredSize(new java.awt.Dimension(1020, 860));
+
+        javax.swing.GroupLayout userAddLayout = new javax.swing.GroupLayout(userAdd);
+        userAdd.setLayout(userAddLayout);
+        userAddLayout.setHorizontalGroup(
+            userAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+        userAddLayout.setVerticalGroup(
+            userAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+
+        userMain.add(userAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        userEdit.setPreferredSize(new java.awt.Dimension(1020, 860));
+
+        javax.swing.GroupLayout userEditLayout = new javax.swing.GroupLayout(userEdit);
+        userEdit.setLayout(userEditLayout);
+        userEditLayout.setHorizontalGroup(
+            userEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+        userEditLayout.setVerticalGroup(
+            userEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+
+        userMain.add(userEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        userDelete.setPreferredSize(new java.awt.Dimension(1020, 860));
+
+        javax.swing.GroupLayout userDeleteLayout = new javax.swing.GroupLayout(userDelete);
+        userDelete.setLayout(userDeleteLayout);
+        userDeleteLayout.setHorizontalGroup(
+            userDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+        userDeleteLayout.setVerticalGroup(
+            userDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+
+        userMain.add(userDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        AdminUs.add(userMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1020, 860));
+
+        jPanel16.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton2.setBackground(new java.awt.Color(102, 102, 255));
+        jButton2.setText("Add");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel17.setBackground(new java.awt.Color(153, 153, 255));
+
+        approveBtn1.setText("View");
+        approveBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                approveBtn1MousePressed(evt);
+            }
+        });
+        approveBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveBtn1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(approveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(approveBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel18.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn1.setText("Edit");
+        editBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editBtn1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel19.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton5.setText("Delete");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton5MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 121, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        AdminUs.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 110));
+
+        AdminDB.add(AdminUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         appointmentPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         jScrollPane1.setBorder(null);
@@ -419,7 +858,7 @@ public class dashboard extends javax.swing.JFrame {
             appointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(appointmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addContainerGap())
         );
         appointmentPanelLayout.setVerticalGroup(
@@ -430,7 +869,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addContainerGap(475, Short.MAX_VALUE))
         );
 
-        bgPanel.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 1020, 860));
+        jPanel5.add(appointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1020, 860));
 
         jPanel9.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -539,7 +978,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 117, Short.MAX_VALUE))
+                .addGap(0, 121, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,10 +989,14 @@ public class dashboard extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
-        bgPanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 860, 110));
+        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 110));
+
+        AdminDB.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        bgPanel.add(AdminDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1020, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -604,6 +1047,7 @@ public class dashboard extends javax.swing.JFrame {
             resetColor(jPanel10);
          resetColor(jPanel11);
          appointmentPanel.setVisible(true);
+         userMain.setVisible(false);
          
     }//GEN-LAST:event_jPanel2MousePressed
 
@@ -617,6 +1061,8 @@ public class dashboard extends javax.swing.JFrame {
             resetColor(jPanel10);
          resetColor(jPanel11);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(true);
+          
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
@@ -629,6 +1075,7 @@ public class dashboard extends javax.swing.JFrame {
             resetColor(jPanel10);
          resetColor(jPanel11);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(false);
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
@@ -641,6 +1088,7 @@ public class dashboard extends javax.swing.JFrame {
             resetColor(jPanel10);
          resetColor(jPanel11);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(false);
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
@@ -653,6 +1101,7 @@ public class dashboard extends javax.swing.JFrame {
            resetColor(jPanel10);
          resetColor(jPanel11);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(false);
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void jPanel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MousePressed
@@ -665,6 +1114,7 @@ public class dashboard extends javax.swing.JFrame {
            resetColor(jPanel11);
          resetColor(jPanel6);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(false);
     }//GEN-LAST:event_jPanel10MousePressed
 
     private void jPanel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MousePressed
@@ -677,6 +1127,7 @@ public class dashboard extends javax.swing.JFrame {
            resetColor(jPanel6);
          resetColor(jPanel10);
           appointmentPanel.setVisible(false);
+          userMain.setVisible(false);
     }//GEN-LAST:event_jPanel11MousePressed
 
     private void approveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtnActionPerformed
@@ -696,6 +1147,60 @@ public class dashboard extends javax.swing.JFrame {
                      editBtn.setEnabled(true);
         }
     }//GEN-LAST:event_appointmentTableMousePressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void approveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_approveBtn1ActionPerformed
+
+    private void approveBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveBtn1MousePressed
+        setColor(approveBtn1);
+        resetColor(jButton2);
+         resetColor(editBtn1);
+          resetColor(jButton5);
+          userView.setVisible(true);
+          userAdd.setVisible(false);
+          userEdit.setVisible(false);
+          userDelete.setVisible(false); 
+    }//GEN-LAST:event_approveBtn1MousePressed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+       
+ resetColor(approveBtn1);
+        setColor(jButton2);
+         resetColor(editBtn1);
+          resetColor(jButton5);
+          userView.setVisible(false);
+          userAdd.setVisible(true);
+          userEdit.setVisible(false);
+          userDelete.setVisible(false); 
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void editBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtn1MousePressed
+          resetColor(approveBtn1);
+        resetColor(jButton2);
+         setColor(editBtn1);
+          resetColor(jButton5);       
+          userView.setVisible(false);
+          userAdd.setVisible(false);
+          userEdit.setVisible(true);
+          userDelete.setVisible(false); 
+    }//GEN-LAST:event_editBtn1MousePressed
+
+    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
+               resetColor(approveBtn1);
+        resetColor(jButton2);
+         resetColor(editBtn1);
+          setColor(jButton5);
+          
+          userView.setVisible(false);
+          userAdd.setVisible(false);
+          userEdit.setVisible(false);
+          userDelete.setVisible(true); 
+    }//GEN-LAST:event_jButton5MousePressed
 
     /**
      * @param args the command line arguments
@@ -747,13 +1252,19 @@ public class dashboard extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AdminDB;
+    private javax.swing.JPanel AdminUs;
     private javax.swing.JPanel appointmentPanel;
     private javax.swing.JTable appointmentTable;
     private javax.swing.JButton approveBtn;
+    private javax.swing.JButton approveBtn1;
     private javax.swing.JPanel bgPanel;
     private javax.swing.JButton editBtn;
+    private javax.swing.JButton editBtn1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -774,9 +1285,15 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -785,5 +1302,32 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel profileImg;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JPanel userAdd;
+    private javax.swing.JPanel userDelete;
+    private javax.swing.JPanel userEdit;
+    private javax.swing.JPanel userMain;
+    private javax.swing.JPanel userView;
+    private javax.swing.JPanel userViewMP;
+    private javax.swing.JScrollPane userViewMPMo;
+    private javax.swing.JTable userViewMPMoTable;
+    private javax.swing.JScrollPane userViewMPP;
+    private javax.swing.JTable userViewMPPTable;
+    private javax.swing.JScrollPane userViewMPR;
+    private javax.swing.JTable userViewMPRTable;
+    private javax.swing.JPanel userViewPMO;
+    private javax.swing.JLabel userViewPMOLable;
+    private javax.swing.JPanel userViewPP;
+    private javax.swing.JLabel userViewPPLable;
+    private javax.swing.JPanel userViewPR;
+    private javax.swing.JLabel userViewPRLable;
+    private javax.swing.JPanel userViewpanel;
     // End of variables declaration//GEN-END:variables
+
+    private void setColor(JButton approveBtn1) {
+         approveBtn.setBackground(new Color(0,0,0));
+    }
+
+    private void resetColor(JButton jButton2) {
+        jButton2.setBackground(new Color(185,65,118));
+    }
 }
