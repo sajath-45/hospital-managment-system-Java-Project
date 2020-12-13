@@ -1,1 +1,1 @@
-sajath,Medical Officer,13/12/2020,00:14:24
+sajath,Patient,13/12/2020,14:23:16
