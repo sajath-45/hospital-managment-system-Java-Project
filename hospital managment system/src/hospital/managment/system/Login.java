@@ -244,6 +244,9 @@ public class Login extends javax.swing.JFrame {
                         
                           try {
                                   FileService.writeLoginRecord(FileService.getUserLoginFilePath(),newLogin.toString());
+                                  this.setVisible(false);
+                                  Dashboard dashboard=new Dashboard(newLogin.getRole()); 
+                                  
                               } catch (IOException ex) {
                                  Logger.getLogger(addVisitors.class.getName()).log(Level.SEVERE, null, ex);
                               }
