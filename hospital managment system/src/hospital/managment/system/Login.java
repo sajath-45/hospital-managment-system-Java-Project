@@ -270,7 +270,7 @@ public class Login extends javax.swing.JFrame {
             icon.getImage().flush();
             imgLabel.setIcon(icon);
             jLabel2.setText("Medical Officer Login");
-            this.setRole("Medical Officer");
+            this.setRole("MedicalOfficer");
            
             
         

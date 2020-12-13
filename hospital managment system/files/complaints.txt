@@ -1,0 +1,3 @@
+199829003939,type 1,13/12/2020,sajath,dadsasd,0773781469,dasdas,bad service,/home/sajath/202-chatbot-dialogflow/chatbot/README.md
+199829003939,type 1,15/12/2020,ruwan,please change receptionist,07739521,none,bad reception,/home/sajath/202-chatbot-dialogflow/chatbot/README.md
+199829002929,type 2,30/12/2020,sangeerthana,bad nursing,0785454784,none,bad nursing i am very disaaponted,/home/sajath/android-udev-rules/README.md

@@ -340,6 +340,7 @@ public class FileService {
             out.print(","+record.getStrInTime());
             out.print(","+record.getStrOutTime());
              out.print(","+record.getStrNote());
+             out.println(","+record.getAttachment());
              
     
           
@@ -378,8 +379,7 @@ public class FileService {
     
     }
      
-    
-    public static ArrayList<String> getPatientAppointments(String id){
+       public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
@@ -404,8 +404,189 @@ public class FileService {
             e.printStackTrace();
             return null;
         }
+          
     
     }
+      
+       public static ArrayList<String> getMOAppointments(String id){
+         ArrayList<String> appointmentList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                if(data[9].equals(id) && data[1].equals("approved")){
+                    
+               
+                appointmentList.add(line);
+                
+                }
+            }
+            reader.close();
+           return appointmentList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+          
+    
+    }
+    
+    public static ArrayList<String> getAllAppointments(){
+         ArrayList<String> appointmentList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                
+                    
+               
+                appointmentList.add(line);
+                
+                
+            }
+            reader.close();
+           return appointmentList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+    }
+    
+     public static ArrayList<String> getAllComplaints(){
+         ArrayList<String> complainList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                
+                    
+               
+                complainList.add(line);
+                
+                
+            }
+            reader.close();
+           return complainList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+    }
+          
+     public static ArrayList<String> getPatientComplaints(String id){
+         ArrayList<String> complaintList= new ArrayList<String>();
+          try {
+               System.out.println("patient complaints");  
+             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                 System.out.println("id"+data[0]);  
+                if(data[0].equals(id)){
+                    
+               
+                complaintList.add(line);
+                
+                }
+            }
+            reader.close();
+           return complaintList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+          
+    
+    }
+     public static ArrayList<String> getDispatchedMails(){
+            ArrayList<String> mailList= new ArrayList<String>();
+          try {
+               System.out.println("mails");  
+             BufferedReader reader = new BufferedReader(new FileReader(MAIL_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                  
+              
+                    
+               
+                mailList.add(line);
+                
+                
+            }
+            reader.close();
+           return mailList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+     
+     
+     }
+     
+     public static ArrayList<String> getVisitorRecords(){
+            ArrayList<String> recordList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(VISITOR_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) { 
+                               System.out.println("visitor record"+line);  
+
+                String[] data = line.split(","); //username, password, email, etc
+                  
+              
+                    
+               
+                recordList.add(line);
+                
+                
+            }
+            reader.close();
+           return recordList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+     
+     
+     }
+
+    
     
    private static boolean isRecordExist(String filePath,String key){
       boolean isExist=false;
