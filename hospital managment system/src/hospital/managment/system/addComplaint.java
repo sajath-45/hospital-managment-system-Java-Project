@@ -275,7 +275,6 @@ public class addComplaint extends javax.swing.JFrame {
     }
     private void setComplainTypeComboBox(){
         ComplainRefference refference = new ComplainRefference();
-       System.out.println("works");
         
         DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getComplainTypes().toArray());
          complainTypeComboBox.setModel( newModel );
