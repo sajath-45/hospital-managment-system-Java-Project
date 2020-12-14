@@ -255,7 +255,7 @@ public class FileService {
     
     }
     
-    public static void writeComplaint(Complaint compain)throws IOException {
+  /* public static void writeComplaint(Complaint compain)throws IOException {
         
         try
         {
@@ -288,7 +288,7 @@ public class FileService {
     
 
     
-    }
+    }*/
     
      public static void writeMail(DispatchedPostal mail)throws IOException {
         
@@ -415,7 +415,7 @@ public class FileService {
             String line;
             while ((line = reader.readLine()) != null) {              
                 String[] data = line.split(","); //username, password, email, etc
-                if(data[9].equals(id) && data[1].equals("approved")){
+                if(data[9].equals(id) && data[3].equals("approved")){
                     
                
                 appointmentList.add(line);
@@ -493,7 +493,7 @@ public class FileService {
     
     }
           
-     public static ArrayList<String> getPatientComplaints(String id){
+     public static ArrayList<String> getPatientComplaints(){
          ArrayList<String> complaintList= new ArrayList<String>();
           try {
                System.out.println("patient complaints");  
@@ -501,13 +501,13 @@ public class FileService {
             String line;
             while ((line = reader.readLine()) != null) {              
                 String[] data = line.split(","); //username, password, email, etc
-                 System.out.println("id"+data[0]);  
-                if(data[0].equals(id)){
+                
+               
                     
                
                 complaintList.add(line);
                 
-                }
+                
             }
             reader.close();
            return complaintList;
@@ -619,7 +619,7 @@ public class FileService {
          
    }
    
-   private static void removeLine(String filePath,String lineToRemove){
+   public static void removeLine(String filePath,String lineToRemove){
         try {
 
       File inFile = new File(filePath);
@@ -670,7 +670,7 @@ public class FileService {
        
    }
    
-   private static void addLine(String filePath,String line){
+   public static void addLine(String filePath,String line){
         try
         {
             

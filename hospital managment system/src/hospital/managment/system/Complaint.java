@@ -84,4 +84,11 @@ public class Complaint {
         this.attachment=attachment;
     }
     
+     
+     
+     public String toString(){
+         return this.getStrType()+","+getStrDate()+","+getStrComplaintBy()+","+getStrDescription()+","+getIntPhonrNumber()+","+getStrActionTaken()+","+getStrNote()+","+getAttachment().getName();
+         
+     }
+    
 }
