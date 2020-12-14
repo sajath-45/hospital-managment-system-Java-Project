@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -36,7 +38,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
 
     private Dashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public void setRole(String role){
         this.userRole=role;
@@ -136,13 +137,23 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
        MouseListener listener = new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         resetAllColor();
-                        resetAllMainPanels();
+                        //resetAllMainPanels();
                         System.out.println(((JPanel)e.getSource()).getName());
                      if( ((JPanel)e.getSource()).getName().equals("complaintBtn")){
                          setColor(complaintBtnPanel);
                          setColor(jPanel17);
                          setColor(jPanel33);
-                         complaintPanel.setVisible(true);
+                          setTables();
+                          setComplainOptions();
+                         appointmentPanel.setVisible(false);
+                          refferencePanel.setVisible(false);                        
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          usersPanel.setVisible(false);
+                        complaintPanel.setVisible(true);
+
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("appointmentBtnPanel")){
@@ -150,20 +161,49 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                          setColor(appointmentBtnPanel);
                          setColor(jPanel31);
                           setColor(jPanel23);
-                          appointmentPanel.setVisible(true);
+                           setTables();
+                           setAppointmentOptions();
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);                        
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          usersPanel.setVisible(false);
+                        appointmentPanel.setVisible(true);
+
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("mailBtn")){
                           setColor(mailBtnPanel);
                          setColor(jPanel32);
-                         mailPanel.setVisible(true);
+                          setTables();
+                          setMailOptions();
+                         appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);                        
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          usersPanel.setVisible(false);
+                        mailPanel.setVisible(true);
+
                          
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("userBtn")){
                           setColor(userBtnPanel);
                          setColor(jPanel37);
-                         usersPanel.setVisible(true);
+                          setTables();
+                          setUserOptions();
+                            appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);                        
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          usersPanel.setVisible(true);
                          
                          
                      }
@@ -171,25 +211,60 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                            setColor(settingBtnPanel);
                          setColor(receptionistSettingPanel);
                          setColor(moSettingPanel);
+                         setTables();
+                         setSettingsOptions();
                           setColor(patientSettingPanel);
-                          complaintPanel.setVisible(false);
+                          usersPanel.setVisible(false);
+                          appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);                        
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(false);
                           settingsPanel.setVisible(true);
                      }
                      else if(((JPanel)e.getSource()).getName().equals("visitorBtn")){
-                         visitorsPanel.setVisible(true);
-                         complaintPanel.setVisible(false);
+                          setTables();
                          setColor(visitorBtnPanel);
-                         setColor(jPanel35);
-                      
-                         System.out.println("visitor panel");
+                         setColor(jPanel35);        
+                         setVisitorOptions();
+                             usersPanel.setVisible(false);
+                            appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                          visitorsPanel.setVisible(true);
                      }
                       else if(((JPanel)e.getSource()).getName().equals("refferenceBtn")){
                          setColor(refferenceBtnPanel);
-                         refferencePanel.setVisible(true);
+                        
+                          setTables();
+                         setComplainRefference();
+                         setRefferenceOption();
+                           visitorsPanel.setVisible(false);
+                             usersPanel.setVisible(false);
+                            appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          mailPanel.setVisible(false);
+                         reportsPanel.setVisible(false);
+                           refferencePanel.setVisible(true);
                      }
                       else if(((JPanel)e.getSource()).getName().equals("reportBtn")){
                          setColor(reportBtnPanel);
+                          setTables();
+                          setReportOptions();
+                           visitorsPanel.setVisible(false);
+                             usersPanel.setVisible(false);
+                            appointmentPanel.setVisible(false);
+                         complaintPanel.setVisible(false);
+                          refferencePanel.setVisible(false);
+                          settingsPanel.setVisible(false);
+                          mailPanel.setVisible(false);
                          reportsPanel.setVisible(true);
+                         
                      }
                      
                     }
@@ -212,6 +287,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         bgPanel = new javax.swing.JPanel();
         adminSidePanel = new javax.swing.JPanel();
         profileImg = new javax.swing.JLabel();
@@ -290,7 +367,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel56 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         userNameLabel3 = new javax.swing.JLabel();
-        adminAppointmentOptions1 = new javax.swing.JPanel();
+        adminAppointmentOptions = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
@@ -299,11 +376,22 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         editBtn1 = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
+        receptionAppointmentOptions = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jButton11 = new javax.swing.JButton();
+        jPanel28 = new javax.swing.JPanel();
+        rAppointmentView = new javax.swing.JButton();
+        jPanel36 = new javax.swing.JPanel();
+        editBtn5 = new javax.swing.JButton();
+        patientAppointmentOptions = new javax.swing.JPanel();
+        jPanel42 = new javax.swing.JPanel();
+        jButton12 = new javax.swing.JButton();
+        jPanel43 = new javax.swing.JPanel();
+        rAppointmentView1 = new javax.swing.JButton();
+        moAppointmentOptions = new javax.swing.JPanel();
+        jPanel46 = new javax.swing.JPanel();
+        moAppoinmentComplete = new javax.swing.JButton();
         adminUsertOptions = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        approveBtn = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         editBtn = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
@@ -353,16 +441,27 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         appointmentTable3 = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         refferencePanel = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        appointmentTable5 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        specialityListPanel = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        refferenceList = new javax.swing.JList<>();
         settingsPanel = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         usersPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        appointmentTable7 = new javax.swing.JTable();
+        usersTable = new javax.swing.JTable();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
+        setPreferredSize(new java.awt.Dimension(1330, 1000));
 
         bgPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -694,8 +793,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
         bgPanel.add(adminSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
@@ -1319,11 +1418,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout adminAppointmentOptions1Layout = new javax.swing.GroupLayout(adminAppointmentOptions1);
-        adminAppointmentOptions1.setLayout(adminAppointmentOptions1Layout);
-        adminAppointmentOptions1Layout.setHorizontalGroup(
-            adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminAppointmentOptions1Layout.createSequentialGroup()
+        javax.swing.GroupLayout adminAppointmentOptionsLayout = new javax.swing.GroupLayout(adminAppointmentOptions);
+        adminAppointmentOptions.setLayout(adminAppointmentOptionsLayout);
+        adminAppointmentOptionsLayout.setHorizontalGroup(
+            adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminAppointmentOptionsLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1334,11 +1433,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 347, Short.MAX_VALUE))
         );
-        adminAppointmentOptions1Layout.setVerticalGroup(
-            adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminAppointmentOptions1Layout.createSequentialGroup()
-                .addGroup(adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminAppointmentOptions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        adminAppointmentOptionsLayout.setVerticalGroup(
+            adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminAppointmentOptionsLayout.createSequentialGroup()
+                .addGroup(adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1346,59 +1445,220 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        bgPanel.add(adminAppointmentOptions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+        bgPanel.add(adminAppointmentOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
 
-        jPanel9.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel20.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setText("Add");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel12.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel28.setBackground(new java.awt.Color(153, 153, 255));
 
-        approveBtn.setText("Approve");
-        approveBtn.addActionListener(new java.awt.event.ActionListener() {
+        rAppointmentView.setText("View");
+        rAppointmentView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveBtnActionPerformed(evt);
+                rAppointmentViewActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(approveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rAppointmentView, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(approveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rAppointmentView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jPanel36.setBackground(new java.awt.Color(153, 153, 255));
+
+        editBtn5.setText("Edit");
+
+        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
+        jPanel36.setLayout(jPanel36Layout);
+        jPanel36Layout.setHorizontalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel36Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(editBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel36Layout.setVerticalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel36Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout receptionAppointmentOptionsLayout = new javax.swing.GroupLayout(receptionAppointmentOptions);
+        receptionAppointmentOptions.setLayout(receptionAppointmentOptionsLayout);
+        receptionAppointmentOptionsLayout.setHorizontalGroup(
+            receptionAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionAppointmentOptionsLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 530, Short.MAX_VALUE))
+        );
+        receptionAppointmentOptionsLayout.setVerticalGroup(
+            receptionAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionAppointmentOptionsLayout.createSequentialGroup()
+                .addGroup(receptionAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(receptionAppointmentOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel42.setBackground(new java.awt.Color(153, 153, 255));
+
+        jButton12.setText("Add");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel42Layout = new javax.swing.GroupLayout(jPanel42);
+        jPanel42.setLayout(jPanel42Layout);
+        jPanel42Layout.setHorizontalGroup(
+            jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel42Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel42Layout.setVerticalGroup(
+            jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel42Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel43.setBackground(new java.awt.Color(153, 153, 255));
+
+        rAppointmentView1.setText("View");
+        rAppointmentView1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rAppointmentView1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
+        jPanel43.setLayout(jPanel43Layout);
+        jPanel43Layout.setHorizontalGroup(
+            jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel43Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(rAppointmentView1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel43Layout.setVerticalGroup(
+            jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel43Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rAppointmentView1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout patientAppointmentOptionsLayout = new javax.swing.GroupLayout(patientAppointmentOptions);
+        patientAppointmentOptions.setLayout(patientAppointmentOptionsLayout);
+        patientAppointmentOptionsLayout.setHorizontalGroup(
+            patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientAppointmentOptionsLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 571, Short.MAX_VALUE))
+        );
+        patientAppointmentOptionsLayout.setVerticalGroup(
+            patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        bgPanel.add(patientAppointmentOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
+
+        jPanel46.setBackground(new java.awt.Color(153, 153, 255));
+
+        moAppoinmentComplete.setText("Complete");
+        moAppoinmentComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moAppoinmentCompleteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
+        jPanel46.setLayout(jPanel46Layout);
+        jPanel46Layout.setHorizontalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel46Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(moAppoinmentComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel46Layout.setVerticalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel46Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(moAppoinmentComplete, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout moAppointmentOptionsLayout = new javax.swing.GroupLayout(moAppointmentOptions);
+        moAppointmentOptions.setLayout(moAppointmentOptionsLayout);
+        moAppointmentOptionsLayout.setHorizontalGroup(
+            moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moAppointmentOptionsLayout.createSequentialGroup()
+                .addGap(215, 215, 215)
+                .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 703, Short.MAX_VALUE))
+        );
+        moAppointmentOptionsLayout.setVerticalGroup(
+            moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moAppointmentOptionsLayout.createSequentialGroup()
+                .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        bgPanel.add(moAppointmentOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
 
         jPanel13.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -1447,24 +1707,17 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminUsertOptionsLayout.setHorizontalGroup(
             adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminUsertOptionsLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(169, 169, 169)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(135, 135, 135)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 347, Short.MAX_VALUE))
+                .addGap(0, 475, Short.MAX_VALUE))
         );
         adminUsertOptionsLayout.setVerticalGroup(
             adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminUsertOptionsLayout.createSequentialGroup()
                 .addGroup(adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminUsertOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
@@ -2156,61 +2409,113 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         bgPanel.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
 
         refferencePanel.setBackground(new java.awt.Color(204, 204, 204));
+        refferencePanel.setPreferredSize(new java.awt.Dimension(1090, 860));
 
-        jScrollPane6.setBorder(null);
-
-        appointmentTable5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        appointmentTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Appointment No", "Status", "Patient Name", "Id Card No", "Date", "Time", "Medical Officer", "Speciality", "Sysmtomps"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        appointmentTable5.setGridColor(new java.awt.Color(255, 255, 255));
-        appointmentTable5.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        appointmentTable5.setRowHeight(20);
-        appointmentTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTable5MousePressed(evt);
+                jPanel2MousePressed(evt);
             }
         });
-        jScrollPane6.setViewportView(appointmentTable5);
-        if (appointmentTable5.getColumnModel().getColumnCount() > 0) {
-            appointmentTable5.getColumnModel().getColumn(0).setPreferredWidth(100);
-            appointmentTable5.getColumnModel().getColumn(2).setPreferredWidth(100);
-            appointmentTable5.getColumnModel().getColumn(3).setPreferredWidth(130);
-            appointmentTable5.getColumnModel().getColumn(4).setPreferredWidth(130);
-            appointmentTable5.getColumnModel().getColumn(6).setPreferredWidth(100);
-        }
+
+        jLabel31.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Speciality Refference");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Complain Refference");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        specialityListPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        refferenceList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane7.setViewportView(refferenceList);
+
+        javax.swing.GroupLayout specialityListPanelLayout = new javax.swing.GroupLayout(specialityListPanel);
+        specialityListPanel.setLayout(specialityListPanelLayout);
+        specialityListPanelLayout.setHorizontalGroup(
+            specialityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(specialityListPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        specialityListPanelLayout.setVerticalGroup(
+            specialityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(specialityListPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout refferencePanelLayout = new javax.swing.GroupLayout(refferencePanel);
         refferencePanel.setLayout(refferencePanelLayout);
         refferencePanelLayout.setHorizontalGroup(
             refferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(refferencePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(221, 221, 221)
+                .addComponent(specialityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         refferencePanelLayout.setVerticalGroup(
             refferencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(refferencePanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(specialityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
         bgPanel.add(refferencePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
@@ -2242,8 +2547,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jScrollPane8.setBorder(null);
 
-        appointmentTable7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        appointmentTable7.setModel(new javax.swing.table.DefaultTableModel(
+        usersTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -2262,21 +2567,21 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 return types [columnIndex];
             }
         });
-        appointmentTable7.setGridColor(new java.awt.Color(255, 255, 255));
-        appointmentTable7.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        appointmentTable7.setRowHeight(20);
-        appointmentTable7.addMouseListener(new java.awt.event.MouseAdapter() {
+        usersTable.setGridColor(new java.awt.Color(255, 255, 255));
+        usersTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        usersTable.setRowHeight(20);
+        usersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTable7MousePressed(evt);
+                usersTableMousePressed(evt);
             }
         });
-        jScrollPane8.setViewportView(appointmentTable7);
-        if (appointmentTable7.getColumnModel().getColumnCount() > 0) {
-            appointmentTable7.getColumnModel().getColumn(0).setPreferredWidth(100);
-            appointmentTable7.getColumnModel().getColumn(2).setPreferredWidth(100);
-            appointmentTable7.getColumnModel().getColumn(3).setPreferredWidth(130);
-            appointmentTable7.getColumnModel().getColumn(4).setPreferredWidth(130);
-            appointmentTable7.getColumnModel().getColumn(6).setPreferredWidth(100);
+        jScrollPane8.setViewportView(usersTable);
+        if (usersTable.getColumnModel().getColumnCount() > 0) {
+            usersTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            usersTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            usersTable.getColumnModel().getColumn(3).setPreferredWidth(130);
+            usersTable.getColumnModel().getColumn(4).setPreferredWidth(130);
+            usersTable.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
@@ -2329,20 +2634,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5MousePressed
 
-    private void approveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_approveBtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void appointmentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTableMousePressed
 
         if (appointmentTable.getSelectedRow() > -1) {
             // print first column value from selected row
             System.out.println("works");
-            approveBtn.setEnabled(true);
             editBtn.setEnabled(true);
         }
     }//GEN-LAST:event_appointmentTableMousePressed
@@ -2463,14 +2759,73 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_visitorTableMousePressed
 
-    private void appointmentTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable5MousePressed
+    private void usersTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentTable5MousePressed
+    }//GEN-LAST:event_usersTableMousePressed
 
-    private void appointmentTable7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable7MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentTable7MousePressed
+       setComplainRefference();
+    }//GEN-LAST:event_jPanel1MousePressed
 
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        // TODO add your handling code here:
+           setSpecialityRefference();
+    }//GEN-LAST:event_jPanel2MousePressed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void rAppointmentViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAppointmentViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rAppointmentViewActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void rAppointmentView1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAppointmentView1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rAppointmentView1ActionPerformed
+
+    private void moAppoinmentCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moAppoinmentCompleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moAppoinmentCompleteActionPerformed
+
+    private void setComplainRefference(){
+        setColor(jPanel1);
+             resetColor(jPanel2);
+            ComplainRefference refference = new ComplainRefference();
+           ArrayList<String> complainRefferenceList = refference.getComplainTypes();
+            DefaultListModel<String> model = new DefaultListModel<String>();
+             refferenceList.setModel(model);
+          for(String s:complainRefferenceList){
+                 model.addElement(s);
+                }
+        
+    }
+    
+     private void setSpecialityRefference(){
+         setColor(jPanel2);
+            resetColor(jPanel1);
+         SpecialityRefference refference=new SpecialityRefference();
+        
+       ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
+            DefaultListModel<String> model2 = new DefaultListModel<String>();
+             refferenceList.setModel(model2);
+          for(String s:specialityRefferenceList){
+                 model2.addElement(s);
+                }
+           
+            
+        
+        
+    }
+    
+    
+    
+    
     private void setTables(){
         if(getUserRole().equals("Admin")){
             getAllAppointment();
@@ -2498,6 +2853,32 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         
     }
     
+    private void setAppointmentOptions(){
+        
+    }
+    private void setMailOptions(){
+        
+    }
+    private void setComplainOptions(){
+        
+    }
+    private void setUserOptions(){
+        
+    }
+    private void setRefferenceOption(){
+        
+    }
+    private void setReportOptions(){
+        
+    }
+    private void setVisitorOptions(){
+        
+    }
+    private void setSettingsOptions(){
+        
+    }
+    
+    
     private void getPatientAppointmentTable(String id){
         ArrayList<String> list= FileService.getPatientAppointments(id);
         TableModel tm = appointmentTable.getModel();
@@ -2513,8 +2894,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     model.addRow(row);
             
            }  
-         approveBtn.setEnabled(false);
-                     editBtn.setEnabled(false);
     }
     private void getMOAppointmentTable(String id){
           ArrayList<String> list= FileService.getMOAppointments(id);
@@ -2531,8 +2910,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     model.addRow(row);
             
            }  
-         approveBtn.setEnabled(false);
-                     editBtn.setEnabled(false);
         
     }
     private void getAllAppointment(){
@@ -2705,7 +3082,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel adminAppointmentOptions1;
+    private javax.swing.JPanel adminAppointmentOptions;
     private javax.swing.JPanel adminComplaintOptions;
     private javax.swing.JPanel adminMailOptions;
     private javax.swing.JPanel adminReportOption;
@@ -2715,9 +3092,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel appointmentPanel;
     private javax.swing.JTable appointmentTable;
     private javax.swing.JTable appointmentTable3;
-    private javax.swing.JTable appointmentTable5;
-    private javax.swing.JTable appointmentTable7;
-    private javax.swing.JButton approveBtn;
     private javax.swing.JButton approveBtn1;
     private javax.swing.JButton approveBtn2;
     private javax.swing.JButton approveBtn3;
@@ -2732,8 +3106,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton editBtn2;
     private javax.swing.JButton editBtn3;
     private javax.swing.JButton editBtn4;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton editBtn5;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2760,9 +3136,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
@@ -2783,9 +3161,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -2793,6 +3173,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
@@ -2800,27 +3182,32 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel41;
+    private javax.swing.JPanel jPanel42;
+    private javax.swing.JPanel jPanel43;
+    private javax.swing.JPanel jPanel46;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -2828,28 +3215,37 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JPanel mailBtnPanel;
     private javax.swing.JPanel mailPanel;
+    private javax.swing.JButton moAppoinmentComplete;
+    private javax.swing.JPanel moAppointmentOptions;
     private javax.swing.JPanel moSettingPanel;
     private javax.swing.JPanel moSidePanel;
+    private javax.swing.JPanel patientAppointmentOptions;
     private javax.swing.JPanel patientSettingPanel;
     private javax.swing.JPanel patientSidePanel;
     private javax.swing.JLabel profileImg;
     private javax.swing.JLabel profileImg1;
     private javax.swing.JLabel profileImg2;
     private javax.swing.JLabel profileImg3;
+    private javax.swing.JButton rAppointmentView;
+    private javax.swing.JButton rAppointmentView1;
+    private javax.swing.JPanel receptionAppointmentOptions;
     private javax.swing.JPanel receptionSidePanel;
     private javax.swing.JPanel receptionistSettingPanel;
     private javax.swing.JPanel refferenceBtnPanel;
+    private javax.swing.JList<String> refferenceList;
     private javax.swing.JPanel refferencePanel;
     private javax.swing.JPanel reportBtnPanel;
     private javax.swing.JPanel reportsPanel;
     private javax.swing.JPanel settingBtnPanel;
     private javax.swing.JPanel settingsPanel;
+    private javax.swing.JPanel specialityListPanel;
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JLabel userNameLabel;
     private javax.swing.JLabel userNameLabel1;
     private javax.swing.JLabel userNameLabel2;
     private javax.swing.JLabel userNameLabel3;
     private javax.swing.JPanel usersPanel;
+    private javax.swing.JTable usersTable;
     private javax.swing.JPanel visitorBtnPanel;
     private javax.swing.JTable visitorTable;
     private javax.swing.JPanel visitorsPanel;
