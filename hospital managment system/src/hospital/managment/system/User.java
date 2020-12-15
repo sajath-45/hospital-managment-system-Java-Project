@@ -29,7 +29,9 @@ public class User {
         this.setGender(gender);
         this.setphoneNumber(mobile);
         this.setAddress(address);
-        this.setMaritalStatus(martialStatus);
+        setIdCardNo(idNumber);
+        setDateOfBirth(dob);
+        setMaritalStatus(martialStatus);
         this.setStrPassword(password);
         
     }  
@@ -90,14 +92,14 @@ public class User {
     public void setAddress(String address){
          this.address=address;
     }
-    public void setMaritalStatus(String maritalstatus){
-         this.maritalStatus=maritalStatus;
+    public void setMaritalStatus(String status){
+         this.maritalStatus=status;
     }
     public void setStrPassword(String password){
         this.password=password;
     }
       public String toString() {
-        return this.name;
+        return getUserName()+","+getName()+","+getGender()+","+getphoneNumber()+","+getIdCardNo()+","+getDateOfBirth()+","+getAddress()+","+getMaritalStatus()+","+getPassword();
     }
     
     

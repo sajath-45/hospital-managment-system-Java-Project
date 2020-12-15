@@ -7,8 +7,15 @@
 package hospital.managment.system;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,14 +29,27 @@ public class AddUser extends javax.swing.JFrame {
     private String userRole;
     private JFileChooser openFileChooser;
     private File attachment;
+     private File photoAttachment;
     private Dashboard dashboard;
+    private boolean photoChoosen=false;
 
-    /** Creates new form AddUser */
-    public AddUser() {
+    /** Creates new form AddUser
+     * @param role
+     * @param dashboard */
+    public AddUser(String role,Dashboard dashboard) {
         initComponents();
+        this.setVisible(true);
+          createSpecialityComboBox();
          setFileChooser();
-        //setUserRole(role);
+         checkPhoto();
+       setUserRole(role);
+       setRoleOption();
+        setDashboard(dashboard);
         
+        
+    }
+
+    private AddUser() {
     }
 
     
@@ -40,9 +60,22 @@ public class AddUser extends javax.swing.JFrame {
     public void setSelectionType(int type){
         this.selectionType=type;
     }
-    public String getUSerRole(){
+     public void setphotoChoosen(boolean value){
+        this.photoChoosen=value;
+    }
+     public void setDashboard(Dashboard dash){
+         this.dashboard=dash;
+     }
+    public String getUserRole(){
         return userRole;
     }
+    public boolean getphotoChoosen(){
+        return this.photoChoosen;
+    }
+    public Dashboard getDashboard(){
+         return dashboard;
+     }
+   
     
     public int getSelectionType(){
         return this.selectionType;
@@ -90,19 +123,21 @@ public class AddUser extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         idCardField = new javax.swing.JTextField();
         dobField = new com.toedter.calendar.JDateChooser();
-        staffPanel = new javax.swing.JPanel();
+        receptionPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         staffIdField = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
         staffMailField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         chooseFileBtn = new javax.swing.JButton();
         fileNameLabel = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         dateJoinField = new com.toedter.calendar.JDateChooser();
         addUserBtn2 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        photoUploadedPanel1 = new javax.swing.JPanel();
+        photoAddBtn2 = new javax.swing.JButton();
+        receptionistPhotoLabel = new javax.swing.JLabel();
         patientPanel = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -111,6 +146,23 @@ public class AddUser extends javax.swing.JFrame {
         allergiesField = new javax.swing.JTextArea();
         bloodComboBox = new javax.swing.JComboBox<>();
         addUserBtn1 = new javax.swing.JButton();
+        moPanel = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        staffIdField1 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        staffMailField1 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        chooseFileBtn1 = new javax.swing.JButton();
+        fileNameLabel1 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        dateJoinField1 = new com.toedter.calendar.JDateChooser();
+        addUserBtn3 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        specialityComboBox = new javax.swing.JComboBox<>();
+        photoUploadedPanel = new javax.swing.JPanel();
+        moPhotoLabel = new javax.swing.JLabel();
+        photoAddBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -362,16 +414,12 @@ public class AddUser extends javax.swing.JFrame {
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 470, 590));
 
-        staffPanel.setBackground(new java.awt.Color(233, 228, 228));
-        staffPanel.setForeground(new java.awt.Color(85, 65, 118));
+        receptionPanel.setBackground(new java.awt.Color(233, 228, 228));
+        receptionPanel.setForeground(new java.awt.Color(85, 65, 118));
 
         jLabel12.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(85, 65, 118));
         jLabel12.setText("Staff Id");
-
-        jLabel13.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(85, 65, 118));
-        jLabel13.setText("Staff Email");
 
         staffMailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,9 +430,6 @@ public class AddUser extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(85, 65, 118));
         jLabel15.setText("Staff Photograph");
-
-        jLabel16.setBackground(new java.awt.Color(153, 153, 255));
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/DOCTORDETAILS (2).png"))); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(85, 65, 118));
@@ -410,68 +455,95 @@ public class AddUser extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
-        staffPanel.setLayout(staffPanelLayout);
-        staffPanelLayout.setHorizontalGroup(
-            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(staffPanelLayout.createSequentialGroup()
+        jLabel18.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel18.setText("Staff Email");
+
+        photoUploadedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        photoAddBtn2.setText("add");
+        photoAddBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                photoAddBtn2ActionPerformed(evt);
+            }
+        });
+        photoUploadedPanel1.add(photoAddBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        receptionistPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                receptionistPhotoLabelMousePressed(evt);
+            }
+        });
+        photoUploadedPanel1.add(receptionistPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
+
+        javax.swing.GroupLayout receptionPanelLayout = new javax.swing.GroupLayout(receptionPanel);
+        receptionPanel.setLayout(receptionPanelLayout);
+        receptionPanelLayout.setHorizontalGroup(
+            receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionPanelLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addGap(28, 28, 28)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(staffMailField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(staffIdField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateJoinField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addGroup(staffPanelLayout.createSequentialGroup()
+                .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(receptionPanelLayout.createSequentialGroup()
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addGap(28, 28, 28)
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(receptionPanelLayout.createSequentialGroup()
                                 .addComponent(chooseFileBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(addUserBtn2))
+                                .addComponent(fileNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(staffMailField)
+                                .addComponent(staffIdField)
+                                .addComponent(dateJoinField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                            .addGroup(receptionPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(receptionPanelLayout.createSequentialGroup()
+                        .addComponent(addUserBtn2)
+                        .addGap(115, 115, 115)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
-        staffPanelLayout.setVerticalGroup(
-            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(staffPanelLayout.createSequentialGroup()
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffMailField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(dateJoinField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(chooseFileBtn))
+        receptionPanelLayout.setVerticalGroup(
+            receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionPanelLayout.createSequentialGroup()
+                .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(receptionPanelLayout.createSequentialGroup()
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(receptionPanelLayout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(receptionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(staffMailField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(staffIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(dateJoinField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addGroup(receptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooseFileBtn)))
                     .addComponent(fileNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
                 .addComponent(addUserBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        jPanel1.add(staffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 440, 590));
+        jPanel1.add(receptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 440, 590));
 
         patientPanel.setBackground(new java.awt.Color(233, 228, 228));
 
@@ -536,6 +608,139 @@ public class AddUser extends javax.swing.JFrame {
 
         jPanel1.add(patientPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 440, 580));
 
+        moPanel.setBackground(new java.awt.Color(233, 228, 228));
+        moPanel.setForeground(new java.awt.Color(85, 65, 118));
+
+        jLabel22.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel22.setText("Staff Id");
+
+        jLabel23.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel23.setText("Speciality");
+
+        staffMailField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffMailField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel25.setText("Staff Photograph");
+
+        jLabel27.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel27.setText("Attachment");
+
+        chooseFileBtn1.setText("Choose");
+        chooseFileBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseFileBtn1ActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel28.setText("Date Of Joining");
+
+        addUserBtn3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        addUserBtn3.setForeground(new java.awt.Color(85, 65, 118));
+        addUserBtn3.setText("Add User");
+        addUserBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserBtn3ActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Jamrul", 1, 15)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(85, 65, 118));
+        jLabel29.setText("Staff Email");
+
+        specialityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        photoUploadedPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        photoUploadedPanel.add(moPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
+
+        photoAddBtn1.setText("add");
+        photoAddBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                photoAddBtn1ActionPerformed(evt);
+            }
+        });
+        photoUploadedPanel.add(photoAddBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        javax.swing.GroupLayout moPanelLayout = new javax.swing.GroupLayout(moPanel);
+        moPanel.setLayout(moPanelLayout);
+        moPanelLayout.setHorizontalGroup(
+            moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(moPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(staffMailField1)
+                            .addComponent(staffIdField1)
+                            .addComponent(dateJoinField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, moPanelLayout.createSequentialGroup()
+                                .addComponent(chooseFileBtn1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fileNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addUserBtn3)
+                            .addComponent(specialityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(moPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(photoUploadedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        moPanelLayout.setVerticalGroup(
+            moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moPanelLayout.createSequentialGroup()
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(moPanelLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(moPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(photoUploadedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(specialityComboBox))
+                .addGap(27, 27, 27)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staffMailField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staffIdField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(dateJoinField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(moPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chooseFileBtn1))
+                    .addComponent(fileNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(addUserBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
+
+        jPanel1.add(moPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 440, 590));
+
         getContentPane().add(jPanel1, "card2");
 
         pack();
@@ -572,37 +777,65 @@ public class AddUser extends javax.swing.JFrame {
 
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         // TODO add your handling code here:
-        setHoverColor(jPanel5,jLabel3);
-        resetHoverColor(jPanel4,jLabel2);
-         resetHoverColor(jPanel6,jLabel4);
-         setSelectionType(1);
-          staffPanel.setVisible(true);
-         patientPanel.setVisible(false);
+       setOptionMo();
     }//GEN-LAST:event_jPanel5MousePressed
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
         // TODO add your handling code here:
-        resetHoverColor(jPanel5,jLabel3);
-        resetHoverColor(jPanel4,jLabel2);
-         setHoverColor(jPanel6,jLabel4);
-         setSelectionType(3);
-         staffPanel.setVisible(false);
-         patientPanel.setVisible(true);
+                setOptionPatient();
+
+        
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         // TODO add your handling code here:
-        resetHoverColor(jPanel5,jLabel3);
-        setHoverColor(jPanel4,jLabel2);
-         resetHoverColor(jPanel6,jLabel4);
-         setSelectionType(2);
-          staffPanel.setVisible(true);
-         patientPanel.setVisible(false);
-         
+        setOptionReceptionist();
+       
+
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void chooseFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileBtnActionPerformed
         // TODO add your handling code here:
+                openFileChooser();
+
+    }//GEN-LAST:event_chooseFileBtnActionPerformed
+
+    private void staffMailField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffMailField1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_staffMailField1ActionPerformed
+
+    private void chooseFileBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileBtn1ActionPerformed
+        // TODO add your handling code here:
+        openFileChooser();
+    }//GEN-LAST:event_chooseFileBtn1ActionPerformed
+
+    private void addUserBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserBtn3ActionPerformed
+        addUser();
+    }//GEN-LAST:event_addUserBtn3ActionPerformed
+
+    private void photoAddBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtn1ActionPerformed
+        // TODO add your handling code here:
+        addPhoto();
+    }//GEN-LAST:event_photoAddBtn1ActionPerformed
+
+    private void photoAddBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtn2ActionPerformed
+        // TODO add your handling code here:
+        addPhoto();
+    }//GEN-LAST:event_photoAddBtn2ActionPerformed
+
+    private void receptionistPhotoLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistPhotoLabelMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_receptionistPhotoLabelMousePressed
+     public void createSpecialityComboBox(){
+        SpecialityRefference refference=new SpecialityRefference();
+        DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getSpecialityTypes().toArray());
+         specialityComboBox.setModel( newModel );
+    }
+     
+    public void openFileChooser(){
+        
         int returnValue =openFileChooser.showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 attachment = openFileChooser.getSelectedFile();
@@ -611,9 +844,25 @@ public class AddUser extends javax.swing.JFrame {
             else{
                  attachment = null;
                  fileNameLabel.setText("no file choosen");
+                  fileNameLabel1.setText("no file choosen");
             }
-    }//GEN-LAST:event_chooseFileBtnActionPerformed
-
+        
+    }
+    public void addPhoto(){
+         int returnValue =openFileChooser.showOpenDialog(this);
+            if(returnValue==JFileChooser.APPROVE_OPTION){
+                this. photoAttachment = openFileChooser.getSelectedFile();
+               setphotoChoosen(true);
+               
+            }
+            else{
+                this. photoAttachment = null;
+                 setphotoChoosen(false);
+            }
+             checkPhoto();
+        
+    }
+    
     public void addUser(){
         String name=nameField.getText();
         String gender=genderField.getSelectedItem().toString();
@@ -623,31 +872,129 @@ public class AddUser extends javax.swing.JFrame {
         String userName=userNameField.getText();
         String martialStatus=martialStatusField.getSelectedItem().toString();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String date=formatter.format(dobField.getDate()); 
+        String dob=formatter.format(dobField.getDate()); 
+            
+            
+         
           
-           String staffId=staffIdField.getText();
+        if(selectionType==1){//mo
+            String speciality=specialityComboBox.getSelectedItem().toString();
+             String staffId=staffIdField1.getText();
+            String staffEmail=staffMailField1.getText();
+            String dateJoined=formatter.format(dateJoinField1.getDate()); 
+           File file=this.attachment;
+           File imageFile=this. photoAttachment;
+           
+           MedicalOfficer medicalOfficer =new MedicalOfficer(userName,name,gender,mobile,id,dob,address,martialStatus,id,staffId,staffEmail,dateJoined,file,speciality,imageFile);
+        FileService.addLine(FileService.getMoFilePath(), medicalOfficer.toString());
+        System.out.println(medicalOfficer.toString());
+        System.out.println("dob"+dob+"martial"+martialStatus);
+        }
+        else if(selectionType==2){//reception
+             String staffId=staffIdField.getText();
             String staffEmail=staffMailField.getText();
             String dateJoined=formatter.format(dateJoinField.getDate()); 
            File file=this.attachment;
-          
-        if(selectionType==1){//mo
-            //MedicalOfficer user =new MedicalOfficer();
-            
-        }
-        else if(selectionType==2){//reception
-           
-            
-            //Receptionist user = new Receptionist();
-            
+            File imageFile=this. photoAttachment;
+      
+            Receptionist receptionist = new Receptionist(userName,name,gender,mobile,id,dob,address,martialStatus,id,staffId,staffEmail,dateJoined,file,imageFile);
+            FileService.addLine(FileService.getReceptionistFilePath(), receptionist.toString());
+            System.out.println(receptionist.toString());
+            System.out.println("dob"+dob+"martial"+martialStatus);
         }
         else if(selectionType==3){//patient
             String alleries=allergiesField.getText();
             String bloodGroup=bloodComboBox.getSelectedItem().toString();
             
-            //Patient user =new Patient();
+            Patient patient =new Patient(userName,name,gender,mobile,id,dob,address,martialStatus,id,bloodGroup,alleries);
+            FileService.addLine(FileService.getPatientsFilePath(), patient.toString());
+            System.out.println(patient.toString());
+            System.out.println("dob"+dob+"martial"+martialStatus);
+        }
+       // getDashboard().setTables();
+        this.dispose();
+        
+        
+    }
+    public void checkPhoto(){
+        if(getphotoChoosen()){
+           //hotoUploadedPanel.setVisible(true);
+           //hotoNotUploadedPanel.setVisible(false);
+           photoAddBtn1.setVisible(false);
+           
+           if(this.selectionType==1){
+            setStaffPhoto(moPhotoLabel,photoAttachment);
+           }
+           else if (this.selectionType==2){
+               setStaffPhoto(receptionistPhotoLabel,photoAttachment);
+           }
+        }
+    }
+    public void setStaffPhoto(JLabel label,File imageFile){
+       
+
+        BufferedImage img = null;
+            try {
+                img = ImageIO.read(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
+        Image.SCALE_SMOOTH);
+        
+        
+            ImageIcon icon = new ImageIcon(dimg);
+            icon.getImage().flush();
+            label.setIcon(icon);
+        
+    }
+    
+    
+    public void setRoleOption(){
+        if(getUserRole().equals("Admin")){
+            setOptionMo();
+        }
+        else{
+            jPanel3.setVisible(false);
+            setSelectionType(3);
+             receptionPanel.setVisible(false);
+         moPanel.setVisible(false);
+         patientPanel.setVisible(true);
             
         }
         
+    }
+    
+    
+    public void setOptionMo(){
+         setHoverColor(jPanel5,jLabel3);
+        resetHoverColor(jPanel4,jLabel2);
+         resetHoverColor(jPanel6,jLabel4);
+         setSelectionType(1);
+           moPanel.setVisible(true);
+          receptionPanel.setVisible(false);
+         patientPanel.setVisible(false);
+        
+    }
+    public void setOptionReceptionist(){
+         resetHoverColor(jPanel5,jLabel3);
+        setHoverColor(jPanel4,jLabel2);
+         resetHoverColor(jPanel6,jLabel4);
+         setSelectionType(2);
+          receptionPanel.setVisible(true);
+         patientPanel.setVisible(false);
+           moPanel.setVisible(false);
+       
+        
+    }
+    public void setOptionPatient(){
+         resetHoverColor(jPanel5,jLabel3);
+        resetHoverColor(jPanel4,jLabel2);
+         setHoverColor(jPanel6,jLabel4);
+         setSelectionType(3);
+         receptionPanel.setVisible(false);
+         moPanel.setVisible(false);
+         patientPanel.setVisible(true);
         
     }
     
@@ -702,29 +1049,38 @@ public class AddUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addUserBtn1;
     private javax.swing.JButton addUserBtn2;
+    private javax.swing.JButton addUserBtn3;
     private javax.swing.JTextArea addressField;
     private javax.swing.JTextArea allergiesField;
     private javax.swing.JComboBox<String> bloodComboBox;
     private javax.swing.JButton chooseFileBtn;
+    private javax.swing.JButton chooseFileBtn1;
     private com.toedter.calendar.JDateChooser dateJoinField;
+    private com.toedter.calendar.JDateChooser dateJoinField1;
     private com.toedter.calendar.JDateChooser dobField;
     private javax.swing.JLabel fileNameLabel;
+    private javax.swing.JLabel fileNameLabel1;
     private javax.swing.JComboBox<String> genderField;
     private javax.swing.JTextField idCardField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -742,12 +1098,22 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> martialStatusField;
+    private javax.swing.JPanel moPanel;
+    private javax.swing.JLabel moPhotoLabel;
     private javax.swing.JTextField mobileField;
     private javax.swing.JTextField nameField;
     private javax.swing.JPanel patientPanel;
+    private javax.swing.JButton photoAddBtn1;
+    private javax.swing.JButton photoAddBtn2;
+    private javax.swing.JPanel photoUploadedPanel;
+    private javax.swing.JPanel photoUploadedPanel1;
+    private javax.swing.JPanel receptionPanel;
+    private javax.swing.JLabel receptionistPhotoLabel;
+    private javax.swing.JComboBox<String> specialityComboBox;
     private javax.swing.JTextField staffIdField;
+    private javax.swing.JTextField staffIdField1;
     private javax.swing.JTextField staffMailField;
-    private javax.swing.JPanel staffPanel;
+    private javax.swing.JTextField staffMailField1;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 

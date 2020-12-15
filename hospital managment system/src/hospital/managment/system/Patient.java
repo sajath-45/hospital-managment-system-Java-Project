@@ -37,6 +37,6 @@ public class Patient extends User {
         this.strAllergies=allergy;
     }
       public String toString() {
-        return super.toString();
+        return super.toString()+","+getStrBloodGrp()+","+getStrAllergies();
     }
 }
