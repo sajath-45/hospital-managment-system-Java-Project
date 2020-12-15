@@ -17,7 +17,7 @@ public class MedicalOfficer extends User {
     private String strSpecialityArea;
     
     
-    public MedicalOfficer(String userName,String name,String gender,int mobile,String idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv,String speciality){
+    public MedicalOfficer(String userName,String name,String gender,String mobile,String idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv,String speciality){
         super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
         this.setStrStaffId(id);
         this.setStrEmailAddress(email);

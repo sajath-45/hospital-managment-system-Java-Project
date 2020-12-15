@@ -16,7 +16,7 @@ public class Receptionist extends User {
     private String strCV;
     
     
-    public Receptionist(String userName,String name,String gender,int mobile,String idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv){
+    public Receptionist(String userName,String name,String gender,String mobile,String idNumber,String dob,String address,String martialStatus,String password,String id,String email,String date,String cv){
          super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
         this.setIntStaffId(id);
         this.setStrMailAddress(email);

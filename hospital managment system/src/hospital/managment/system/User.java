@@ -14,7 +14,7 @@ public class User {
     private String userName;
     private String name;
     private String gender;
-    private int phoneNumber;
+    private String phoneNumber;
     private String idCardNo;
     private String dateOfBirth;
     private String address;
@@ -23,7 +23,7 @@ public class User {
    
     
     // Default constructor
-    public User(String userName,String name,String gender,int mobile,String idNumber,String dob,String address,String martialStatus,String password){
+    public User(String userName,String name,String gender,String mobile,String idNumber,String dob,String address,String martialStatus,String password){
         this.setUserName(userName);
         this.setName(name);
         this.setGender(gender);
@@ -35,9 +35,7 @@ public class User {
     }  
     
     // Constructor with parameters
-    public User(String u,String n,String g,String d,String a,int p,int i,boolean m){
-        
-    }
+  
        
       
     // Getter and Setter methods (Accessors and Mutators)
@@ -51,7 +49,7 @@ public class User {
     public String getGender(){
         return gender;
     }
-    public int getphoneNumber(){
+    public String getphoneNumber(){
         return phoneNumber;
     }
     public String getIdCardNo(){
@@ -80,7 +78,7 @@ public class User {
     public void setGender(String gender){
          this.gender=gender;
     }
-    public void setphoneNumber(int phoneNumber){
+    public void setphoneNumber(String phoneNumber){
          this.phoneNumber=phoneNumber;
     }
     public void setIdCardNo(String idCardNo){

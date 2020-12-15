@@ -158,7 +158,7 @@ public class FileService {
           String userName=data[0];
            String name=data[1];
             String gender=data[2];
-            int mobile=Integer.parseInt(data[3]);
+            String mobile=data[3];
             String idCard=data[4];
             String dob=data[5];
             String address=data[6];
@@ -205,7 +205,7 @@ public class FileService {
           String userName=data[0];
            String name=data[1];
             String gender=data[2];
-            int mobile=Integer.parseInt(data[3]);
+            String mobile=data[3];
             String idCard=data[4];
             String dob=data[5];
             String address=data[6];
