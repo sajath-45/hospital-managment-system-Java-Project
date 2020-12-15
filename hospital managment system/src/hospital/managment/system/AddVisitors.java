@@ -85,6 +85,7 @@ public class AddVisitors extends javax.swing.JFrame {
         fileNameLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setForeground(new java.awt.Color(85, 65, 118));
         jPanel1.setFocusTraversalPolicyProvider(true);

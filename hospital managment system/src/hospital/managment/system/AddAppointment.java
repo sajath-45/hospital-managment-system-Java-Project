@@ -78,6 +78,7 @@ public class AddAppointment extends javax.swing.JFrame {
         sysmtompsField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setForeground(new java.awt.Color(85, 65, 118));

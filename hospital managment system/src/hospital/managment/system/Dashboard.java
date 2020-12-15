@@ -3961,6 +3961,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        addNewAppointment();
         
     }//GEN-LAST:event_jButton11ActionPerformed
 
