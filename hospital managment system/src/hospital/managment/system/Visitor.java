@@ -94,4 +94,9 @@ public class Visitor {
         this. attachment=attach;
     }
     
+    public String toString(){
+        return getStrDate()+","+getIntId()+","+getStrName()+","+getStrPurpose()+","+getIntPhoneNo()+","+getStrInTime()+","+getStrOutTime()+","+getStrNote()+","+getAttachment().getName();
+        
+    }
+    
 }

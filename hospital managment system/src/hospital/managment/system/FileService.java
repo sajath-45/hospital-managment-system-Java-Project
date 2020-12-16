@@ -29,7 +29,7 @@ public class FileService {
          private static final String MO_FILE_PATH = "files/medicalofficers.txt";
          private static final File MO_FILE = new File(MO_FILE_PATH);
          
-         private static final String RECEPTIONIST_FILE_PATH = "files/receptionist.txt";
+         private static final String RECEPTIONIST_FILE_PATH = "files/receptionists.txt";
          private static  final File RECEPTIONIST_FILE = new File(RECEPTIONIST_FILE_PATH);
          
          private  static final String APPOINTMENTS_FILE_PATH="files/appointments.txt";
@@ -81,20 +81,20 @@ public class FileService {
       public static File getUserFile(){
           return USER_FILE;
       }
-       public String getMOFilePath(){
+       public static String getMoFilePath(){
           return MO_FILE_PATH;
       }
-       public File getMoFile(){
+       public static File getMoFile(){
           return MO_FILE;
       }  
        public static File getUserLoginFile(){
            return LOGIN_FILE;
        }
        
-      public static String getPatientFilePath(){
+      public static String getPatientsFilePath(){
           return PATIENT_FILE_PATH;
       }
-      public static File getPatientFile(){
+      public static File getPatientsFile(){
           return PATIENTS_FILE;
       }
       public static String getReceptionistFilePath(){
@@ -158,7 +158,7 @@ public class FileService {
           String userName=data[0];
            String name=data[1];
             String gender=data[2];
-            int mobile=Integer.parseInt(data[3]);
+            String mobile=data[3];
             String idCard=data[4];
             String dob=data[5];
             String address=data[6];
@@ -205,7 +205,7 @@ public class FileService {
           String userName=data[0];
            String name=data[1];
             String gender=data[2];
-            int mobile=Integer.parseInt(data[3]);
+            String mobile=data[3];
             String idCard=data[4];
             String dob=data[5];
             String address=data[6];
@@ -216,11 +216,12 @@ public class FileService {
                String date=data[11];
                 String cv=data[12];
                 String speciality=data[13];
-
+                String image=data[14];
+                
+                File cvFile = new File(cv);
+                 File staffImage = new File(image);
                
-               
-               
-               return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cv,speciality);
+               return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,speciality,staffImage);
       }
     
     public static void writeAppoinment(Appointment appointment)throws IOException {
@@ -255,7 +256,7 @@ public class FileService {
     
     }
     
-    public static void writeComplaint(Complaint compain)throws IOException {
+  /* public static void writeComplaint(Complaint compain)throws IOException {
         
         try
         {
@@ -288,7 +289,7 @@ public class FileService {
     
 
     
-    }
+    }*/
     
      public static void writeMail(DispatchedPostal mail)throws IOException {
         
@@ -340,6 +341,7 @@ public class FileService {
             out.print(","+record.getStrInTime());
             out.print(","+record.getStrOutTime());
              out.print(","+record.getStrNote());
+             out.println(","+record.getAttachment());
              
     
           
@@ -378,8 +380,7 @@ public class FileService {
     
     }
      
-    
-    public static ArrayList<String> getPatientAppointments(String id){
+       public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
@@ -404,8 +405,189 @@ public class FileService {
             e.printStackTrace();
             return null;
         }
+          
     
     }
+      
+       public static ArrayList<String> getMOAppointments(String id){
+         ArrayList<String> appointmentList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                if(data[9].equals(id) && data[3].equals("approved")){
+                    
+               
+                appointmentList.add(line);
+                
+                }
+            }
+            reader.close();
+           return appointmentList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+          
+    
+    }
+    
+    public static ArrayList<String> getAllAppointments(){
+         ArrayList<String> appointmentList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                
+                    
+               
+                appointmentList.add(line);
+                
+                
+            }
+            reader.close();
+           return appointmentList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+    }
+    
+     public static ArrayList<String> getAllComplaints(){
+         ArrayList<String> complainList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                
+                    
+               
+                complainList.add(line);
+                
+                
+            }
+            reader.close();
+           return complainList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+    }
+          
+     public static ArrayList<String> getPatientComplaints(){
+         ArrayList<String> complaintList= new ArrayList<String>();
+          try {
+               System.out.println("patient complaints");  
+             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                
+               
+                    
+               
+                complaintList.add(line);
+                
+                
+            }
+            reader.close();
+           return complaintList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+          
+    
+    }
+     public static ArrayList<String> getDispatchedMails(){
+            ArrayList<String> mailList= new ArrayList<String>();
+          try {
+               System.out.println("mails");  
+             BufferedReader reader = new BufferedReader(new FileReader(MAIL_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {              
+                String[] data = line.split(","); //username, password, email, etc
+                  
+              
+                    
+               
+                mailList.add(line);
+                
+                
+            }
+            reader.close();
+           return mailList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+     
+     
+     }
+     
+     public static ArrayList<String> getVisitorRecords(){
+            ArrayList<String> recordList= new ArrayList<String>();
+          try {
+             BufferedReader reader = new BufferedReader(new FileReader(VISITOR_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) { 
+                               System.out.println("visitor record"+line);  
+
+                String[] data = line.split(","); //username, password, email, etc
+                  
+              
+                    
+               
+                recordList.add(line);
+                
+                
+            }
+            reader.close();
+           return recordList;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+     
+     
+     }
+
+    
     
    private static boolean isRecordExist(String filePath,String key){
       boolean isExist=false;
@@ -438,7 +620,7 @@ public class FileService {
          
    }
    
-   private static void removeLine(String filePath,String lineToRemove){
+   public static void removeLine(String filePath,String lineToRemove){
         try {
 
       File inFile = new File(filePath);
@@ -489,7 +671,7 @@ public class FileService {
        
    }
    
-   private static void addLine(String filePath,String line){
+   public static void addLine(String filePath,String line){
         try
         {
             

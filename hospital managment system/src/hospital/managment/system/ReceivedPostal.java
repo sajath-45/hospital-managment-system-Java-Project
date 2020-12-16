@@ -36,4 +36,7 @@ public class ReceivedPostal extends PostalMail{
     public void setStrFromAddress(String address){
         this.strFromAddress=address;
     }
+    public String toString(){
+        return super.toString();
+    }
 }

@@ -38,6 +38,10 @@ public class DispatchedPostal extends PostalMail {
     public void setStrToAddress(String address){
         this.strToAddress=address;
     }
+    
+    public String toString(){
+        return  super.getIntReferenceNo()+","+super.getStrDate()+","+getStrToName()+","+ getStrToAddress()+","+super.getStrNote()+","+super.getAttachment().getName();
+    }
 
    
 }
