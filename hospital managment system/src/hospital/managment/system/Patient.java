@@ -13,7 +13,7 @@ public class Patient extends User {
     private String strBloodGrp;
     private String strAllergies;
     
-    public Patient(String userName,String name,String gender,int mobile,String idNumber,String dob,String address,String martialStatus,String password,String bloodGrp, String allergies){
+    public Patient(String userName,String name,String gender,String mobile,String idNumber,String dob,String address,String martialStatus,String password,String bloodGrp, String allergies){
          super(userName,name,gender,mobile,idNumber,dob,address,martialStatus,password);
         this.setStrBloodGrp(bloodGrp);
         this.setStrAllergies(allergies);
@@ -37,6 +37,6 @@ public class Patient extends User {
         this.strAllergies=allergy;
     }
       public String toString() {
-        return super.toString();
+        return super.toString()+","+getStrBloodGrp()+","+getStrAllergies();
     }
 }

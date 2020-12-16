@@ -54,7 +54,6 @@ public class AddAppointment extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -91,14 +90,6 @@ public class AddAppointment extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Add Appointment");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 0, 206, 50));
-
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(204, 0, 0));
-        jButton4.setText("Back");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 41));
 
         jPanel4.setBackground(new java.awt.Color(85, 65, 118));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -488,7 +479,6 @@ public class AddAppointment extends javax.swing.JFrame {
     private javax.swing.JComboBox<MedicalOfficer> doctorComboBox;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -26,6 +26,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private String userRole;
     /**
      * Creates new form dashboard
+     * @param role
      */
     public Dashboard(String role) {
         initComponents();
@@ -2506,7 +2507,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel43Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rAppointmentView1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(rAppointmentView1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2519,7 +2520,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
                 .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 571, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         patientAppointmentOptionsLayout.setVerticalGroup(
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2645,8 +2646,18 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         );
 
         jPanel59.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel59.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel59MousePressed(evt);
+            }
+        });
 
         addBtn11.setText("Add");
+        addBtn11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtn11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel59Layout = new javax.swing.GroupLayout(jPanel59);
         jPanel59.setLayout(jPanel59Layout);
@@ -2691,15 +2702,15 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminUserOptionsLayout.setHorizontalGroup(
             adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminUserOptionsLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(49, 49, 49)
                 .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(47, 47, 47)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 350, Short.MAX_VALUE))
+                .addGap(0, 294, Short.MAX_VALUE))
         );
         adminUserOptionsLayout.setVerticalGroup(
             adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3998,6 +4009,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void addBtn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn10ActionPerformed
         // TODO add your handling code here:
+         addNewUser();
     }//GEN-LAST:event_addBtn10ActionPerformed
 
     private void viewBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtn5ActionPerformed
@@ -4024,6 +4036,15 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
         addNewVisitorRecord();
     }//GEN-LAST:event_addBtn13ActionPerformed
+
+    private void jPanel59MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel59MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel59MousePressed
+
+    private void addBtn11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn11ActionPerformed
+        // TODO add your handling code here:
+        addNewUser();
+    }//GEN-LAST:event_addBtn11ActionPerformed
  
     private void addNewAppointment(){
          AddAppointment appointment = new AddAppointment(this);
@@ -4039,6 +4060,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     
     private void addDispatchedPostal(){
         AddMail mail = new AddMail(this);
+    }
+    
+    private void addNewUser(){
+        AddUser user= new AddUser(getUserRole(),this);
     }
     
     
