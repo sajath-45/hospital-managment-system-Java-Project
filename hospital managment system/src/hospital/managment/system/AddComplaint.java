@@ -71,7 +71,6 @@ public class AddComplaint extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -108,12 +107,6 @@ public class AddComplaint extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Add Complaint");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 168, -1));
-
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(204, 0, 0));
-        jButton3.setText("Back");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
 
         jPanel7.setBackground(new java.awt.Color(85, 65, 118));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -403,7 +396,6 @@ public class AddComplaint extends javax.swing.JFrame {
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileNameLabel;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
