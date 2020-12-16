@@ -248,7 +248,7 @@ public class Login extends javax.swing.JFrame {
                                   Dashboard dashboard=new Dashboard(newLogin.getRole()); 
                                   
                               } catch (IOException ex) {
-                                 Logger.getLogger(addVisitors.class.getName()).log(Level.SEVERE, null, ex);
+                                 Logger.getLogger(AddVisitors.class.getName()).log(Level.SEVERE, null, ex);
                               }
                           
                     }

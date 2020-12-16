@@ -96,5 +96,8 @@ public class Appointment {
       public static void increment(){
         appointmentCount++;
     }
+    public String toString(){
+        return getAppointmentNumber()+","+getAppointmentDate()+","+ getAppointmentTime()+","+getStatus()+","+getPatient().getName()+","+getPatient().getIdCardNo()+","+getMedicalOfficer().getName()+","+getSpeciality()+","+getSymtomps()+","+getMedicalOfficer().getStrStaffId();
+    }  
      
 }

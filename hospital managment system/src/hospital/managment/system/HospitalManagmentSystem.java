@@ -19,7 +19,7 @@ public class HospitalManagmentSystem {
      public static void main(String[] args) {
         splashScreen screen = new splashScreen();
           screen.setVisible(true);
-        home home = new home();
+        Home home = new Home();
         
      
         try {
