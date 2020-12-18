@@ -37,6 +37,10 @@ public class Patient extends User {
         this.strAllergies=allergy;
     }
       public String toString() {
+        return super.getName()+"--"+super.getIdCardNo();
+    }
+      
+      public String toString2() {
         return super.toString()+","+getStrBloodGrp()+","+getStrAllergies();
     }
 }

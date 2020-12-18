@@ -1,1 +1,2 @@
 cena123,john cena,Male,789789789,199929003399,11/12/1998,10 wijayab mawatha,Single,199929003399,456,john@gmail.com,17/12/2020,README.md,null
+john12,john,Male,077378469,199829003939,11/12/2020,sredtfyguhjk,Married,199829003939,78,jog@gmaulc,03/12/2020,Driver.java,/home/sajath/DOCTORDETAILS (2).png

@@ -2,3 +2,4 @@
 2,10/12/2020,1 0 A.M,approved,sajath ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
 2,10/12/2020,1 0 A.M,pending,sajath ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
 4,15/12/2020,1 0 A.M,approved,saju ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
+1,11/12/2020,1 0 A.M,pending,sajath,199829003939,sangeerthana ,dental,corona,D-003
