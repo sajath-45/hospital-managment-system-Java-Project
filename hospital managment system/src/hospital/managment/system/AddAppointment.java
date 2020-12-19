@@ -345,13 +345,10 @@ public class AddAppointment extends javax.swing.JFrame {
         String seg = timeComboBox.getSelectedItem().toString();
         String time=Integer.toString(hour)+ " "+Integer.toString(min)+" "+ seg;
         String symtomps=sysmtompsField.getText();
+        String appointmentNumber=String.valueOf((FileService.getRecordCount(FileService.getAppointmentsFile())+1));
         
-        System.out.println("date"+appointmentDate);
-        System.out.println("time"+time);
-        System.out.println("speciality"+speciality);
-        System.out.println("time"+doctor.toString());
-        System.out.println("time"+patient.toString());
-        Appointment appointment =new Appointment(patient,doctor,appointmentDate,time,"pending",symtomps,speciality);
+        
+        Appointment appointment =new Appointment(appointmentNumber,patient,doctor,appointmentDate,time,"Pending",symtomps,speciality);
         FileService.addLine(FileService.getAppointmentsFilePath(),appointment.toString());
         this.dashboard.setTables();
         this.dispose();

@@ -24,29 +24,35 @@ public class AddComplaint extends javax.swing.JFrame {
     private JFileChooser openFileChooser;
     private File attachment;
     private String userRole;
-        private Dashboard dashboard;
+    private Dashboard dashboard;
 
     /**
      * Creates new form addComplaint
      */
     public AddComplaint(String role,Dashboard dash) {
         initComponents();
-         setDashboard(dash);
+        setDashboard(dash);
         this.setVisible(true);
         setUserRole(role);
-         setComplainTypeComboBox();
-         setFileChooser();
-         setData();
-         Date date = new Date();
-     complainDate.setDate(date);
+        setComplainTypeComboBox();
+        setFileChooser();
+        setData();
+        Date date = new Date();
+        complainDate.setDate(date);
         
     }
     
      public void setDashboard(Dashboard dash){
         this.dashboard=dash;
     }
+     public void setAttachment(File file){
+         this.attachment=file;
+     }
      public Dashboard getDashboard(){
         return dashboard;
+    }
+    public File getAttachment(){
+        return this.attachment;
     }
 
     private AddComplaint() {
@@ -283,6 +289,12 @@ public class AddComplaint extends javax.swing.JFrame {
 
         }
     }
+      private void setComplainTypeComboBox(){
+        ComplainRefference refference = new ComplainRefference();
+        DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getComplainTypes().toArray());
+         complainTypeComboBox.setModel( newModel );
+        
+    }
     
     private void descriptionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionFieldActionPerformed
         // TODO add your handling code here:
@@ -294,15 +306,15 @@ public class AddComplaint extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-            String complainType=complainTypeComboBox.getSelectedItem().toString();
-            String complainBy=complainByText.getText();
-          String mobile=phoneNumber.getText();
-          String description=descriptionField.getText();
-           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String complainType=complainTypeComboBox.getSelectedItem().toString();
+        String complainBy=complainByText.getText();
+        String mobile=phoneNumber.getText();
+        String description=descriptionField.getText();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
          String date=formatter.format(complainDate.getDate());  
          String actionTaken=actionTakenField.getText();
          String note=noteField.getText();
-         File file=this.attachment;
+         File file=getAttachment();
          
          //validate needed
          Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
@@ -316,11 +328,12 @@ public class AddComplaint extends javax.swing.JFrame {
         // TODO add your handling code here:
             int returnValue =openFileChooser.showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
-                attachment = openFileChooser.getSelectedFile();
-                fileNameLabel.setText(attachment.getName());
+                 setAttachment(openFileChooser.getSelectedFile());
+                fileNameLabel.setText(getAttachment().getName());
             }
             else{
-                 attachment = null;
+                setAttachment(null);
+                 
                  fileNameLabel.setText("no file choosen");
             }
     }//GEN-LAST:event_openFIleBtnActionPerformed
@@ -380,14 +393,7 @@ public class AddComplaint extends javax.swing.JFrame {
             }
         });
     }
-    private void setComplainTypeComboBox(){
-        ComplainRefference refference = new ComplainRefference();
-       System.out.println("works");
-        
-        DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getComplainTypes().toArray());
-         complainTypeComboBox.setModel( newModel );
-        
-    }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actionTakenField;
     private javax.swing.JTextField complainByText;

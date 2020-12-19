@@ -15,21 +15,21 @@ public class Appointment {
     private String appointmentDate;
     private String appointmentTime;
     private String status;
-    private int appointmentNumber;
+    private String appointmentNumber;
     private String symtomps;
     private String speciality;
-    public static int appointmentCount=1;
+    public static String appointmentCount="1";
 
     
     
     
-    public Appointment(Patient patient,MedicalOfficer officer,String appointmentDate,String appointmentTime,String status,String symtomps,String speciality)
+    public Appointment(String number,Patient patient,MedicalOfficer officer,String appointmentDate,String appointmentTime,String status,String symtomps,String speciality)
     {
         this.setPatient(patient);
         this.setMedicalOfficer(officer);
         this.setAppointmentDate(appointmentDate);
         this.setAppointmentTime(appointmentTime);
-        this.setAppointmentNumber(appointmentCount);
+        this.setAppointmentNumber(number);
         this.setStatus(status);
         this.setSymtomps(symtomps);
         this.setSpeciality(speciality);
@@ -55,7 +55,7 @@ public class Appointment {
     public void setStatus(String status){
         this.status=status;  
     }
-    public void setAppointmentNumber(int appointmentNumber){
+    public void setAppointmentNumber(String appointmentNumber){
         this.appointmentNumber=appointmentNumber;
         
     }
@@ -83,7 +83,7 @@ public class Appointment {
       public String getStatus(){
         return this.status;
     }
-      public int getAppointmentNumber(){
+      public String getAppointmentNumber(){
         return this.appointmentNumber;
     }      
      public String getSymtomps(){
@@ -93,9 +93,6 @@ public class Appointment {
          return this.speciality;
      }
      
-      public static void increment(){
-        appointmentCount++;
-    }
     public String toString(){
         return getAppointmentNumber()+","+getAppointmentDate()+","+ getAppointmentTime()+","+getStatus()+","+getPatient().getName()+","+getPatient().getIdCardNo()+","+getMedicalOfficer().getName()+","+getSpeciality()+","+getSymtomps()+","+getMedicalOfficer().getStrStaffId();
     }  

@@ -17,8 +17,8 @@ public class ReceivedPostal extends PostalMail{
     
     
     
-    public ReceivedPostal(String note,String date,File file,String fromName,String address){
-         super(note,date,file);
+    public ReceivedPostal(String number,String note,String date,File file,String fromName,String address){
+         super(number,note,date,file);
         this.setStrFromAddress(address);
         this.setStrFromName(fromName);
     }

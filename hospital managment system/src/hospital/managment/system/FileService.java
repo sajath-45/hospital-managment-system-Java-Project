@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -173,7 +174,7 @@ public class FileService {
       
       
       
-    public static Patient createPatientUser(String line){
+public static Patient readPatientUser(String line){
           String[] data=line.split(",");
           
           String userName=data[0];
@@ -187,77 +188,132 @@ public class FileService {
              String password=data[8];
               String bldGroup=data[9];
                String allergy=data[10];
-               
-               
+ 
                return new Patient(userName,name,gender,mobile,idCard,dob,address,status,password,bldGroup,allergy);
       }
-    public static MedicalOfficer createMOUser(String line){
-          String[] data=line.split(",");
-          
-          String userName=data[0];
-           String name=data[1];
-            String gender=data[2];
-            String mobile=data[3];
-            String idCard=data[4];
-            String dob=data[5];
-            String address=data[6];
-            String status=data[7];
-             String password=data[8];
-              String staffId=data[9];
-               String email=data[10];
-               String date=data[11];
-                String cv=data[12];
-                String speciality=data[13];
-                String image=data[14];
-                
-                File cvFile = new File(cv);
-                 File staffImage = new File(image);
-               
-               return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,speciality,staffImage);
-      } 
-    public static Receptionist createReceptionistUser(String line){
-          String[] data=line.split(",");
-          
-          String userName=data[0];
-           String name=data[1];
-            String gender=data[2];
-            String mobile=data[3];
-            String idCard=data[4];
-            String dob=data[5];
-            String address=data[6];
-            String status=data[7];
-             String password=data[8];
-              String staffId=data[9];
-               String email=data[10];
-               String date=data[11];
-                String cv=data[12];
-                String image=data[13];
-                File cvFile = new File(cv);
-                 File staffImage = new File(image);
-               
-               return new Receptionist(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,staffImage);
-      } 
-      
-      
-      
-    public  static ArrayList<Patient> getAllPatients(){
+public static MedicalOfficer readMoUser(String line){
+      String[] data=line.split(",");
+
+      String userName=data[0];
+       String name=data[1];
+        String gender=data[2];
+        String mobile=data[3];
+        String idCard=data[4];
+        String dob=data[5];
+        String address=data[6];
+        String status=data[7];
+         String password=data[8];
+          String staffId=data[9];
+           String email=data[10];
+           String date=data[11];
+            String cv=data[12];
+            String speciality=data[13];
+            String image=data[14];
+
+            File cvFile = new File(cv);
+             File staffImage = new File(image);
+
+           return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,speciality,staffImage);
+  } 
+public static Receptionist readReceptionistUser(String line){
+  String[] data=line.split(",");
+
+  String userName=data[0];
+   String name=data[1];
+    String gender=data[2];
+    String mobile=data[3];
+    String idCard=data[4];
+    String dob=data[5];
+    String address=data[6];
+    String status=data[7];
+     String password=data[8];
+      String staffId=data[9];
+       String email=data[10];
+       String date=data[11];
+        String cv=data[12];
+        String image=data[13];
+        File cvFile = new File(cv);
+         File staffImage = new File(image);
+
+       return new Receptionist(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,staffImage);
+} 
+public static Appointment readAppoinment(String line){
+String[] data=line.split(",");
+String appoinmentNo=data[0];
+String date=data[1];
+ String time=data[2];
+ String status=data[3];
+ String patientName=data[4];
+ String patientId=data[5];
+ String moName=data[6];
+ String speciality=data[7];
+  String sysmtomps=data[8];
+   String staffId=data[9];
+
+ return new Appointment(appoinmentNo,getPatientById ( patientId ),getMoByStaffId(staffId),date,time,status,sysmtomps,speciality);
+}
+public static Complaint readComplaint(String line){
+String[] data=line.split(",");
+String type=data[0];
+String date=data[1];
+String complainBy=data[2];
+String description=data[3];
+String mobile=data[4];
+String actionTaken=data[5];
+String note=data[6];
+String attachment=data[7];
+
+ return new Complaint(type,date,complainBy,description,mobile,actionTaken,note,new File(attachment));
+}
+public static Visitor readVisitor(String line){
+         String[] data=line.split(",");
+          String date=data[0];
+           String visitorId=data[1];
+            String visitorName=data[2];
+            String purpose=data[3];
+            String mobile=data[4];
+            String inTime=data[5];
+             String outTime=data[6];
+            String note=data[7];
+             String attachment=data[8];
+
+               return new Visitor(purpose,visitorName,date,visitorId,mobile,inTime,outTime,note,new File(attachment));
+    }
+public static DispatchedPostal readMail(String line){
+         String[] data=line.split(",");
+         
+          String refferenceNumber=data[0];
+           String date=data[1];
+            String toName=data[2];
+            String toAddress=data[3];
+            String note=data[4];
+            String attachment=data[5];
+            
+            
+
+               return new DispatchedPostal(refferenceNumber,note,date,new File(attachment),toName,toAddress);
+    }    
+     
+   
+   
+public  static ArrayList<Patient> getAllPatients(){
              ArrayList<Patient> allPatientList= new ArrayList<Patient>();
             try {
              BufferedReader reader = new BufferedReader(new FileReader(PATIENTS_FILE));
             String line;
             while ((line = reader.readLine()) != null) {
-                 
+
                  //username, password, email, etc
-           
-                Patient p=createPatientUser(line);//line with commas
-                
+
+                Patient p=readPatientUser(line);//line with commas
+
                 allPatientList.add(p);
-               
+
             }
             reader.close();
              return allPatientList;
-            
-            
+
+
         } 
          catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -266,13 +322,12 @@ public class FileService {
             e.printStackTrace();
             return null;
         }
-          
-          
-          
+
+
+
       }
-      
-      
-    public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
+
+public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
        ArrayList<MedicalOfficer> specialityOfficer= new ArrayList<MedicalOfficer>();
          try {
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
@@ -282,7 +337,7 @@ public class FileService {
                  
                 String[] data = line.split(","); //username, password, email, etc
                 if(data[13].equals(speciality)){
-                MedicalOfficer user=createMOUser(line);
+                MedicalOfficer user=readMoUser(line);
                 
                 specialityOfficer.add(user);
                 }
@@ -302,8 +357,71 @@ public class FileService {
        
    }   
    
-   
-   
+public static MedicalOfficer getMoByStaffId(String id){
+       MedicalOfficer officer=null;
+         try {
+             BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println("Doctor"+line);
+                 
+                String[] data = line.split(","); //username, password, email, etc
+                if(data[9].equals(id)){
+                
+                
+               officer=readMoUser(line);
+                }
+            }
+            reader.close();
+            return officer;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+       
+   }
+ 
+public static Patient getPatientById(String id){
+       Patient patient=null;
+         try {
+             BufferedReader reader = new BufferedReader(new FileReader(PATIENTS_FILE));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                 
+                String[] data = line.split(","); //username, password, email, etc
+                if(data[4].equals(id)){
+                
+                
+               patient=readPatientUser(line);
+                }
+            }
+            reader.close();
+            return patient;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+       
+   }
+ 
+public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){
+      ArrayList<MedicalOfficer> moOfficerList= new ArrayList<MedicalOfficer>();
+    for(String line:list){
+        MedicalOfficer officer=readMoUser(line);
+            moOfficerList.add(officer);
+    }
+    return moOfficerList;
+}
     
   /*  public static void writeAppoinment(Appointment appointment)throws IOException {
         
@@ -441,7 +559,7 @@ public class FileService {
     
     }*/
      
-       public static void writeLoginRecord(String filePath,String line)throws IOException {
+public static void writeLoginRecord(String filePath,String line)throws IOException {
              String[] lineList=line.split(",");
            if(isRecordExist(filePath,lineList[0])){ 
                             System.out.println("key"+lineList[0]);
@@ -461,7 +579,7 @@ public class FileService {
     
     }
      
-       public static ArrayList<String> getPatientAppointments(String id){
+public static ArrayList<String> getPatientAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
@@ -490,7 +608,7 @@ public class FileService {
     
     }
       
-       public static ArrayList<String> getMOAppointments(String id){
+public static ArrayList<String> getMOAppointments(String id){
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
@@ -519,17 +637,7 @@ public class FileService {
     
     }
        
-     public static String getPatientById(String id){
-         String outLine=null;
-        ArrayList<String> list= getRecords(getPatientsFile());
-         for (String line : list) { 
-             String[] data=line.split(",");
-          		if(data[0].equals(id)){
-                            outLine=line;
-                        }
-      }
-         return outLine;
-     }  
+   
     
    /* public static ArrayList<String> getAllAppointments(){
          ArrayList<String> appointmentList= new ArrayList<String>();
@@ -680,7 +788,7 @@ public class FileService {
      
      }*/
      
-      public static ArrayList<String> getRecords(File file){
+public static ArrayList<String> getRecords(File file){
             ArrayList<String> recordList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -712,6 +820,29 @@ public class FileService {
      
      }
 
+      public static int getRecordCount(File file){
+          int count=0;
+           try {
+             BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) { 
+
+                count++;
+           
+            }
+            reader.close();
+           return count;
+            
+        } 
+         catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+          
+      }
     
     
    public static boolean isRecordExist(String filePath,String key){//can be used for user name validation
@@ -746,7 +877,8 @@ public class FileService {
    }
    
    public static void removeLine(String filePath,String lineToRemove){
-        try {
+         
+     try {
 
       File inFile = new File(filePath);
 
@@ -793,6 +925,11 @@ public class FileService {
     catch (IOException ex) {
       ex.printStackTrace();
     }
+
+       
+       
+       
+     
        
    }
    
@@ -818,6 +955,9 @@ public class FileService {
    }
    
    public static void deleteRecord(String filePath,String lineToRemove){
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+       int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to delete record?","Warning",dialogButton);
+    if(dialogResult == JOptionPane.YES_OPTION){
          try {
 
       File inFile = new File(filePath);
@@ -867,6 +1007,6 @@ public class FileService {
     }
        
    }
-    
+   }
     
 }

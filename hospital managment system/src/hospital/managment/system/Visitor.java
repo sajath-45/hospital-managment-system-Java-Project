@@ -15,7 +15,7 @@ public class Visitor {
     private String strPurpose;
     private String strName;
     private String intId;
-    private String intPhoneNo;
+    private String phoneNo;
     private String strDate;
     private String  strInTime;
     private String  strOutTime;
@@ -27,8 +27,8 @@ public class Visitor {
     public Visitor(String purpose,String name,String date,String id,String number,String inTime,String outTime,String note,File file){
         this.setStrPurpose(purpose);
         this.setStrName(name);
-        this.setIntId(id);
-        this.setIntPhoneNo(number);
+        this.setId(id);
+        this.setPhoneNo(number);
         this.setStrDate(date);
         this.setStrInTime(inTime);
         this.setStrOutTime(outTime);
@@ -46,11 +46,11 @@ public class Visitor {
     public String getStrDate(){
         return strDate;
     }
-    public String getIntId(){
+    public String getId(){
         return intId;
     }
-    public String getIntPhoneNo(){
-        return intPhoneNo;
+    public String getPhoneNo(){
+        return phoneNo;
     }
     public String getStrInTime(){
         return strInTime;
@@ -75,11 +75,11 @@ public class Visitor {
     public void setStrDate(String date){
         this .strDate=date;
     }
-    public void setIntId(String id){
+    public void setId(String id){
         this. intId=id;
     }
-    public void setIntPhoneNo(String phone){
-        this .intPhoneNo=phone;
+    public void setPhoneNo(String phone){
+        this .phoneNo=phone;
     }
     public void setStrInTime(String in){
         this. strInTime=in;
@@ -95,7 +95,7 @@ public class Visitor {
     }
     
     public String toString(){
-        return getStrDate()+","+getIntId()+","+getStrName()+","+getStrPurpose()+","+getIntPhoneNo()+","+getStrInTime()+","+getStrOutTime()+","+getStrNote()+","+getAttachment().getName();
+        return getStrDate()+","+getId()+","+getStrName()+","+getStrPurpose()+","+getPhoneNo()+","+getStrInTime()+","+getStrOutTime()+","+getStrNote()+","+getAttachment().getName();
         
     }
     

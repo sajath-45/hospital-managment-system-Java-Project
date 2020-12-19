@@ -12,23 +12,23 @@ import java.io.File;
  * @author Sangeerthana
  */
 public class PostalMail {
-    private  int intReferenceNo;
+    private  String referenceNo;
     private String strNote;
     private String strDate;
     private File strAttachment;
-    private static int refferenceCount=1;
+   
     
     
-    public PostalMail(String note,String date,File file){
-        this.setIntReferenceNo(refferenceCount);
+    public PostalMail(String number,String note,String date,File file){
+       setReferenceNo(number);
         this.setAttachment(file);
         this.setStrDate(date);
         this.setStrNote(note);
         
     }
     
-    public int getIntReferenceNo(){
-        return intReferenceNo;
+    public String getReferenceNo(){
+        return referenceNo;
     }
     public String getStrNote(){
         return strNote;    
@@ -41,8 +41,8 @@ public class PostalMail {
         return strAttachment;
     }
   
-   public void setIntReferenceNo(int reference){
-       this.intReferenceNo=reference;
+   public void setReferenceNo(String reference){
+       this.referenceNo=reference;
    }
     
     public void setStrNote(String note){
@@ -55,8 +55,6 @@ public class PostalMail {
         this.strAttachment=attach;
     }
     
-    public static void incrementRefferenceCount(){
-        refferenceCount++;
-    }
+   
     
 }    

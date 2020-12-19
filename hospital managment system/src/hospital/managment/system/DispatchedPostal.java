@@ -16,8 +16,8 @@ public class DispatchedPostal extends PostalMail {
     private String strToAddress;
     
     
-    public DispatchedPostal(String note,String date,File file,String toName,String address){
-        super(note,date,file);
+    public DispatchedPostal(String number,String note,String date,File file,String toName,String address){
+        super(number,note,date,file);
         this.setStrToName(toName);
         this.setStrToAddress(address);
         
@@ -39,8 +39,9 @@ public class DispatchedPostal extends PostalMail {
         this.strToAddress=address;
     }
     
+    @Override
     public String toString(){
-        return  super.getIntReferenceNo()+","+super.getStrDate()+","+getStrToName()+","+ getStrToAddress()+","+super.getStrNote()+","+super.getAttachment().getName();
+        return  super.getReferenceNo()+","+super.getStrDate()+","+getStrToName()+","+ getStrToAddress()+","+super.getStrNote()+","+super.getAttachment().getName();
     }
 
    

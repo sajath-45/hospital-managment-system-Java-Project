@@ -70,13 +70,14 @@ public class AddMail extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        refferenceField = new javax.swing.JTextField();
+        refferenceNoField = new javax.swing.JTextField();
         toAddressField = new javax.swing.JTextField();
         mailDate = new com.toedter.calendar.JDateChooser();
         toNameField = new javax.swing.JTextField();
         sendMailBtn = new javax.swing.JButton();
         noteField = new javax.swing.JTextField();
         addFileBtn = new javax.swing.JButton();
+        attachmentName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -230,7 +231,7 @@ public class AddMail extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(85, 65, 118));
         jLabel6.setText("To Address");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 110, 30));
-        jPanel1.add(refferenceField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 200, 30));
+        jPanel1.add(refferenceNoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 200, 30));
         jPanel1.add(toAddressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 200, 80));
         jPanel1.add(mailDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 200, 30));
         jPanel1.add(toNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 200, 30));
@@ -254,6 +255,7 @@ public class AddMail extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        jPanel1.add(attachmentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,13 +276,14 @@ public class AddMail extends javax.swing.JFrame {
 
     private void sendMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailBtnActionPerformed
         // TODO add your handling code here:
+        String refferenceNumber=refferenceNoField.getText();
         String name=toNameField.getText();
         String address=toAddressField.getText();
         String note=noteField.getText();
           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
          String date=formatter.format(mailDate.getDate());  
           File file=this.attachment;
-        DispatchedPostal mail=new DispatchedPostal(note,date,file,name,address); 
+        DispatchedPostal mail=new DispatchedPostal(refferenceNumber,note,date,file,name,address); 
        FileService.addLine(FileService.getMailsFilePath(),mail.toString());
         this.dashboard.setTables();
           this.dispose();
@@ -296,11 +299,11 @@ public class AddMail extends javax.swing.JFrame {
          int returnValue =openFileChooser.showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 attachment = openFileChooser.getSelectedFile();
-                messageField.setText(attachment.getName());
+                attachmentName.setText(attachment.getName());
             }
             else{
                  attachment = null;
-                 messageField.setText("no file choosen");
+                 attachmentName.setText("no file choosen");
             }
     }//GEN-LAST:event_addFileBtnActionPerformed
 
@@ -363,6 +366,7 @@ public class AddMail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addFileBtn;
+    private javax.swing.JLabel attachmentName;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -380,21 +384,13 @@ public class AddMail extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private com.toedter.calendar.JDateChooser mailDate;
     private javax.swing.JTextField noteField;
-    private javax.swing.JTextField refferenceField;
+    private javax.swing.JTextField refferenceNoField;
     private javax.swing.JButton sendMailBtn;
     private javax.swing.JTextField toAddressField;
     private javax.swing.JTextField toNameField;
     // End of variables declaration//GEN-END:variables
 
-    private static class messageField {
-
-        private static void setText(String name) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        public messageField() {
-        }
-    }
+  
 
 
     

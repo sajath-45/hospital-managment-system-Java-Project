@@ -1,1 +1,3 @@
 saju,sajath,Male,0773781469,199829003939,23/12/2020,canada onatwa,Married,199829003939,001,sajatahahm45@gmail.com,11/12/2020,/home/sajath/Desktop/cs/L5_p2.pdf,cardio,/home/sajath/DOCTORDETAILS (2).png
+ruwan90,ruwan,Male,7784593,199852652,09/06/2020,galle matara,Married,199852652,189,ruwam@gmail.com,15/12/2020,/home/sajath/202-chatbot-dialogflow/README.md,dental,/home/sajath/DOCTORDETAILS (2).png
+sangee11,sangee,Female,12343567,200093457,31/12/2020,jaffna ,Single,200093457,741,sange12g,aivnn,06/12/2020,/home/sajath/202-chatbot-dialogflow/firebase.json,physio,/home/sajath/DOCTORDETAILS (2).png

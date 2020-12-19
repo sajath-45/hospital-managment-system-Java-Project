@@ -1,5 +1,6 @@
-2,10/12/2020,1 0 A.M,pending,sajath ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
-2,10/12/2020,1 0 A.M,approved,sajath ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
-2,10/12/2020,1 0 A.M,pending,sajath ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
-4,15/12/2020,1 0 A.M,approved,saju ahamed,199829003939,DR.sajath ahamed,cardio,Symptoms,dr001
 1,11/12/2020,1 0 A.M,pending,sajath,199829003939,sangeerthana ,dental,corona,D-003
+2,24/12/2020,1 45 A.M,pending,sajath,199829003978,sajath,cardio,fever,001
+3,24/12/2020,1 0 A.M,pending,sajath,199829003978,sajath,cardio,corona,001
+4,01/12/2020,4 30 P.M,Approved,ahamed,199829003939,sajath,cardio,tooth pain,001
+5,04/12/2020,3 45 A.M,Approved,ahamed,199829003939,sajath,cardio,hearth pain,001
+6,23/12/2020,4 30 P.M,Approved,ahamed,199829003939,ruwan,dental,fever and headche,189
