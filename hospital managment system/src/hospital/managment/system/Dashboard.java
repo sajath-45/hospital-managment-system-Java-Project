@@ -3207,9 +3207,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminAppointmentOptionsLayout.setHorizontalGroup(
             adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminAppointmentOptionsLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(55, 55, 55)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(832, Short.MAX_VALUE))
+                .addContainerGap(902, Short.MAX_VALUE))
         );
         adminAppointmentOptionsLayout.setVerticalGroup(
             adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3310,9 +3310,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         patientAppointmentOptionsLayout.setHorizontalGroup(
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientAppointmentOptionsLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(45, 45, 45)
                 .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addGap(843, 843, 843))
+                .addGap(903, 903, 903))
         );
         patientAppointmentOptionsLayout.setVerticalGroup(
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3339,9 +3339,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         moAppointmentOptionsLayout.setHorizontalGroup(
             moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(moAppointmentOptionsLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(37, 37, 37)
                 .addComponent(moAppoinmentCompleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(869, Short.MAX_VALUE))
+                .addContainerGap(926, Short.MAX_VALUE))
         );
         moAppointmentOptionsLayout.setVerticalGroup(
             moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3491,13 +3491,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         receptionUserOptionsLayout.setHorizontalGroup(
             receptionUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionUserOptionsLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(45, 45, 45)
                 .addComponent(addBtn10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(41, 41, 41)
                 .addComponent(editBtn7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addGap(41, 41, 41)
                 .addComponent(deleteBtn15, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 493, Short.MAX_VALUE))
+                .addGap(0, 624, Short.MAX_VALUE))
         );
         receptionUserOptionsLayout.setVerticalGroup(
             receptionUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3525,14 +3525,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         );
         usersMainOptionLayout.setVerticalGroup(
             usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
             .addGroup(usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(usersMainOptionLayout.createSequentialGroup()
-                    .addGap(0, 1, Short.MAX_VALUE)
+                    .addGap(0, 2, Short.MAX_VALUE)
                     .addGroup(usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(adminUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(receptionUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
 
         bgPanel.add(usersMainOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
@@ -3552,9 +3552,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminMailOptionsLayout.setHorizontalGroup(
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminMailOptionsLayout.createSequentialGroup()
-                .addGap(124, 124, 124)
+                .addGap(44, 44, 44)
                 .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                .addGap(0, 851, Short.MAX_VALUE))
+                .addGap(931, 931, 931))
         );
         adminMailOptionsLayout.setVerticalGroup(
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3599,9 +3599,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         receptionMailOptionsLayout.setHorizontalGroup(
             receptionMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionMailOptionsLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(52, 52, 52)
                 .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                .addGap(71, 71, 71)
+                .addGap(89, 89, 89)
                 .addComponent(editBtn6, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3633,7 +3633,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         );
         mailMainOptionLayout.setVerticalGroup(
             mailMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
             .addGroup(mailMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mailMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -3687,13 +3687,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminComplaintOptionsLayout.setHorizontalGroup(
             adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, Short.MAX_VALUE)
-                .addGap(85, 85, 85)
-                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 319, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 382, Short.MAX_VALUE))
         );
         adminComplaintOptionsLayout.setVerticalGroup(
             adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3724,9 +3724,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         patientComplaintOptionsLayout.setHorizontalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientComplaintOptionsLayout.createSequentialGroup()
-                .addGap(248, 248, 248)
+                .addGap(79, 79, 79)
                 .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                .addGap(707, 707, 707))
+                .addGap(876, 876, 876))
         );
         patientComplaintOptionsLayout.setVerticalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3754,9 +3754,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         receptionComplaintOptionsLayout.setHorizontalGroup(
             receptionComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionComplaintOptionsLayout.createSequentialGroup()
-                .addGap(173, 173, 173)
+                .addGap(53, 53, 53)
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(773, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         receptionComplaintOptionsLayout.setVerticalGroup(
             receptionComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3782,7 +3782,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         );
         complaintsMainOptionLayout.setVerticalGroup(
             complaintsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
             .addGroup(complaintsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(complaintsMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -3837,22 +3837,22 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         receptionVisitorOptionsLayout.setHorizontalGroup(
             receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionVisitorOptionsLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(29, 29, 29)
                 .addComponent(addBtn13, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(75, 75, 75)
                 .addComponent(editBtn8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(57, 57, 57)
                 .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 441, Short.MAX_VALUE))
+                .addGap(0, 530, Short.MAX_VALUE))
         );
         receptionVisitorOptionsLayout.setVerticalGroup(
             receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionVisitorOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBtn13, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(editBtn8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(editBtn8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(addBtn13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -3874,9 +3874,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminVisitorOptionsLayout.setHorizontalGroup(
             adminVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminVisitorOptionsLayout.createSequentialGroup()
-                .addGap(135, 135, 135)
+                .addGap(51, 51, 51)
                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(840, Short.MAX_VALUE))
+                .addContainerGap(924, Short.MAX_VALUE))
         );
         adminVisitorOptionsLayout.setVerticalGroup(
             adminVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3946,22 +3946,24 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminRefferenceOptionsLayout.setHorizontalGroup(
             adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminRefferenceOptionsLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(34, 34, 34)
                 .addComponent(addBtn12, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
+                .addGap(67, 67, 67)
                 .addComponent(editBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(73, 73, 73)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 480, Short.MAX_VALUE))
+                .addGap(0, 594, Short.MAX_VALUE))
         );
         adminRefferenceOptionsLayout.setVerticalGroup(
             adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminRefferenceOptionsLayout.createSequentialGroup()
-                .addGroup(adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(addBtn12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(editBtn2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addBtn12, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addGroup(adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout refferenceMainOptionLayout = new javax.swing.GroupLayout(refferenceMainOption);
