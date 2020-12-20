@@ -44,5 +44,19 @@ public class DispatchedPostal extends PostalMail {
         return  super.getReferenceNo()+","+super.getStrDate()+","+getStrToName()+","+ getStrToAddress()+","+super.getStrNote()+","+super.getAttachment().getName();
     }
 
-   
+  public static DispatchedPostal readMail(String line){
+         String[] data=line.split(",");
+         
+          String refferenceNumber=data[0];
+           String date=data[1];
+            String toName=data[2];
+            String toAddress=data[3];
+            String note=data[4];
+            String attachment=data[5];
+            
+            
+
+               return new DispatchedPostal(refferenceNumber,note,date,new File(attachment),toName,toAddress);
+    }    
+ 
 }

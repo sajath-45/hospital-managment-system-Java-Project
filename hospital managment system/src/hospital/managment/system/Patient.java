@@ -43,4 +43,22 @@ public class Patient extends User {
       public String toString2() {
         return super.toString()+","+getStrBloodGrp()+","+getStrAllergies();
     }
+      
+    public static Patient readPatientUser(String line){
+          String[] data=line.split(",");
+          
+          String userName=data[0];
+           String name=data[1];
+            String gender=data[2];
+            String mobile=data[3];
+            String idCard=data[4];
+            String dob=data[5];
+            String address=data[6];
+            String status=data[7];
+             String password=data[8];
+              String bldGroup=data[9];
+               String allergy=data[10];
+ 
+               return new Patient(userName,name,gender,mobile,idCard,dob,address,status,password,bldGroup,allergy);
+      }
 }

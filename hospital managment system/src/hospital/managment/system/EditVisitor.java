@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -326,9 +327,8 @@ public class EditVisitor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(AlertService.optionalPlane("Would you like to edit the Appoinment Record?", "Warning")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getVisitorsFilePath(), getVisitor().toString());
-
-        
         String purpose=purposeField.getText();
         String idCard=idField.getText();
         String name=nameField.getText();
@@ -341,6 +341,7 @@ public class EditVisitor extends javax.swing.JFrame {
         File file=this.attachment;
         Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);
         FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
+        }
         getDashboard().setTables();
         this.dispose();
 

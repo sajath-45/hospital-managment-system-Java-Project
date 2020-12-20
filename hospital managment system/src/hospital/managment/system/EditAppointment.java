@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -437,6 +438,7 @@ public class EditAppointment extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
+            if(AlertService.optionalPlane("Would you like to edit the Appoinment Record?", "Warning")==JOptionPane.YES_NO_OPTION){
             FileService.deleteRecord(FileService.getAppointmentsFilePath(),getAppointment().toString());
 
             String speciality=specialityComboBox.getSelectedItem().toString();
@@ -458,7 +460,7 @@ public class EditAppointment extends javax.swing.JFrame {
             Appointment newAppoinment =new Appointment(getAppointment().getAppointmentNumber(),patient,doctor,appointmentDate,time,status,symtomps,speciality);
             FileService.addLine(FileService.getAppointmentsFilePath(),newAppoinment.toString());
            
-            
+            }
             this.dashboard.setTables();
             this.dispose();
 

@@ -4,15 +4,23 @@
  * and open the template in the editor.
  */
 package hospital.managment.system;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -60,7 +68,18 @@ public class FileService {
     private static final File SPECIALITY_REFFERENCE_FILE = new File(SPECIALITY_REFFERENCE_FILE_PATH);
     private static final String COMPLAIN_REFFERENCE_FILE_PATH = "files/complainRefference.txt";
     private static final File COMPLAIN_REFFERENCE_FILE = new File(COMPLAIN_REFFERENCE_FILE_PATH);
-      
+    
+    private static final String USERLOGIN_REPORT_FILE_PATH="files/reports/userlogin report.pdf";
+    private static final File USERLOGIN_REPORT_FILE= new File(USERLOGIN_REPORT_FILE_PATH); 
+    
+    private static final String APPOINMENT_REPORT_FILE_PATH="files/reports/appoinment report.pdf";
+    private static final File APPOINMENT_REPORT_FILE= new File(APPOINMENT_REPORT_FILE_PATH); 
+    
+    private static final String PATIENTCREDINTIAL_REPORT_FILE_PATH="files/reports/patient credintial report.pdf";
+    private static final File PATIENTCREDINTIAL_REPORT_FILE= new File(PATIENTCREDINTIAL_REPORT_FILE_PATH); 
+    
+    
+    
       public FileService(){
           this.getAllPatients();
           
@@ -118,9 +137,19 @@ public class FileService {
          public static File getSpecialityRefferenceFile(){
           return SPECIALITY_REFFERENCE_FILE;
       }
-          public static File getComplaintRefferenceFile(){
+    public static File getComplaintRefferenceFile(){
           return COMPLAIN_REFFERENCE_FILE;
       }
+    public static File getAppoinmentReportFile(){
+            return APPOINMENT_REPORT_FILE;
+        }
+    public static File getPatientCredintailReportFile(){
+            return PATIENTCREDINTIAL_REPORT_FILE;
+        }
+    public static File getUserLoginReportFile(){
+            return USERLOGIN_REPORT_FILE;
+            
+        }
        
        
        //file paths
@@ -147,155 +176,37 @@ public class FileService {
         public static String getVisitorsFilePath(){
           return VISITOR_FILE_PATH;
       }
-         public static String getComplaintsFilePath(){
+    public static String getComplaintsFilePath(){
           return COMPLAINT_FILE_PATH;
       }
-        public static String getImagePath(){
+    public static String getImagePath(){
             return IMAGEPATH;
         }
-         public static String getMailsFilePath(){
+    public static String getMailsFilePath(){
             return MAIL_FILE_PATH;
         }
-          public static String getUserLoginFilePath(){
+    public static String getUserLoginFilePath(){
             return LOGIN_FILE_PATH;
         }
-          public static String getSpecialityRefferenceFilePath(){
+    public static String getSpecialityRefferenceFilePath(){
             return SPECIALITY_REFFERENCE_FILE_PATH;
         }
-          public static String getComplainRefferenceFilePath(){
+    public static String getComplainRefferenceFilePath(){
             return COMPLAIN_REFFERENCE_FILE_PATH;
         }
-         
+    public static String getAppoinmentReportFilePath(){
+            return APPOINMENT_REPORT_FILE_PATH;
+        }
+    public static String getPatientCredintailReportFilePath(){
+            return PATIENTCREDINTIAL_REPORT_FILE_PATH;
+        }
+    public static String getUserLoginReportFilePath(){
+            return USERLOGIN_REPORT_FILE_PATH;
+            
+        }     
       
       //getters here
-      
-      
-      
-      
-      
-      
-public static Patient readPatientUser(String line){
-          String[] data=line.split(",");
-          
-          String userName=data[0];
-           String name=data[1];
-            String gender=data[2];
-            String mobile=data[3];
-            String idCard=data[4];
-            String dob=data[5];
-            String address=data[6];
-            String status=data[7];
-             String password=data[8];
-              String bldGroup=data[9];
-               String allergy=data[10];
  
-               return new Patient(userName,name,gender,mobile,idCard,dob,address,status,password,bldGroup,allergy);
-      }
-public static MedicalOfficer readMoUser(String line){
-      String[] data=line.split(",");
-
-      String userName=data[0];
-       String name=data[1];
-        String gender=data[2];
-        String mobile=data[3];
-        String idCard=data[4];
-        String dob=data[5];
-        String address=data[6];
-        String status=data[7];
-         String password=data[8];
-          String staffId=data[9];
-           String email=data[10];
-           String date=data[11];
-            String cv=data[12];
-            String speciality=data[13];
-            String image=data[14];
-
-            File cvFile = new File(cv);
-             File staffImage = new File(image);
-
-           return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,speciality,staffImage);
-  } 
-public static Receptionist readReceptionistUser(String line){
-  String[] data=line.split(",");
-
-  String userName=data[0];
-   String name=data[1];
-    String gender=data[2];
-    String mobile=data[3];
-    String idCard=data[4];
-    String dob=data[5];
-    String address=data[6];
-    String status=data[7];
-     String password=data[8];
-      String staffId=data[9];
-       String email=data[10];
-       String date=data[11];
-        String cv=data[12];
-        String image=data[13];
-        File cvFile = new File(cv);
-         File staffImage = new File(image);
-
-       return new Receptionist(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,staffImage);
-} 
-public static Appointment readAppoinment(String line){
-String[] data=line.split(",");
-String appoinmentNo=data[0];
-String date=data[1];
- String time=data[2];
- String status=data[3];
- String patientName=data[4];
- String patientId=data[5];
- String moName=data[6];
- String speciality=data[7];
-  String sysmtomps=data[8];
-   String staffId=data[9];
-
- return new Appointment(appoinmentNo,getPatientById ( patientId ),getMoByStaffId(staffId),date,time,status,sysmtomps,speciality);
-}
-public static Complaint readComplaint(String line){
-String[] data=line.split(",");
-String type=data[0];
-String date=data[1];
-String complainBy=data[2];
-String description=data[3];
-String mobile=data[4];
-String actionTaken=data[5];
-String note=data[6];
-String attachment=data[7];
-
- return new Complaint(type,date,complainBy,description,mobile,actionTaken,note,new File(attachment));
-}
-public static Visitor readVisitor(String line){
-         String[] data=line.split(",");
-          String date=data[0];
-           String visitorId=data[1];
-            String visitorName=data[2];
-            String purpose=data[3];
-            String mobile=data[4];
-            String inTime=data[5];
-             String outTime=data[6];
-            String note=data[7];
-             String attachment=data[8];
-
-               return new Visitor(purpose,visitorName,date,visitorId,mobile,inTime,outTime,note,new File(attachment));
-    }
-public static DispatchedPostal readMail(String line){
-         String[] data=line.split(",");
-         
-          String refferenceNumber=data[0];
-           String date=data[1];
-            String toName=data[2];
-            String toAddress=data[3];
-            String note=data[4];
-            String attachment=data[5];
-            
-            
-
-               return new DispatchedPostal(refferenceNumber,note,date,new File(attachment),toName,toAddress);
-    }    
-     
-   
-   
 public  static ArrayList<Patient> getAllPatients(){
              ArrayList<Patient> allPatientList= new ArrayList<Patient>();
             try {
@@ -305,7 +216,7 @@ public  static ArrayList<Patient> getAllPatients(){
 
                  //username, password, email, etc
 
-                Patient p=readPatientUser(line);//line with commas
+                Patient p=Patient.readPatientUser(line);//line with commas
 
                 allPatientList.add(p);
 
@@ -337,7 +248,7 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
                  
                 String[] data = line.split(","); //username, password, email, etc
                 if(data[13].equals(speciality)){
-                MedicalOfficer user=readMoUser(line);
+                MedicalOfficer user=MedicalOfficer.readMoUser(line);
                 
                 specialityOfficer.add(user);
                 }
@@ -369,7 +280,7 @@ public static MedicalOfficer getMoByStaffId(String id){
                 if(data[9].equals(id)){
                 
                 
-               officer=readMoUser(line);
+               officer=MedicalOfficer.readMoUser(line);
                 }
             }
             reader.close();
@@ -397,7 +308,7 @@ public static Patient getPatientById(String id){
                 if(data[4].equals(id)){
                 
                 
-               patient=readPatientUser(line);
+               patient=Patient.readPatientUser(line);
                 }
             }
             reader.close();
@@ -417,7 +328,7 @@ public static Patient getPatientById(String id){
 public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){
       ArrayList<MedicalOfficer> moOfficerList= new ArrayList<MedicalOfficer>();
     for(String line:list){
-        MedicalOfficer officer=readMoUser(line);
+        MedicalOfficer officer=MedicalOfficer.readMoUser(line);
             moOfficerList.add(officer);
     }
     return moOfficerList;
@@ -955,9 +866,8 @@ public static ArrayList<String> getRecords(File file){
    }
    
    public static void deleteRecord(String filePath,String lineToRemove){
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-       int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to delete record?","Warning",dialogButton);
-    if(dialogResult == JOptionPane.YES_OPTION){
+       
+   
          try {
 
       File inFile = new File(filePath);
@@ -1007,6 +917,136 @@ public static ArrayList<String> getRecords(File file){
     }
        
    }
-   }
+   public static void generatePdf( TableModel model,String path){
+        
+        try {
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            doc.open();
+            PdfPTable pdfTable = new PdfPTable(model.getColumnCount());
+            //adding table headers
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                pdfTable.addCell(model.getColumnName(i));
+            }
+            //extracting data from the JTable and inserting it to PdfPTable
+            for (int rows = 0; rows < model.getRowCount() - 1; rows++) {
+                for (int cols = 0; cols < model.getColumnCount(); cols++) {
+                    pdfTable.addCell(model.getValueAt(rows, cols).toString());
+
+                }
+            }
+            doc.add(pdfTable);
+            doc.close();
+            System.out.println("done");
+        } catch (DocumentException ex) {
+            
+        } catch (FileNotFoundException ex) {
+           
+        }
+
+    
+        
+        
+    } 
+    public static void generateApprovedAppoinmentReport(){
+          Document document = new Document();
+    try
+    {
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("files/reports/approved appoinments.pdf"));
+        document.open();
+ 
+        PdfPTable table = new PdfPTable(10); // 3 columns.
+        table.setWidthPercentage(100); //Width 100%
+        table.setSpacingBefore(5f); //Space before table
+        table.setSpacingAfter(5f); //Space after table
+ 
+        //Set Column widths
+        float[] columnWidths = {1f, 1f, 1f,1f, 1f, 1f,1f, 1f, 1f,1f};
+        table.setWidths(columnWidths);
+        table.addCell("number");
+        table.addCell("Date");
+        table.addCell("Time");
+        table.addCell("Status");
+        table.addCell("Patient Name");
+        table.addCell("Patient Id Card");
+        table.addCell("Medical Officer");
+        table.addCell("Speciality");
+        table.addCell("Systomp");
+        table.addCell("Staff Id");
+        ArrayList<String> appointmentList =FileService.getRecords(FileService.getAppointmentsFile());
+        
+        
+         for(int i=0; i<appointmentList.size(); i++){
+             Appointment appoinment=Appointment.readAppoinment(appointmentList.get(i));
+             if(appoinment.getStatus().equals("Approved")){
+                 
+            table.addCell(appoinment.getAppointmentNumber());
+            table.addCell(appoinment.getAppointmentDate());
+            table.addCell(appoinment.getAppointmentTime());
+            table.addCell(appoinment.getStatus());
+            table.addCell(appoinment.getPatient().getName());
+            table.addCell(appoinment.getPatient().getIdCardNo());
+            table.addCell(appoinment.getMedicalOfficer().moName());
+            table.addCell(appoinment.getSpeciality());
+            table.addCell(appoinment.getSymtomps());
+            table.addCell(appoinment.getMedicalOfficer().getStrStaffId());
+            
+                 
+                 
+                 
+             }
+         
+         }
+        
+        
+        
+        
+        
+        
+        
+        
+ 
+        
+ 
+        //To avoid having the cell border and the content overlap, if you are having thick cell borders
+        //cell1.setUserBorderPadding(true);
+        //cell2.setUserBorderPadding(true);
+        //cell3.setUserBorderPadding(true);
+ 
+ 
+        document.add(table);
+ 
+        document.close();
+        writer.close();
+    } catch (Exception e)
+    {
+        e.printStackTrace();
+    }
+         
+         
+     } 
+   
+    public static void generateCsvFile(TableModel model,String path) throws IOException{
+       try  {
+           
+          // File file =new File(path);
+          FileWriter fileWriter = new FileWriter(path, true);
+        BufferedWriter bw = new BufferedWriter(fileWriter);
+           
+            for (int row = 0; row < model.getRowCount(); row++){
+            Object record= ((DefaultTableModel) model).getDataVector().elementAt(row);
+                   String line= PipeService.formatTableString(record.toString());
+                    bw.write(line+"\n");
+            }
+          bw.flush();
+        bw.close();
+
+               
+
+
+    } catch (FileNotFoundException e) {
+        System.out.println(e.getMessage());
+        }    
+    }
     
 }

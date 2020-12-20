@@ -569,14 +569,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         moComboBox = new javax.swing.JComboBox<>();
         userLogReportPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        appointmentTable4 = new javax.swing.JTable();
+        userLogReportTable = new javax.swing.JTable();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jComboBox4 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         patientCreditialReportPanel = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        appointmentTable5 = new javax.swing.JTable();
+        patientCredintialTable = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
@@ -2186,6 +2186,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         }
 
         jButton2.setText("Generate Report in PDF");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Generate Report in CSV");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -2258,8 +2263,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jScrollPane8.setBorder(null);
 
-        appointmentTable4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        appointmentTable4.setModel(new javax.swing.table.DefaultTableModel(
+        userLogReportTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        userLogReportTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2267,14 +2272,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 {null, null, null, null}
             },
             new String [] {
-                "User Name", "Date", "Time", "Role"
+                "User Name", "Role", "Date", "Time"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2285,27 +2290,31 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 return canEdit [columnIndex];
             }
         });
-        appointmentTable4.setGridColor(new java.awt.Color(255, 255, 255));
-        appointmentTable4.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        appointmentTable4.setRowHeight(20);
-        appointmentTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+        userLogReportTable.setGridColor(new java.awt.Color(255, 255, 255));
+        userLogReportTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        userLogReportTable.setRowHeight(20);
+        userLogReportTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTable4MousePressed(evt);
+                userLogReportTableMousePressed(evt);
             }
         });
-        jScrollPane8.setViewportView(appointmentTable4);
-        if (appointmentTable4.getColumnModel().getColumnCount() > 0) {
-            appointmentTable4.getColumnModel().getColumn(0).setPreferredWidth(100);
-            appointmentTable4.getColumnModel().getColumn(1).setPreferredWidth(100);
-            appointmentTable4.getColumnModel().getColumn(2).setPreferredWidth(100);
-            appointmentTable4.getColumnModel().getColumn(3).setPreferredWidth(100);
-            appointmentTable4.getColumnModel().getColumn(3).setHeaderValue("Id Card No");
+        jScrollPane8.setViewportView(userLogReportTable);
+        if (userLogReportTable.getColumnModel().getColumnCount() > 0) {
+            userLogReportTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            userLogReportTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            userLogReportTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            userLogReportTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         jDateChooser3.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Receptionist", "MedicalOfficer", "Patient", " ", " " }));
         jComboBox4.setPreferredSize(new java.awt.Dimension(100, 20));
+        jComboBox4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox4ItemStateChanged(evt);
+            }
+        });
 
         jButton4.setText("Generate Report in PDF");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -2315,6 +2324,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         });
 
         jButton9.setText("Generate Report in CSV");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout userLogReportPanelLayout = new javax.swing.GroupLayout(userLogReportPanel);
         userLogReportPanel.setLayout(userLogReportPanelLayout);
@@ -2359,8 +2373,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jScrollPane9.setBorder(null);
 
-        appointmentTable5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        appointmentTable5.setModel(new javax.swing.table.DefaultTableModel(
+        patientCredintialTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        patientCredintialTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -2386,24 +2400,34 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 return canEdit [columnIndex];
             }
         });
-        appointmentTable5.setGridColor(new java.awt.Color(255, 255, 255));
-        appointmentTable5.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        appointmentTable5.setRowHeight(20);
-        appointmentTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+        patientCredintialTable.setGridColor(new java.awt.Color(255, 255, 255));
+        patientCredintialTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        patientCredintialTable.setRowHeight(20);
+        patientCredintialTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTable5MousePressed(evt);
+                patientCredintialTableMousePressed(evt);
             }
         });
-        jScrollPane9.setViewportView(appointmentTable5);
-        if (appointmentTable5.getColumnModel().getColumnCount() > 0) {
-            appointmentTable5.getColumnModel().getColumn(0).setPreferredWidth(100);
-            appointmentTable5.getColumnModel().getColumn(1).setPreferredWidth(100);
-            appointmentTable5.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jScrollPane9.setViewportView(patientCredintialTable);
+        if (patientCredintialTable.getColumnModel().getColumnCount() > 0) {
+            patientCredintialTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            patientCredintialTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            patientCredintialTable.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
         jButton10.setText("Generate Report in PDF");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton19.setText("Generate Report in CSV");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout patientCreditialReportPanelLayout = new javax.swing.GroupLayout(patientCreditialReportPanel);
         patientCreditialReportPanel.setLayout(patientCreditialReportPanelLayout);
@@ -3201,6 +3225,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jButton5.setForeground(new java.awt.Color(85, 65, 118));
         jButton5.setText("Delete");
         jButton5.setPreferredSize(new java.awt.Dimension(67, 31));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout adminAppointmentOptionsLayout = new javax.swing.GroupLayout(adminAppointmentOptions);
         adminAppointmentOptions.setLayout(adminAppointmentOptionsLayout);
@@ -3272,8 +3301,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addGap(39, 39, 39)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
-                .addComponent(generatePdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addComponent(generatePdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addComponent(editBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addComponent(approveAppoinmentBtn9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3318,7 +3347,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientAppointmentOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3546,6 +3575,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jButton6.setForeground(new java.awt.Color(85, 65, 118));
         jButton6.setText("Delete");
         jButton6.setPreferredSize(new java.awt.Dimension(67, 31));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout adminMailOptionsLayout = new javax.swing.GroupLayout(adminMailOptions);
         adminMailOptions.setLayout(adminMailOptionsLayout);
@@ -3582,6 +3616,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         editBtn6.setForeground(new java.awt.Color(85, 65, 118));
         editBtn6.setText("Edit");
         editBtn6.setPreferredSize(new java.awt.Dimension(67, 31));
+        editBtn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtn6ActionPerformed(evt);
+            }
+        });
 
         jButton13.setBackground(new java.awt.Color(255, 255, 255));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -3687,11 +3726,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminComplaintOptionsLayout.setHorizontalGroup(
             adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, Short.MAX_VALUE)
-                .addGap(85, 85, 85)
-                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addGap(103, 103, 103)
+                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 319, Short.MAX_VALUE))
         );
@@ -3725,8 +3764,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientComplaintOptionsLayout.createSequentialGroup()
                 .addGap(248, 248, 248)
-                .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                .addGap(707, 707, 707))
+                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(685, Short.MAX_VALUE))
         );
         patientComplaintOptionsLayout.setVerticalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4134,7 +4173,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void generatePdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePdfBtnActionPerformed
         // TODO add your handling code here:
-        generateAppoinmentReport();
+        FileService.generateApprovedAppoinmentReport();
     }//GEN-LAST:event_generatePdfBtnActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -4346,16 +4385,20 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
           deleteVisitorRecord();
     }//GEN-LAST:event_jButton17ActionPerformed
 
-    private void appointmentTable4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable4MousePressed
+    private void userLogReportTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportTableMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentTable4MousePressed
+    }//GEN-LAST:event_userLogReportTableMousePressed
 
-    private void appointmentTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTable5MousePressed
+    private void patientCredintialTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientCredintialTableMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentTable5MousePressed
+    }//GEN-LAST:event_patientCredintialTableMousePressed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            FileService.generateCsvFile(appointmentReportTable.getModel(),"files/report/appointmentReport.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel77MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel77MouseExited
@@ -4380,7 +4423,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jPanel38MousePressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+                 FileService.generatePdf(userLogReportTable.getModel(),FileService.getUserLoginReportFilePath());
+
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void moComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_moComboBoxItemStateChanged
@@ -4402,6 +4447,48 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private void jDateChooser2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser2MousePressed
          setAppointmentReportTable();
     }//GEN-LAST:event_jDateChooser2MousePressed
+
+    private void jComboBox4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox4ItemStateChanged
+            setUserLoginReportTable();
+    }//GEN-LAST:event_jComboBox4ItemStateChanged
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        deleteMail();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void editBtn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn6ActionPerformed
+       editMail();
+    }//GEN-LAST:event_editBtn6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        deleteAppointment();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        FileService.generatePdf(patientCredintialTable.getModel(),FileService.getPatientCredintailReportFilePath());
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         FileService.generatePdf(appointmentReportTable.getModel(),FileService.getAppoinmentReportFilePath());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            FileService.generateCsvFile(userLogReportTable.getModel(),"files/report/userLogReport.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        try {
+            FileService.generateCsvFile(patientCredintialTable.getModel(),"files/reports/patientCredintial.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton19ActionPerformed
  
    
     
@@ -4431,7 +4518,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                    Object record= ((DefaultTableModel) moTable.getModel()).getDataVector().elementAt(moTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getMoFilePath();
-                    MedicalOfficer officer=FileService.readMoUser(line);
+                    MedicalOfficer officer=MedicalOfficer.readMoUser(line);
                     if(type==1){
                          FileService.deleteRecord(path, line);
                     }
@@ -4445,7 +4532,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                      Object record= ((DefaultTableModel) patientsTable.getModel()).getDataVector().elementAt(patientsTable.getSelectedRow());
                      String line= PipeService.formatTableString(record.toString());
                      String path=FileService.getPatientsFilePath();
-                     Patient patient=FileService.readPatientUser(line);
+                     Patient patient=Patient.readPatientUser(line);
                     if(type==1){
                          FileService.deleteRecord(path, line);
                     }
@@ -4458,7 +4545,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                      Object record= ((DefaultTableModel) receptionistTable.getModel()).getDataVector().elementAt(receptionistTable.getSelectedRow());
                       String line= PipeService.formatTableString(record.toString());
                       String path=FileService.getReceptionistFilePath();
-                      Receptionist officer=FileService.readReceptionistUser(line);
+                      Receptionist officer=Receptionist.readReceptionistUser(line);
                     if(type==1){
                          FileService.deleteRecord(path, line);
                     }
@@ -4481,14 +4568,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
        setTables();
     }
     
-    
-    
-    
-    
-   
-   
-    
-    
+          
     
     public void setTables(){
         if(getUserRole().equals("Admin")){
@@ -4698,6 +4778,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         appoinmentReportPanel.setVisible(true);
         userLogReportPanel.setVisible(false);
         patientCreditialReportPanel.setVisible(false);
+         setAppointmentReportTable();
     }
     public void setUserLogReports(){
         resetHoverColor(jPanel38,jLabel79);
@@ -4706,6 +4787,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         appoinmentReportPanel.setVisible(false);
         userLogReportPanel.setVisible(true);
         patientCreditialReportPanel.setVisible(false);
+        setUserLoginReportTable();
         
     }
     public void setPatientCredintialReports(){
@@ -4715,6 +4797,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         appoinmentReportPanel.setVisible(false);
         userLogReportPanel.setVisible(false);
         patientCreditialReportPanel.setVisible(true);
+         setPatientCredintialReportTable();
     }
     
     
@@ -4871,7 +4954,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
              for(int i=0;i<list.size();i++)  
            {  
             
-            MedicalOfficer officer=FileService.readMoUser(list.get(i));
+            MedicalOfficer officer=MedicalOfficer.readMoUser(list.get(i));
            
              Object[] row = {officer.getUserName(),officer.getName(),officer.getGender(),officer.getphoneNumber(),officer.getIdCardNo(),officer.getDateOfBirth(),officer.getAddress(),officer.getMaritalStatus(),officer.getPassword(),officer.getStrStaffId(),officer.getStrEmailAddress(),officer.getStrDateOfJoining(),officer.getCvFile(),officer.getStrSpecialityArea(),officer.getPhoto()};
                     model.addRow(row);
@@ -4887,7 +4970,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
            {   
-        Receptionist officer=FileService.readReceptionistUser(list.get(i));
+        Receptionist officer=Receptionist.readReceptionistUser(list.get(i));
              Object[] row = { officer.getUserName(),officer.getName(),officer.getGender(),officer.getphoneNumber(),officer.getIdCardNo(),officer.getDateOfBirth(),officer.getAddress(),officer.getMaritalStatus(),officer.getPassword(),officer.getStrStaffId(),officer.getStrEmailAddress(),officer.getStrDateOfJoining(),officer.getCvFile(),officer.getPhoto()};
                     model.addRow(row);
             
@@ -4902,7 +4985,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
              for(int i=0;i<list.size();i++)  
            {  
             
-            Patient patient=FileService.readPatientUser(list.get(i));
+            Patient patient=Patient.readPatientUser(list.get(i));
              Object[] row = {patient.getUserName(),patient.getName(),patient.getGender(),patient.getphoneNumber(),patient.getIdCardNo(),patient.getDateOfBirth(),patient.getAddress(),patient.getMaritalStatus(),patient.getPassword(),patient.getStrBloodGrp(),patient.getStrAllergies()};
              model.addRow(row);
             
@@ -5036,7 +5119,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getAppointmentsFilePath();
-                   Appointment appointment=FileService.readAppoinment(line);
+                   Appointment appointment=Appointment.readAppoinment(line);
                     EditAppointment edit=new EditAppointment(appointment,this);
                    
     } 
@@ -5044,96 +5127,21 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
           Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getAppointmentsFilePath();
+                    if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(path, line);
-                     this.setTables();
+                     this.setTables();}
     } 
      public void approveAppoinment(String status){
          Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getAppointmentsFilePath();
                     FileService.deleteRecord(path, line);
-                    Appointment appointment=FileService.readAppoinment(line);
+                    Appointment appointment=Appointment.readAppoinment(line);
                     appointment.setStatus(status);
                     FileService.addLine(path, appointment.toString());
                      this.setTables();
      }
-     public void generateAppoinmentReport(){
-          Document document = new Document();
-    try
-    {
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("files/new.pdf"));
-        document.open();
- 
-        PdfPTable table = new PdfPTable(10); // 3 columns.
-        table.setWidthPercentage(100); //Width 100%
-        table.setSpacingBefore(5f); //Space before table
-        table.setSpacingAfter(5f); //Space after table
- 
-        //Set Column widths
-        float[] columnWidths = {1f, 1f, 1f,1f, 1f, 1f,1f, 1f, 1f,1f};
-        table.setWidths(columnWidths);
-        table.addCell("number");
-        table.addCell("Date");
-        table.addCell("Time");
-        table.addCell("Status");
-        table.addCell("Patient Name");
-        table.addCell("Patient Id Card");
-        table.addCell("Medical Officer");
-        table.addCell("Speciality");
-        table.addCell("Systomp");
-        table.addCell("Staff Id");
-        ArrayList<String> appointmentList =FileService.getRecords(FileService.getAppointmentsFile());
-        
-        
-         for(int i=0; i<appointmentList.size(); i++){
-             Appointment appoinment=FileService.readAppoinment(appointmentList.get(i));
-             if(appoinment.getStatus().equals("Approved")){
-                 
-            table.addCell(appoinment.getAppointmentNumber());
-            table.addCell(appoinment.getAppointmentDate());
-            table.addCell(appoinment.getAppointmentTime());
-            table.addCell(appoinment.getStatus());
-            table.addCell(appoinment.getPatient().getName());
-            table.addCell(appoinment.getPatient().getIdCardNo());
-            table.addCell(appoinment.getMedicalOfficer().moName());
-            table.addCell(appoinment.getSpeciality());
-            table.addCell(appoinment.getSymtomps());
-            table.addCell(appoinment.getMedicalOfficer().getStrStaffId());
-            
-                 
-                 
-                 
-             }
-         
-         }
-        
-        
-        
-        
-        
-        
-        
-        
- 
-        
- 
-        //To avoid having the cell border and the content overlap, if you are having thick cell borders
-        //cell1.setUserBorderPadding(true);
-        //cell2.setUserBorderPadding(true);
-        //cell3.setUserBorderPadding(true);
- 
- 
-        document.add(table);
- 
-        document.close();
-        writer.close();
-    } catch (Exception e)
-    {
-        e.printStackTrace();
-    }
-         
-         
-     }
+  
    
      //complaint functions here
       private void addNewComplaint(){
@@ -5143,15 +5151,16 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
           Object record= ((DefaultTableModel) complaintTable.getModel()).getDataVector().elementAt(complaintTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getComplaintsFilePath();
+                    if(AlertService.optionalPlane("Would you like to Delete the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(path, line);
-                    this.setTables();
+                    this.setTables();}
          
      }
      private void editComplaint(){
           Object record= ((DefaultTableModel) complaintTable.getModel()).getDataVector().elementAt(complaintTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getComplaintsFilePath();
-                    Complaint complain= FileService.readComplaint(line);
+                    Complaint complain= Complaint.readComplaint(line);
                     EditComplaint edit=new EditComplaint(complain,this);
      }
      public void editApproveAction(String action){
@@ -5159,7 +5168,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getComplaintsFilePath();
                     FileService.deleteRecord(path,line);
-                    Complaint complain= FileService.readComplaint(line);
+                    Complaint complain= Complaint.readComplaint(line);
                     complain.setStrActionTaken(action);
                     FileService.addLine(path, complain.toString());
                     this.setTables();
@@ -5174,15 +5183,18 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
           Object record= ((DefaultTableModel) dispatchedMailTable.getModel()).getDataVector().elementAt(dispatchedMailTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getMailsFilePath();
+            if(AlertService.optionalPlane("Would you like to Delete the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+
                     FileService.deleteRecord(path, line);
                     this.setTables();
+                    }
          
      }
      private void editMail(){
           Object record= ((DefaultTableModel) dispatchedMailTable.getModel()).getDataVector().elementAt(dispatchedMailTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getMailsFilePath();
-                    DispatchedPostal mail= FileService.readMail(line);
+                    DispatchedPostal mail= DispatchedPostal.readMail(line);
                     EditMail edit=new EditMail(mail,this);
          
      }
@@ -5195,15 +5207,16 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         Object record= ((DefaultTableModel) visitorTable.getModel()).getDataVector().elementAt(visitorTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getVisitorsFilePath();
+                    if(AlertService.optionalPlane("Would you like to Delete the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(path, line);
-                    this.setTables();
+                    this.setTables();}
         
     }
     private void editVisitorRecord(){
         Object record= ((DefaultTableModel) visitorTable.getModel()).getDataVector().elementAt(visitorTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getVisitorsFilePath();
-                    Visitor visitor =FileService.readVisitor(line) ;
+                    Visitor visitor =Visitor.readVisitor(line) ;
                     EditVisitor edit =new EditVisitor(visitor,this);
     }
    //  
@@ -5217,8 +5230,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     
     
+    
     private void setAppointmentReportTable(){
-        String date=getDateSimpleFormat(jDateChooser2.getDate());
+        String date=PipeService.getDateSimpleFormat(jDateChooser2.getDate());
         MedicalOfficer officer=(MedicalOfficer) moComboBox.getSelectedItem();
          ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = appointmentReportTable.getModel();
@@ -5228,7 +5242,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
              for(int i=0;i<list.size();i++)  
            {  
             
-            Appointment appoinment=FileService.readAppoinment(list.get(i));
+            Appointment appoinment=Appointment.readAppoinment(list.get(i));
             try{
             if(appoinment.getAppointmentDate().equals(date) && appoinment.getMedicalOfficer().getIdCardNo().equals(officer.getIdCardNo())){
              Object[] row = {appoinment.getAppointmentNumber(), appoinment.getStatus(), appoinment.getPatient().getName(), appoinment.getPatient().getIdCardNo(), appoinment.getAppointmentDate(), appoinment.getAppointmentTime(), appoinment.getMedicalOfficer().getName(), appoinment.getSpeciality(),appoinment.getSymtomps()};
@@ -5243,16 +5257,48 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         
     }
      private void setUserLoginReportTable(){
+         String date=PipeService.getDateSimpleFormat(jDateChooser3.getDate());
+         String role =jComboBox4.getSelectedItem().toString();
+         ArrayList<String> list= FileService.getRecords(FileService.getUserLoginFile());
+        TableModel tm = userLogReportTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+      
+             for(int i=0;i<list.size();i++)  
+           {  
+            
+            UserLogin login=UserLogin.readLogin(list.get(i));
+            try{
+            if(login.getDate().equals(date) && login.getRole().equals(role)){
+             Object[] row = {login.getUserName(),login.getRole(),login.getDate(),login.getTime()};
+                    model.addRow(row);
+            }
+           }
+            catch(NullPointerException e){
+                   JOptionPane.showMessageDialog(null, "enter all fields");
+            }
+            
+           }
         
     }
      private void setPatientCredintialReportTable(){
+         ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
+        TableModel tm = patientCredintialTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) tm;
+                model.setRowCount(0);
+                
+             for(int i=0;i<list.size();i++)  
+           {  
+            
+            Patient patient=Patient.readPatientUser(list.get(i));
+             Object[] row = {patient.getUserName(),patient.getName(),patient.getPassword()};
+             model.addRow(row);
+            
+           }  
         
     } 
      
-     private String getDateSimpleFormat(Date date){
-         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(date); 
-     }
+    
      
      
      
@@ -5293,8 +5339,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel appointmentPanel;
     private javax.swing.JTable appointmentReportTable;
     private javax.swing.JTable appointmentTable;
-    private javax.swing.JTable appointmentTable4;
-    private javax.swing.JTable appointmentTable5;
     private javax.swing.JButton approveAppoinmentBtn9;
     private javax.swing.JButton approveBtn3;
     private javax.swing.JPanel bgPanel;
@@ -5470,6 +5514,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTextField namefield;
     private javax.swing.JPanel patientAppointmentOptions;
     private javax.swing.JPanel patientComplaintOptions;
+    private javax.swing.JTable patientCredintialTable;
     private javax.swing.JPanel patientCreditialReportPanel;
     private javax.swing.JScrollPane patientScrollPanel;
     private javax.swing.JPanel patientSettingPanel;
@@ -5508,6 +5553,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JPanel userBtnPanel2;
     private javax.swing.JPanel userLogReportPanel;
+    private javax.swing.JTable userLogReportTable;
     private javax.swing.JLabel userNameLabel;
     private javax.swing.JLabel userNameLabel1;
     private javax.swing.JLabel userNameLabel2;

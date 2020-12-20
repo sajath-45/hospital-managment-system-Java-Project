@@ -337,8 +337,7 @@ public class AddAppointment extends javax.swing.JFrame {
         Patient patient  =(Patient) patientComboBox.getSelectedItem();
        
         Date date = jDateChooser.getDate();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String appointmentDate=formatter.format(date);  
+        String appointmentDate=PipeService.getDateSimpleFormat(date);  
 
         int hour = (Integer) timeHour.getValue();
         int min = (Integer) timeMinute.getValue();

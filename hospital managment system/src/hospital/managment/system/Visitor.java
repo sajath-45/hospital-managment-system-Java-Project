@@ -98,5 +98,18 @@ public class Visitor {
         return getStrDate()+","+getId()+","+getStrName()+","+getStrPurpose()+","+getPhoneNo()+","+getStrInTime()+","+getStrOutTime()+","+getStrNote()+","+getAttachment().getName();
         
     }
-    
+   public static Visitor readVisitor(String line){
+         String[] data=line.split(",");
+          String date=data[0];
+           String visitorId=data[1];
+            String visitorName=data[2];
+            String purpose=data[3];
+            String mobile=data[4];
+            String inTime=data[5];
+             String outTime=data[6];
+            String note=data[7];
+             String attachment=data[8];
+
+               return new Visitor(purpose,visitorName,date,visitorId,mobile,inTime,outTime,note,new File(attachment));
+    } 
 }

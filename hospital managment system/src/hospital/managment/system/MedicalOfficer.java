@@ -86,4 +86,28 @@ public class MedicalOfficer extends User {
      public String toString2() {
         return super.toString()+","+getStrStaffId()+","+getStrEmailAddress()+","+getStrDateOfJoining()+","+getCvFile()+","+getStrSpecialityArea()+","+getPhoto();
     }
+     public static MedicalOfficer readMoUser(String line){
+      String[] data=line.split(",");
+
+      String userName=data[0];
+       String name=data[1];
+        String gender=data[2];
+        String mobile=data[3];
+        String idCard=data[4];
+        String dob=data[5];
+        String address=data[6];
+        String status=data[7];
+         String password=data[8];
+          String staffId=data[9];
+           String email=data[10];
+           String date=data[11];
+            String cv=data[12];
+            String speciality=data[13];
+            String image=data[14];
+
+            File cvFile = new File(cv);
+             File staffImage = new File(image);
+
+           return new MedicalOfficer(userName,name,gender,mobile,idCard,dob,address,status,password,staffId,email,date,cvFile,speciality,staffImage);
+  } 
 }
