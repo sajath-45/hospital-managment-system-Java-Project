@@ -25,7 +25,7 @@ public class Complaint {
     public Complaint(String type,String date,String complainBy,String number,String description,String actionTaken,String note,File file ) {
         setStrType(type);
            setStrComplaintBy(complainBy);
-           setIntPhoneNumber(number);
+           setPhoneNumber(number);
            setStrDate(date);
            setStrDescription(description);
            setStrActionTaken(actionTaken);
@@ -40,7 +40,7 @@ public class Complaint {
     public String getStrComplaintBy() {
         return strComplaintBy;
     }
-    public String getIntPhonrNumber() {
+    public String getPhoneNumber() {
             return phoneNumber;
     }
     public String getStrDate() {
@@ -65,7 +65,7 @@ public class Complaint {
     public void setStrComplaintBy(String ComplaintBy){
         this.strComplaintBy=ComplaintBy;
     }
-    public void setIntPhoneNumber(String PhoneNumber){
+    public void setPhoneNumber(String PhoneNumber){
         this.phoneNumber=PhoneNumber;
     }
     public void setStrDate(String Date){
@@ -87,7 +87,7 @@ public class Complaint {
      
      
      public String toString(){
-         return this.getStrType()+","+getStrDate()+","+getStrComplaintBy()+","+getStrDescription()+","+getIntPhonrNumber()+","+getStrActionTaken()+","+getStrNote()+","+getAttachment().getName();
+         return this.getStrType()+","+getStrDate()+","+getStrComplaintBy()+","+getStrDescription()+","+getPhoneNumber()+","+getStrActionTaken()+","+getStrNote()+","+getAttachment();
          
      }
     

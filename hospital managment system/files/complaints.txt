@@ -1,7 +1,1 @@
-type 1,13/12/2020,sajath,dadsasd,0773781469,dasdas,bad service,/home/sajath/202-chatbot-dialogflow/chatbot/README.md
-type 1,15/12/2020,ruwan,please change receptionist,07739521,none,bad reception,/home/sajath/202-chatbot-dialogflow/chatbot/README.md
 type 2,30/12/2020,sangeerthana,bad nursing,0785454784,none,bad nursing i am very disaaponted,/home/sajath/android-udev-rules/README.md
-type 2,14/12/2020,ahamed,srrdfghjikol,773781456,,fsdfsdfsdfs,/home/sajath/admin/release-key.txt
-type 1,14/12/2020,sajath,no decription,078454,,dasdsad,README.md
-type 3,14/12/2020,user,no description,7845845,,none,firebase.json
-type 1,15/12/2020,messi,bad reff,77845698,,none,angular.json

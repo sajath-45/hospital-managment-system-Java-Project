@@ -28,6 +28,8 @@ public class Login extends javax.swing.JFrame {
    private String time;
    private String role;
    private String userName;
+   private  final int userNameIndex=0;
+   private  final int passwordIndex=8;
    
 
     /**
@@ -307,16 +309,33 @@ public class Login extends javax.swing.JFrame {
     
     public boolean validateLogin(){
         boolean isUserValid=false;
+        File loginFile=null;
+        if(getRole().equals("Admin")){
+            loginFile=FileService.getAdminFile();
+        }
+        else if(getRole().equals("MedicalOfficer")){
+             loginFile=FileService.getMoFile();
+            
+        }
+        else if(getRole().equals("Patient")){
+             loginFile=FileService.getPatientsFile();
+            
+        }
+         else if(getRole().equals("Receptionist")){
+             loginFile=FileService.getReceptionistFile();
+            
+        }
+      
 
          try {
-             BufferedReader reader = new BufferedReader(new FileReader(FileService.getUserFile()));
+             BufferedReader reader = new BufferedReader(new FileReader(loginFile));
             String line;
             while ((line = reader.readLine()) != null) {
                  
                 String[] data = line.split(","); //username, password, email, etc
                 System.out.println("username"+data[0]);
                  System.out.println("pass"+data[8]);
-               if(data[0].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[8])){
+               if(data[userNameIndex].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[passwordIndex])){
                     isUserValid=true;
                }
             }

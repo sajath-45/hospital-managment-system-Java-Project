@@ -1,0 +1,14 @@
+rec1
+rec1
+Male
+0777777
+999999
+19/12/2020
+47 canvad one fsah
+Married
+999999
+789
+de@gmail.com
+08/12/2020
+null
+null

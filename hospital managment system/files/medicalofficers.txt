@@ -1,4 +1,3 @@
-DR sajath,sajath ahamed,male,077378415,199829003939,16/10/1998,wijayba mawatha,single,123456,D-001,sajathahamed@hmail.com,11/10/2015,myfile,cardio
-DR ruwan,ruwan ,male,78459521,1998200009,7/5/1998,rathnapura mawatha,single,123456,D-002,ruwan@hmail.com,11/10/2015,myfile,othopaedic
-DR sangee,sangeerthana ,female,0773785555,1998884403939,17/10/1998,jaffna mawatha,single,123456,D-003,sajathahamed2@hmail.com,11/10/2015,myfile,dental
-DR lathusan,lathusan,male,077378415,199829003939,16/8/1998,jaffna mawatha,married,123456,D-004,thusan2@hmail.com,11/10/2015,myfile,cardio
+saju,sajath,Male,0773781469,199829003939,23/12/2020,canada onatwa,Married,199829003939,001,sajatahahm45@gmail.com,11/12/2020,/home/sajath/Desktop/cs/L5_p2.pdf,cardio,/home/sajath/DOCTORDETAILS (2).png
+ruwan90,ruwan,Male,7784593,199852652,09/06/2020,galle matara,Married,199852652,189,ruwam@gmail.com,15/12/2020,/home/sajath/202-chatbot-dialogflow/README.md,dental,/home/sajath/DOCTORDETAILS (2).png
+sangee11,sangee,Female,12343567,200093457,31/12/2020,jaffna ,Single,200093457,741,sange12g,aivnn,06/12/2020,/home/sajath/202-chatbot-dialogflow/firebase.json,physio,/home/sajath/DOCTORDETAILS (2).png

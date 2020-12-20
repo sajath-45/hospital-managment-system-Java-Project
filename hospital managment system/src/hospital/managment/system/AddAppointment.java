@@ -77,7 +77,6 @@ public class AddAppointment extends javax.swing.JFrame {
         sysmtompsField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setForeground(new java.awt.Color(85, 65, 118));
@@ -346,13 +345,10 @@ public class AddAppointment extends javax.swing.JFrame {
         String seg = timeComboBox.getSelectedItem().toString();
         String time=Integer.toString(hour)+ " "+Integer.toString(min)+" "+ seg;
         String symtomps=sysmtompsField.getText();
+        String appointmentNumber=String.valueOf((FileService.getRecordCount(FileService.getAppointmentsFile())+1));
         
-        System.out.println("date"+appointmentDate);
-        System.out.println("time"+time);
-        System.out.println("speciality"+speciality);
-        System.out.println("time"+doctor.toString());
-        System.out.println("time"+patient.toString());
-        Appointment appointment =new Appointment(patient,doctor,appointmentDate,time,"pending",symtomps,speciality);
+        
+        Appointment appointment =new Appointment(appointmentNumber,patient,doctor,appointmentDate,time,"Pending",symtomps,speciality);
         FileService.addLine(FileService.getAppointmentsFilePath(),appointment.toString());
         this.dashboard.setTables();
         this.dispose();
@@ -417,22 +413,18 @@ public class AddAppointment extends javax.swing.JFrame {
          this.createDoctorComboBox(specialityComboBox.getSelectedItem().toString());
     }
     private void createPatientComboBox(){
-        FileService service=new  FileService();
-        Object[] items= service.getPatientList().toArray();
-      
         
+        Object[] items= FileService.getAllPatients().toArray();
+  
          DefaultComboBoxModel newModel = new DefaultComboBoxModel(items);
-         patientComboBox.setModel( newModel );
-        
-        
-       
+         patientComboBox.setModel( newModel );     
         
         
     }
     private void  createDoctorComboBox(String speciality){
         if(!"".equals(speciality)){
-          FileService service=new  FileService();
-        Object[] items= service.getMoBySpeciality(speciality).toArray();     
+          
+        Object[] items= FileService.getMoBySpeciality(speciality).toArray();     
         
              DefaultComboBoxModel model = new DefaultComboBoxModel(items);
                doctorComboBox.setModel( model );

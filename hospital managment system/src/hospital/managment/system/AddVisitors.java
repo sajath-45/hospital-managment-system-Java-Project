@@ -287,7 +287,7 @@ public class AddVisitors extends javax.swing.JFrame {
             
              
                 FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
-                 this.dashboard.setTables();
+                 getDashboard().setTables();
                   this.dispose();
            
         

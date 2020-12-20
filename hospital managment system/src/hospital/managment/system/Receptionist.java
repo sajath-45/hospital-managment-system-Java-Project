@@ -47,27 +47,27 @@ public class Receptionist extends User {
         this.staffPhoto=photo;
     }
     
-    public String getIntStaffId(){
+    public String getStrStaffId(){
         return intStaffId;
     }
     
-    public String getStrMailAddress(){
+    public String getStrEmailAddress(){
         return strMailAddress;
         
     }
     public String getStrDateOfJoining(){
         return strDateOfJoining;
     }
-    public File getFileCv(){
+    public File getCvFile(){
         return fileCv;
     }
-     public File getStaffPhoto(){
+     public File getPhoto(){
         return staffPhoto;
     }
    
     
     public String toString(){
-        return  super.toString()+","+getIntStaffId()+","+getStrMailAddress()+","+getStrDateOfJoining()+","+getFileCv().getName() +","+getStaffPhoto()  ;
+        return  super.toString()+","+getStrStaffId()+","+getStrEmailAddress()+","+getStrDateOfJoining()+","+getCvFile() +","+getPhoto()  ;
     }
     
 }

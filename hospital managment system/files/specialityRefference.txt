@@ -3,3 +3,5 @@ dental
 physio
 othopaedic
 ENT
+Hearth specialist
+child specialist
