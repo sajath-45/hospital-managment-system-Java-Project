@@ -533,9 +533,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         visitorBtnPanel2 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
-        receptionistSettingPanel = new javax.swing.JPanel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
         userBtnPanel2 = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
@@ -547,6 +544,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel74 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         userNameLabel3 = new javax.swing.JLabel();
+        receptionistSettingPanel = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
         appointmentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
@@ -681,8 +680,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         addBtn10 = new javax.swing.JButton();
         mailMainOption = new javax.swing.JPanel();
         adminMailOptions = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        viewBtn3 = new javax.swing.JButton();
         jPanel25 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         receptionMailOptions = new javax.swing.JPanel();
@@ -1728,43 +1725,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel30.add(visitorBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 50));
 
-        receptionistSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
-        receptionistSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        receptionistSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistSettingPanelMousePressed(evt);
-            }
-        });
-
-        jLabel53.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel53.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel53.setText("Settings");
-
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
-
-        javax.swing.GroupLayout receptionistSettingPanelLayout = new javax.swing.GroupLayout(receptionistSettingPanel);
-        receptionistSettingPanel.setLayout(receptionistSettingPanelLayout);
-        receptionistSettingPanelLayout.setHorizontalGroup(
-            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel54)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        receptionistSettingPanelLayout.setVerticalGroup(
-            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel30.add(receptionistSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
-
         userBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
         userBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         userBtnPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1874,7 +1834,30 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap())
         );
 
-        jPanel30.add(receptionistSettingPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 250, 50));
+        jPanel30.add(receptionistSettingPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
+
+        receptionistSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
+        receptionistSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        receptionistSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                receptionistSettingPanelMousePressed(evt);
+            }
+        });
+
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
+
+        javax.swing.GroupLayout receptionistSettingPanelLayout = new javax.swing.GroupLayout(receptionistSettingPanel);
+        receptionistSettingPanel.setLayout(receptionistSettingPanelLayout);
+        receptionistSettingPanelLayout.setHorizontalGroup(
+            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
+                .addComponent(jLabel54)
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+        receptionistSettingPanelLayout.setVerticalGroup(
+            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout receptionSidePanelLayout = new javax.swing.GroupLayout(receptionSidePanel);
         receptionSidePanel.setLayout(receptionSidePanelLayout);
@@ -1891,22 +1874,30 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addGap(55, 55, 55)
                         .addComponent(userNameLabel3))
                     .addGroup(receptionSidePanelLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(profileImg3)))
+                        .addGap(39, 39, 39)
+                        .addComponent(profileImg3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(receptionistSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         receptionSidePanelLayout.setVerticalGroup(
             receptionSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionSidePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(profileImg3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGroup(receptionSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(receptionSidePanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(receptionistSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionSidePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(profileImg3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(userNameLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         bgPanel.add(receptionSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
@@ -2454,13 +2445,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addContainerGap()
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE))
                     .addGroup(patientCreditialReportPanelLayout.createSequentialGroup()
-                        .addGroup(patientCreditialReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(patientCreditialReportPanelLayout.createSequentialGroup()
-                                .addGap(564, 564, 564)
-                                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(patientCreditialReportPanelLayout.createSequentialGroup()
-                                .addGap(145, 145, 145)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(145, 145, 145)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2470,10 +2458,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+                .addGroup(patientCreditialReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         reportsPanel.add(patientCreditialReportPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 73, 1090, 780));
@@ -2879,7 +2867,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(142, 142, 142))))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3773,32 +3760,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         mailMainOption.setPreferredSize(new java.awt.Dimension(1090, 108));
 
-        jPanel11.setBackground(new java.awt.Color(153, 153, 255));
-
-        viewBtn3.setText("Add");
-        viewBtn3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtn3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jPanel25.setBackground(new java.awt.Color(153, 153, 255));
 
         jButton6.setText("Delete");
@@ -3825,15 +3786,12 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminMailOptionsLayout.setHorizontalGroup(
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminMailOptionsLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(354, 354, 354)
                 .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 580, Short.MAX_VALUE))
         );
         adminMailOptionsLayout.setVerticalGroup(
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -4322,31 +4280,25 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         visitorsMainOption.setLayout(visitorsMainOptionLayout);
         visitorsMainOptionLayout.setHorizontalGroup(
             visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(visitorsMainOptionLayout.createSequentialGroup()
+                .addComponent(adminVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(visitorsMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(receptionVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(visitorsMainOptionLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(adminVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         visitorsMainOptionLayout.setVerticalGroup(
             visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(visitorsMainOptionLayout.createSequentialGroup()
+                .addComponent(adminVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(visitorsMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(receptionVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 2, Short.MAX_VALUE)))
-            .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, visitorsMainOptionLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         bgPanel.add(visitorsMainOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
@@ -4499,7 +4451,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         if (appointmentTable.getSelectedRow() > -1) {
             // print first column value from selected row
-            System.out.println("works");
+           
             editBtn.setEnabled(true);
         }
     }//GEN-LAST:event_appointmentTableMousePressed
@@ -4571,11 +4523,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private void refferenceBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refferenceBtnPanelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_refferenceBtnPanelMousePressed
-
-    private void viewBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtn3ActionPerformed
-        // TODO add your handling code here:
-        addDispatchedPostal();
-    }//GEN-LAST:event_viewBtn3ActionPerformed
 
     private void approveBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn3ActionPerformed
         // TODO add your handling code here:
@@ -5236,7 +5183,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         System.out.println("patient appointments");  
              for(int i=0;i<list.size();i++)  
            {  
-            System.out.println(list.get(i));  
             
             String [] data=list.get(i).split(",");
             
@@ -5251,10 +5197,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         TableModel tm = appointmentTable.getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
-        System.out.println("Mo appoinments");  
              for(int i=0;i<list.size();i++)  
            {  
-            System.out.println(list.get(i));  
+            
             
             String [] data=list.get(i).split(",");
              Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
@@ -5271,7 +5216,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
        System.out.println("all appointments"); 
              for(int i=0;i<list.size();i++)  
            {  
-            System.out.println(list.get(i));  
             
             String [] data=list.get(i).split(",");
              Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8],data[9]};
@@ -5289,7 +5233,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
        System.out.println("all complaints");  
              for(int i=0;i<list.size();i++)  
            {  
-            System.out.println(list.get(i));  
              String [] data=list.get(i).split(",");
             
              Object[] row = { data[0],data[1], data[2], data[3], data[4], data[5], data[6], data[7]};
@@ -5307,7 +5250,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             System.out.println("patient complaints");  
              for(int i=0;i<list.size();i++)  
            {  
-            System.out.println(list.get(i));  
             
             String [] data=list.get(i).split(",");
              Object[] row = { data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
@@ -5696,7 +5638,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         
     }
     private void editVisitorRecord(){
-        Object record= ((DefaultTableModel) dispatchedMailTable.getModel()).getDataVector().elementAt(dispatchedMailTable.getSelectedRow());
+        Object record= ((DefaultTableModel) visitorTable.getModel()).getDataVector().elementAt(visitorTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getVisitorsFilePath();
                     Visitor visitor =FileService.readVisitor(line) ;
@@ -5885,7 +5827,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
@@ -5920,7 +5861,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -6044,7 +5984,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel usersMainOption;
     private javax.swing.JPanel usersPanel;
     private javax.swing.JButton viewBtn11;
-    private javax.swing.JButton viewBtn3;
     private javax.swing.JPanel visitorBtnPanel;
     private javax.swing.JPanel visitorBtnPanel2;
     private javax.swing.JTable visitorTable;
