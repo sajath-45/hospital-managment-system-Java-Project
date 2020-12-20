@@ -116,6 +116,7 @@ public class EditComplaint extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -144,7 +145,7 @@ public class EditComplaint extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Add Complaint");
+        jLabel1.setText("Edit Complaint");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 168, -1));
 
         jPanel7.setBackground(new java.awt.Color(85, 65, 118));
@@ -211,6 +212,12 @@ public class EditComplaint extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 0, 0));
+        jButton1.setText("Back");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
 
         jPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 40));
 
@@ -409,6 +416,7 @@ public class EditComplaint extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> complainTypeComboBox;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileNameLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
