@@ -54,5 +54,15 @@ public class UserLogin {
     public String toString(){
         return this.getUserName()+","+getRole()+","+getDate()+","+getTime();
     }
-    
+   public static  UserLogin readLogin(String line){
+     String[] data=line.split(",");
+         
+          String userName=data[0];
+           String role=data[1];
+            String date=data[2];
+            String time=data[3];
+            
+    return new UserLogin(userName,role,date,time);
+}    
+ 
 }

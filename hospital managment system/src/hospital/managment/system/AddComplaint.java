@@ -7,12 +7,7 @@ package hospital.managment.system;
 
 import java.awt.Color;
 import java.io.File;
-import java.io.IOException;
-import static java.lang.Integer.parseInt;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 
@@ -310,8 +305,7 @@ public class AddComplaint extends javax.swing.JFrame {
         String complainBy=complainByText.getText();
         String mobile=phoneNumber.getText();
         String description=descriptionField.getText();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         String date=formatter.format(complainDate.getDate());  
+         String date=PipeService.getDateSimpleFormat(complainDate.getDate());  
          String actionTaken=actionTakenField.getText();
          String note=noteField.getText();
          File file=getAttachment();

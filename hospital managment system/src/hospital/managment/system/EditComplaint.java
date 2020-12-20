@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -342,6 +343,8 @@ public class EditComplaint extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
+                    if(AlertService.optionalPlane("Would you like to edit the Complaint Record?", "Warning")==JOptionPane.YES_NO_OPTION){
+
         FileService.deleteRecord(FileService.getComplaintsFilePath(), getComplaint().toString());
         String complainType=complainTypeComboBox.getSelectedItem().toString();
         String complainBy=complainByText.getText();
@@ -356,6 +359,7 @@ public class EditComplaint extends javax.swing.JFrame {
         //validate needed
         Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
         FileService.addLine(FileService.getComplaintsFilePath(),complain.toString());
+                    }
         getDashboard().setTables();
         this.dispose();
 

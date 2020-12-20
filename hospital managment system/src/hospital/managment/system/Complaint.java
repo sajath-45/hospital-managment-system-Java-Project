@@ -90,5 +90,17 @@ public class Complaint {
          return this.getStrType()+","+getStrDate()+","+getStrComplaintBy()+","+getStrDescription()+","+getPhoneNumber()+","+getStrActionTaken()+","+getStrNote()+","+getAttachment();
          
      }
-    
+    public static Complaint readComplaint(String line){
+String[] data=line.split(",");
+String type=data[0];
+String date=data[1];
+String complainBy=data[2];
+String description=data[3];
+String mobile=data[4];
+String actionTaken=data[5];
+String note=data[6];
+String attachment=data[7];
+
+ return new Complaint(type,date,complainBy,description,mobile,actionTaken,note,new File(attachment));
+}
 }

@@ -1,8 +1,0 @@
-type 1
-17-12-2020
-dasd
-dsad
-dasd
-dasd
-dasd
-/home/sajath/202-chatbot-dialogflow/README.md

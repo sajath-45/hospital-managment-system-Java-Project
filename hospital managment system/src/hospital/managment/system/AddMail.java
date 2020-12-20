@@ -7,12 +7,7 @@ package hospital.managment.system;
 
 import java.awt.Color;
 import java.io.File;
-import java.io.IOException;
-import static java.lang.Boolean.FALSE;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -280,8 +275,7 @@ public class AddMail extends javax.swing.JFrame {
         String name=toNameField.getText();
         String address=toAddressField.getText();
         String note=noteField.getText();
-          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         String date=formatter.format(mailDate.getDate());  
+         String date=PipeService.getDateSimpleFormat(mailDate.getDate());  
           File file=this.attachment;
         DispatchedPostal mail=new DispatchedPostal(refferenceNumber,note,date,file,name,address); 
        FileService.addLine(FileService.getMailsFilePath(),mail.toString());

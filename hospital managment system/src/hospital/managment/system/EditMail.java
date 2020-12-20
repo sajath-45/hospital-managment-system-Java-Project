@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -334,7 +335,8 @@ public class EditMail extends javax.swing.JFrame {
 
     private void sendMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailBtnActionPerformed
         // TODO add your handling code here:
-        
+        if(AlertService.optionalPlane("Would you like to edit the Maill Record?", "Warning")==JOptionPane.YES_NO_OPTION){
+     
         FileService.deleteRecord(FileService.getMailsFilePath(), getDispatchedPostal().toString());
         
         String refferenceNumber=refferenceNoField.getText();
@@ -346,6 +348,7 @@ public class EditMail extends javax.swing.JFrame {
         File file=this.attachment;
         DispatchedPostal mail=new DispatchedPostal(getDispatchedPostal().getReferenceNo(),note,date,file,name,address);
         FileService.addLine(FileService.getMailsFilePath(),mail.toString());
+        }
         this.dashboard.setTables();
         this.dispose();
 

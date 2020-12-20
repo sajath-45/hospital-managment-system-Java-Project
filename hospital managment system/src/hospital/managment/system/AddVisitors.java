@@ -8,10 +8,7 @@ package hospital.managment.system;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -280,8 +277,7 @@ public class AddVisitors extends javax.swing.JFrame {
             String note=noteField.getText();
              String inTime=inTimeField.getText();
               String outTime=outTimeField.getText();
-              SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         String date=formatter.format(dateField.getDate()); 
+         String date=PipeService.getDateSimpleFormat(dateField.getDate()); 
          File file=this.attachment;
          Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);
             
