@@ -29,7 +29,7 @@ public class AddReference extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         // setDashboard(dash);
-        setController(new ReferenceController( this));
+        setController(new ReferenceController( this,null));
         getController().initController();
         
         

@@ -20,14 +20,23 @@ import javax.swing.JPanel;
  */
 public  class ReferenceController  {
     private AddReference view;
-    public ReferenceController(AddReference view){
+    private String model;
+    public ReferenceController(AddReference view,String model){
         setView(view);
+        setModel(model);
     }  
-    public AddReference getView(){
-        return this.view;
-    }
+    
     public void setView(AddReference view){
         this.view=view;
+    }
+    public void setModel(String model){
+        this.model=model;
+    }
+    public AddReference getView(){
+       return this.view;
+    }
+    public String getModel(){
+        return this.model;
     }
     
     public void initController(){
@@ -91,6 +100,31 @@ public  class ReferenceController  {
         
         
         
+    }
+    public void editComplaintReference(){
+        String action=JOptionPane.showInputDialog("Edit Complaint Reference");
+         if( action != null){
+        FileService.deleteRecord(FileService.getComplainRefferenceFilePath(),getModel() );
+        FileService.addLine(FileService.getComplainRefferenceFilePath(),action );
+         }
+        
+    }
+    public void editSpecialityReference(){
+        String action=JOptionPane.showInputDialog("Edit Speciality Reference");
+         if( action != null){
+         FileService.deleteRecord(FileService.getSpecialityRefferenceFilePath(),getModel() );
+         FileService.addLine(FileService.getSpecialityRefferenceFilePath(),action );
+         
+         }
+    }
+    public void deleteComplaintReference(){
+    if(AlertService.optionalPlane("Would you like to Delete the Complaint Reference Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+        FileService.deleteRecord(FileService.getComplainRefferenceFilePath(),getModel() );}
+    }
+    public void deleteSpecialityReference(){
+        if(AlertService.optionalPlane("Would you like to Delete the Speciality Reference Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+         FileService.deleteRecord(FileService.getSpecialityRefferenceFilePath(),getModel() );
+        }
     }
     
     

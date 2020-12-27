@@ -484,15 +484,30 @@ public class Dashboard extends javax.swing.JFrame  {
      public JScrollPane getPatientScrollPanel(){
         return this.patientScrollPanel;
     }
+     public JScrollPane getComplaintReferencejScrollPanel(){
+        return this.complaintReferencejScrollPanel;
+    }
+     public JScrollPane getSpecialityReferenceJScrollPanel(){
+        return this.specialityReferenceJScrollPanel;
+    }
+    //reffernce list
+     
+      public JList<String> getComplaintReferenceList(){
+         return this.complainRefferenceList;
+     }
+       public JList<String> getSpecialityRefferenceList(){
+         return this.specialityRefferenceList;
+     }
+     
+     
+     
      
     //other panels
      public JPanel getJPanel6(){
          return this.jPanel6;
      }
      //
-     public JList<String> getReferenceList(){
-         return this.refferenceList;
-     }
+    
      
     public JDateChooser   getUserLoginReportDateChooser3(){
         return this.userLoginReportDateChooser3;}
@@ -1108,8 +1123,10 @@ public class Dashboard extends javax.swing.JFrame  {
         complainReferenceOptionPanel = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         specialityListPanel = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        refferenceList = new javax.swing.JList<>();
+        complaintReferencejScrollPanel = new javax.swing.JScrollPane();
+        complainRefferenceList = new javax.swing.JList<>();
+        specialityReferenceJScrollPanel = new javax.swing.JScrollPane();
+        specialityRefferenceList = new javax.swing.JList<>();
         settingsPanel = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
@@ -2957,26 +2974,17 @@ public class Dashboard extends javax.swing.JFrame  {
         jPanel3.add(complainReferenceOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 60));
 
         specialityListPanel.setBackground(new java.awt.Color(204, 204, 204));
+        specialityListPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        refferenceList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane7.setViewportView(refferenceList);
+        complainRefferenceList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        complaintReferencejScrollPanel.setViewportView(complainRefferenceList);
 
-        javax.swing.GroupLayout specialityListPanelLayout = new javax.swing.GroupLayout(specialityListPanel);
-        specialityListPanel.setLayout(specialityListPanelLayout);
-        specialityListPanelLayout.setHorizontalGroup(
-            specialityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(specialityListPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        specialityListPanelLayout.setVerticalGroup(
-            specialityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(specialityListPanelLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
+        specialityListPanel.add(complaintReferencejScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 52, 502, 388));
+
+        specialityRefferenceList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        specialityReferenceJScrollPanel.setViewportView(specialityRefferenceList);
+
+        specialityListPanel.add(specialityReferenceJScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 52, 502, 388));
 
         javax.swing.GroupLayout refferencePanelLayout = new javax.swing.GroupLayout(refferencePanel);
         refferencePanel.setLayout(refferencePanelLayout);
@@ -2995,7 +3003,7 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(specialityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         bgPanel.add(refferencePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 1090, 860));
@@ -5144,7 +5152,7 @@ public class Dashboard extends javax.swing.JFrame  {
             ComplainRefference refference = new ComplainRefference();
            ArrayList<String> complainRefferenceList = refference.getComplainTypes();
             DefaultListModel<String> model = new DefaultListModel<String>();
-             refferenceList.setModel(model);
+             getComplaintReferenceList().setModel(model);
           for(String s:complainRefferenceList){
                  model.addElement(s);
                 }
@@ -5153,7 +5161,7 @@ public class Dashboard extends javax.swing.JFrame  {
        SpecialityRefference refference=new SpecialityRefference();
        ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
         DefaultListModel<String> model2 = new DefaultListModel<String>();
-        refferenceList.setModel(model2);
+        getSpecialityRefferenceList().setModel(model2);
         for(String s:specialityRefferenceList){
                  model2.addElement(s);
                 }          
@@ -5491,10 +5499,12 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JButton approveComplaintBtn;
     private javax.swing.JPanel bgPanel;
     private javax.swing.JPanel complainReferenceOptionPanel;
+    private javax.swing.JList<String> complainRefferenceList;
     private javax.swing.JPanel complaintBtnPanel1;
     private javax.swing.JPanel complaintBtnPanel2;
     private javax.swing.JPanel complaintBtnPanel3;
     private javax.swing.JPanel complaintPanel;
+    private javax.swing.JScrollPane complaintReferencejScrollPanel;
     private javax.swing.JTable complaintTable;
     private javax.swing.JPanel complaintsMainOption;
     private javax.swing.JButton completedAppointmentBtn;
@@ -5612,7 +5622,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
@@ -5663,7 +5672,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel receptionistUserOptions;
     private javax.swing.JPanel receptionistVisitorOptions;
     private javax.swing.JPanel refferenceBtnPanel;
-    private javax.swing.JList<String> refferenceList;
     private javax.swing.JPanel refferenceMainOption;
     private javax.swing.JPanel refferencePanel;
     private javax.swing.JPanel reportBtnPanel;
@@ -5673,7 +5681,9 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JButton saveUserBtn;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel specialityListPanel;
+    private javax.swing.JScrollPane specialityReferenceJScrollPanel;
     private javax.swing.JPanel specialityReferenceOptionPanel;
+    private javax.swing.JList<String> specialityRefferenceList;
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JPanel userBtnPanel2;
     private javax.swing.JButton userLogReportCsvBtn;

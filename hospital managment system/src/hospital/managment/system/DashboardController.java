@@ -819,18 +819,22 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
     private void setComplainRefference(){
         setHoverColor(getView().getComplainReferencePanel(),getView().getjLabel28());
         resetHoverColor(getView().getSpecialityReferencePanel(),getView().getjLabel31());
+        getView().getComplaintReferencejScrollPanel().setVisible(true);
+        getView().getSpecialityReferenceJScrollPanel().setVisible(false);
         getComplainRefference();
     }
     private void setSpecialityRefference(){
         setHoverColor(getView().getSpecialityReferencePanel(),getView().getjLabel31());
         resetHoverColor(getView().getComplainReferencePanel(),getView().getjLabel28());
+         getView().getComplaintReferencejScrollPanel().setVisible(false);
+        getView().getSpecialityReferenceJScrollPanel().setVisible(true);
         getSpecialityRefference();         
     }
     private void getComplainRefference(){
             ComplainRefference refference = new ComplainRefference();
            ArrayList<String> complainRefferenceList = refference.getComplainTypes();
             DefaultListModel<String> model = new DefaultListModel<String>();
-             getView().getReferenceList().setModel(model);
+             getView().getComplaintReferenceList().setModel(model);
           for(String s:complainRefferenceList){
                  model.addElement(s);
                 }
@@ -839,7 +843,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
        SpecialityRefference refference=new SpecialityRefference();
        ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
         DefaultListModel<String> model2 = new DefaultListModel<String>();
-        getView().getReferenceList().setModel(model2);
+        getView().getSpecialityRefferenceList().setModel(model2);
         for(String s:specialityRefferenceList){
                  model2.addElement(s);
                 }          
@@ -1207,10 +1211,25 @@ private void addNewReference(){
     
 }
 private void deleteReference(){
+    if(getView().getComplaintReferencejScrollPanel().isShowing()){
+        String selected = getView().getComplaintReferenceList().getSelectedValue();
+    }
+    else if(getView().getSpecialityReferenceJScrollPanel().isShowing()){
+                String selected = getView().getSpecialityRefferenceList().getSelectedValue();
+
+    }
     
     
 }
 private void editReference(){
+     if(getView().getComplaintReferencejScrollPanel().isShowing()){
+        String selected = getView().getComplaintReferenceList().getSelectedValue();
+    }
+    else if(getView().getSpecialityReferenceJScrollPanel().isShowing()){
+                String selected = getView().getSpecialityRefferenceList().getSelectedValue();
+
+    }
+    
     
 }
 
