@@ -5,30 +5,34 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.Complaint;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author sajath
  */
 public class UpdateComplaintActionTaken extends javax.swing.JFrame {
-    private Dashboard  dashboard;
     private Complaint complaint;
     /**
      * Creates new form UpdateComplaintActionTaken
      */
-    public UpdateComplaintActionTaken(Dashboard dash) {
+    public UpdateComplaintActionTaken(Complaint complaint) {
         initComponents();
-         setDashboard(dash);
+        setComplaint(complaint);
     }
-
     private UpdateComplaintActionTaken() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-      public void setDashboard(Dashboard dash){
-        this.dashboard=dash;
+    public void setComplaint(Complaint complaint){
+        this.complaint=complaint;
     }
-     public Dashboard getDashboard(){
-        return dashboard;
+    public Complaint getComplaint(){
+        return this.complaint;
     }
+    public JTextArea getActionTakenField(){
+        return actionTakenField;
+    }
+     
      
 
     /**
@@ -139,8 +143,8 @@ public class UpdateComplaintActionTaken extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-        String action=actionTakenField.getText();
-        getDashboard().editApproveAction(action);
+        String action=getActionTakenField().getText();
+        getComplaint().setStrActionTaken(action);
         this.dispose();
     }//GEN-LAST:event_updateBtnActionPerformed
 

@@ -5,18 +5,30 @@
  */
 package hospital.managment.system;
 
+import com.toedter.calendar.JDateChooser;
+import hospital.managment.system.models.ComplainRefference;
+import hospital.managment.system.models.Complaint;
+import hospital.managment.system.models.CurrentUser;
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.PipeService;
 import java.awt.Color;
 import java.io.File;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Sangeerthana
  */
 public class AddComplaint extends javax.swing.JFrame {
+    private ComplaintController controller;
     private JFileChooser openFileChooser;
+    private Complaint complaint;
     private File attachment;
     private String userRole;
     private Dashboard dashboard;
@@ -24,41 +36,143 @@ public class AddComplaint extends javax.swing.JFrame {
     /**
      * Creates new form addComplaint
      */
-    public AddComplaint(String role,Dashboard dash) {
+    private AddComplaint() {
+    }
+    public AddComplaint(String role,Dashboard dash,Complaint complain,int type) {
         initComponents();
         setDashboard(dash);
         this.setVisible(true);
         setUserRole(role);
-        setComplainTypeComboBox();
-        setFileChooser();
-        setData();
-        Date date = new Date();
-        complainDate.setDate(date);
+        setComplaint(complain);
+        setController(new ComplaintController( getComplaint(),this));
+        getController().initController();
+        getAddComplaintBtn().addActionListener(getController());
+        
+        if(type==1){
+        getAddComplaintBtn().setText("Add");
+        getComplainDateChooser().setDate(new Date());
+        }
+        else if(type==2){
+            getAddComplaintBtn().setText("Save");
+            setEditData();
+        }
+        
+        
+        
+        
+        //setComplainTypeComboBox();
+       // setFileChooser();
+        //setData();
+        
         
     }
     
      public void setDashboard(Dashboard dash){
         this.dashboard=dash;
     }
-     public void setAttachment(File file){
+    public void setComplaint(Complaint com){
+        this.complaint=com;
+        
+    }
+    public void setController(ComplaintController controller){
+        this.controller=controller;
+    }
+    public void setAttachment(File file){
          this.attachment=file;
-     }
-     public Dashboard getDashboard(){
+    }
+     private void setUserRole(String role){
+        this.userRole=role;
+    }
+    public void setFileChooser(){
+        this.openFileChooser =new JFileChooser();
+        
+    }
+    public void setEditData(){
+        setComplainByTextField(getComplaint().getStrComplaintBy());
+        setComplainTypeComboBox(getComplaint().getStrType());
+        setPhoneNumberTextField(getComplaint().getPhoneNumber());
+        setDescriptionTextField(getComplaint().getStrDescription());
+        setComplainDateChooser(getComplaint().getStrDate());
+        setComplainActionTaken(getComplaint().getStrActionTaken());
+        setComplainNoteField(getComplaint().getStrNote());
+        setAttachment(getComplaint().getAttachment());
+        getFileLabel().setText(getComplaint().getAttachment().getName());
+        
+    }
+    public void setComplainByTextField(String name){
+        getComplainByTextField().setText(name);
+    }
+    public void setComplainTypeComboBox(String type){
+         this.getComplainTypeComboBox().setSelectedItem(type);
+    }
+    public void setPhoneNumberTextField(String number){
+         this.getPhoneNumberTextField().setText(number);
+    }
+    public void setDescriptionTextField(String description){
+         this.getDescriptionTextField().setText(description);
+    }
+    public void setComplainDateChooser(String date){
+         this.getComplainDateChooser().setDate(PipeService.getStringToDateFormat(date));
+    }
+    public void setComplainActionTaken(String action){
+         this.getComplainActionTaken().setText(action);
+    }
+    public void setComplainNoteField(String note){
+         this.getComplainNoteField().setText(note);
+    }
+     
+     //gettrrs
+    public Dashboard getDashboard(){
         return dashboard;
+    }
+    public  ComplaintController getController(){
+        return controller;
+    }
+    public Complaint getComplaint(){
+         return this.complaint;
     }
     public File getAttachment(){
         return this.attachment;
     }
-
-    private AddComplaint() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    private void setUserRole(String role){
-        this.userRole=role;
-    }
-    private String getUserRole(){
+   
+    public String getUserRole(){
         return this.userRole;
     }
+    public JTextField getComplainByTextField(){
+        return this.complainByText;
+    }
+    public JComboBox<String> getComplainTypeComboBox(){
+        return this.complainTypeComboBox;
+    }
+    public JTextField getPhoneNumberTextField(){
+        return this.phoneNumber;
+    }
+    public JTextField getDescriptionTextField(){
+        return this.descriptionField;
+    }
+    public JDateChooser getComplainDateChooser(){
+        return this.complainDate;
+    }
+    public JTextField getComplainActionTaken(){
+        return this.actionTakenField;
+    }
+    public JTextField getComplainNoteField(){
+        return this.noteField;
+    }
+    public JButton getAddComplaintBtn(){
+        return this.addComplaintBtn;
+    }
+    public JButton getOpenFileChooserBtn(){
+        return this.openFileChooserBtn;
+    }
+    public JLabel getFileLabel(){
+        return this.fileNameLabel;
+    }
+    public JFileChooser getFileChooser(){
+        return this.openFileChooser;
+    }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,9 +204,9 @@ public class AddComplaint extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         actionTakenField = new javax.swing.JTextField();
         noteField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        addComplaintBtn = new javax.swing.JButton();
         complainDate = new com.toedter.calendar.JDateChooser();
-        openFIleBtn = new javax.swing.JButton();
+        openFileChooserBtn = new javax.swing.JButton();
         fileNameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -237,25 +351,25 @@ public class AddComplaint extends javax.swing.JFrame {
         jPanel1.add(actionTakenField, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 200, 80));
         jPanel1.add(noteField, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 200, 80));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(85, 65, 118));
-        jButton2.setText("Add");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addComplaintBtn.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        addComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addComplaintBtn.setText("Add");
+        addComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addComplaintBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, -1, 40));
+        jPanel1.add(addComplaintBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, -1, 40));
         jPanel1.add(complainDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 190, 30));
 
-        openFIleBtn.setText("open File");
-        openFIleBtn.addActionListener(new java.awt.event.ActionListener() {
+        openFileChooserBtn.setText("open File");
+        openFileChooserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openFIleBtnActionPerformed(evt);
+                openFileChooserBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(openFIleBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, -1, -1));
+        jPanel1.add(openFileChooserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, -1, -1));
         jPanel1.add(fileNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 200, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,23 +387,20 @@ public class AddComplaint extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setFileChooser(){
-        openFileChooser =new JFileChooser();
-        
-    }
-    private void setData(){
-        if(this.getUserRole().equals("Patient")){
-            complainByText.setText("user");
-             actionTakenField.setEditable(false);
+    
+   /* private void setData(){
+        if(this.getUserRole().equalsIgnoreCase("Patient")){
+            getComplainByTextField().setText(CurrentUser.getUser().getName());
+             getComplainActionTaken().setEditable(false);
 
         }
     }
       private void setComplainTypeComboBox(){
         ComplainRefference refference = new ComplainRefference();
         DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getComplainTypes().toArray());
-         complainTypeComboBox.setModel( newModel );
+         getComplainTypeComboBox().setModel( newModel );
         
-    }
+    }*/
     
     private void descriptionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionFieldActionPerformed
         // TODO add your handling code here:
@@ -299,53 +410,49 @@ public class AddComplaint extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneNumberActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComplaintBtnActionPerformed
         // TODO add your handling code here:
-        String complainType=complainTypeComboBox.getSelectedItem().toString();
-        String complainBy=complainByText.getText();
-        String mobile=phoneNumber.getText();
-        String description=descriptionField.getText();
-         String date=PipeService.getDateSimpleFormat(complainDate.getDate());  
-         String actionTaken=actionTakenField.getText();
-         String note=noteField.getText();
+       /* String complainType=getComplainTypeComboBox().getSelectedItem().toString();
+        String complainBy=getComplainByTextField().getText();
+        String mobile=getPhoneNumberTextField().getText();
+        String description=getDescriptionTextField().getText();
+         String date=PipeService.getDateSimpleFormat(getComplainDateChooser().getDate());  
+         String actionTaken=getComplainActionTaken().getText();
+         String note=getComplainNoteField().getText();
          File file=getAttachment();
          
          //validate needed
          Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
          FileService.addLine(FileService.getComplaintsFilePath(),complain.toString());
           this.dashboard.setTables();
-           this.dispose();
+           this.dispose();*/
           
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addComplaintBtnActionPerformed
 
-    private void openFIleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFIleBtnActionPerformed
+    private void openFileChooserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileChooserBtnActionPerformed
         // TODO add your handling code here:
-            int returnValue =openFileChooser.showOpenDialog(this);
+          /*  int returnValue =getFileChooser().showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
-                 setAttachment(openFileChooser.getSelectedFile());
-                fileNameLabel.setText(getAttachment().getName());
+                 setAttachment(getFileChooser().getSelectedFile());
+                getFileLabel().setText(getAttachment().getName());
             }
             else{
                 setAttachment(null);
                  
-                 fileNameLabel.setText("no file choosen");
-            }
-    }//GEN-LAST:event_openFIleBtnActionPerformed
+                 getFileLabel().setText("no file choosen");
+            }*/
+    }//GEN-LAST:event_openFileChooserBtnActionPerformed
 
     private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
-        jPanel8.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_jPanel8MouseEntered
 
     private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
-       jPanel8.setBackground(new Color(85,65,118));
     }//GEN-LAST:event_jPanel8MouseExited
 
     private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-       jPanel7.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_jPanel7MouseEntered
 
     private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
-       jPanel7.setBackground(new Color(85,65,118));
     }//GEN-LAST:event_jPanel7MouseExited
 
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
@@ -390,12 +497,12 @@ public class AddComplaint extends javax.swing.JFrame {
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actionTakenField;
+    private javax.swing.JButton addComplaintBtn;
     private javax.swing.JTextField complainByText;
     private com.toedter.calendar.JDateChooser complainDate;
     private javax.swing.JComboBox<String> complainTypeComboBox;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileNameLabel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -412,7 +519,7 @@ public class AddComplaint extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField noteField;
-    private javax.swing.JButton openFIleBtn;
+    private javax.swing.JButton openFileChooserBtn;
     private javax.swing.JTextField phoneNumber;
     // End of variables declaration//GEN-END:variables
 }

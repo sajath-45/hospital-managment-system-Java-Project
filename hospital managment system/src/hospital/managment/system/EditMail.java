@@ -5,11 +5,11 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.DispatchedPostal;
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.PipeService;
 import java.io.File;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -34,11 +34,9 @@ public class EditMail extends javax.swing.JFrame {
         this.setVisible(true);
         setDispatchedPostal(mail);
         setDashboard(dash);
-         try {
+       
              setEditData();
-         } catch (ParseException ex) {
-             Logger.getLogger(EditMail.class.getName()).log(Level.SEVERE, null, ex);
-         }
+         
 
     }
 
@@ -72,14 +70,13 @@ public class EditMail extends javax.swing.JFrame {
     }
     
     
-    private void setEditData() throws ParseException{
+    private void setEditData(){
         
         refferenceNoField.setText(getDispatchedPostal().getReferenceNo());
         noteField.setText(getDispatchedPostal().getStrNote());
         toNameField.setText(getDispatchedPostal().getStrToName());
         toAddressField.setText(getDispatchedPostal().getStrToAddress());
-        java.util.Date date=new SimpleDateFormat("dd/MM/yyyy").parse(getDispatchedPostal().getStrDate());
-        mailDate.setDate(date);
+        mailDate.setDate(PipeService.getStringToDateFormat(getDispatchedPostal().getStrDate()));
         setAttachment(getDispatchedPostal().getAttachment());
         if(getAttachment() == null){
         attachmentName.setText("no file choosen");
@@ -107,7 +104,6 @@ public class EditMail extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -214,18 +210,12 @@ public class EditMail extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Edit Mail");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(204, 0, 0));
-        jButton3.setText("Back");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
+                .addContainerGap(413, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(216, 216, 216)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,9 +224,7 @@ public class EditMail extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -349,7 +337,7 @@ public class EditMail extends javax.swing.JFrame {
         DispatchedPostal mail=new DispatchedPostal(getDispatchedPostal().getReferenceNo(),note,date,file,name,address);
         FileService.addLine(FileService.getMailsFilePath(),mail.toString());
         }
-        this.dashboard.setTables();
+        //this.dashboard.setTables();
         this.dispose();
 
     }//GEN-LAST:event_sendMailBtnActionPerformed
@@ -405,7 +393,6 @@ public class EditMail extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addFileBtn;
     private javax.swing.JLabel attachmentName;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
