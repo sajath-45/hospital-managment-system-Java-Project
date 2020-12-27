@@ -12,7 +12,6 @@ import hospital.managment.system.models.Appointment;
 import hospital.managment.system.models.PipeService;
 import com.toedter.calendar.JDateChooser;
 import hospital.managment.system.models.SpecialityRefference;
-import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;

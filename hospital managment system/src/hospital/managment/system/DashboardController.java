@@ -12,17 +12,22 @@ import hospital.managment.system.models.MedicalOfficer;
 import hospital.managment.system.models.Patient;
 import hospital.managment.system.models.Appointment;
 import hospital.managment.system.models.ComplainRefference;
+import hospital.managment.system.models.CurrentUser;
 import hospital.managment.system.models.PipeService;
 import hospital.managment.system.models.Receptionist;
 import hospital.managment.system.models.SpecialityRefference;
+import hospital.managment.system.models.User;
 import hospital.managment.system.models.UserLogin;
 import hospital.managment.system.models.Visitor;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -62,6 +67,16 @@ public void initController(String role){
     setTables();
     setSideBarPanels();
     setHome();
+    
+    //user
+    getView().getAddUsersBtn().addActionListener(e->addUser());
+    getView().getAddUsersBtn2().addActionListener(e->addUser());
+    getView().getEditUsersBtn().addActionListener(e->editUser());
+    getView().getEditUsersBtn2().addActionListener(e->editUser());
+    getView().getDeleteUsersBtn().addActionListener(e->deleteUser());
+    getView().getDeleteUsersBtn2().addActionListener(e->deleteUser());
+    getView().getResetPasswordBtn().addActionListener(e->resetPassword());
+    getView().getResetPasswordBtn2().addActionListener(e->resetPassword());
     //appoinments
     getView().getAddAppointmentBtn().addActionListener(e -> addNewAppointment());
     getView().getAddAppointmentBtn2().addActionListener(e -> addNewAppointment());
@@ -81,16 +96,26 @@ public void initController(String role){
     getView().getEditMailBtn().addActionListener(e -> editMail());
     getView().getDeleteMailBtn().addActionListener(e -> deleteMail());
     getView().getDeleteMailBtn2().addActionListener(e -> deleteMail());
-    
     //visitors
     getView().getAddVisitorBtn().addActionListener(e -> addNewVisitorRecord());
     getView().getEditVisitorBtn().addActionListener(e -> editVisitorRecord());
     getView().getDeleteVisitorBtn().addActionListener(e -> deleteVisitorRecord());
     getView().getDeleteVisitorBtn2().addActionListener(e -> deleteVisitorRecord());
-    //refference
+    //refference btns
     getView().getAddReferenceBtn().addActionListener(e->addNewReference());
     getView().getEditReferenceBtn().addActionListener(e->editReference());
     getView().getdeleteReferenceBtn().addActionListener(e->deleteReference());
+    //report btns
+    getView().getGenerateAppointmentReportPdfBtn().addActionListener(e->generateAppointmentsPdf());
+    getView().getGeneratePatientCredintialPdfBtn().addActionListener(e->generatePatientCredintialReportPdf());
+    getView().getGenerateUserLogReportPdfBtn().addActionListener(e->generateUserLoginReportPdf());
+    getView().getGenerateAppointmentReportCsvBtn().addActionListener(e->generateAppointmentsReportCsv());
+    getView().getGeneratePatientCredintialCsvBtn().addActionListener(e->generatePatientCredintialReportCsv());
+    getView().getGenerateUserLogReportCsvBtn().addActionListener(e->generateUserLoginReportCsv());
+    //settings btne
+    getView().getSaveUserBtn().addActionListener(e->saveUser());
+    
+    
 }
  
  public void initTables(){
@@ -189,13 +214,20 @@ public void setSideBarPanels(){
         getView().getMailBtnPanel1().addMouseListener(sideBarPanelListener);
         getView().getComplaintBtnPanel3().addMouseListener(sideBarPanelListener);
         getView().getVisitorBtnPanel1().addMouseListener(sideBarPanelListener);
-        getView().getAdminSettingBtnPanel().addMouseListener(sideBarPanelListener);
         getView().getRefferenceBtnPanel().addMouseListener(sideBarPanelListener);
+        getView().getLogOutBtnPanel1().addMouseListener(sideBarPanelListener);
+        getView().getLogOutBtnPanel2().addMouseListener(sideBarPanelListener);
+        getView().getLogOutBtnPanel3().addMouseListener(sideBarPanelListener);
+        getView().getLogOutBtnPanel4().addMouseListener(sideBarPanelListener);
         getView().getappointmentReportOptionPanel().addMouseListener(reportsOptionsListener);
         getView(). getUserLogReportOptionPanel().addMouseListener(reportsOptionsListener);
         getView().getPatientCredentialReportOptionPanel().addMouseListener(reportsOptionsListener);
         getView().getComplainReferenceOptionPanel().addMouseListener(referenceOptionsListener);
         getView().getSpecialityReferenceOptionPanel().addMouseListener(referenceOptionsListener);
+         getView().getJPanel7().addMouseListener(userOptionsListener);
+         getView().getJPanel9().addMouseListener(userOptionsListener);
+        getView().getJPanel35().addMouseListener(userOptionsListener);
+
         
         getView().getHomeBtnPanel1().setName("homeBtn");
         getView().getHomeBtnPanel2().setName("homeBtn");
@@ -218,23 +250,29 @@ public void setSideBarPanels(){
         getView().getVisitorBtnPanel2().setName("visitorBtn");
         getView().getVisitorBtnPanel1().setName("visitorBtn");
         
-        getView().getAdminSettingBtnPanel().setName("settingBtn");
         getView().getReceptionistSettingBtnPanel().setName("settingBtn");
         getView().getMoSettingBtnPanel().setName("settingBtn");
         getView().getPatientSettingBtnPanel().setName("settingBtn");
-        
         getView().getUserBtnPanel().setName("userBtn");
         getView().getUserBtnPanel2().setName("userBtn");
-        
         getView().getReportBtnPanel().setName("reportBtn");
-        
         getView().getRefferenceBtnPanel().setName("refferenceBtn");
+        getView().getLogOutBtnPanel2().setName("logOut");
+        getView().getLogOutBtnPanel1().setName("logOut");
+        getView().getLogOutBtnPanel3().setName("logOut");
+        getView().getLogOutBtnPanel4().setName("logOut");
+        
         getView().getappointmentReportOptionPanel().setName("appointmentReport");
         getView(). getUserLogReportOptionPanel().setName("userLogReport");
         getView().getPatientCredentialReportOptionPanel().setName("patientCredentialReport");
         
         getView().getComplainReferenceOptionPanel().setName("ComplainReferenceOption");
         getView().getSpecialityReferenceOptionPanel().setName("SpecialityReferenceOption");
+        
+        getView().getJPanel9().setName("moOption");
+         getView().getJPanel7().setName("receptionistOption");
+        getView().getJPanel35().setName("patientOption");
+        
         
                   
         
@@ -245,7 +283,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         //
                      
                         System.out.println(((JPanel)e.getSource()).getName());
-                     if( ((JPanel)e.getSource()).getName().equals("complaintBtn")){
+                     if( ((JPanel)e.getSource()).getName().equalsIgnoreCase("complaintBtn")){
                         setColor(getView().getComplaintBtnPanel1());
                         setColor(getView().getComplaintBtnPanel2());
                         setColor(getView().getComplaintBtnPanel3());
@@ -269,7 +307,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
 
                          
                      }
-                     else if(((JPanel)e.getSource()).getName().equals("appointmentBtnPanel")){
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("appointmentBtnPanel")){
                         setColor(getView().getAppointmentBtnPanel1());
                         setColor(getView().getAppointmentBtnPanel2());
                         setColor(getView().getAppointmentBtnPanel3());
@@ -297,7 +335,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
 
                          
                      }
-                     else if(((JPanel)e.getSource()).getName().equals("mailBtn")){
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("mailBtn")){
                         setColor(getView().getMailBtnPanel1());
                         setColor(getView().getMailBtnPanel2());
                         setTables();
@@ -321,7 +359,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                          
                          
                      }
-                     else if(((JPanel)e.getSource()).getName().equals("userBtn")){
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("userBtn")){
                         setColor(getView().getUserBtnPanel());
                         setColor(getView().getUserBtnPanel2());
                         setTables();
@@ -345,10 +383,9 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("settingBtn")){
-                        setColor(getView().getAdminSettingBtnPanel());
                         setColor(getView().getReceptionistSettingBtnPanel());
                         setColor(getView().getMoSettingBtnPanel());
-                        setTables();
+                        loadUserDetails();
                         setColor(getView().getPatientSettingBtnPanel());
                         getView().getHomePanel().setVisible(false);
                         getView().getUsersPanel().setVisible(false);
@@ -359,7 +396,6 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         getView().getReportsPanel().setVisible(false);
                         getView().getVisitorsPanel().setVisible(false);
                         getView().getSettingsPanel().setVisible(true);
-                        //loadUserDetails();
                         getView().getComplaintsMainOptionPanel().setVisible(false);
                         getView().getVisitorsMainOptionPanel().setVisible(false);
                         getView().getAppoinmentsMainOptionsPanel().setVisible(false);
@@ -368,7 +404,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         getView().getRefferenceOptionsMainPanel().setVisible(false);
                           
                      }
-                     else if(((JPanel)e.getSource()).getName().equals("visitorBtn")){
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("visitorBtn")){
                         setTables();
                         setColor(getView().getVisitorBtnPanel1());
                         setColor(getView().getVisitorBtnPanel2());        
@@ -389,7 +425,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         getView().getRefferenceOptionsMainPanel().setVisible(false);
                         setVisitorOptions();
                      }
-                      else if(((JPanel)e.getSource()).getName().equals("refferenceBtn")){
+                      else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("refferenceBtn")){
                         setColor(getView().getRefferenceBtnPanel());    
                         setTables();
                         setComplainRefference();
@@ -410,9 +446,10 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         getView().getRefferenceOptionsMainPanel().setVisible(true);
                         setRefferenceOption();
                      }
-                      else if(((JPanel)e.getSource()).getName().equals("reportBtn")){
+                      else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("reportBtn")){
                        setAppoinmentReports();
                         setTables();
+                        setColor(getView().getReportBtnPanel());
                         getView().getHomePanel().setVisible(false);
                         getView().getVisitorsPanel().setVisible(false);
                         getView().getUsersPanel().setVisible(false);
@@ -431,7 +468,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                         setMoComboBox();
                         setReportOptions();
                      }
-                     else if(((JPanel)e.getSource()).getName().equals("homeBtn")){
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("homeBtn")){
                         setColor(getView().getHomeBtnPanel1());
                         setColor(getView().getHomeBtnPanel2());
                         setColor(getView().getHomeBtnPanel3());
@@ -456,6 +493,9 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                          
                      }
                      
+                     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("logOut")){
+                         userLogOut();
+                     }
                      
                      
                     }
@@ -482,6 +522,22 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
      else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("SpecialityReferenceOption")){
          setSpecialityRefference();
      }
+    
+ }
+     
+ };
+  MouseListener userOptionsListener =new MouseAdapter(){
+     public void mouseClicked(MouseEvent e) { 
+     if( ((JPanel)e.getSource()).getName().equalsIgnoreCase("moOption")){
+         setOptionMo();
+       }
+     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("receptionistOption")){
+         setOptionReceptionist();
+     }
+     else if(((JPanel)e.getSource()).getName().equalsIgnoreCase("patientOption")){
+         setOptionPatient();
+     }
+      
     
  }
      
@@ -693,7 +749,6 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         getView().getMailBtnPanel1().setBackground(new Color(64,43,100));
         getView().getComplaintBtnPanel1().setBackground(new Color(64,43,100));
         getView().getVisitorBtnPanel1().setBackground(new Color(64,43,100));
-        getView().getAdminSettingBtnPanel().setBackground(new Color(64,43,100));
         getView().getRefferenceBtnPanel().setBackground(new Color(64,43,100));
     }
      void resetColor(JPanel panel){
@@ -893,12 +948,11 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void getAllAppointment(){
+    private void  getAllAppointment(){
         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
-       System.out.println("all appointments"); 
              for(int i=0;i<list.size();i++)  
            {  
             
@@ -1077,7 +1131,7 @@ public void approveAppointment(String status){
                      appointmentView.getController().addAppoinment();
                     }              
      }
-     //complaint
+//complaint
 
 private void addNewComplaint(){
         AddComplaint complaintView = new AddComplaint(getView().getUserRole(),getView(),new Complaint(),1);
@@ -1125,7 +1179,7 @@ private void editMail(){
          
      }
      
-     //visitor function
+//visitor function
 private void addNewVisitorRecord(){
         AddVisitors record = new AddVisitors(getView(),null,1);
         record.setVisible(true);
@@ -1160,11 +1214,175 @@ private void editReference(){
     
 }
 
-//reports
+//reports functions
 
+private void generateAppointmentsPdf(){
+    FileService.generatePdf(getView().getAppointmentReportTable().getModel(),FileService.getAppoinmentReportFilePath());
+}
+private void generatePatientCredintialReportPdf(){
+    FileService.generatePdf(getView().getPatientCredintialTable().getModel(),FileService.getPatientCredintailReportFilePath());
+}
+private void generateUserLoginReportPdf(){
+    FileService.generatePdf(getView().getUserLogReportTable().getModel(),FileService.getUserLoginReportFilePath());
+}
+private void generateAppointmentsReportCsv(){
+ try {
+            FileService.generateCsvFile(getView().getAppointmentReportTable().getModel(),"files/report/appointmentReport.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+private void generatePatientCredintialReportCsv(){
+try {
+            FileService.generateCsvFile(getView().getUserLogReportTable().getModel(),"files/report/userLogReport.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+private void generateUserLoginReportCsv(){
+ try {
+            FileService.generateCsvFile(getView().getPatientCredintialTable().getModel(),"files/reports/patientCredintial.csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+//settings panel functions
+ public void loadUserDetails(){
+       User user=CurrentUser.getUser();
+       System.out.println("user "+user.toString2());
+       getView().getUserNameField().setText(user.getUserName());
+       getView().getPasswordField().setText(user.getPassword());
+        getView().getPhoneNumberField().setText(user.getphoneNumber());
+        getView().getNameField().setText(user.getName());
+        getView().getNicField().setText(user.getIdCardNo());
+        getView().getGenderComboBox().setSelectedItem(user.getGender());
+        getView().getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
+        getView().getAddressField().setText(user.getAddress());
+        Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
+         getView().getDobDateChooser().setDate(dob);
+     }
+ public  void saveUser(){
+         String role=CurrentUser.getUserRole();
+         String path=null;
+          if(role.equalsIgnoreCase("Patient")){
+              path=FileService.getPatientsFilePath();
+             
+         }
+         else if(role.equalsIgnoreCase("MedicalOfficer")){
+               path=FileService.getMoFilePath();
+         }
+         else if(role.equalsIgnoreCase("Receptionist")){
+               path=FileService.getReceptionistFilePath();
+         }
+        
+         FileService.deleteRecord(path, CurrentUser.getUser().toString2());
+         
+         
+        CurrentUser.getUser().setIdCardNo( getView().getNicField().getText());
+        CurrentUser.getUser().setGender( getView().getGenderComboBox().getSelectedItem().toString());
+        CurrentUser.getUser().setName( getView().getNameField().getText());
+        CurrentUser.getUser().setUserName( getView().getUserNameField().getText());
+        CurrentUser.getUser().setMaritalStatus( getView().getMartialStatusComboBoxField().getSelectedItem().toString());
+        CurrentUser.getUser().setAddress( getView().getAddressField().getText());
+        CurrentUser.getUser().setStrPassword( getView().getPasswordField().getText());
+        CurrentUser.getUser().setphoneNumber( getView().getPhoneNumberField().getText());
+        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat( getView().getDobDateChooser().getDate()));
+         
+         FileService.addLine(path,  CurrentUser.getUser().toString2());
+     }
 
+ //user functions
+ private void addUser(){
+      if(getView().getMoScrollPanel().isShowing()){
+          AddMedicalOfficer newOfficer=new  AddMedicalOfficer(null,1);  
+          newOfficer.setVisible(true);
+        }
+        else if(getView().getPatientScrollPanel().isShowing()){
+                     AddPatient newPatient=new  AddPatient(null,1); 
+                     newPatient.setVisible(true);
+        }
+        else if(getView().getReceptionistScrollPanel().isShowing()){
+                   AddReceptionist newReceptionist=new  AddReceptionist(null,1);
+                   newReceptionist.setVisible(true);
+        }
+     
+ }
+ private void editUser(){
+      if(getView().getMoScrollPanel().isShowing()){
+          Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
+                   String line= PipeService.formatTableString(record.toString());
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    editOfficer.setVisible(true);
+        }
+        else if(getView().getPatientScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    editPatient.setVisible(true);
+        }
+        else if(getView().getReceptionistScrollPanel().isShowing()){
+            Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    editReceptionist.setVisible(true);
+                   
+        }
+     
+     
+ }
+ private void deleteUser(){
+     if(getView().getMoScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    editOfficer.getController().deleteMedicalOfficer();
+        }
+        else if(getView().getPatientScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    editPatient.getController().deletePatient();
+        }
+        else if(getView().getReceptionistScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    editReceptionist.getController().deleteReceptionist();
+                   
+        }
+     
+ } 
+ private void resetPassword(){
+     if(getView().getMoScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    editOfficer.getController().resetMedicalOfficerPassword();
+        }
+        else if(getView().getPatientScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    editPatient.getController().resetMedicalOfficerPassword();
+        }
+        else if(getView().getReceptionistScrollPanel().isShowing()){
+                    Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
+                    String line= PipeService.formatTableString(record.toString());
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    editReceptionist.getController().resetReceptionistPassword();
+                   
+        }
+     
+ } 
+ 
+ 
+ 
 
-
+  private void userLogOut(){
+        getView().dispose();
+        Home home=new Home();
+        home.setVisible(true);
+    }
     
 }
 

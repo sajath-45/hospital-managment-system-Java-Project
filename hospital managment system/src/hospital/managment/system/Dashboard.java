@@ -31,13 +31,13 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
@@ -100,14 +100,32 @@ public class Dashboard extends javax.swing.JFrame  {
     public JButton getAddUsersBtn(){//for patient
         return this.addUsersBtn;
     }
+     public JButton getAddUsersBtn2(){//for patient
+        return this.addUsersBtn2;
+    }
     public JButton getViewUsersBtn(){//for patient
-        return this.viewUsersBtn;
+        return this.resetPasswordBtn;
+    }
+     public JButton getViewUsersBtn2(){//for patient
+        return this.resetPasswordBtn2;
     }
      public JButton getEditUsersBtn(){//for patient
         return this.editUsersBtn;
     }
+      public JButton getEditUsersBtn2(){//for patient
+        return this.editUsersBtn2;
+    }
      public JButton getDeleteUsersBtn(){//for patient
         return this.deleteUsersBtn;
+    }
+     public JButton getDeleteUsersBtn2(){//for patient
+        return this.deleteUsersBtn2;
+    }
+    public JButton getResetPasswordBtn(){
+        return resetPasswordBtn;
+    }
+    public JButton getResetPasswordBtn2(){
+        return resetPasswordBtn2;
     }
      
      
@@ -314,9 +332,22 @@ public class Dashboard extends javax.swing.JFrame  {
     public JPanel getUserBtnPanel2(){
         return this.userBtnPanel2;
     }
-    public JPanel getAdminSettingBtnPanel(){
-        return this.adminSettingBtnPanel;
+    
+    
+    public JPanel getLogOutBtnPanel1(){
+        return this.logOutBtnPanel1;
     }
+    public JPanel getLogOutBtnPanel2(){
+        return this.logOutBtnPanel2;
+    }
+    public JPanel getLogOutBtnPanel3(){
+        return this.logOutBtnPanel3;
+    }
+    public JPanel getLogOutBtnPanel4(){
+        return this.logOutBtnPanel4;
+    }
+    
+    
     public JPanel getMoSettingBtnPanel(){
         return this.moSettingBtnPanel;
     }
@@ -505,7 +536,39 @@ public class Dashboard extends javax.swing.JFrame  {
         return this.complainReferenceOptionPanel;}
     public JPanel getSpecialityReferenceOptionPanel(){
         return this.specialityReferenceOptionPanel;}
+    //settings panel
+    public JTextField getUserNameField(){
+         return this.userNameField;
+     }
+    public JTextField getNicField(){
+         return this.nicField;
+     }
+    public JTextField getPasswordField(){
+         return this.Passwordfield;
+     }
+    public JTextArea getAddressField(){
+         return this.addressField;
+     }
+     public JTextField getPhoneNumberField(){
+         return this.PhoneNofield;
+     }
+    public JComboBox<String> getGenderComboBox(){
+         return this.genderComboBox1;
+     }
+    public JComboBox<String> getMartialStatusComboBoxField(){
+         return this.martialStatusComboBox2;
+     }
+    public JDateChooser getDobDateChooser(){
+         return this.jDateChooser1;
+     }
+    public JTextField getNameField(){
+        return this.nameField;
+    }
+    public JButton getSaveUserBtn(){
+        return saveUserBtn;
+    }
     
+   
      
      
      
@@ -839,26 +902,26 @@ public class Dashboard extends javax.swing.JFrame  {
     
     */
    
-     public void loadUserDetails(){
+    /* public void loadUserDetails(){
        
        User user=CurrentUser.getUser();
        System.out.println("user "+user.toString2());
-       userNameField.setText(user.getUserName());
-       Passwordfield.setText(user.getPassword());
-        PhoneNofield.setText(user.getphoneNumber());
-        nameField.setText(user.getName());
-        nicField.setText(user.getIdCardNo());
-        genderComboBox1.setSelectedItem(user.getGender());
-        martialStatusComboBox2.setSelectedItem(user.getMaritalStatus());
-        addressField.setText(user.getAddress());
+       getUserNameField().setText(user.getUserName());
+       getPasswordField().setText(user.getPassword());
+        getPhoneNumberField().setText(user.getphoneNumber());
+        getNameField().setText(user.getName());
+        getNicField().setText(user.getIdCardNo());
+        getGenderComboBox().setSelectedItem(user.getGender());
+        getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
+        getAddressField().setText(user.getAddress());
         Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
-         jDateChooser1.setDate(dob);
+         getDobDateChooser().setDate(dob);
         
          
          
 
-     }
-     public  void saveUser(){
+     }*/
+   /*  public  void saveUser(){
          String role=CurrentUser.getUserRole();
          String path=null;
           if(role.equalsIgnoreCase("Patient")){
@@ -875,18 +938,18 @@ public class Dashboard extends javax.swing.JFrame  {
          FileService.deleteRecord(path, CurrentUser.getUser().toString2());
          
          
-        CurrentUser.getUser().setIdCardNo(nicField.getText());
-        CurrentUser.getUser().setGender(genderComboBox1.getSelectedItem().toString());
-        CurrentUser.getUser().setName(nameField.getText());
-        CurrentUser.getUser().setUserName(userNameField.getText());
-        CurrentUser.getUser().setMaritalStatus(martialStatusComboBox2.getSelectedItem().toString());
-        CurrentUser.getUser().setAddress(addressField.getText());
-        CurrentUser.getUser().setStrPassword(Passwordfield.getText());
-        CurrentUser.getUser().setphoneNumber(PhoneNofield.getText());
-        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat(jDateChooser1.getDate()));
+        CurrentUser.getUser().setIdCardNo(getNicField().getText());
+        CurrentUser.getUser().setGender(getGenderComboBox().getSelectedItem().toString());
+        CurrentUser.getUser().setName(getNameField().getText());
+        CurrentUser.getUser().setUserName(getUserNameField().getText());
+        CurrentUser.getUser().setMaritalStatus(getMartialStatusComboBoxField().getSelectedItem().toString());
+        CurrentUser.getUser().setAddress(getAddressField().getText());
+        CurrentUser.getUser().setStrPassword(getPasswordField().getText());
+        CurrentUser.getUser().setphoneNumber(getPhoneNumberField().getText());
+        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat(getDobDateChooser().getDate()));
          
          FileService.addLine(path,  CurrentUser.getUser().toString2());
-     }
+     }*/
      
 
     /**
@@ -935,8 +998,6 @@ public class Dashboard extends javax.swing.JFrame  {
         jLabel76 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userNameLabel = new javax.swing.JLabel();
-        adminSettingBtnPanel = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         patientSidePanel = new javax.swing.JPanel();
         profileImg1 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -949,7 +1010,7 @@ public class Dashboard extends javax.swing.JFrame  {
         homeBtnPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        patientSettingPanel1 = new javax.swing.JPanel();
+        logOutBtnPanel2 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -962,7 +1023,7 @@ public class Dashboard extends javax.swing.JFrame  {
         homeBtnPanel2 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        moLogOutjPanel37 = new javax.swing.JPanel();
+        logOutBtnPanel3 = new javax.swing.JPanel();
         jLabel71 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
         appointmentBtnPanel4 = new javax.swing.JPanel();
@@ -993,7 +1054,7 @@ public class Dashboard extends javax.swing.JFrame  {
         homeBtnPanel4 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        receptionistLogOutPanel = new javax.swing.JPanel();
+        logOutBtnPanel4 = new javax.swing.JPanel();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1066,7 +1127,7 @@ public class Dashboard extends javax.swing.JFrame  {
         martialStatusComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
         addressField = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        saveUserBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
@@ -1106,12 +1167,13 @@ public class Dashboard extends javax.swing.JFrame  {
         adminUserOptions = new javax.swing.JPanel();
         deleteUsersBtn = new javax.swing.JButton();
         editUsersBtn = new javax.swing.JButton();
-        viewUsersBtn = new javax.swing.JButton();
+        resetPasswordBtn = new javax.swing.JButton();
         addUsersBtn = new javax.swing.JButton();
         receptionistUserOptions = new javax.swing.JPanel();
         deleteUsersBtn2 = new javax.swing.JButton();
         editUsersBtn2 = new javax.swing.JButton();
         addUsersBtn2 = new javax.swing.JButton();
+        resetPasswordBtn2 = new javax.swing.JButton();
         mailMainOption = new javax.swing.JPanel();
         adminMailOptions = new javax.swing.JPanel();
         deleteMailBtn = new javax.swing.JButton();
@@ -1475,41 +1537,19 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jPanel8.add(logOutBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 250, 50));
 
-        adminSettingBtnPanel.setBackground(new java.awt.Color(54, 33, 89));
-        adminSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
-
-        javax.swing.GroupLayout adminSettingBtnPanelLayout = new javax.swing.GroupLayout(adminSettingBtnPanel);
-        adminSettingBtnPanel.setLayout(adminSettingBtnPanelLayout);
-        adminSettingBtnPanelLayout.setHorizontalGroup(
-            adminSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminSettingBtnPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        adminSettingBtnPanelLayout.setVerticalGroup(
-            adminSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout adminSidePanelLayout = new javax.swing.GroupLayout(adminSidePanel);
         adminSidePanel.setLayout(adminSidePanelLayout);
         adminSidePanelLayout.setHorizontalGroup(
             adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminSidePanelLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(adminSidePanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(adminSidePanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(profileImg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(adminSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(profileImg)))
+                .addGap(28, 28, 28))
             .addGroup(adminSidePanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(userNameLabel)
@@ -1519,11 +1559,7 @@ public class Dashboard extends javax.swing.JFrame  {
         adminSidePanelLayout.setVerticalGroup(
             adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminSidePanelLayout.createSequentialGroup()
-                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(adminSidePanelLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(adminSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(profileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(userNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1638,8 +1674,8 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jPanel15.add(homeBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        patientSettingPanel1.setBackground(new java.awt.Color(64, 43, 100));
-        patientSettingPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel69.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel69.setForeground(new java.awt.Color(255, 255, 255));
@@ -1647,28 +1683,28 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout patientSettingPanel1Layout = new javax.swing.GroupLayout(patientSettingPanel1);
-        patientSettingPanel1.setLayout(patientSettingPanel1Layout);
-        patientSettingPanel1Layout.setHorizontalGroup(
-            patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout logOutBtnPanel2Layout = new javax.swing.GroupLayout(logOutBtnPanel2);
+        logOutBtnPanel2.setLayout(logOutBtnPanel2Layout);
+        logOutBtnPanel2Layout.setHorizontalGroup(
+            logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel70)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
-        patientSettingPanel1Layout.setVerticalGroup(
-            patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanel1Layout.createSequentialGroup()
+        logOutBtnPanel2Layout.setVerticalGroup(
+            logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel15.add(patientSettingPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
+        jPanel15.add(logOutBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
 
         patientSettingBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
         patientSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1767,11 +1803,11 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jPanel22.add(homeBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        moLogOutjPanel37.setBackground(new java.awt.Color(64, 43, 100));
-        moLogOutjPanel37.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        moLogOutjPanel37.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutBtnPanel3.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                moLogOutjPanel37MousePressed(evt);
+                logOutBtnPanel3MousePressed(evt);
             }
         });
 
@@ -1781,27 +1817,27 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/LogOut32px.png"))); // NOI18N
 
-        javax.swing.GroupLayout moLogOutjPanel37Layout = new javax.swing.GroupLayout(moLogOutjPanel37);
-        moLogOutjPanel37.setLayout(moLogOutjPanel37Layout);
-        moLogOutjPanel37Layout.setHorizontalGroup(
-            moLogOutjPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(moLogOutjPanel37Layout.createSequentialGroup()
+        javax.swing.GroupLayout logOutBtnPanel3Layout = new javax.swing.GroupLayout(logOutBtnPanel3);
+        logOutBtnPanel3.setLayout(logOutBtnPanel3Layout);
+        logOutBtnPanel3Layout.setHorizontalGroup(
+            logOutBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel72)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel71)
                 .addContainerGap(107, Short.MAX_VALUE))
         );
-        moLogOutjPanel37Layout.setVerticalGroup(
-            moLogOutjPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, moLogOutjPanel37Layout.createSequentialGroup()
+        logOutBtnPanel3Layout.setVerticalGroup(
+            logOutBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logOutBtnPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel72)
                 .addContainerGap())
             .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel22.add(moLogOutjPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
+        jPanel22.add(logOutBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
 
         appointmentBtnPanel4.setBackground(new java.awt.Color(64, 43, 100));
         appointmentBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2091,11 +2127,11 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jPanel30.add(homeBtnPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        receptionistLogOutPanel.setBackground(new java.awt.Color(64, 43, 100));
-        receptionistLogOutPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        receptionistLogOutPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutBtnPanel4.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistLogOutPanelMousePressed(evt);
+                logOutBtnPanel4MousePressed(evt);
             }
         });
 
@@ -2105,28 +2141,28 @@ public class Dashboard extends javax.swing.JFrame  {
 
         jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout receptionistLogOutPanelLayout = new javax.swing.GroupLayout(receptionistLogOutPanel);
-        receptionistLogOutPanel.setLayout(receptionistLogOutPanelLayout);
-        receptionistLogOutPanelLayout.setHorizontalGroup(
-            receptionistLogOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistLogOutPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout logOutBtnPanel4Layout = new javax.swing.GroupLayout(logOutBtnPanel4);
+        logOutBtnPanel4.setLayout(logOutBtnPanel4Layout);
+        logOutBtnPanel4Layout.setHorizontalGroup(
+            logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel74)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(85, Short.MAX_VALUE))
         );
-        receptionistLogOutPanelLayout.setVerticalGroup(
-            receptionistLogOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistLogOutPanelLayout.createSequentialGroup()
+        logOutBtnPanel4Layout.setVerticalGroup(
+            logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(receptionistLogOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel30.add(receptionistLogOutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
+        jPanel30.add(logOutBtnPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
 
         receptionistSettingBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
         receptionistSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2789,9 +2825,6 @@ public class Dashboard extends javax.swing.JFrame  {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 userLogReportOptionPanelMousePressed(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userLogReportOptionPanelMouseEntered(evt);
-            }
         });
 
         jLabel77.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -2822,11 +2855,6 @@ public class Dashboard extends javax.swing.JFrame  {
         appointmentReportOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
         appointmentReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         appointmentReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
-        appointmentReportOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentReportOptionPanelMousePressed(evt);
-            }
-        });
 
         jLabel78.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel78.setForeground(new java.awt.Color(102, 0, 102));
@@ -2851,11 +2879,6 @@ public class Dashboard extends javax.swing.JFrame  {
         patientCredentialReportOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
         patientCredentialReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         patientCredentialReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
-        patientCredentialReportOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                patientCredentialReportOptionPanelMousePressed(evt);
-            }
-        });
 
         jLabel79.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel79.setForeground(new java.awt.Color(102, 0, 102));
@@ -2888,11 +2911,6 @@ public class Dashboard extends javax.swing.JFrame  {
 
         specialityReferenceOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
         specialityReferenceOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        specialityReferenceOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                specialityReferenceOptionPanelMousePressed(evt);
-            }
-        });
 
         jLabel31.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(64, 43, 100));
@@ -2916,11 +2934,6 @@ public class Dashboard extends javax.swing.JFrame  {
 
         complainReferenceOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
         complainReferenceOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        complainReferenceOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                complainReferenceOptionPanelMousePressed(evt);
-            }
-        });
 
         jLabel28.setBackground(new java.awt.Color(255, 255, 255));
         jLabel28.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -3033,10 +3046,10 @@ public class Dashboard extends javax.swing.JFrame  {
         addressField.setRows(5);
         jScrollPane6.setViewportView(addressField);
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveUserBtn.setText("Save");
+        saveUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveUserBtnActionPerformed(evt);
             }
         });
 
@@ -3150,7 +3163,7 @@ public class Dashboard extends javax.swing.JFrame  {
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(142, 142, 142))
                             .addGroup(settingsPanelLayout.createSequentialGroup()
                                 .addGap(124, 124, 124)
@@ -3202,7 +3215,7 @@ public class Dashboard extends javax.swing.JFrame  {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(196, 196, 196)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
 
@@ -3712,11 +3725,11 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
-        viewUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
-        viewUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        viewUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
-        viewUsersBtn.setText("view");
-        viewUsersBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        resetPasswordBtn.setBackground(new java.awt.Color(255, 255, 255));
+        resetPasswordBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resetPasswordBtn.setForeground(new java.awt.Color(85, 65, 118));
+        resetPasswordBtn.setText("Reset Password");
+        resetPasswordBtn.setPreferredSize(new java.awt.Dimension(67, 31));
 
         addUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
         addUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -3736,13 +3749,13 @@ public class Dashboard extends javax.swing.JFrame  {
             .addGroup(adminUserOptionsLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(addUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(viewUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(61, 61, 61)
+                .addComponent(resetPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(editUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
                 .addComponent(deleteUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 301, Short.MAX_VALUE))
+                .addGap(0, 289, Short.MAX_VALUE))
         );
         adminUserOptionsLayout.setVerticalGroup(
             adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3750,7 +3763,7 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addContainerGap()
                 .addGroup(adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addUsersBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(viewUsersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resetPasswordBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editUsersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteUsersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -3791,18 +3804,31 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
+        resetPasswordBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        resetPasswordBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resetPasswordBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        resetPasswordBtn2.setText("Reset Password");
+        resetPasswordBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        resetPasswordBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPasswordBtn2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout receptionistUserOptionsLayout = new javax.swing.GroupLayout(receptionistUserOptions);
         receptionistUserOptions.setLayout(receptionistUserOptionsLayout);
         receptionistUserOptionsLayout.setHorizontalGroup(
             receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionistUserOptionsLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(66, 66, 66)
                 .addComponent(addUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(74, 74, 74)
                 .addComponent(editUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addGap(79, 79, 79)
                 .addComponent(deleteUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 493, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addComponent(resetPasswordBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 292, Short.MAX_VALUE))
         );
         receptionistUserOptionsLayout.setVerticalGroup(
             receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3811,7 +3837,8 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addGroup(receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                     .addComponent(editUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resetPasswordBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -4348,16 +4375,6 @@ public class Dashboard extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_moTableMousePressed
 
-    private void complainReferenceOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complainReferenceOptionPanelMousePressed
-        // TODO add your handling code here:
-      // setComplainRefference();
-    }//GEN-LAST:event_complainReferenceOptionPanelMousePressed
-
-    private void specialityReferenceOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_specialityReferenceOptionPanelMousePressed
-        // TODO add your handling code here:
-          // setSpecialityRefference();
-    }//GEN-LAST:event_specialityReferenceOptionPanelMousePressed
-
     private void addAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentBtnActionPerformed
         // TODO add your handling code here:
         //addNewAppointment();
@@ -4416,9 +4433,9 @@ public class Dashboard extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_martialStatusComboBox2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       saveUser();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void saveUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUserBtnActionPerformed
+      // saveUser();
+    }//GEN-LAST:event_saveUserBtnActionPerformed
 
     private void photoAddBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtn2ActionPerformed
         // TODO add your handling code here:
@@ -4469,17 +4486,17 @@ public class Dashboard extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_receptionistTableMousePressed
 
-    private void moLogOutjPanel37MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moLogOutjPanel37MousePressed
-        userLogOut();
-    }//GEN-LAST:event_moLogOutjPanel37MousePressed
+    private void logOutBtnPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel3MousePressed
+       // userLogOut();
+    }//GEN-LAST:event_logOutBtnPanel3MousePressed
 
-    private void receptionistLogOutPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistLogOutPanelMousePressed
-        userLogOut();
-    }//GEN-LAST:event_receptionistLogOutPanelMousePressed
+    private void logOutBtnPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel4MousePressed
+       // userLogOut();
+    }//GEN-LAST:event_logOutBtnPanel4MousePressed
 
     private void logOutBtnPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel1MousePressed
         // TODO add your handling code here:
-        userLogOut();
+       // userLogOut();
     }//GEN-LAST:event_logOutBtnPanel1MousePressed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -4487,7 +4504,7 @@ public class Dashboard extends javax.swing.JFrame  {
     }//GEN-LAST:event_nameFieldActionPerformed
 
     private void deleteUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtnActionPerformed
-        alterUser(1);
+       // alterUser(1);
         
     }//GEN-LAST:event_deleteUsersBtnActionPerformed
 
@@ -4498,17 +4515,17 @@ public class Dashboard extends javax.swing.JFrame  {
 
     private void editUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtnActionPerformed
         // TODO add your handling code here:
-         alterUser(2);
+       //  alterUser(2);
     }//GEN-LAST:event_editUsersBtnActionPerformed
 
     private void editUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtn2ActionPerformed
         // TODO add your handling code here:
-        alterUser(2);//2 for edit
+       // alterUser(2);//2 for edit
     }//GEN-LAST:event_editUsersBtn2ActionPerformed
 
     private void deleteUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtn2ActionPerformed
         // TODO add your handling code here:
-        alterUser(1);//1 for edit
+       // alterUser(1);//1 for edit
     }//GEN-LAST:event_deleteUsersBtn2ActionPerformed
 
     private void editAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentBtnActionPerformed
@@ -4559,11 +4576,11 @@ public class Dashboard extends javax.swing.JFrame  {
     }//GEN-LAST:event_patientCredintialTableMousePressed
 
     private void appointmentReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentReportCsvBtnActionPerformed
-        try {
+      /*  try {
             FileService.generateCsvFile(getAppointmentReportTable().getModel(),"files/report/appointmentReport.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_appointmentReportCsvBtnActionPerformed
 
     private void jLabel77MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel77MouseExited
@@ -4574,21 +4591,8 @@ public class Dashboard extends javax.swing.JFrame  {
          //setUserLogReports();
     }//GEN-LAST:event_userLogReportOptionPanelMousePressed
 
-    private void userLogReportOptionPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportOptionPanelMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userLogReportOptionPanelMouseEntered
-
-    private void appointmentReportOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportOptionPanelMousePressed
-       // setAppoinmentReports();
-        
-    }//GEN-LAST:event_appointmentReportOptionPanelMousePressed
-
-    private void patientCredentialReportOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientCredentialReportOptionPanelMousePressed
-           // setPatientCredintialReports();
-    }//GEN-LAST:event_patientCredentialReportOptionPanelMousePressed
-
     private void userLogReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportPdfBtnActionPerformed
-                 FileService.generatePdf(getUserLogReportTable().getModel(),FileService.getUserLoginReportFilePath());
+               //  FileService.generatePdf(getUserLogReportTable().getModel(),FileService.getUserLoginReportFilePath());
 
         
     }//GEN-LAST:event_userLogReportPdfBtnActionPerformed
@@ -4630,45 +4634,45 @@ public class Dashboard extends javax.swing.JFrame  {
     }//GEN-LAST:event_deleteAppointmentBtnActionPerformed
 
     private void patientCredintialPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialPdfBtnActionPerformed
-        FileService.generatePdf(getPatientCredintialTable().getModel(),FileService.getPatientCredintailReportFilePath());
+       // FileService.generatePdf(getPatientCredintialTable().getModel(),FileService.getPatientCredintailReportFilePath());
     }//GEN-LAST:event_patientCredintialPdfBtnActionPerformed
 
     private void appoinmentReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmentReportPdfBtnActionPerformed
-         FileService.generatePdf(getAppointmentReportTable().getModel(),FileService.getAppoinmentReportFilePath());
+      //   FileService.generatePdf(getAppointmentReportTable().getModel(),FileService.getAppoinmentReportFilePath());
     }//GEN-LAST:event_appoinmentReportPdfBtnActionPerformed
 
     private void userLogReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportCsvBtnActionPerformed
-        try {
+    /*    try {
             FileService.generateCsvFile(getUserLogReportTable().getModel(),"files/report/userLogReport.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }//GEN-LAST:event_userLogReportCsvBtnActionPerformed
 
     private void patientCredintialCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialCsvBtnActionPerformed
-        try {
+       /* try {
             FileService.generateCsvFile(getPatientCredintialTable().getModel(),"files/reports/patientCredintial.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }//GEN-LAST:event_patientCredintialCsvBtnActionPerformed
+
+    private void resetPasswordBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPasswordBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetPasswordBtn2ActionPerformed
  
    /*  private void addRefference(){
         AddReference refference= new AddReference(this);
     }*/
     
-    private void addNewUser(){
+    /*private void addNewUser(){
         AddUser user= new AddUser(1,getUserRole(),this,null,null,null);
-    }
+    }*/
   
     
-    private void alterUser( int type){
-       
-        
-        
-        
+    private void alterUser( int type){        
         if(getMoScrollPanel().isShowing()){
                    Object record= ((DefaultTableModel) getMedicalOfficerTable().getModel()).getDataVector().elementAt(getMedicalOfficerTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
@@ -5466,7 +5470,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel adminComplaintOptions;
     private javax.swing.JPanel adminMailOptions;
     private javax.swing.JPanel adminRefferenceOptions;
-    private javax.swing.JPanel adminSettingBtnPanel;
     private javax.swing.JPanel adminSidePanel;
     private javax.swing.JPanel adminUserOptions;
     private javax.swing.JPanel adminVisitorOptions;
@@ -5519,13 +5522,11 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel homeBtnPanel3;
     private javax.swing.JPanel homeBtnPanel4;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -5619,13 +5620,15 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JPanel logOutBtnPanel1;
+    private javax.swing.JPanel logOutBtnPanel2;
+    private javax.swing.JPanel logOutBtnPanel3;
+    private javax.swing.JPanel logOutBtnPanel4;
     private javax.swing.JPanel mailBtnPanel1;
     private javax.swing.JPanel mailBtnPanel2;
     private javax.swing.JPanel mailMainOption;
     private javax.swing.JPanel mailPanel;
     private javax.swing.JComboBox<String> martialStatusComboBox2;
     private javax.swing.JPanel moAppointmentOptions;
-    private javax.swing.JPanel moLogOutjPanel37;
     private javax.swing.JScrollPane moScrollPanel;
     private javax.swing.JPanel moSettingBtnPanel;
     private javax.swing.JPanel moSidePanel;
@@ -5641,7 +5644,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel patientCreditialReportPanel;
     private javax.swing.JScrollPane patientScrollPanel;
     private javax.swing.JPanel patientSettingBtnPanel;
-    private javax.swing.JPanel patientSettingPanel1;
     private javax.swing.JPanel patientSidePanel;
     private javax.swing.JTable patientsTable;
     private javax.swing.JButton photoAddBtn2;
@@ -5654,7 +5656,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel receptionMailOptions;
     private javax.swing.JPanel receptionSidePanel;
     private javax.swing.JPanel receptionistComplaintOptions;
-    private javax.swing.JPanel receptionistLogOutPanel;
     private javax.swing.JLabel receptionistPhotoLabel;
     private javax.swing.JScrollPane receptionistScrollPanel;
     private javax.swing.JPanel receptionistSettingBtnPanel;
@@ -5667,6 +5668,9 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel refferencePanel;
     private javax.swing.JPanel reportBtnPanel;
     private javax.swing.JPanel reportsPanel;
+    private javax.swing.JButton resetPasswordBtn;
+    private javax.swing.JButton resetPasswordBtn2;
+    private javax.swing.JButton saveUserBtn;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel specialityListPanel;
     private javax.swing.JPanel specialityReferenceOptionPanel;
@@ -5686,7 +5690,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JLabel userNameLabel3;
     private javax.swing.JPanel usersMainOption;
     private javax.swing.JPanel usersPanel;
-    private javax.swing.JButton viewUsersBtn;
     private javax.swing.JPanel visitorBtnPanel1;
     private javax.swing.JPanel visitorBtnPanel2;
     private javax.swing.JTable visitorTable;

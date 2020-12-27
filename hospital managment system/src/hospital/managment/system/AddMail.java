@@ -7,7 +7,6 @@ package hospital.managment.system;
 
 import com.toedter.calendar.JDateChooser;
 import hospital.managment.system.models.DispatchedPostal;
-import hospital.managment.system.models.FileService;
 import hospital.managment.system.models.PipeService;
 import java.io.File;
 import java.util.Date;
@@ -79,8 +78,7 @@ private DispatchedPostal mail;
         this.toAddressField.setText(address);
     }
     private void setFileChooser(){
-        openFileChooser =new JFileChooser();
-        
+        openFileChooser =new JFileChooser();   
     }
     public void setAttachmentName(String name){
         this.attachmentName.setText(name);

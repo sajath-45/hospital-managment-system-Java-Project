@@ -5,11 +5,6 @@
  */
 package hospital.managment.system.models;
 
-import hospital.managment.system.models.MedicalOfficer;
-import hospital.managment.system.models.Patient;
-import hospital.managment.system.models.Receptionist;
-import hospital.managment.system.models.User;
-
 /**
  *
  * @author sajath
