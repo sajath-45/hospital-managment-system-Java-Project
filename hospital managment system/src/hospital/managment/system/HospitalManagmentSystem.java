@@ -5,8 +5,6 @@
  */
 package hospital.managment.system;
 
-import java.awt.SplashScreen;
-
 /**
  *
  * @author sajath

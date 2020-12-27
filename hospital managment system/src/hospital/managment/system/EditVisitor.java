@@ -5,6 +5,9 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.PipeService;
+import hospital.managment.system.models.Visitor;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,10 +29,13 @@ public class EditVisitor extends javax.swing.JFrame {
 
     /**
      * Creates new form EditVisitor
+     * @param visitor
+     * @param dash
      */
     public EditVisitor(Visitor visitor,Dashboard dash) {
         initComponents();
         setDashboard(dash);
+        setVisitor(visitor);
         try {
              setEditData();
          } catch (ParseException ex) {
@@ -67,7 +73,6 @@ public class EditVisitor extends javax.swing.JFrame {
     
     private void setEditData() throws ParseException{
         
-        
         purposeField.setText(getVisitor().getStrPurpose());
         nameField.setText(getVisitor().getStrName());
         idField.setText(getVisitor().getId());
@@ -75,8 +80,7 @@ public class EditVisitor extends javax.swing.JFrame {
         inTimeField.setText(getVisitor().getStrInTime());
         outTimeField.setText(getVisitor().getStrOutTime());
         noteField.setText(getVisitor().getStrNote());
-        java.util.Date date=new SimpleDateFormat("dd/MM/yyyy").parse(getVisitor().getStrDate());
-        dateField.setDate(date);
+        dateField.setDate(PipeService.getStringToDateFormat(getVisitor().getStrDate()));
          setAttachment(getVisitor().getAttachment());
         if(getAttachment() == null){
         fileNameLable.setText("no file choosen");
@@ -106,7 +110,6 @@ public class EditVisitor extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         purposeField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -210,12 +213,6 @@ public class EditVisitor extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("Back");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 40));
 
@@ -342,7 +339,7 @@ public class EditVisitor extends javax.swing.JFrame {
         Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);
         FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
         }
-        getDashboard().setTables();
+       // getDashboard().setTables();
         this.dispose();
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -401,7 +398,6 @@ public class EditVisitor extends javax.swing.JFrame {
     private javax.swing.JLabel fileNameLable;
     private javax.swing.JTextField idField;
     private javax.swing.JTextField inTimeField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -1,3 +1,2 @@
-sajath45,ahamed,Male,0773781469,199829003939,23/12/2020,47 colombo 10,Married,199829003939,A+,none
-messi,messi,Male,03488210970,19989007878,02/12/2020,spani baarcelona,Single,19989007878,AB+,dust
-cr7,ronaldo,Male,754754754,200039392900,05/12/2020,italy torinto,Married,200039392900,A+,cuttle fish
+y12,yoosuf,Male,7547547,123456,05/12/2020,athulgama western province,Married,123456,A+,omlet,null
+david45,david,Male,0342210910,17829003939,04/12/2020,sm road tricomalee,Married,17829003939,B+,none,null

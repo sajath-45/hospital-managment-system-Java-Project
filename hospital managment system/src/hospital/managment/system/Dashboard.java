@@ -5,47 +5,48 @@
  */
 package hospital.managment.system;
 
+import com.toedter.calendar.JDateChooser;
+import hospital.managment.system.models.ComplainRefference;
+import hospital.managment.system.models.CurrentUser;
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.SpecialityRefference;
+import hospital.managment.system.models.MedicalOfficer;
+import hospital.managment.system.models.Patient;
+import hospital.managment.system.models.UserLogin;
+import hospital.managment.system.models.Appointment;
+import hospital.managment.system.models.PipeService;
+import hospital.managment.system.models.Receptionist;
+import hospital.managment.system.models.User;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
- 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
  *
  * @author sajath
  */
-public class Dashboard extends javax.swing.JFrame implements ActionListener {
+public class Dashboard extends javax.swing.JFrame  {
     private String userRole;
-
+    private DashboardController controller;
     /**
      * Creates new form dashboard
      * @param role
@@ -53,17 +54,19 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     public Dashboard(String role) {
         initComponents();
         this.setVisible(true);
-        setHome();
+        //setHome();
         setRole(role);
-        setSidePanel(role);
-        setTables();
-        setSideBarPanels();
-        
-      
-
+        //setSidePanel(role);
+        //setTables();
+        //setSideBarPanels();
+        setController(new DashboardController(null,this));
+        getController().initController(role);
         
     }
     private Dashboard() {
+    }
+    public void  setController(DashboardController controller){
+        this.controller=controller;
     }
     public void setRole(String role){
         this.userRole=role;
@@ -72,120 +75,610 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         return this.userRole;
     }
     
+    //getters
+    public DashboardController getController(){
+        return this.controller;
+    }
+    public JButton getAddAppointmentBtn(){//for patient
+        return this.addAppointmentBtn;
+    }
+    public JButton getAddAppointmentBtn2(){//for patient
+        return this.addAppointmentBtn2;
+    }
+    public JButton getApproveAppoinmentBtn(){//for patient
+        return this.approveAppoinmentBtn;
+    }
+    public JButton getGeneratePdfBtn(){//for patient
+        return this.generatePdfBtn;
+    }
+    public JButton getEditAppointmentBtn(){//for patient
+        return this.editAppointmentBtn;
+    }
+    public JButton getDeleteAppointmentBtn(){//for patient
+        return this.deleteAppointmentBtn;
+    }
+    public JButton getAddUsersBtn(){//for patient
+        return this.addUsersBtn;
+    }
+     public JButton getAddUsersBtn2(){//for patient
+        return this.addUsersBtn2;
+    }
+    public JButton getViewUsersBtn(){//for patient
+        return this.resetPasswordBtn;
+    }
+     public JButton getViewUsersBtn2(){//for patient
+        return this.resetPasswordBtn2;
+    }
+     public JButton getEditUsersBtn(){//for patient
+        return this.editUsersBtn;
+    }
+      public JButton getEditUsersBtn2(){//for patient
+        return this.editUsersBtn2;
+    }
+     public JButton getDeleteUsersBtn(){//for patient
+        return this.deleteUsersBtn;
+    }
+     public JButton getDeleteUsersBtn2(){//for patient
+        return this.deleteUsersBtn2;
+    }
+    public JButton getResetPasswordBtn(){
+        return resetPasswordBtn;
+    }
+    public JButton getResetPasswordBtn2(){
+        return resetPasswordBtn2;
+    }
+     
+     
+    public JButton getAddMailBtn(){
+        return this.addMailBtn;
+    }
+    public JButton getEditMailBtn(){
+        return this.editMailBtn;
+    }
+    public JButton getDeleteMailBtn2(){
+        return this.deleteMailBtn2;
+    }
+    public JButton getDeleteMailBtn(){
+        return this.deleteMailBtn;
+    }
+    
+    public JButton getApproveComplaintBtn(){//for patient
+        return this.approveComplaintBtn;
+    }
+    public JButton getCompleteAppointmentBtn(){//for patient
+        return this.completedAppointmentBtn;
+    }
+    public JButton getAddComplaintBtn2(){//for patient
+        return this.addComplaintBtn2;
+    }
+     public JButton getAddComplaintBtn(){//for patient
+        return this.addComplaintBtn;
+    }
+    public JButton getEditComplaintBtn(){
+        return this.editComplaintBtn;
+    }
+    public JButton getDeleteComplaintBtn(){
+        return this.deleteComplaintBtn;
+    }
+    
+    public JButton getAddVisitorBtn(){
+        return this.addVisitorBtn;
+    }
+    public JButton getEditVisitorBtn(){
+        return this.editVisitorBtn;
+    }
+    public JButton getDeleteVisitorBtn(){
+        return this.deleteVisitorBtn;
+    }
+    public JButton getDeleteVisitorBtn2(){
+        return this.deleteVisitorBtn2;
+    }
+    
+    public JButton getAddReferenceBtn(){
+        return this.addReferenceBtn;
+    }
+    public JButton getEditReferenceBtn(){
+        return this.editReferenceBtn;
+    }
+    public JButton getdeleteReferenceBtn(){
+        return this.deleteReferenceBtn;
+    }
+    public JTable getAppointmentTable(){
+        return appointmentTable;
+    }
+    public JTable getComplaintsTable(){
+        return complaintTable;
+    }
+    public JTable getMailsTable(){
+        return dispatchedMailTable;
+    }
+    public JTable getVisitorsTable(){
+        return visitorTable;
+    }
+     public JTable getAppointmentReportTable(){
+        return appointmentReportTable;
+    }
+    public JTable getUserLogReportTable(){
+        return userLogReportTable;
+    }
+    public JTable getPatientCredintialTable(){
+        return patientCredintialTable;
+    }
+    public JTable getMedicalOfficerTable(){
+        return moTable;
+    }
+     public JTable getPatientsTable(){
+        return patientsTable;
+    }
+      public JTable getReceptionistTable(){
+        return receptionistTable;
+    }
+    public JPanel getComplainReferencePanel(){
+        return this.complainReferenceOptionPanel;
+    }
+    public JPanel getSpecialityReferencePanel(){
+        return this.specialityReferenceOptionPanel;
+    }
+    //side panels
+    public JPanel getReceptionSidePanel(){
+        return this.receptionSidePanel;
+    }
+    public JPanel getAdminSidePanel(){
+        return this.adminSidePanel;
+    }
+    public JPanel getPatientSidePanel(){
+        return this.patientSidePanel;
+    }
+    public JPanel getMoSidePanel(){
+        return this.moSidePanel;
+    }
+    //main panels
+    public JPanel getHomePanel(){
+        return this.homePanel;
+    }
+    public JPanel getAppointmentPanel(){
+        return this.appointmentPanel;
+    }
+    public JPanel getRefferencePanel(){
+        return this.refferencePanel;
+    }
+    public JPanel getComplaintPanel(){
+        return this.complaintPanel;
+    }
+    public JPanel getMailPanel(){
+        return this.mailPanel;
+    }
+    public JPanel getUsersPanel(){
+        return this.usersPanel;
+    }
+    public JPanel getVisitorsPanel(){
+        return this.visitorsPanel;
+    }
+    public JPanel getReportsPanel(){
+        return this.reportsPanel;
+    }
+    public JPanel getSettingsPanel(){
+        return this.settingsPanel;
+    }
+    //options panel
+    public JPanel getUsersMainOptionsPanel(){
+        return this.usersMainOption;
+    }
+    public JPanel getMailsMainOptionsPanel(){
+        return this.mailMainOption;
+    }
+    public JPanel getAppoinmentsMainOptionsPanel(){
+        return this.appointmentMainOption;
+    }
+    public JPanel getVisitorsMainOptionPanel(){
+        return this.visitorsMainOption;
+    }
+    public JPanel getComplaintsMainOptionPanel(){
+        return this.complaintsMainOption;
+    }
+    public JPanel getRefferenceOptionsMainPanel(){
+        return this.refferenceMainOption;
+    }
+    //getters for side panel buttons
+    public JPanel getHomeBtnPanel1(){
+        return this.homeBtnPanel1;
+    }
+    public JPanel getHomeBtnPanel2(){
+        return this.homeBtnPanel2;
+    }
+    public JPanel getHomeBtnPanel3(){
+        return this.homeBtnPanel3;
+    }
+    public JPanel getHomeBtnPanel4(){
+        return this.homeBtnPanel4;
+    }
+     public JPanel getAppointmentBtnPanel1(){
+        return this.appointmentBtnPanel1;
+    }
+    public JPanel getAppointmentBtnPanel2(){
+        return this.appointmentBtnPanel2;
+    }
+    public JPanel getAppointmentBtnPanel3(){
+        return this.appointmentBtnPanel3;
+    }
+    public JPanel getAppointmentBtnPanel4(){
+        return this.appointmentBtnPanel4;
+    }
+    
+    public JPanel getMailBtnPanel1(){
+        return this.mailBtnPanel1;
+    }
+    public JPanel getMailBtnPanel2(){
+        return this.mailBtnPanel2;
+    }
+    public JPanel getComplaintBtnPanel1(){
+        return this.complaintBtnPanel1;
+    }
+    public JPanel getComplaintBtnPanel2(){
+        return this.complaintBtnPanel2;
+    }
+    public JPanel getComplaintBtnPanel3(){
+        return this.complaintBtnPanel3;
+    }
+    public JPanel getVisitorBtnPanel1(){
+        return this.visitorBtnPanel1;
+    }
+    public JPanel getVisitorBtnPanel2(){
+        return this.visitorBtnPanel2;
+    }
+    public JPanel getUserBtnPanel(){
+        return this.userBtnPanel;
+    }
+    public JPanel getUserBtnPanel2(){
+        return this.userBtnPanel2;
+    }
+    
+    
+    public JPanel getLogOutBtnPanel1(){
+        return this.logOutBtnPanel1;
+    }
+    public JPanel getLogOutBtnPanel2(){
+        return this.logOutBtnPanel2;
+    }
+    public JPanel getLogOutBtnPanel3(){
+        return this.logOutBtnPanel3;
+    }
+    public JPanel getLogOutBtnPanel4(){
+        return this.logOutBtnPanel4;
+    }
+    
+    
+    public JPanel getMoSettingBtnPanel(){
+        return this.moSettingBtnPanel;
+    }
+    public JPanel getPatientSettingBtnPanel(){
+        return this.patientSettingBtnPanel;
+    }
+    public JPanel getReceptionistSettingBtnPanel(){
+        return this.receptionistSettingBtnPanel;
+    }
+    public JPanel getRefferenceBtnPanel(){
+        return this.refferenceBtnPanel;
+    }
+    public JPanel getReportBtnPanel(){
+        return this.reportBtnPanel;
+    }
+     public JPanel getMoAppointmentOptions(){
+        return moAppointmentOptions;
+    }
+    public JPanel getAdminAppointmentOptions(){
+        return adminAppointmentOptions;
+    }
+    public JPanel getPatientAppointmentOptions(){
+        return patientAppointmentOptions;
+    }
+    public JPanel getReceptionistAppointmentOptions(){
+        return receptionAppointmentOptions;
+    }
+    public JPanel getAdminMailOptions(){
+        return adminMailOptions;
+    }
+    public JPanel getReceptionMailOptions(){
+        return receptionMailOptions;
+    }
+    public JPanel getPatientComplaintOptions(){
+        return patientComplaintOptions;
+    }
+    public JPanel getAdminComplaintOptions(){
+        return adminComplaintOptions;
+    }
+    public JPanel getReceptionComplaintOptions(){
+        return receptionistComplaintOptions;
+    }
+    public JPanel getAdminUserOptions(){
+        return adminUserOptions;
+    }
+     public JPanel getAdminRefferenceOptions(){
+        return adminRefferenceOptions;
+    }
+      public JPanel getPatientComplainOptions(){
+        return this.patientComplaintOptions;
+    }
+    public JPanel getAdminComplainOptions(){
+        return this.adminComplaintOptions;
+    }
+    public JPanel getReceptionistComplaintOptions(){
+        return this.receptionistComplaintOptions;
+    }
+    
+   
+    
+    public JPanel getReceptionistUserOptions(){
+        return this.receptionistUserOptions;
+    }
+    public JPanel getAdminVisitorOptions(){
+        return this.adminVisitorOptions;
+    }
+    public JPanel getReceptionistVisitorOptions(){
+        return this.receptionistVisitorOptions;
+    }
+    public JPanel getAppoinmentReportPanel(){
+        return this.appoinmentReportPanel;
+    }
+    public JPanel getUserLogReportPanel(){
+        return this.userLogReportPanel;
+    }
+    public JPanel getPatientCreditialReportPanel(){
+        return this.patientCreditialReportPanel;
+    }
+    
+    
+    public JPanel getJPanel7(){
+        return this.jPanel7;
+    }
+    public JLabel getJLabel66(){
+        return this.jLabel66;
+    }
+    public JPanel getJPanel9(){
+        return this.jPanel9;
+    }
+    public JLabel getJLabel67(){
+        return this.jLabel67;
+    }
+    public JLabel getJLabel68(){
+        return this.jLabel68;
+    }
+    public JPanel getJPanel35(){
+        return this.jPanel35;
+    }
+    
+    
+    public JLabel getJLabel79(){
+        return this.jLabel79;
+    }
+    public JPanel getJPanel38(){
+        return this.patientCredentialReportOptionPanel;
+    }
+    public JLabel getJLabel78(){
+        return this.jLabel78;
+    }
+    public JPanel getJPanel18(){
+        return this.appointmentReportOptionPanel;
+    }
+    public JLabel getJLabel77(){
+        return this.jLabel77;
+    }
+    public JPanel getJPanel16(){
+        return this.userLogReportOptionPanel;
+    }
+    public JLabel getjLabel28(){
+        return this.jLabel28;
+    }
+     public JLabel getjLabel31(){
+        return this.jLabel31;
+    }
+    
+    
+    //scroll panels
+    public JScrollPane getMoScrollPanel(){
+        return this.moScrollPanel;
+    }
+     public JScrollPane getReceptionistScrollPanel(){
+        return this.receptionistScrollPanel;
+    }
+     public JScrollPane getPatientScrollPanel(){
+        return this.patientScrollPanel;
+    }
+     
+    //other panels
+     public JPanel getJPanel6(){
+         return this.jPanel6;
+     }
+     //
+     public JList<String> getReferenceList(){
+         return this.refferenceList;
+     }
+     
+    public JDateChooser   getUserLoginReportDateChooser3(){
+        return this.userLoginReportDateChooser3;}
+    public JComboBox<String>   getUserLoginReportComboBox(){
+        return this.userLoginReportComboBox;}
+    public JDateChooser   getAppointmentReportDateChooser(){
+            return this.appointmentReportDateChooser;}
+    public JComboBox<String>   getAppointmentReportMoComboBox(){
+            return this.appointmentReportMoComboBox;}
+    
+    //report panel generate pdf and csv buttons
+    public JButton getGenerateAppointmentReportPdfBtn(){
+        return this.appoinmentReportPdfBtn;
+    }
+    public JButton getGenerateAppointmentReportCsvBtn(){
+        return this.appointmentReportCsvBtn;
+    }
+    public JButton getGenerateUserLogReportPdfBtn(){
+        return this.userLogReportPdfBtn;
+    }
+    public JButton getGenerateUserLogReportCsvBtn(){
+        return this.userLogReportCsvBtn;
+    }
+    public JButton getGeneratePatientCredintialPdfBtn(){
+        return this.patientCredintialPdfBtn;
+    }
+    public JButton getGeneratePatientCredintialCsvBtn(){
+        return this.patientCredintialCsvBtn;
+    }
+    public JPanel getappointmentReportOptionPanel(){
+        return this.appointmentReportOptionPanel;
+    }
+    public JPanel getUserLogReportOptionPanel(){
+        return this.userLogReportOptionPanel;
+    }
+    public JPanel getPatientCredentialReportOptionPanel(){
+        return this.patientCredentialReportOptionPanel;
+    }
+    //reference panel options
+    public JPanel getComplainReferenceOptionPanel(){
+        return this.complainReferenceOptionPanel;}
+    public JPanel getSpecialityReferenceOptionPanel(){
+        return this.specialityReferenceOptionPanel;}
+    //settings panel
+    public JTextField getUserNameField(){
+         return this.userNameField;
+     }
+    public JTextField getNicField(){
+         return this.nicField;
+     }
+    public JTextField getPasswordField(){
+         return this.Passwordfield;
+     }
+    public JTextArea getAddressField(){
+         return this.addressField;
+     }
+     public JTextField getPhoneNumberField(){
+         return this.PhoneNofield;
+     }
+    public JComboBox<String> getGenderComboBox(){
+         return this.genderComboBox1;
+     }
+    public JComboBox<String> getMartialStatusComboBoxField(){
+         return this.martialStatusComboBox2;
+     }
+    public JDateChooser getDobDateChooser(){
+         return this.jDateChooser1;
+     }
+    public JTextField getNameField(){
+        return this.nameField;
+    }
+    public JButton getSaveUserBtn(){
+        return saveUserBtn;
+    }
+    
+   
      
      
      
      //others methods
-    public void setSidePanel(String role){
+   /* public void setSidePanel(String role){
         if(getUserRole().equals("Admin")){
-            receptionSidePanel.setVisible(false);
-            adminSidePanel.setVisible(true);
-            patientSidePanel.setVisible(false);
-            moSidePanel.setVisible(false);
+            getReceptionSidePanel().setVisible(false);
+            getAdminSidePanel().setVisible(true);
+            getPatientSidePanel().setVisible(false);
+            getMoSidePanel().setVisible(false);
             
         }
         else if(getUserRole().equals("Receptionist")){
-            receptionSidePanel.setVisible(true);
-            adminSidePanel.setVisible(false);
-              patientSidePanel.setVisible(false);
-            moSidePanel.setVisible(false);
+            getReceptionSidePanel().setVisible(true);
+            getAdminSidePanel().setVisible(false);
+              getPatientSidePanel().setVisible(false);
+            getMoSidePanel().setVisible(false);
             
 
         }
         else if(getUserRole().equals("Patient")){
-             patientSidePanel.setVisible(true);
-            moSidePanel.setVisible(false);
-            receptionSidePanel.setVisible(false);
-            adminSidePanel.setVisible(false);
+             getPatientSidePanel().setVisible(true);
+            getMoSidePanel().setVisible(false);
+            getReceptionSidePanel().setVisible(false);
+            getAdminSidePanel().setVisible(false);
 
         }
         else if(getUserRole().equals("MedicalOfficer")){
-            patientSidePanel.setVisible(false);
-            moSidePanel.setVisible(true);
-            receptionSidePanel.setVisible(false);
-            adminSidePanel.setVisible(false);
+            getPatientSidePanel().setVisible(false);
+            getMoSidePanel().setVisible(true);
+            getReceptionSidePanel().setVisible(false);
+            getAdminSidePanel().setVisible(false);
             
            
 
         }
         
     }
-    
     public void  setHome(){
          resetAllMainPanels();
-          homePanel.setVisible(true);
-           complaintsMainOption.setVisible(false);
-            appointmentMainOption.setVisible(false);
-            visitorsMainOption.setVisible(false);
-            mailMainOption.setVisible(false);
-            usersMainOption.setVisible(false);
-            refferenceMainOption.setVisible(false);
-            jDateChooser2.setDate(new Date());
+        getHomePanel().setVisible(true);
+        getComplaintsMainOptionPanel().setVisible(false);
+        getAppoinmentsMainOptionsPanel().setVisible(false);
+        getVisitorsMainOptionPanel().setVisible(false);
+        getMailsMainOptionsPanel().setVisible(false);
+        getUsersMainOptionsPanel().setVisible(false);
+        getRefferenceOptionsMainPanel().setVisible(false);
+       
     }
-    
-    
     public void setSideBarPanels(){
-        homeBtnPanel1.addMouseListener(listener);
-          homeBtnPanel2.addMouseListener(listener);
-            homeBtnPanel3.addMouseListener(listener);
-              homeBtnPanel4.addMouseListener(listener);
-         jPanel23.addMouseListener(listener);
-        moSettingPanel.addMouseListener(listener);
-        jPanel5.addMouseListener(listener);
-        jPanel17.addMouseListener(listener);
-        patientSettingPanel.addMouseListener(listener);
-        jPanel31.addMouseListener(listener);
-        jPanel32.addMouseListener(listener);
-        jPanel33.addMouseListener(listener);
-        visitorBtnPanel2.addMouseListener(listener);
-        receptionistSettingPanel.addMouseListener(listener);
-        userBtnPanel2.addMouseListener(listener);
-        userBtnPanel.addMouseListener(listener);
-        reportBtnPanel.addMouseListener(listener);
-        appointmentBtnPanel.addMouseListener(listener);
-        mailBtnPanel.addMouseListener(listener);
-        complaintBtnPanel.addMouseListener(listener);
-        visitorBtnPanel.addMouseListener(listener);
-        settingBtnPanel.addMouseListener(listener);
-        refferenceBtnPanel.addMouseListener(listener);
+        getHomeBtnPanel1().addMouseListener(listener);
+        getHomeBtnPanel2().addMouseListener(listener);
+        getHomeBtnPanel3().addMouseListener(listener);
+        getHomeBtnPanel4().addMouseListener(listener);
+        getAppointmentBtnPanel4().addMouseListener(listener);
+        getMoSettingBtnPanel().addMouseListener(listener);
+        getAppointmentBtnPanel3().addMouseListener(listener);
+        getComplaintBtnPanel2().addMouseListener(listener);
+        getPatientSettingBtnPanel().addMouseListener(listener);
+        getAppointmentBtnPanel2().addMouseListener(listener);
+        getMailBtnPanel2().addMouseListener(listener);
+        getComplaintBtnPanel1().addMouseListener(listener);
+        getVisitorBtnPanel2().addMouseListener(listener);
+        getReceptionistSettingBtnPanel().addMouseListener(listener);
+        getUserBtnPanel2().addMouseListener(listener);
+        getUserBtnPanel().addMouseListener(listener);
+        getReportBtnPanel().addMouseListener(listener);
+        getAppointmentBtnPanel1().addMouseListener(listener);
+        getMailBtnPanel1().addMouseListener(listener);
+        getComplaintBtnPanel3().addMouseListener(listener);
+        getVisitorBtnPanel1().addMouseListener(listener);
+        getAdminSettingBtnPanel().addMouseListener(listener);
+        getRefferenceBtnPanel().addMouseListener(listener);
         
-        homeBtnPanel1.setName("homeBtn");
-        homeBtnPanel2.setName("homeBtn");
-        homeBtnPanel3.setName("homeBtn");
-        homeBtnPanel4.setName("homeBtn");
+        getHomeBtnPanel1().setName("homeBtn");
+        getHomeBtnPanel2().setName("homeBtn");
+        getHomeBtnPanel3().setName("homeBtn");
+        getHomeBtnPanel4().setName("homeBtn");
         
-        jPanel31.setName("appointmentBtnPanel");//recep
-        appointmentBtnPanel.setName("appointmentBtnPanel");//admin
-        jPanel5.setName("appointmentBtnPanel");
-        jPanel23.setName("appointmentBtnPanel");
+        getAppointmentBtnPanel2().setName("appointmentBtnPanel");//recep
+        getAppointmentBtnPanel1().setName("appointmentBtnPanel");//admin
+        getAppointmentBtnPanel4().setName("appointmentBtnPanel");
+        getAppointmentBtnPanel3().setName("appointmentBtnPanel");
         
-        mailBtnPanel.setName("mailBtn");
-        jPanel32.setName("mailBtn");
+        getMailBtnPanel2().setName("mailBtn");
+        getMailBtnPanel1().setName("mailBtn");
        
         
-        complaintBtnPanel.setName("complaintBtn");
-        jPanel17.setName("complaintBtn");
-        jPanel33.setName("complaintBtn");
+        getComplaintBtnPanel1().setName("complaintBtn");
+        getComplaintBtnPanel2().setName("complaintBtn");
+        getComplaintBtnPanel3().setName("complaintBtn");
         
-        visitorBtnPanel2.setName("visitorBtn");
-        visitorBtnPanel.setName("visitorBtn");
+         getVisitorBtnPanel2().setName("visitorBtn");
+         getVisitorBtnPanel1().setName("visitorBtn");
         
-        settingBtnPanel.setName("settingBtn");
-        receptionistSettingPanel.setName("settingBtn");
-        moSettingPanel.setName("settingBtn");
-        patientSettingPanel.setName("settingBtn");
+        getAdminSettingBtnPanel().setName("settingBtn");
+        getReceptionistSettingBtnPanel().setName("settingBtn");
+        getMoSettingBtnPanel().setName("settingBtn");
+        getPatientSettingBtnPanel().setName("settingBtn");
         
-         userBtnPanel.setName("userBtn");
-        userBtnPanel2.setName("userBtn");
+         getUserBtnPanel().setName("userBtn");
+        getUserBtnPanel2().setName("userBtn");
         
-        reportBtnPanel.setName("reportBtn");
+        getReportBtnPanel().setName("reportBtn");
         
-        refferenceBtnPanel.setName("refferenceBtn");
+        getRefferenceBtnPanel().setName("refferenceBtn");
         
                   
         
     }
-    
     MouseListener listener = new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         resetAllColor();
@@ -193,53 +686,51 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                      
                         System.out.println(((JPanel)e.getSource()).getName());
                      if( ((JPanel)e.getSource()).getName().equals("complaintBtn")){
-                         setColor(complaintBtnPanel);
-                         setColor(jPanel17);
-                         setColor(jPanel33);
-                          setTables();
-                         homePanel.setVisible(false);
-                         appointmentPanel.setVisible(false);
-                          refferencePanel.setVisible(false);                        
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          usersPanel.setVisible(false);
-                        complaintPanel.setVisible(true);
-                        
-                        complaintsMainOption.setVisible(true);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
-                         setComplainOptions();
+                        setColor(getComplaintBtnPanel1());
+                        setColor(getComplaintBtnPanel2());
+                        setColor(getComplaintBtnPanel3());
+                        setTables();
+                        getHomePanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);                        
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getComplaintPanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(true);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
+                        setComplainOptions();
 
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("appointmentBtnPanel")){
-                          setColor(jPanel5);
-                         setColor(appointmentBtnPanel);
-                         setColor(jPanel31);
-                          setColor(jPanel23);
-                           setTables();
-                           homePanel.setVisible(false); 
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);                        
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          usersPanel.setVisible(false);
-                        appointmentPanel.setVisible(true);
-                        
-                        
-                         complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(true);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
+                        setColor(getAppointmentBtnPanel1());
+                        setColor(getAppointmentBtnPanel2());
+                        setColor(getAppointmentBtnPanel3());
+                        setColor(getAppointmentBtnPanel4());
+                        setTables();
+                        getHomePanel().setVisible(false); 
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);                        
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(true);
+    
+                         getComplaintsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(true);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                                
 
                         setAppointmentOptions();
@@ -247,191 +738,219 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("mailBtn")){
-                          setColor(mailBtnPanel);
-                         setColor(jPanel32);
-                          setTables();
-                          homePanel.setVisible(false);
-                         appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);                        
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          usersPanel.setVisible(false);
-                        mailPanel.setVisible(true);
-                        
-                         complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(true);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
+                        setColor(getMailBtnPanel1());
+                        setColor(getMailBtnPanel2());
+                        setTables();
+                        getHomePanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);                        
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getMailPanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(true);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                         setMailOptions();
 
                          
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("userBtn")){
-                          setColor(userBtnPanel);
-                         setColor(userBtnPanel2);
-                          setTables();
-                          homePanel.setVisible(false);
-                            appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);                        
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          usersPanel.setVisible(true);
-                          
-                           complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(true);
-                        refferenceMainOption.setVisible(false);
+                        setColor(getUserBtnPanel());
+                        setColor(getUserBtnPanel2());
+                        setTables();
+                        getHomePanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);                        
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getUsersPanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(true);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                         setUserOptions();
                          
                          
                      }
                      else if(((JPanel)e.getSource()).getName().equals("settingBtn")){
-                           setColor(settingBtnPanel);
-                         setColor(receptionistSettingPanel);
-                         setColor(moSettingPanel);
-                         setTables();
-                       
-                          setColor(patientSettingPanel);
-                          homePanel.setVisible(false);
-                          usersPanel.setVisible(false);
-                          appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);                        
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(false);
-                          settingsPanel.setVisible(true);
+                        setColor(getAdminSettingBtnPanel());
+                        setColor(getReceptionistSettingBtnPanel());
+                        setColor(getMoSettingBtnPanel());
+                        setTables();
+                        setColor(getPatientSettingBtnPanel());
+                        getHomePanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);                        
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getSettingsPanel().setVisible(true);
+                        loadUserDetails();
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                           
-                           complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
-                          setSettingsOptions();
                      }
                      else if(((JPanel)e.getSource()).getName().equals("visitorBtn")){
-                          setTables();
-                         setColor(visitorBtnPanel);
-                         setColor(visitorBtnPanel2);        
-                        
-                         homePanel.setVisible(false);
-                             usersPanel.setVisible(false);
-                            appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                          visitorsPanel.setVisible(true);
-                          
-                          complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(true);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
-                         setVisitorOptions();
+                        setTables();
+                        setColor(getVisitorBtnPanel1());
+                        setColor(getVisitorBtnPanel2());        
+                        getHomePanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getVisitorsPanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(true);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
+                        setVisitorOptions();
                      }
                       else if(((JPanel)e.getSource()).getName().equals("refferenceBtn")){
-                         setColor(refferenceBtnPanel);
-                        
-                          setTables();
-                         setComplainRefference();
-                         
-                         homePanel.setVisible(false);
-                           visitorsPanel.setVisible(false);
-                             usersPanel.setVisible(false);
-                            appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                           refferencePanel.setVisible(true);
-                           
-                            complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(true);
+                        setColor(getRefferenceBtnPanel());    
+                        setTables();
+                        setComplainRefference();
+                        getHomePanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getRefferencePanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getMailPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(true);
                         setRefferenceOption();
                      }
                       else if(((JPanel)e.getSource()).getName().equals("reportBtn")){
-                         setColor(reportBtnPanel);
-                          setTables();
-                        
-                          homePanel.setVisible(false);
-                           visitorsPanel.setVisible(false);
-                             usersPanel.setVisible(false);
-                            appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(true);
-                         
-                          complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
+                        setColor(getReportBtnPanel());
+                        setTables();
+                        getHomePanel().setVisible(false);
+                        getVisitorsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(true); 
+                        getMailPanel().setVisible(false);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                         setMoComboBox();
-                          setReportOptions();
+                        setReportOptions();
                      }
                      else if(((JPanel)e.getSource()).getName().equals("homeBtn")){
-                         setColor(homeBtnPanel1);
-                          setColor(homeBtnPanel2);
-                           setColor(homeBtnPanel3);
-                            setColor(homeBtnPanel4);
-                          setTables();
+                        setColor(getHomeBtnPanel1());
+                        setColor(getHomeBtnPanel2());
+                        setColor(getHomeBtnPanel3());
+                        setColor(getHomeBtnPanel4());
+                        setTables();
                         
                           
-                           visitorsPanel.setVisible(false);
-                             usersPanel.setVisible(false);
-                            appointmentPanel.setVisible(false);
-                         complaintPanel.setVisible(false);
-                          refferencePanel.setVisible(false);
-                          settingsPanel.setVisible(false);
-                          mailPanel.setVisible(false);
-                         reportsPanel.setVisible(false);
-                         homePanel.setVisible(true);
+                        getVisitorsPanel().setVisible(false);
+                        getUsersPanel().setVisible(false);
+                        getAppointmentPanel().setVisible(false);
+                        getComplaintPanel().setVisible(false);
+                        getRefferencePanel().setVisible(false);
+                        getSettingsPanel().setVisible(false);
+                        getMailPanel().setVisible(false);
+                        getReportsPanel().setVisible(false);
+                        getHomePanel().setVisible(true);
+                        getComplaintsMainOptionPanel().setVisible(false);
+                        getVisitorsMainOptionPanel().setVisible(false);
+                        getAppoinmentsMainOptionsPanel().setVisible(false);
+                        getMailsMainOptionsPanel().setVisible(false);
+                        getUsersMainOptionsPanel().setVisible(false);
+                        getRefferenceOptionsMainPanel().setVisible(false);
                          
-                          complaintsMainOption.setVisible(false);
-                        appointmentMainOption.setVisible(false);
-                        visitorsMainOption.setVisible(false);
-                        mailMainOption.setVisible(false);
-                        usersMainOption.setVisible(false);
-                        refferenceMainOption.setVisible(false);
-                         
-                     }
-                     
-                     
+                     } 
                      
                     }
                 };
     
-    
-     public void actionPerformed(ActionEvent e) {
-           System.out.println("event "+e);
-        if(e.getSource() == jPanel23){
-            System.out.println("japnel 23");
-        }
-    } 
-      public void actionPerformedBtn(ActionEvent e) {
+    */
+   
+    /* public void loadUserDetails(){
+       
+       User user=CurrentUser.getUser();
+       System.out.println("user "+user.toString2());
+       getUserNameField().setText(user.getUserName());
+       getPasswordField().setText(user.getPassword());
+        getPhoneNumberField().setText(user.getphoneNumber());
+        getNameField().setText(user.getName());
+        getNicField().setText(user.getIdCardNo());
+        getGenderComboBox().setSelectedItem(user.getGender());
+        getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
+        getAddressField().setText(user.getAddress());
+        Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
+         getDobDateChooser().setDate(dob);
         
-    } 
+         
+         
+
+     }*/
+   /*  public  void saveUser(){
+         String role=CurrentUser.getUserRole();
+         String path=null;
+          if(role.equalsIgnoreCase("Patient")){
+              path=FileService.getPatientsFilePath();
+             
+         }
+         else if(role.equalsIgnoreCase("MedicalOfficer")){
+               path=FileService.getMoFilePath();
+         }
+         else if(role.equalsIgnoreCase("Receptionist")){
+               path=FileService.getReceptionistFilePath();
+         }
+        
+         FileService.deleteRecord(path, CurrentUser.getUser().toString2());
+         
+         
+        CurrentUser.getUser().setIdCardNo(getNicField().getText());
+        CurrentUser.getUser().setGender(getGenderComboBox().getSelectedItem().toString());
+        CurrentUser.getUser().setName(getNameField().getText());
+        CurrentUser.getUser().setUserName(getUserNameField().getText());
+        CurrentUser.getUser().setMaritalStatus(getMartialStatusComboBoxField().getSelectedItem().toString());
+        CurrentUser.getUser().setAddress(getAddressField().getText());
+        CurrentUser.getUser().setStrPassword(getPasswordField().getText());
+        CurrentUser.getUser().setphoneNumber(getPhoneNumberField().getText());
+        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat(getDobDateChooser().getDate()));
+         
+         FileService.addLine(path,  CurrentUser.getUser().toString2());
+     }*/
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -450,19 +969,19 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminSidePanel = new javax.swing.JPanel();
         profileImg = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        appointmentBtnPanel = new javax.swing.JPanel();
+        appointmentBtnPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        mailBtnPanel = new javax.swing.JPanel();
+        mailBtnPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        complaintBtnPanel = new javax.swing.JPanel();
+        complaintBtnPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         reportBtnPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        visitorBtnPanel = new javax.swing.JPanel();
+        visitorBtnPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         homeBtnPanel1 = new javax.swing.JPanel();
@@ -474,60 +993,56 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         refferenceBtnPanel = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        settingBtnPanel1 = new javax.swing.JPanel();
+        logOutBtnPanel1 = new javax.swing.JPanel();
         jLabel75 = new javax.swing.JLabel();
         jLabel76 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userNameLabel = new javax.swing.JLabel();
-        settingBtnPanel = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         patientSidePanel = new javax.swing.JPanel();
         profileImg1 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        appointmentBtnPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
+        complaintBtnPanel2 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        patientSettingPanel = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         homeBtnPanel3 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        patientSettingPanel1 = new javax.swing.JPanel();
+        logOutBtnPanel2 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         userNameLabel1 = new javax.swing.JLabel();
+        patientSettingBtnPanel = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
         moSidePanel = new javax.swing.JPanel();
         profileImg2 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        moSettingPanel = new javax.swing.JPanel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
         homeBtnPanel2 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jPanel37 = new javax.swing.JPanel();
+        logOutBtnPanel3 = new javax.swing.JPanel();
         jLabel71 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
+        appointmentBtnPanel4 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         userNameLabel2 = new javax.swing.JLabel();
+        moSettingBtnPanel = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
         receptionSidePanel = new javax.swing.JPanel();
         profileImg3 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
-        jPanel31 = new javax.swing.JPanel();
+        appointmentBtnPanel2 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jPanel32 = new javax.swing.JPanel();
+        mailBtnPanel2 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        jPanel33 = new javax.swing.JPanel();
+        complaintBtnPanel3 = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         visitorBtnPanel2 = new javax.swing.JPanel();
@@ -539,12 +1054,12 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         homeBtnPanel4 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        receptionistSettingPanel1 = new javax.swing.JPanel();
+        logOutBtnPanel4 = new javax.swing.JPanel();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         userNameLabel3 = new javax.swing.JLabel();
-        receptionistSettingPanel = new javax.swing.JPanel();
+        receptionistSettingBtnPanel = new javax.swing.JPanel();
         jLabel54 = new javax.swing.JLabel();
         appointmentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -563,70 +1078,64 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         appoinmentReportPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         appointmentReportTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        moComboBox = new javax.swing.JComboBox<>();
+        appoinmentReportPdfBtn = new javax.swing.JButton();
+        appointmentReportCsvBtn = new javax.swing.JButton();
+        appointmentReportDateChooser = new com.toedter.calendar.JDateChooser();
+        appointmentReportMoComboBox = new javax.swing.JComboBox<>();
         userLogReportPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         userLogReportTable = new javax.swing.JTable();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        userLoginReportDateChooser3 = new com.toedter.calendar.JDateChooser();
+        userLoginReportComboBox = new javax.swing.JComboBox<>();
+        userLogReportPdfBtn = new javax.swing.JButton();
+        userLogReportCsvBtn = new javax.swing.JButton();
         patientCreditialReportPanel = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         patientCredintialTable = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
+        patientCredintialPdfBtn = new javax.swing.JButton();
+        patientCredintialCsvBtn = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
+        userLogReportOptionPanel = new javax.swing.JPanel();
         jLabel77 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
+        appointmentReportOptionPanel = new javax.swing.JPanel();
         jLabel78 = new javax.swing.JLabel();
-        jPanel38 = new javax.swing.JPanel();
+        patientCredentialReportOptionPanel = new javax.swing.JPanel();
         jLabel79 = new javax.swing.JLabel();
         refferencePanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        specialityReferenceOptionPanel = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        complainReferenceOptionPanel = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         specialityListPanel = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         refferenceList = new javax.swing.JList<>();
         settingsPanel = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        usernamefield = new javax.swing.JTextField();
-        jLabel41 = new javax.swing.JLabel();
-        namefield = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
-        Passwordfield = new javax.swing.JPasswordField();
         jLabel50 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        genderComboBox1 = new javax.swing.JComboBox<>();
         jLabel59 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel60 = new javax.swing.JLabel();
         PhoneNofield = new javax.swing.JTextField();
         jLabel61 = new javax.swing.JLabel();
-        NICNofield = new javax.swing.JTextField();
+        nicField = new javax.swing.JTextField();
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        martialStatusComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
-        AddressField = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        addressField = new javax.swing.JTextArea();
+        saveUserBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel64 = new javax.swing.JLabel();
-        dateJoinedField = new com.toedter.calendar.JDateChooser();
-        jLabel49 = new javax.swing.JLabel();
-        staffIdField = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        staffEmailField = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        userNameField = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        Passwordfield = new javax.swing.JTextField();
         photoUploadedPanel1 = new javax.swing.JPanel();
-        receptionistPhotoLabel = new javax.swing.JLabel();
         photoAddBtn2 = new javax.swing.JButton();
+        receptionistPhotoLabel = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         usersPanel = new javax.swing.JPanel();
         moScrollPanel = new javax.swing.JScrollPane();
@@ -644,54 +1153,55 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel68 = new javax.swing.JLabel();
         appointmentMainOption = new javax.swing.JPanel();
         adminAppointmentOptions = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        deleteAppointmentBtn = new javax.swing.JButton();
         receptionAppointmentOptions = new javax.swing.JPanel();
-        approveAppoinmentBtn9 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        approveAppoinmentBtn = new javax.swing.JButton();
+        addAppointmentBtn = new javax.swing.JButton();
         generatePdfBtn = new javax.swing.JButton();
-        editBtn5 = new javax.swing.JButton();
+        editAppointmentBtn = new javax.swing.JButton();
         patientAppointmentOptions = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
+        addAppointmentBtn2 = new javax.swing.JButton();
         moAppointmentOptions = new javax.swing.JPanel();
-        moAppoinmentCompleteBtn = new javax.swing.JButton();
+        completedAppointmentBtn = new javax.swing.JButton();
         usersMainOption = new javax.swing.JPanel();
         adminUserOptions = new javax.swing.JPanel();
-        adminDeleteUser = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
-        viewBtn11 = new javax.swing.JButton();
-        addBtn11 = new javax.swing.JButton();
-        receptionUserOptions = new javax.swing.JPanel();
-        deleteBtn15 = new javax.swing.JButton();
-        editBtn7 = new javax.swing.JButton();
-        addBtn10 = new javax.swing.JButton();
+        deleteUsersBtn = new javax.swing.JButton();
+        editUsersBtn = new javax.swing.JButton();
+        resetPasswordBtn = new javax.swing.JButton();
+        addUsersBtn = new javax.swing.JButton();
+        receptionistUserOptions = new javax.swing.JPanel();
+        deleteUsersBtn2 = new javax.swing.JButton();
+        editUsersBtn2 = new javax.swing.JButton();
+        addUsersBtn2 = new javax.swing.JButton();
+        resetPasswordBtn2 = new javax.swing.JButton();
         mailMainOption = new javax.swing.JPanel();
         adminMailOptions = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        deleteMailBtn = new javax.swing.JButton();
         receptionMailOptions = new javax.swing.JPanel();
-        jButton14 = new javax.swing.JButton();
-        editBtn6 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        deleteMailBtn2 = new javax.swing.JButton();
+        editMailBtn = new javax.swing.JButton();
+        addMailBtn = new javax.swing.JButton();
         complaintsMainOption = new javax.swing.JPanel();
         adminComplaintOptions = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        editBtn3 = new javax.swing.JButton();
-        approveBtn3 = new javax.swing.JButton();
+        deleteComplaintBtn = new javax.swing.JButton();
+        editComplaintBtn = new javax.swing.JButton();
+        approveComplaintBtn = new javax.swing.JButton();
         patientComplaintOptions = new javax.swing.JPanel();
-        jButton18 = new javax.swing.JButton();
-        receptionComplaintOptions = new javax.swing.JPanel();
-        jButton16 = new javax.swing.JButton();
+        addComplaintBtn2 = new javax.swing.JButton();
+        receptionistComplaintOptions = new javax.swing.JPanel();
+        addComplaintBtn = new javax.swing.JButton();
         visitorsMainOption = new javax.swing.JPanel();
-        receptionVisitorOptions = new javax.swing.JPanel();
-        jButton15 = new javax.swing.JButton();
-        editBtn8 = new javax.swing.JButton();
-        addBtn13 = new javax.swing.JButton();
+        receptionistVisitorOptions = new javax.swing.JPanel();
+        deleteVisitorBtn = new javax.swing.JButton();
+        editVisitorBtn = new javax.swing.JButton();
+        addVisitorBtn = new javax.swing.JButton();
         adminVisitorOptions = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
+        deleteVisitorBtn2 = new javax.swing.JButton();
         refferenceMainOption = new javax.swing.JPanel();
         adminRefferenceOptions = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        editBtn2 = new javax.swing.JButton();
-        addBtn12 = new javax.swing.JButton();
+        deleteReferenceBtn = new javax.swing.JButton();
+        editReferenceBtn = new javax.swing.JButton();
+        addReferenceBtn = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -735,13 +1245,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel8.setForeground(new java.awt.Color(54, 33, 89));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        appointmentBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
-        appointmentBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        appointmentBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentBtnPanelMousePressed(evt);
-            }
-        });
+        appointmentBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        appointmentBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -749,35 +1254,30 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
 
-        javax.swing.GroupLayout appointmentBtnPanelLayout = new javax.swing.GroupLayout(appointmentBtnPanel);
-        appointmentBtnPanel.setLayout(appointmentBtnPanelLayout);
-        appointmentBtnPanelLayout.setHorizontalGroup(
-            appointmentBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(appointmentBtnPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout appointmentBtnPanel1Layout = new javax.swing.GroupLayout(appointmentBtnPanel1);
+        appointmentBtnPanel1.setLayout(appointmentBtnPanel1Layout);
+        appointmentBtnPanel1Layout.setHorizontalGroup(
+            appointmentBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentBtnPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
-        appointmentBtnPanelLayout.setVerticalGroup(
-            appointmentBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentBtnPanelLayout.createSequentialGroup()
+        appointmentBtnPanel1Layout.setVerticalGroup(
+            appointmentBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentBtnPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel8.add(appointmentBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
+        jPanel8.add(appointmentBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
 
-        mailBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
-        mailBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        mailBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mailBtnPanelMousePressed(evt);
-            }
-        });
+        mailBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        mailBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -785,73 +1285,63 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/mail_configuration_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout mailBtnPanelLayout = new javax.swing.GroupLayout(mailBtnPanel);
-        mailBtnPanel.setLayout(mailBtnPanelLayout);
-        mailBtnPanelLayout.setHorizontalGroup(
-            mailBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mailBtnPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout mailBtnPanel1Layout = new javax.swing.GroupLayout(mailBtnPanel1);
+        mailBtnPanel1.setLayout(mailBtnPanel1Layout);
+        mailBtnPanel1Layout.setHorizontalGroup(
+            mailBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailBtnPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        mailBtnPanelLayout.setVerticalGroup(
-            mailBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mailBtnPanelLayout.createSequentialGroup()
+        mailBtnPanel1Layout.setVerticalGroup(
+            mailBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailBtnPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mailBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mailBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel8.add(mailBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
+        jPanel8.add(mailBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
 
-        complaintBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
-        complaintBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        complaintBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                complaintBtnPanelMousePressed(evt);
-            }
-        });
+        complaintBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        complaintBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Complaints");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/documents_30px.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/complaint_32px.png"))); // NOI18N
 
-        javax.swing.GroupLayout complaintBtnPanelLayout = new javax.swing.GroupLayout(complaintBtnPanel);
-        complaintBtnPanel.setLayout(complaintBtnPanelLayout);
-        complaintBtnPanelLayout.setHorizontalGroup(
-            complaintBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(complaintBtnPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout complaintBtnPanel1Layout = new javax.swing.GroupLayout(complaintBtnPanel1);
+        complaintBtnPanel1.setLayout(complaintBtnPanel1Layout);
+        complaintBtnPanel1Layout.setHorizontalGroup(
+            complaintBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
-        complaintBtnPanelLayout.setVerticalGroup(
-            complaintBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(complaintBtnPanelLayout.createSequentialGroup()
+        complaintBtnPanel1Layout.setVerticalGroup(
+            complaintBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(complaintBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(complaintBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel8.add(complaintBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
+        jPanel8.add(complaintBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
 
         reportBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
         reportBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        reportBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                reportBtnPanelMousePressed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -882,13 +1372,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel8.add(reportBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 50));
 
-        visitorBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
-        visitorBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        visitorBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                visitorBtnPanelMousePressed(evt);
-            }
-        });
+        visitorBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        visitorBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -896,36 +1381,31 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/myspace_app_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout visitorBtnPanelLayout = new javax.swing.GroupLayout(visitorBtnPanel);
-        visitorBtnPanel.setLayout(visitorBtnPanelLayout);
-        visitorBtnPanelLayout.setHorizontalGroup(
-            visitorBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(visitorBtnPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout visitorBtnPanel1Layout = new javax.swing.GroupLayout(visitorBtnPanel1);
+        visitorBtnPanel1.setLayout(visitorBtnPanel1Layout);
+        visitorBtnPanel1Layout.setHorizontalGroup(
+            visitorBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(visitorBtnPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        visitorBtnPanelLayout.setVerticalGroup(
-            visitorBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(visitorBtnPanelLayout.createSequentialGroup()
+        visitorBtnPanel1Layout.setVerticalGroup(
+            visitorBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(visitorBtnPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(visitorBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(visitorBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel8.add(visitorBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
+        jPanel8.add(visitorBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
 
         homeBtnPanel1.setBackground(new java.awt.Color(85, 65, 118));
         homeBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        homeBtnPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                homeBtnPanel1MousePressed(evt);
-            }
-        });
 
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -958,11 +1438,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         userBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
         userBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        userBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userBtnPanelMousePressed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -995,17 +1470,12 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         refferenceBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
         refferenceBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        refferenceBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                refferenceBtnPanelMousePressed(evt);
-            }
-        });
 
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Refference");
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/documents_30px.png"))); // NOI18N
 
         javax.swing.GroupLayout refferenceBtnPanelLayout = new javax.swing.GroupLayout(refferenceBtnPanel);
         refferenceBtnPanel.setLayout(refferenceBtnPanelLayout);
@@ -1016,7 +1486,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         refferenceBtnPanelLayout.setVerticalGroup(
             refferenceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1030,11 +1500,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel8.add(refferenceBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 250, 50));
 
-        settingBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
-        settingBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        settingBtnPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                settingBtnPanel1MousePressed(evt);
+                logOutBtnPanel1MousePressed(evt);
             }
         });
 
@@ -1044,52 +1514,28 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout settingBtnPanel1Layout = new javax.swing.GroupLayout(settingBtnPanel1);
-        settingBtnPanel1.setLayout(settingBtnPanel1Layout);
-        settingBtnPanel1Layout.setHorizontalGroup(
-            settingBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingBtnPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout logOutBtnPanel1Layout = new javax.swing.GroupLayout(logOutBtnPanel1);
+        logOutBtnPanel1.setLayout(logOutBtnPanel1Layout);
+        logOutBtnPanel1Layout.setHorizontalGroup(
+            logOutBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel76)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        settingBtnPanel1Layout.setVerticalGroup(
-            settingBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingBtnPanel1Layout.createSequentialGroup()
+        logOutBtnPanel1Layout.setVerticalGroup(
+            logOutBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(settingBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logOutBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel8.add(settingBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 250, 50));
-
-        settingBtnPanel.setBackground(new java.awt.Color(54, 33, 89));
-        settingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        settingBtnPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                settingBtnPanelMousePressed(evt);
-            }
-        });
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
-
-        javax.swing.GroupLayout settingBtnPanelLayout = new javax.swing.GroupLayout(settingBtnPanel);
-        settingBtnPanel.setLayout(settingBtnPanelLayout);
-        settingBtnPanelLayout.setHorizontalGroup(
-            settingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingBtnPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        settingBtnPanelLayout.setVerticalGroup(
-            settingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
+        jPanel8.add(logOutBtnPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 250, 50));
 
         javax.swing.GroupLayout adminSidePanelLayout = new javax.swing.GroupLayout(adminSidePanel);
         adminSidePanel.setLayout(adminSidePanelLayout);
@@ -1097,16 +1543,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminSidePanelLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(adminSidePanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(adminSidePanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(profileImg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(settingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(profileImg)))
+                .addGap(28, 28, 28))
             .addGroup(adminSidePanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(userNameLabel)
@@ -1116,11 +1559,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         adminSidePanelLayout.setVerticalGroup(
             adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminSidePanelLayout.createSequentialGroup()
-                .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(adminSidePanelLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(settingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(profileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(userNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1140,13 +1579,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel15.setForeground(new java.awt.Color(54, 33, 89));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel5MousePressed(evt);
-            }
-        });
+        appointmentBtnPanel3.setBackground(new java.awt.Color(64, 43, 100));
+        appointmentBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -1154,109 +1588,62 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+        javax.swing.GroupLayout appointmentBtnPanel3Layout = new javax.swing.GroupLayout(appointmentBtnPanel3);
+        appointmentBtnPanel3.setLayout(appointmentBtnPanel3Layout);
+        appointmentBtnPanel3Layout.setHorizontalGroup(
+            appointmentBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentBtnPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        appointmentBtnPanel3Layout.setVerticalGroup(
+            appointmentBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentBtnPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addContainerGap())
             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel15.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
+        jPanel15.add(appointmentBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
 
-        jPanel17.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel17MousePressed(evt);
-            }
-        });
+        complaintBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        complaintBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Complaints");
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/documents_30px.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/complaint_32px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+        javax.swing.GroupLayout complaintBtnPanel2Layout = new javax.swing.GroupLayout(complaintBtnPanel2);
+        complaintBtnPanel2.setLayout(complaintBtnPanel2Layout);
+        complaintBtnPanel2Layout.setHorizontalGroup(
+            complaintBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
+        complaintBtnPanel2Layout.setVerticalGroup(
+            complaintBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(complaintBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
-
-        patientSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
-        patientSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        patientSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                patientSettingPanelMousePressed(evt);
-            }
-        });
-
-        jLabel25.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Settings");
-
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
-
-        javax.swing.GroupLayout patientSettingPanelLayout = new javax.swing.GroupLayout(patientSettingPanel);
-        patientSettingPanel.setLayout(patientSettingPanelLayout);
-        patientSettingPanelLayout.setHorizontalGroup(
-            patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel26)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        patientSettingPanelLayout.setVerticalGroup(
-            patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(patientSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel15.add(patientSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
+        jPanel15.add(complaintBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
 
         homeBtnPanel3.setBackground(new java.awt.Color(85, 65, 118));
         homeBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        homeBtnPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                homeBtnPanel3MousePressed(evt);
-            }
-        });
 
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
@@ -1287,42 +1674,56 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel15.add(homeBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        patientSettingPanel1.setBackground(new java.awt.Color(64, 43, 100));
-        patientSettingPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        patientSettingPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                patientSettingPanel1MousePressed(evt);
-            }
-        });
+        logOutBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel69.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel69.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel69.setText("Settings");
+        jLabel69.setText("Log-Out");
 
         jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout patientSettingPanel1Layout = new javax.swing.GroupLayout(patientSettingPanel1);
-        patientSettingPanel1.setLayout(patientSettingPanel1Layout);
-        patientSettingPanel1Layout.setHorizontalGroup(
-            patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+        javax.swing.GroupLayout logOutBtnPanel2Layout = new javax.swing.GroupLayout(logOutBtnPanel2);
+        logOutBtnPanel2.setLayout(logOutBtnPanel2Layout);
+        logOutBtnPanel2Layout.setHorizontalGroup(
+            logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel70)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
-        patientSettingPanel1Layout.setVerticalGroup(
-            patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(patientSettingPanel1Layout.createSequentialGroup()
+        logOutBtnPanel2Layout.setVerticalGroup(
+            logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(patientSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logOutBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel15.add(patientSettingPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
+        jPanel15.add(logOutBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
+
+        patientSettingBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
+        patientSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
+
+        javax.swing.GroupLayout patientSettingBtnPanelLayout = new javax.swing.GroupLayout(patientSettingBtnPanel);
+        patientSettingBtnPanel.setLayout(patientSettingBtnPanelLayout);
+        patientSettingBtnPanelLayout.setHorizontalGroup(
+            patientSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientSettingBtnPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel26)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        patientSettingBtnPanelLayout.setVerticalGroup(
+            patientSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout patientSidePanelLayout = new javax.swing.GroupLayout(patientSidePanel);
         patientSidePanel.setLayout(patientSidePanelLayout);
@@ -1330,10 +1731,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patientSidePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(patientSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(profileImg1)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGroup(patientSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(patientSidePanelLayout.createSequentialGroup()
+                        .addComponent(profileImg1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(patientSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(patientSidePanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(userNameLabel1)
@@ -1343,14 +1747,18 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         patientSidePanelLayout.setVerticalGroup(
             patientSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientSidePanelLayout.createSequentialGroup()
-                .addComponent(profileImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(patientSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(profileImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(patientSidePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(patientSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addComponent(userNameLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addContainerGap(453, Short.MAX_VALUE))
         );
 
         bgPanel.add(patientSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, -1));
@@ -1363,86 +1771,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel22.setForeground(new java.awt.Color(54, 33, 89));
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel23.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel23.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel23MousePressed(evt);
-            }
-        });
-
-        jLabel29.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("Log-out");
-
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel29)
-                .addContainerGap(112, Short.MAX_VALUE))
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel30)
-                .addContainerGap())
-            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
-
-        moSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
-        moSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        moSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                moSettingPanelMousePressed(evt);
-            }
-        });
-
-        jLabel39.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("Settings");
-
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
-
-        javax.swing.GroupLayout moSettingPanelLayout = new javax.swing.GroupLayout(moSettingPanel);
-        moSettingPanel.setLayout(moSettingPanelLayout);
-        moSettingPanelLayout.setHorizontalGroup(
-            moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(moSettingPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel40)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
-        moSettingPanelLayout.setVerticalGroup(
-            moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(moSettingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(moSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel22.add(moSettingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
-
         homeBtnPanel2.setBackground(new java.awt.Color(85, 65, 118));
         homeBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        homeBtnPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                homeBtnPanel2MousePressed(evt);
-            }
-        });
 
         jLabel33.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
@@ -1473,41 +1803,92 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel22.add(homeBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        jPanel37.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel37.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel37.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutBtnPanel3.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel37MousePressed(evt);
+                logOutBtnPanel3MousePressed(evt);
             }
         });
 
         jLabel71.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel71.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel71.setText("Appointments");
+        jLabel71.setText("Log-Out");
 
-        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
+        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/LogOut32px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
-        jPanel37.setLayout(jPanel37Layout);
-        jPanel37Layout.setHorizontalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+        javax.swing.GroupLayout logOutBtnPanel3Layout = new javax.swing.GroupLayout(logOutBtnPanel3);
+        logOutBtnPanel3.setLayout(logOutBtnPanel3Layout);
+        logOutBtnPanel3Layout.setHorizontalGroup(
+            logOutBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jLabel72)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel71)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
-        jPanel37Layout.setVerticalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel37Layout.createSequentialGroup()
+        logOutBtnPanel3Layout.setVerticalGroup(
+            logOutBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logOutBtnPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel72)
                 .addContainerGap())
             .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel22.add(jPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
+        jPanel22.add(logOutBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
+
+        appointmentBtnPanel4.setBackground(new java.awt.Color(64, 43, 100));
+        appointmentBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("Appoinments");
+
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
+
+        javax.swing.GroupLayout appointmentBtnPanel4Layout = new javax.swing.GroupLayout(appointmentBtnPanel4);
+        appointmentBtnPanel4.setLayout(appointmentBtnPanel4Layout);
+        appointmentBtnPanel4Layout.setHorizontalGroup(
+            appointmentBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentBtnPanel4Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel37)
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+        appointmentBtnPanel4Layout.setVerticalGroup(
+            appointmentBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentBtnPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel39)
+                .addContainerGap())
+            .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel22.add(appointmentBtnPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 50));
+
+        moSettingBtnPanel.setBackground(new java.awt.Color(54, 33, 89));
+        moSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
+
+        javax.swing.GroupLayout moSettingBtnPanelLayout = new javax.swing.GroupLayout(moSettingBtnPanel);
+        moSettingBtnPanel.setLayout(moSettingBtnPanelLayout);
+        moSettingBtnPanelLayout.setHorizontalGroup(
+            moSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moSettingBtnPanelLayout.createSequentialGroup()
+                .addComponent(jLabel40)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+        moSettingBtnPanelLayout.setVerticalGroup(
+            moSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(moSettingBtnPanelLayout.createSequentialGroup()
+                .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout moSidePanelLayout = new javax.swing.GroupLayout(moSidePanel);
         moSidePanel.setLayout(moSidePanelLayout);
@@ -1517,8 +1898,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(moSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profileImg2))
-                .addGap(27, 27, 27))
+                    .addGroup(moSidePanelLayout.createSequentialGroup()
+                        .addComponent(profileImg2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(moSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17))
             .addGroup(moSidePanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(userNameLabel2)
@@ -1528,14 +1912,18 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         moSidePanelLayout.setVerticalGroup(
             moSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(moSidePanelLayout.createSequentialGroup()
-                .addComponent(profileImg2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(moSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(profileImg2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(moSidePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(moSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addComponent(userNameLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(46, 46, 46)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addContainerGap(522, Short.MAX_VALUE))
         );
 
         bgPanel.add(moSidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, -1));
@@ -1548,13 +1936,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel30.setForeground(new java.awt.Color(54, 33, 89));
         jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel31.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel31.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel31.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel31MousePressed(evt);
-            }
-        });
+        appointmentBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        appointmentBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel43.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
@@ -1562,35 +1945,30 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/calendar 32.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel31Layout.createSequentialGroup()
+        javax.swing.GroupLayout appointmentBtnPanel2Layout = new javax.swing.GroupLayout(appointmentBtnPanel2);
+        appointmentBtnPanel2.setLayout(appointmentBtnPanel2Layout);
+        appointmentBtnPanel2Layout.setHorizontalGroup(
+            appointmentBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentBtnPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel44)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel43)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
-        jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel31Layout.createSequentialGroup()
+        appointmentBtnPanel2Layout.setVerticalGroup(
+            appointmentBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentBtnPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel44)
                 .addContainerGap())
             .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel30.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
+        jPanel30.add(appointmentBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 250, 50));
 
-        jPanel32.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel32.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel32.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel32MousePressed(evt);
-            }
-        });
+        mailBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
+        mailBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel45.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
@@ -1598,73 +1976,63 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/mail_configuration_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
+        javax.swing.GroupLayout mailBtnPanel2Layout = new javax.swing.GroupLayout(mailBtnPanel2);
+        mailBtnPanel2.setLayout(mailBtnPanel2Layout);
+        mailBtnPanel2Layout.setHorizontalGroup(
+            mailBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailBtnPanel2Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel46)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(85, Short.MAX_VALUE))
         );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
+        mailBtnPanel2Layout.setVerticalGroup(
+            mailBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mailBtnPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mailBtnPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel30.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
+        jPanel30.add(mailBtnPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 250, 50));
 
-        jPanel33.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel33.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel33.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel33MousePressed(evt);
-            }
-        });
+        complaintBtnPanel3.setBackground(new java.awt.Color(64, 43, 100));
+        complaintBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel47.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("Complaints");
 
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/documents_30px.png"))); // NOI18N
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/complaint_32px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        javax.swing.GroupLayout complaintBtnPanel3Layout = new javax.swing.GroupLayout(complaintBtnPanel3);
+        complaintBtnPanel3.setLayout(complaintBtnPanel3Layout);
+        complaintBtnPanel3Layout.setHorizontalGroup(
+            complaintBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel48)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        complaintBtnPanel3Layout.setVerticalGroup(
+            complaintBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complaintBtnPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(complaintBtnPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel30.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
+        jPanel30.add(complaintBtnPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 50));
 
         visitorBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
         visitorBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        visitorBtnPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                visitorBtnPanel2MousePressed(evt);
-            }
-        });
 
         jLabel51.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(255, 255, 255));
@@ -1697,11 +2065,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         userBtnPanel2.setBackground(new java.awt.Color(64, 43, 100));
         userBtnPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        userBtnPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userBtnPanel2MousePressed(evt);
-            }
-        });
 
         jLabel55.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel55.setForeground(new java.awt.Color(255, 255, 255));
@@ -1734,11 +2097,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         homeBtnPanel4.setBackground(new java.awt.Color(85, 65, 118));
         homeBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        homeBtnPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                homeBtnPanel4MousePressed(evt);
-            }
-        });
 
         jLabel57.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel57.setForeground(new java.awt.Color(255, 255, 255));
@@ -1769,11 +2127,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jPanel30.add(homeBtnPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 50));
 
-        receptionistSettingPanel1.setBackground(new java.awt.Color(64, 43, 100));
-        receptionistSettingPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        receptionistSettingPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutBtnPanel4.setBackground(new java.awt.Color(64, 43, 100));
+        logOutBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logOutBtnPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistSettingPanel1MousePressed(evt);
+                logOutBtnPanel4MousePressed(evt);
             }
         });
 
@@ -1783,49 +2141,44 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout receptionistSettingPanel1Layout = new javax.swing.GroupLayout(receptionistSettingPanel1);
-        receptionistSettingPanel1.setLayout(receptionistSettingPanel1Layout);
-        receptionistSettingPanel1Layout.setHorizontalGroup(
-            receptionistSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistSettingPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout logOutBtnPanel4Layout = new javax.swing.GroupLayout(logOutBtnPanel4);
+        logOutBtnPanel4.setLayout(logOutBtnPanel4Layout);
+        logOutBtnPanel4Layout.setHorizontalGroup(
+            logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel74)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(85, Short.MAX_VALUE))
         );
-        receptionistSettingPanel1Layout.setVerticalGroup(
-            receptionistSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistSettingPanel1Layout.createSequentialGroup()
+        logOutBtnPanel4Layout.setVerticalGroup(
+            logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(receptionistSettingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logOutBtnPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel30.add(receptionistSettingPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
+        jPanel30.add(logOutBtnPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 250, 50));
 
-        receptionistSettingPanel.setBackground(new java.awt.Color(64, 43, 100));
-        receptionistSettingPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        receptionistSettingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistSettingPanelMousePressed(evt);
-            }
-        });
+        receptionistSettingBtnPanel.setBackground(new java.awt.Color(64, 43, 100));
+        receptionistSettingBtnPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/settings_24px.png"))); // NOI18N
 
-        javax.swing.GroupLayout receptionistSettingPanelLayout = new javax.swing.GroupLayout(receptionistSettingPanel);
-        receptionistSettingPanel.setLayout(receptionistSettingPanelLayout);
-        receptionistSettingPanelLayout.setHorizontalGroup(
-            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionistSettingPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout receptionistSettingBtnPanelLayout = new javax.swing.GroupLayout(receptionistSettingBtnPanel);
+        receptionistSettingBtnPanel.setLayout(receptionistSettingBtnPanelLayout);
+        receptionistSettingBtnPanelLayout.setHorizontalGroup(
+            receptionistSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistSettingBtnPanelLayout.createSequentialGroup()
                 .addComponent(jLabel54)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
-        receptionistSettingPanelLayout.setVerticalGroup(
-            receptionistSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        receptionistSettingBtnPanelLayout.setVerticalGroup(
+            receptionistSettingBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1847,7 +2200,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addGap(39, 39, 39)
                         .addComponent(profileImg3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(receptionistSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(receptionistSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         receptionSidePanelLayout.setVerticalGroup(
@@ -1856,7 +2209,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addGroup(receptionSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(receptionSidePanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(receptionistSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(receptionistSettingBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(131, 131, 131))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionSidePanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -2185,37 +2538,37 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             appointmentReportTable.getColumnModel().getColumn(8).setHeaderValue("Sysmtomps");
         }
 
-        jButton2.setText("Generate Report in PDF");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        appoinmentReportPdfBtn.setText("Generate Report in PDF");
+        appoinmentReportPdfBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                appoinmentReportPdfBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Generate Report in CSV");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        appointmentReportCsvBtn.setText("Generate Report in CSV");
+        appointmentReportCsvBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                appointmentReportCsvBtnActionPerformed(evt);
             }
         });
 
-        jDateChooser2.addMouseListener(new java.awt.event.MouseAdapter() {
+        appointmentReportDateChooser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jDateChooser2MousePressed(evt);
+                appointmentReportDateChooserMousePressed(evt);
             }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jDateChooser2MouseClicked(evt);
+                appointmentReportDateChooserMouseClicked(evt);
             }
         });
-        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        appointmentReportDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser2PropertyChange(evt);
+                appointmentReportDateChooserPropertyChange(evt);
             }
         });
 
-        moComboBox.addItemListener(new java.awt.event.ItemListener() {
+        appointmentReportMoComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                moComboBoxItemStateChanged(evt);
+                appointmentReportMoComboBoxItemStateChanged(evt);
             }
         });
 
@@ -2232,14 +2585,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addGroup(appoinmentReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
                                 .addGap(188, 188, 188)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(appointmentReportDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(127, 127, 127)
-                                .addComponent(moComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
                                 .addGap(120, 120, 120)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(appoinmentReportPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(188, 188, 188)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(appointmentReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2248,14 +2601,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(appoinmentReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(moComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(appointmentReportDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addGroup(appoinmentReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(appoinmentReportPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(appointmentReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
@@ -2306,27 +2659,27 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             userLogReportTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
-        jDateChooser3.setPreferredSize(new java.awt.Dimension(100, 20));
+        userLoginReportDateChooser3.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Receptionist", "MedicalOfficer", "Patient", " ", " " }));
-        jComboBox4.setPreferredSize(new java.awt.Dimension(100, 20));
-        jComboBox4.addItemListener(new java.awt.event.ItemListener() {
+        userLoginReportComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Receptionist", "MedicalOfficer", "Patient", " ", " " }));
+        userLoginReportComboBox.setPreferredSize(new java.awt.Dimension(100, 20));
+        userLoginReportComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox4ItemStateChanged(evt);
+                userLoginReportComboBoxItemStateChanged(evt);
             }
         });
 
-        jButton4.setText("Generate Report in PDF");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        userLogReportPdfBtn.setText("Generate Report in PDF");
+        userLogReportPdfBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                userLogReportPdfBtnActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Generate Report in CSV");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        userLogReportCsvBtn.setText("Generate Report in CSV");
+        userLogReportCsvBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                userLogReportCsvBtnActionPerformed(evt);
             }
         });
 
@@ -2341,16 +2694,16 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE))
                     .addGroup(userLogReportPanelLayout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userLoginReportDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(225, 225, 225)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userLoginReportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(userLogReportPanelLayout.createSequentialGroup()
                 .addGap(170, 170, 170)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userLogReportPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(157, 157, 157)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userLogReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         userLogReportPanelLayout.setVerticalGroup(
@@ -2358,14 +2711,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(userLogReportPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(userLogReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(userLoginReportComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(userLoginReportDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addGroup(userLogReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userLogReportPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userLogReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
 
@@ -2415,17 +2768,17 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientCredintialTable.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
-        jButton10.setText("Generate Report in PDF");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        patientCredintialPdfBtn.setText("Generate Report in PDF");
+        patientCredintialPdfBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                patientCredintialPdfBtnActionPerformed(evt);
             }
         });
 
-        jButton19.setText("Generate Report in CSV");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        patientCredintialCsvBtn.setText("Generate Report in CSV");
+        patientCredintialCsvBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                patientCredintialCsvBtnActionPerformed(evt);
             }
         });
 
@@ -2440,9 +2793,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE))
                     .addGroup(patientCreditialReportPanelLayout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(patientCredintialPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(120, 120, 120)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(patientCredintialCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2453,8 +2806,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addGroup(patientCreditialReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(patientCredintialPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(patientCredintialCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(298, Short.MAX_VALUE))
         );
 
@@ -2464,16 +2817,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jPanel10.setForeground(new java.awt.Color(39, 55, 130));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel16.setForeground(new java.awt.Color(102, 0, 102));
-        jPanel16.setPreferredSize(new java.awt.Dimension(363, 40));
-        jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
+        userLogReportOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userLogReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        userLogReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
+        userLogReportOptionPanel.setPreferredSize(new java.awt.Dimension(363, 40));
+        userLogReportOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel16MousePressed(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel16MouseEntered(evt);
+                userLogReportOptionPanelMousePressed(evt);
             }
         });
 
@@ -2486,79 +2836,69 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+        javax.swing.GroupLayout userLogReportOptionPanelLayout = new javax.swing.GroupLayout(userLogReportOptionPanel);
+        userLogReportOptionPanel.setLayout(userLogReportOptionPanelLayout);
+        userLogReportOptionPanelLayout.setHorizontalGroup(
+            userLogReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userLogReportOptionPanelLayout.createSequentialGroup()
                 .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(jLabel77, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
         );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        userLogReportOptionPanelLayout.setVerticalGroup(
+            userLogReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel77, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 0, 370, 70));
+        jPanel10.add(userLogReportOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 0, 370, 70));
 
-        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel18.setForeground(new java.awt.Color(102, 0, 102));
-        jPanel18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel18MousePressed(evt);
-            }
-        });
+        appointmentReportOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        appointmentReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
 
         jLabel78.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel78.setForeground(new java.awt.Color(102, 0, 102));
         jLabel78.setText("Appointment Reports");
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
+        javax.swing.GroupLayout appointmentReportOptionPanelLayout = new javax.swing.GroupLayout(appointmentReportOptionPanel);
+        appointmentReportOptionPanel.setLayout(appointmentReportOptionPanelLayout);
+        appointmentReportOptionPanelLayout.setHorizontalGroup(
+            appointmentReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentReportOptionPanelLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(jLabel78)
                 .addContainerGap(99, Short.MAX_VALUE))
         );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        appointmentReportOptionPanelLayout.setVerticalGroup(
+            appointmentReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel78, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 363, 70));
+        jPanel10.add(appointmentReportOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 363, 70));
 
-        jPanel38.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel38.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel38.setForeground(new java.awt.Color(102, 0, 102));
-        jPanel38.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel38MousePressed(evt);
-            }
-        });
+        patientCredentialReportOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        patientCredentialReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        patientCredentialReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
 
         jLabel79.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel79.setForeground(new java.awt.Color(102, 0, 102));
         jLabel79.setText("Patients Creditials");
 
-        javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
-        jPanel38.setLayout(jPanel38Layout);
-        jPanel38Layout.setHorizontalGroup(
-            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel38Layout.createSequentialGroup()
+        javax.swing.GroupLayout patientCredentialReportOptionPanelLayout = new javax.swing.GroupLayout(patientCredentialReportOptionPanel);
+        patientCredentialReportOptionPanel.setLayout(patientCredentialReportOptionPanelLayout);
+        patientCredentialReportOptionPanelLayout.setHorizontalGroup(
+            patientCredentialReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patientCredentialReportOptionPanelLayout.createSequentialGroup()
                 .addContainerGap(114, Short.MAX_VALUE)
                 .addComponent(jLabel79, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
         );
-        jPanel38Layout.setVerticalGroup(
-            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        patientCredentialReportOptionPanelLayout.setVerticalGroup(
+            patientCredentialReportOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel79, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 360, 70));
+        jPanel10.add(patientCredentialReportOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 360, 70));
 
         reportsPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 70));
 
@@ -2567,70 +2907,54 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         refferencePanel.setBackground(new java.awt.Color(204, 204, 204));
         refferencePanel.setPreferredSize(new java.awt.Dimension(1090, 860));
 
-        jPanel2.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel2MousePressed(evt);
-            }
-        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        specialityReferenceOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        specialityReferenceOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel31.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setForeground(new java.awt.Color(64, 43, 100));
         jLabel31.setText("Speciality Refference");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+        javax.swing.GroupLayout specialityReferenceOptionPanelLayout = new javax.swing.GroupLayout(specialityReferenceOptionPanel);
+        specialityReferenceOptionPanel.setLayout(specialityReferenceOptionPanelLayout);
+        specialityReferenceOptionPanelLayout.setHorizontalGroup(
+            specialityReferenceOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, specialityReferenceOptionPanelLayout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(165, 165, 165))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        specialityReferenceOptionPanelLayout.setVerticalGroup(
+            specialityReferenceOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(64, 43, 100));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
-            }
-        });
+        jPanel3.add(specialityReferenceOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 530, 60));
 
+        complainReferenceOptionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        complainReferenceOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel28.setBackground(new java.awt.Color(255, 255, 255));
         jLabel28.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setForeground(new java.awt.Color(64, 43, 100));
         jLabel28.setText("Complain Refference");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout complainReferenceOptionPanelLayout = new javax.swing.GroupLayout(complainReferenceOptionPanel);
+        complainReferenceOptionPanel.setLayout(complainReferenceOptionPanelLayout);
+        complainReferenceOptionPanelLayout.setHorizontalGroup(
+            complainReferenceOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, complainReferenceOptionPanelLayout.createSequentialGroup()
+                .addContainerGap(106, Short.MAX_VALUE)
+                .addComponent(jLabel28)
                 .addGap(172, 172, 172))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        complainReferenceOptionPanelLayout.setVerticalGroup(
+            complainReferenceOptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel3.add(complainReferenceOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 60));
 
         specialityListPanel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -2649,7 +2973,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         specialityListPanelLayout.setVerticalGroup(
             specialityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(specialityListPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(52, 52, 52)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -2669,7 +2993,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(refferencePanelLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(specialityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(324, Short.MAX_VALUE))
         );
@@ -2682,37 +3006,19 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setText("setting ");
 
-        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel38.setText("Username");
-
-        usernamefield.addActionListener(new java.awt.event.ActionListener() {
+        nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernamefieldActionPerformed(evt);
-            }
-        });
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel41.setText("Password");
-
-        namefield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namefieldActionPerformed(evt);
+                nameFieldActionPerformed(evt);
             }
         });
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel42.setText("Name");
 
-        Passwordfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordfieldActionPerformed(evt);
-            }
-        });
-
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel50.setText("Gender");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Neutral" }));
+        genderComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Neutral" }));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel59.setText("Date of birth");
@@ -2729,81 +3035,66 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         jLabel63.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel63.setText("Marital status");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "Single" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        martialStatusComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "Single" }));
+        martialStatusComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                martialStatusComboBox2ActionPerformed(evt);
             }
         });
 
-        AddressField.setColumns(20);
-        AddressField.setRows(5);
-        jScrollPane6.setViewportView(AddressField);
+        addressField.setColumns(20);
+        addressField.setRows(5);
+        jScrollPane6.setViewportView(addressField);
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveUserBtn.setText("Save");
+        saveUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveUserBtnActionPerformed(evt);
             }
         });
 
-        jLabel64.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel64.setText("Date of joining");
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel38.setText("Username");
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel49.setText("Staff ID");
-
-        staffIdField.addActionListener(new java.awt.event.ActionListener() {
+        userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffIdFieldActionPerformed(evt);
+                userNameFieldActionPerformed(evt);
             }
         });
 
-        jLabel37.setText("Staff Email");
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel41.setText("Password");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(96, 96, 96)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(staffIdField)
-                    .addComponent(dateJoinedField, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(staffEmailField))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(userNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                    .addComponent(Passwordfield))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateJoinedField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(staffEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(Passwordfield))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         photoUploadedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        receptionistPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistPhotoLabelMousePressed(evt);
-            }
-        });
-        photoUploadedPanel1.add(receptionistPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
 
         photoAddBtn2.setText("add");
         photoAddBtn2.addActionListener(new java.awt.event.ActionListener() {
@@ -2813,7 +3104,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         });
         photoUploadedPanel1.add(photoAddBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
-        jLabel65.setText("Staff Photo");
+        receptionistPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                receptionistPhotoLabelMousePressed(evt);
+            }
+        });
+        photoUploadedPanel1.add(receptionistPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
+
+        jLabel65.setText("Photo");
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
@@ -2825,51 +3123,52 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel63, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                         .addComponent(jLabel62, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(settingsPanelLayout.createSequentialGroup()
-                                    .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(usernamefield)
-                                            .addComponent(namefield)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                            .addComponent(PhoneNofield))
-                                        .addComponent(Passwordfield, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(3, 3, 3))
-                                .addComponent(NICNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(142, 142, 142))))
+                                .addComponent(nicField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(122, 122, 122)
+                                        .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PhoneNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                                        .addGap(187, 187, 187)
+                                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(genderComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(martialStatusComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(223, 223, 223))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)))
-                        .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                                .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142))
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2879,55 +3178,45 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         .addGap(33, 33, 33)
                         .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(Passwordfield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernamefield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)))
-                        .addGap(30, 30, 30)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(namefield, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PhoneNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PhoneNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(genderComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(42, 42, 42)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                            .addComponent(martialStatusComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NICNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                            .addComponent(nicField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(331, Short.MAX_VALUE))
+                        .addGap(196, 196, 196)
+                        .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         bgPanel.add(settingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 1000));
@@ -3007,14 +3296,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
             },
             new String [] {
-                "User Name", "Name", "Gender", "Mobile", "Id Card No", "D.O.B", "Address", "Martail Status", "Password", "Blood Group", "Symtomps"
+                "User Name", "Name", "Gender", "Mobile", "Id Card No", "D.O.B", "Address", "Martail Status", "Password", "Blood Group", "Symtomps", "Photo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -3220,14 +3509,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         adminAppointmentOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(85, 65, 118));
-        jButton5.setText("Delete");
-        jButton5.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        deleteAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteAppointmentBtn.setText("Delete");
+        deleteAppointmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                deleteAppointmentBtnActionPerformed(evt);
             }
         });
 
@@ -3237,37 +3526,37 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminAppointmentOptionsLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(832, Short.MAX_VALUE))
         );
         adminAppointmentOptionsLayout.setVerticalGroup(
             adminAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminAppointmentOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(deleteAppointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         receptionAppointmentOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        approveAppoinmentBtn9.setBackground(new java.awt.Color(255, 255, 255));
-        approveAppoinmentBtn9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        approveAppoinmentBtn9.setForeground(new java.awt.Color(85, 65, 118));
-        approveAppoinmentBtn9.setText("Approve");
-        approveAppoinmentBtn9.setPreferredSize(new java.awt.Dimension(67, 31));
-        approveAppoinmentBtn9.addActionListener(new java.awt.event.ActionListener() {
+        approveAppoinmentBtn.setBackground(new java.awt.Color(255, 255, 255));
+        approveAppoinmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        approveAppoinmentBtn.setForeground(new java.awt.Color(85, 65, 118));
+        approveAppoinmentBtn.setText("Approve");
+        approveAppoinmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        approveAppoinmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveAppoinmentBtn9ActionPerformed(evt);
+                approveAppoinmentBtnActionPerformed(evt);
             }
         });
 
-        jButton11.setBackground(new java.awt.Color(255, 255, 255));
-        jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(85, 65, 118));
-        jButton11.setText("Add");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        addAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addAppointmentBtn.setText("Add");
+        addAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                addAppointmentBtnActionPerformed(evt);
             }
         });
 
@@ -3282,14 +3571,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        editBtn5.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn5.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn5.setText("Edit");
-        editBtn5.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn5.addActionListener(new java.awt.event.ActionListener() {
+        editAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editAppointmentBtn.setText("Edit");
+        editAppointmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        editAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn5ActionPerformed(evt);
+                editAppointmentBtnActionPerformed(evt);
             }
         });
 
@@ -3299,13 +3588,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             receptionAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionAppointmentOptionsLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(generatePdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(editBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
-                .addComponent(approveAppoinmentBtn9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(approveAppoinmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 299, Short.MAX_VALUE))
         );
         receptionAppointmentOptionsLayout.setVerticalGroup(
@@ -3313,24 +3602,24 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(receptionAppointmentOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(receptionAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editAppointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAppointmentBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(generatePdfBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(approveAppoinmentBtn9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(approveAppoinmentBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         patientAppointmentOptions.setForeground(new java.awt.Color(85, 65, 118));
         patientAppointmentOptions.setPreferredSize(new java.awt.Dimension(1090, 110));
 
-        jButton12.setBackground(new java.awt.Color(255, 255, 255));
-        jButton12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(85, 65, 118));
-        jButton12.setText("Add");
-        jButton12.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        addAppointmentBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        addAppointmentBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addAppointmentBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        addAppointmentBtn2.setText("Add");
+        addAppointmentBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        addAppointmentBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                addAppointmentBtn2ActionPerformed(evt);
             }
         });
 
@@ -3340,26 +3629,26 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientAppointmentOptionsLayout.createSequentialGroup()
                 .addGap(105, 105, 105)
-                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(addAppointmentBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addGap(843, 843, 843))
         );
         patientAppointmentOptionsLayout.setVerticalGroup(
             patientAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientAppointmentOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(addAppointmentBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         moAppointmentOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        moAppoinmentCompleteBtn.setBackground(new java.awt.Color(255, 255, 255));
-        moAppoinmentCompleteBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        moAppoinmentCompleteBtn.setForeground(new java.awt.Color(85, 65, 118));
-        moAppoinmentCompleteBtn.setText("Complete");
-        moAppoinmentCompleteBtn.addActionListener(new java.awt.event.ActionListener() {
+        completedAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
+        completedAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        completedAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
+        completedAppointmentBtn.setText("Complete");
+        completedAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moAppoinmentCompleteBtnActionPerformed(evt);
+                completedAppointmentBtnActionPerformed(evt);
             }
         });
 
@@ -3369,14 +3658,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(moAppointmentOptionsLayout.createSequentialGroup()
                 .addGap(94, 94, 94)
-                .addComponent(moAppoinmentCompleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(completedAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(869, Short.MAX_VALUE))
         );
         moAppointmentOptionsLayout.setVerticalGroup(
             moAppointmentOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, moAppointmentOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(moAppoinmentCompleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(completedAppointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3415,41 +3704,41 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         adminUserOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        adminDeleteUser.setBackground(new java.awt.Color(255, 255, 255));
-        adminDeleteUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        adminDeleteUser.setForeground(new java.awt.Color(85, 65, 118));
-        adminDeleteUser.setText("Delete");
-        adminDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+        deleteUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteUsersBtn.setText("Delete");
+        deleteUsersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminDeleteUserActionPerformed(evt);
+                deleteUsersBtnActionPerformed(evt);
             }
         });
 
-        editBtn.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn.setText("Edit");
-        editBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
+        editUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editUsersBtn.setText("Edit");
+        editUsersBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        editUsersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+                editUsersBtnActionPerformed(evt);
             }
         });
 
-        viewBtn11.setBackground(new java.awt.Color(255, 255, 255));
-        viewBtn11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        viewBtn11.setForeground(new java.awt.Color(85, 65, 118));
-        viewBtn11.setText("view");
-        viewBtn11.setPreferredSize(new java.awt.Dimension(67, 31));
+        resetPasswordBtn.setBackground(new java.awt.Color(255, 255, 255));
+        resetPasswordBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resetPasswordBtn.setForeground(new java.awt.Color(85, 65, 118));
+        resetPasswordBtn.setText("Reset Password");
+        resetPasswordBtn.setPreferredSize(new java.awt.Dimension(67, 31));
 
-        addBtn11.setBackground(new java.awt.Color(255, 255, 255));
-        addBtn11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        addBtn11.setForeground(new java.awt.Color(85, 65, 118));
-        addBtn11.setText("Add");
-        addBtn11.setPreferredSize(new java.awt.Dimension(67, 31));
-        addBtn11.addActionListener(new java.awt.event.ActionListener() {
+        addUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addUsersBtn.setText("Add");
+        addUsersBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        addUsersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn11ActionPerformed(evt);
+                addUsersBtnActionPerformed(evt);
             }
         });
 
@@ -3459,83 +3748,97 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminUserOptionsLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(addBtn11, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(viewBtn11, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(resetPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(editUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
-                .addComponent(adminDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 301, Short.MAX_VALUE))
+                .addComponent(deleteUsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 289, Short.MAX_VALUE))
         );
         adminUserOptionsLayout.setVerticalGroup(
             adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminUserOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(adminUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addBtn11, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(viewBtn11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminDeleteUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addUsersBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(resetPasswordBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editUsersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteUsersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        receptionUserOptions.setForeground(new java.awt.Color(85, 65, 118));
+        receptionistUserOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        deleteBtn15.setBackground(new java.awt.Color(255, 255, 255));
-        deleteBtn15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        deleteBtn15.setForeground(new java.awt.Color(85, 65, 118));
-        deleteBtn15.setText("Delete");
-        deleteBtn15.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteBtn15.addActionListener(new java.awt.event.ActionListener() {
+        deleteUsersBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        deleteUsersBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        deleteUsersBtn2.setText("Delete");
+        deleteUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtn15ActionPerformed(evt);
+                deleteUsersBtn2ActionPerformed(evt);
             }
         });
 
-        editBtn7.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn7.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn7.setText("Edit");
-        editBtn7.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn7.addActionListener(new java.awt.event.ActionListener() {
+        editUsersBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        editUsersBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        editUsersBtn2.setText("Edit");
+        editUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        editUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn7ActionPerformed(evt);
+                editUsersBtn2ActionPerformed(evt);
             }
         });
 
-        addBtn10.setBackground(new java.awt.Color(255, 255, 255));
-        addBtn10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        addBtn10.setForeground(new java.awt.Color(85, 65, 118));
-        addBtn10.setText("add");
-        addBtn10.setPreferredSize(new java.awt.Dimension(67, 31));
-        addBtn10.addActionListener(new java.awt.event.ActionListener() {
+        addUsersBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        addUsersBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        addUsersBtn2.setText("add");
+        addUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        addUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn10ActionPerformed(evt);
+                addUsersBtn2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout receptionUserOptionsLayout = new javax.swing.GroupLayout(receptionUserOptions);
-        receptionUserOptions.setLayout(receptionUserOptionsLayout);
-        receptionUserOptionsLayout.setHorizontalGroup(
-            receptionUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionUserOptionsLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(addBtn10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
-                .addComponent(editBtn7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(deleteBtn15, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 493, Short.MAX_VALUE))
+        resetPasswordBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        resetPasswordBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resetPasswordBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        resetPasswordBtn2.setText("Reset Password");
+        resetPasswordBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        resetPasswordBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPasswordBtn2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout receptionistUserOptionsLayout = new javax.swing.GroupLayout(receptionistUserOptions);
+        receptionistUserOptions.setLayout(receptionistUserOptionsLayout);
+        receptionistUserOptionsLayout.setHorizontalGroup(
+            receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistUserOptionsLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(addUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(editUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
+                .addComponent(deleteUsersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(resetPasswordBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 292, Short.MAX_VALUE))
         );
-        receptionUserOptionsLayout.setVerticalGroup(
-            receptionUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionUserOptionsLayout.createSequentialGroup()
+        receptionistUserOptionsLayout.setVerticalGroup(
+            receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionistUserOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(receptionUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBtn10, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(editBtn7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteBtn15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(receptionistUserOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(editUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteUsersBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resetPasswordBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -3549,7 +3852,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addGroup(usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(adminUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(receptionUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(receptionistUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         usersMainOptionLayout.setVerticalGroup(
@@ -3557,11 +3860,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGap(0, 108, Short.MAX_VALUE)
             .addGroup(usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(usersMainOptionLayout.createSequentialGroup()
-                    .addGap(0, 1, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addGroup(usersMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(adminUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(receptionUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                        .addComponent(receptionistUserOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         bgPanel.add(usersMainOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 110));
@@ -3570,14 +3873,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         adminMailOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(85, 65, 118));
-        jButton6.setText("Delete");
-        jButton6.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        deleteMailBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteMailBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteMailBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteMailBtn.setText("Delete");
+        deleteMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteMailBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                deleteMailBtnActionPerformed(evt);
             }
         });
 
@@ -3587,49 +3890,49 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminMailOptionsLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(deleteMailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addGap(0, 851, Short.MAX_VALUE))
         );
         adminMailOptionsLayout.setVerticalGroup(
             adminMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminMailOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(deleteMailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         receptionMailOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton14.setBackground(new java.awt.Color(255, 255, 255));
-        jButton14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(85, 65, 118));
-        jButton14.setText("Delete");
-        jButton14.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        deleteMailBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        deleteMailBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteMailBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        deleteMailBtn2.setText("Delete");
+        deleteMailBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteMailBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                deleteMailBtn2ActionPerformed(evt);
             }
         });
 
-        editBtn6.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn6.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn6.setText("Edit");
-        editBtn6.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn6.addActionListener(new java.awt.event.ActionListener() {
+        editMailBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editMailBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editMailBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editMailBtn.setText("Edit");
+        editMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        editMailBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn6ActionPerformed(evt);
+                editMailBtnActionPerformed(evt);
             }
         });
 
-        jButton13.setBackground(new java.awt.Color(255, 255, 255));
-        jButton13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(85, 65, 118));
-        jButton13.setText("Add");
-        jButton13.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        addMailBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addMailBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addMailBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addMailBtn.setText("Add");
+        addMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        addMailBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                addMailBtnActionPerformed(evt);
             }
         });
 
@@ -3639,11 +3942,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             receptionMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionMailOptionsLayout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(addMailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addGap(71, 71, 71)
-                .addComponent(editBtn6, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editMailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
-                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteMailBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 524, Short.MAX_VALUE))
         );
         receptionMailOptionsLayout.setVerticalGroup(
@@ -3651,9 +3954,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionMailOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(receptionMailOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(editBtn6, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                    .addComponent(deleteMailBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(editMailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(addMailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -3688,36 +3991,36 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         adminComplaintOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
-        jButton8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(85, 65, 118));
-        jButton8.setText("Delete");
-        jButton8.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        deleteComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteComplaintBtn.setText("Delete");
+        deleteComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                deleteComplaintBtnActionPerformed(evt);
             }
         });
 
-        editBtn3.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn3.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn3.setText("Edit Complaint");
-        editBtn3.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn3.addActionListener(new java.awt.event.ActionListener() {
+        editComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editComplaintBtn.setText("Edit Complaint");
+        editComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        editComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn3ActionPerformed(evt);
+                editComplaintBtnActionPerformed(evt);
             }
         });
 
-        approveBtn3.setBackground(new java.awt.Color(255, 255, 255));
-        approveBtn3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        approveBtn3.setForeground(new java.awt.Color(85, 65, 118));
-        approveBtn3.setText("set Action Taken");
-        approveBtn3.setPreferredSize(new java.awt.Dimension(67, 31));
-        approveBtn3.addActionListener(new java.awt.event.ActionListener() {
+        approveComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
+        approveComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        approveComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
+        approveComplaintBtn.setText("set Action Taken");
+        approveComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        approveComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveBtn3ActionPerformed(evt);
+                approveComplaintBtnActionPerformed(evt);
             }
         });
 
@@ -3727,11 +4030,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
                 .addGap(103, 103, 103)
-                .addComponent(approveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(approveComplaintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addComponent(editBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editComplaintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteComplaintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 319, Short.MAX_VALUE))
         );
         adminComplaintOptionsLayout.setVerticalGroup(
@@ -3739,22 +4042,22 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(adminComplaintOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(adminComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(editBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(approveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                    .addComponent(deleteComplaintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(editComplaintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(approveComplaintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         patientComplaintOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton18.setBackground(new java.awt.Color(255, 255, 255));
-        jButton18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton18.setForeground(new java.awt.Color(85, 65, 118));
-        jButton18.setText("Add Complain");
-        jButton18.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        addComplaintBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        addComplaintBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addComplaintBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        addComplaintBtn2.setText("Add Complain");
+        addComplaintBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        addComplaintBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                addComplaintBtn2ActionPerformed(evt);
             }
         });
 
@@ -3764,44 +4067,44 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientComplaintOptionsLayout.createSequentialGroup()
                 .addGap(248, 248, 248)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addComplaintBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(685, Short.MAX_VALUE))
         );
         patientComplaintOptionsLayout.setVerticalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientComplaintOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(addComplaintBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        receptionComplaintOptions.setForeground(new java.awt.Color(85, 65, 118));
+        receptionistComplaintOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton16.setBackground(new java.awt.Color(255, 255, 255));
-        jButton16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton16.setForeground(new java.awt.Color(85, 65, 118));
-        jButton16.setText("Add Complaint");
-        jButton16.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        addComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addComplaintBtn.setText("Add Complaint");
+        addComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        addComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                addComplaintBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout receptionComplaintOptionsLayout = new javax.swing.GroupLayout(receptionComplaintOptions);
-        receptionComplaintOptions.setLayout(receptionComplaintOptionsLayout);
-        receptionComplaintOptionsLayout.setHorizontalGroup(
-            receptionComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionComplaintOptionsLayout.createSequentialGroup()
+        javax.swing.GroupLayout receptionistComplaintOptionsLayout = new javax.swing.GroupLayout(receptionistComplaintOptions);
+        receptionistComplaintOptions.setLayout(receptionistComplaintOptionsLayout);
+        receptionistComplaintOptionsLayout.setHorizontalGroup(
+            receptionistComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistComplaintOptionsLayout.createSequentialGroup()
                 .addGap(173, 173, 173)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(773, Short.MAX_VALUE))
+                .addComponent(addComplaintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(758, Short.MAX_VALUE))
         );
-        receptionComplaintOptionsLayout.setVerticalGroup(
-            receptionComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionComplaintOptionsLayout.createSequentialGroup()
+        receptionistComplaintOptionsLayout.setVerticalGroup(
+            receptionistComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionistComplaintOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(addComplaintBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3816,7 +4119,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     .addGroup(complaintsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(adminComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(patientComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(receptionComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(receptionistComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         complaintsMainOptionLayout.setVerticalGroup(
@@ -3828,7 +4131,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     .addGroup(complaintsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(adminComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(patientComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(receptionComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(receptionistComplaintOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -3836,75 +4139,75 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         visitorsMainOption.setPreferredSize(new java.awt.Dimension(1090, 108));
 
-        receptionVisitorOptions.setForeground(new java.awt.Color(85, 65, 118));
+        receptionistVisitorOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton15.setBackground(new java.awt.Color(255, 255, 255));
-        jButton15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton15.setForeground(new java.awt.Color(85, 65, 118));
-        jButton15.setText("Delete");
-        jButton15.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        deleteVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteVisitorBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteVisitorBtn.setText("Delete");
+        deleteVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                deleteVisitorBtnActionPerformed(evt);
             }
         });
 
-        editBtn8.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn8.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn8.setText("Edit");
-        editBtn8.setPreferredSize(new java.awt.Dimension(67, 31));
-        editBtn8.addActionListener(new java.awt.event.ActionListener() {
+        editVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editVisitorBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editVisitorBtn.setText("Edit");
+        editVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        editVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn8ActionPerformed(evt);
+                editVisitorBtnActionPerformed(evt);
             }
         });
 
-        addBtn13.setBackground(new java.awt.Color(255, 255, 255));
-        addBtn13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        addBtn13.setForeground(new java.awt.Color(85, 65, 118));
-        addBtn13.setText("Add");
-        addBtn13.setPreferredSize(new java.awt.Dimension(67, 31));
-        addBtn13.addActionListener(new java.awt.event.ActionListener() {
+        addVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addVisitorBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addVisitorBtn.setText("Add");
+        addVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        addVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn13ActionPerformed(evt);
+                addVisitorBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout receptionVisitorOptionsLayout = new javax.swing.GroupLayout(receptionVisitorOptions);
-        receptionVisitorOptions.setLayout(receptionVisitorOptionsLayout);
-        receptionVisitorOptionsLayout.setHorizontalGroup(
-            receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receptionVisitorOptionsLayout.createSequentialGroup()
+        javax.swing.GroupLayout receptionistVisitorOptionsLayout = new javax.swing.GroupLayout(receptionistVisitorOptions);
+        receptionistVisitorOptions.setLayout(receptionistVisitorOptionsLayout);
+        receptionistVisitorOptionsLayout.setHorizontalGroup(
+            receptionistVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receptionistVisitorOptionsLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(addBtn13, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addVisitorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
-                .addComponent(editBtn8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editVisitorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteVisitorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 441, Short.MAX_VALUE))
         );
-        receptionVisitorOptionsLayout.setVerticalGroup(
-            receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionVisitorOptionsLayout.createSequentialGroup()
+        receptionistVisitorOptionsLayout.setVerticalGroup(
+            receptionistVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receptionistVisitorOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(receptionVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBtn13, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(editBtn8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(receptionistVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addVisitorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(editVisitorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteVisitorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         adminVisitorOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton17.setBackground(new java.awt.Color(255, 255, 255));
-        jButton17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(85, 65, 118));
-        jButton17.setText("Delete");
-        jButton17.setPreferredSize(new java.awt.Dimension(67, 31));
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        deleteVisitorBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        deleteVisitorBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteVisitorBtn2.setForeground(new java.awt.Color(85, 65, 118));
+        deleteVisitorBtn2.setText("Delete");
+        deleteVisitorBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteVisitorBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                deleteVisitorBtn2ActionPerformed(evt);
             }
         });
 
@@ -3914,14 +4217,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminVisitorOptionsLayout.createSequentialGroup()
                 .addGap(135, 135, 135)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteVisitorBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(840, Short.MAX_VALUE))
         );
         adminVisitorOptionsLayout.setVerticalGroup(
             adminVisitorOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminVisitorOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(deleteVisitorBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3935,7 +4238,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(visitorsMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(receptionVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(receptionistVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         visitorsMainOptionLayout.setVerticalGroup(
@@ -3946,7 +4249,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             .addGroup(visitorsMainOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(visitorsMainOptionLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(receptionVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(receptionistVisitorOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -3957,26 +4260,26 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
         adminRefferenceOptions.setForeground(new java.awt.Color(85, 65, 118));
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(85, 65, 118));
-        jButton7.setText("Delete");
-        jButton7.setPreferredSize(new java.awt.Dimension(67, 31));
+        deleteReferenceBtn.setBackground(new java.awt.Color(255, 255, 255));
+        deleteReferenceBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteReferenceBtn.setForeground(new java.awt.Color(85, 65, 118));
+        deleteReferenceBtn.setText("Delete");
+        deleteReferenceBtn.setPreferredSize(new java.awt.Dimension(67, 31));
 
-        editBtn2.setBackground(new java.awt.Color(255, 255, 255));
-        editBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editBtn2.setForeground(new java.awt.Color(85, 65, 118));
-        editBtn2.setText("Edit");
-        editBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
+        editReferenceBtn.setBackground(new java.awt.Color(255, 255, 255));
+        editReferenceBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editReferenceBtn.setForeground(new java.awt.Color(85, 65, 118));
+        editReferenceBtn.setText("Edit");
+        editReferenceBtn.setPreferredSize(new java.awt.Dimension(67, 31));
 
-        addBtn12.setBackground(new java.awt.Color(255, 255, 255));
-        addBtn12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        addBtn12.setForeground(new java.awt.Color(85, 65, 118));
-        addBtn12.setText("Add");
-        addBtn12.setPreferredSize(new java.awt.Dimension(67, 31));
-        addBtn12.addActionListener(new java.awt.event.ActionListener() {
+        addReferenceBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addReferenceBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addReferenceBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addReferenceBtn.setText("Add");
+        addReferenceBtn.setPreferredSize(new java.awt.Dimension(67, 31));
+        addReferenceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn12ActionPerformed(evt);
+                addReferenceBtnActionPerformed(evt);
             }
         });
 
@@ -3986,20 +4289,20 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminRefferenceOptionsLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
-                .addComponent(addBtn12, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addReferenceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
-                .addComponent(editBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editReferenceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteReferenceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 480, Short.MAX_VALUE))
         );
         adminRefferenceOptionsLayout.setVerticalGroup(
             adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminRefferenceOptionsLayout.createSequentialGroup()
                 .addGroup(adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(addBtn12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(editBtn2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                    .addComponent(editReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4036,104 +4339,21 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void moSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moSettingPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_moSettingPanelMousePressed
-
-    private void jPanel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel23MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel23MousePressed
-
-    private void jPanel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel17MousePressed
-
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel5MousePressed
-
     private void appointmentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTableMousePressed
 
-        if (appointmentTable.getSelectedRow() > -1) {
+        if (getAppointmentTable().getSelectedRow() > -1) {
             // print first column value from selected row
            
-            editBtn.setEnabled(true);
+            getEditUsersBtn().setEnabled(true);
         }
     }//GEN-LAST:event_appointmentTableMousePressed
 
-    private void userBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnPanelMousePressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_userBtnPanelMousePressed
-
-    private void settingBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnPanelMousePressed
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_settingBtnPanelMousePressed
-
-    private void visitorBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorBtnPanelMousePressed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_visitorBtnPanelMousePressed
-
-    private void reportBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportBtnPanelMousePressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_reportBtnPanelMousePressed
-
-    private void complaintBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaintBtnPanelMousePressed
-    
-    }//GEN-LAST:event_complaintBtnPanelMousePressed
-
-    private void mailBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailBtnPanelMousePressed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_mailBtnPanelMousePressed
-
   
-    private void appointmentBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentBtnPanelMousePressed
-
-       
-
-    }//GEN-LAST:event_appointmentBtnPanelMousePressed
-
-    private void jPanel31MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel31MousePressed
+    private void approveComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveComplaintBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel31MousePressed
-
-    private void jPanel32MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel32MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel32MousePressed
-
-    private void jPanel33MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel33MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel33MousePressed
-
-    private void visitorBtnPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorBtnPanel2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_visitorBtnPanel2MousePressed
-
-    private void receptionistSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistSettingPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_receptionistSettingPanelMousePressed
-
-    private void userBtnPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnPanel2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtnPanel2MousePressed
-
-    private void patientSettingPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientSettingPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientSettingPanelMousePressed
-
-    private void refferenceBtnPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refferenceBtnPanelMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_refferenceBtnPanelMousePressed
-
-    private void approveBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveBtn3ActionPerformed
-        // TODO add your handling code here:
-       UpdateComplaintActionTaken action = new UpdateComplaintActionTaken(this);
+      // UpdateComplaintActionTaken action = new UpdateComplaintActionTaken(this);
         
-    }//GEN-LAST:event_approveBtn3ActionPerformed
+    }//GEN-LAST:event_approveComplaintBtnActionPerformed
 
     private void dispatchedMailTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dispatchedMailTableMousePressed
         // TODO add your handling code here:
@@ -4155,101 +4375,67 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_moTableMousePressed
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void addAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentBtnActionPerformed
         // TODO add your handling code here:
-       setComplainRefference();
-    }//GEN-LAST:event_jPanel1MousePressed
-
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        // TODO add your handling code here:
-           setSpecialityRefference();
-    }//GEN-LAST:event_jPanel2MousePressed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-        addNewAppointment();
+        //addNewAppointment();
         
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_addAppointmentBtnActionPerformed
 
     private void generatePdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePdfBtnActionPerformed
         // TODO add your handling code here:
-        FileService.generateApprovedAppoinmentReport();
+       // FileService.generateApprovedAppoinmentReport();
     }//GEN-LAST:event_generatePdfBtnActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void addAppointmentBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentBtn2ActionPerformed
         // TODO add your handling code here:
-        addNewAppointment();
-    }//GEN-LAST:event_jButton12ActionPerformed
+        //addNewAppointment();
+    }//GEN-LAST:event_addAppointmentBtn2ActionPerformed
 
-    private void moAppoinmentCompleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moAppoinmentCompleteBtnActionPerformed
+    private void completedAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completedAppointmentBtnActionPerformed
         // TODO add your handling code here:
-         approveAppoinment("Completed");
-    }//GEN-LAST:event_moAppoinmentCompleteBtnActionPerformed
+        // approveAppoinment("Completed");
+    }//GEN-LAST:event_completedAppointmentBtnActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        addDispatchedPostal();
-    }//GEN-LAST:event_jButton13ActionPerformed
+    private void addMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMailBtnActionPerformed
+        //addDispatchedPostal();
+    }//GEN-LAST:event_addMailBtnActionPerformed
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void addComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComplaintBtnActionPerformed
         // TODO add your handling code here:
-        addNewComplaint();
-    }//GEN-LAST:event_jButton16ActionPerformed
+        //addNewComplaint();
+    }//GEN-LAST:event_addComplaintBtnActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void addComplaintBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComplaintBtn2ActionPerformed
         // TODO add your handling code here:
-        addNewComplaint();
-    }//GEN-LAST:event_jButton18ActionPerformed
+        //addNewComplaint();
+    }//GEN-LAST:event_addComplaintBtn2ActionPerformed
 
-    private void addBtn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn10ActionPerformed
+    private void addUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersBtn2ActionPerformed
         // TODO add your handling code here:
-         addNewUser();
-    }//GEN-LAST:event_addBtn10ActionPerformed
+        // addNewUser();
+    }//GEN-LAST:event_addUsersBtn2ActionPerformed
 
-    private void homeBtnPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnPanel1MousePressed
+    private void addVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVisitorBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_homeBtnPanel1MousePressed
+       // addNewVisitorRecord();
+    }//GEN-LAST:event_addVisitorBtnActionPerformed
 
-    private void homeBtnPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnPanel2MousePressed
+    private void addUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_homeBtnPanel2MousePressed
+        //addNewUser();
+    }//GEN-LAST:event_addUsersBtnActionPerformed
 
-    private void homeBtnPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnPanel3MousePressed
+    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_homeBtnPanel3MousePressed
+    }//GEN-LAST:event_userNameFieldActionPerformed
 
-    private void homeBtnPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnPanel4MousePressed
+    private void martialStatusComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_martialStatusComboBox2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_homeBtnPanel4MousePressed
+    }//GEN-LAST:event_martialStatusComboBox2ActionPerformed
 
-    private void addBtn13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn13ActionPerformed
-        // TODO add your handling code here:
-        addNewVisitorRecord();
-    }//GEN-LAST:event_addBtn13ActionPerformed
-
-    private void addBtn11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn11ActionPerformed
-        // TODO add your handling code here:
-        addNewUser();
-    }//GEN-LAST:event_addBtn11ActionPerformed
-
-    private void usernamefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernamefieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernamefieldActionPerformed
-
-    private void PasswordfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordfieldActionPerformed
-
-    private void staffIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffIdFieldActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void saveUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUserBtnActionPerformed
+      // saveUser();
+    }//GEN-LAST:event_saveUserBtnActionPerformed
 
     private void photoAddBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtn2ActionPerformed
         // TODO add your handling code here:
@@ -4272,7 +4458,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void jPanel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MousePressed
         // TODO add your handling code here:
-        setOptionReceptionist();
+      //  setOptionReceptionist();
        
 
     }//GEN-LAST:event_jPanel7MousePressed
@@ -4284,14 +4470,14 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
 
     private void jPanel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MousePressed
         // TODO add your handling code here:
-        setOptionMo();
+        //setOptionMo();
         
         
     }//GEN-LAST:event_jPanel9MousePressed
 
     private void jPanel35MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel35MousePressed
         // TODO add your handling code here:
-        setOptionPatient();
+       // setOptionPatient();
         
 
     }//GEN-LAST:event_jPanel35MousePressed
@@ -4300,90 +4486,86 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_receptionistTableMousePressed
 
-    private void patientSettingPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientSettingPanel1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientSettingPanel1MousePressed
+    private void logOutBtnPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel3MousePressed
+       // userLogOut();
+    }//GEN-LAST:event_logOutBtnPanel3MousePressed
 
-    private void jPanel37MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel37MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel37MousePressed
+    private void logOutBtnPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel4MousePressed
+       // userLogOut();
+    }//GEN-LAST:event_logOutBtnPanel4MousePressed
 
-    private void receptionistSettingPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistSettingPanel1MousePressed
+    private void logOutBtnPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel1MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_receptionistSettingPanel1MousePressed
+       // userLogOut();
+    }//GEN-LAST:event_logOutBtnPanel1MousePressed
 
-    private void settingBtnPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnPanel1MousePressed
+    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_settingBtnPanel1MousePressed
+    }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void namefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namefieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namefieldActionPerformed
-
-    private void adminDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminDeleteUserActionPerformed
-        alterUser(1);
+    private void deleteUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtnActionPerformed
+       // alterUser(1);
         
-    }//GEN-LAST:event_adminDeleteUserActionPerformed
+    }//GEN-LAST:event_deleteUsersBtnActionPerformed
 
-    private void addBtn12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn12ActionPerformed
+    private void addReferenceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addReferenceBtnActionPerformed
         // TODO add your handling code here:
-        addRefference();
-    }//GEN-LAST:event_addBtn12ActionPerformed
+       // addRefference();
+    }//GEN-LAST:event_addReferenceBtnActionPerformed
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+    private void editUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtnActionPerformed
         // TODO add your handling code here:
-         alterUser(2);
-    }//GEN-LAST:event_editBtnActionPerformed
+       //  alterUser(2);
+    }//GEN-LAST:event_editUsersBtnActionPerformed
 
-    private void editBtn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn7ActionPerformed
+    private void editUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtn2ActionPerformed
         // TODO add your handling code here:
-        alterUser(2);//2 for edit
-    }//GEN-LAST:event_editBtn7ActionPerformed
+       // alterUser(2);//2 for edit
+    }//GEN-LAST:event_editUsersBtn2ActionPerformed
 
-    private void deleteBtn15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn15ActionPerformed
+    private void deleteUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtn2ActionPerformed
         // TODO add your handling code here:
-        alterUser(1);//1 for edit
-    }//GEN-LAST:event_deleteBtn15ActionPerformed
+       // alterUser(1);//1 for edit
+    }//GEN-LAST:event_deleteUsersBtn2ActionPerformed
 
-    private void editBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn5ActionPerformed
+    private void editAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentBtnActionPerformed
         // TODO add your handling code here:
-        editAppointment();
+        //editAppointment();
         
-    }//GEN-LAST:event_editBtn5ActionPerformed
+    }//GEN-LAST:event_editAppointmentBtnActionPerformed
 
-    private void approveAppoinmentBtn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveAppoinmentBtn9ActionPerformed
+    private void approveAppoinmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveAppoinmentBtnActionPerformed
         // TODO add your handling code here:
-        approveAppoinment("Approved");
-    }//GEN-LAST:event_approveAppoinmentBtn9ActionPerformed
+        //approveAppoinment("Approved");
+    }//GEN-LAST:event_approveAppoinmentBtnActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void deleteMailBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMailBtn2ActionPerformed
         // TODO add your handling code here:
-        deleteMail();
+        //deleteMail();
         
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_deleteMailBtn2ActionPerformed
 
-    private void editBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn3ActionPerformed
+    private void editComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComplaintBtnActionPerformed
         // TODO add your handling code here:
-        editComplaint();
-    }//GEN-LAST:event_editBtn3ActionPerformed
+        //editComplaint();
+    }//GEN-LAST:event_editComplaintBtnActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void deleteComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteComplaintBtnActionPerformed
         // TODO add your handling code here:
-        deleteComplaint();
-    }//GEN-LAST:event_jButton8ActionPerformed
+       // deleteComplaint();
+    }//GEN-LAST:event_deleteComplaintBtnActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        deleteVisitorRecord();
-    }//GEN-LAST:event_jButton15ActionPerformed
+    private void deleteVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVisitorBtnActionPerformed
+        //deleteVisitorRecord();
+    }//GEN-LAST:event_deleteVisitorBtnActionPerformed
 
-    private void editBtn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn8ActionPerformed
-        editVisitorRecord();
-    }//GEN-LAST:event_editBtn8ActionPerformed
+    private void editVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVisitorBtnActionPerformed
+        //editVisitorRecord();
+    }//GEN-LAST:event_editVisitorBtnActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-          deleteVisitorRecord();
-    }//GEN-LAST:event_jButton17ActionPerformed
+    private void deleteVisitorBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVisitorBtn2ActionPerformed
+          //deleteVisitorRecord();
+    }//GEN-LAST:event_deleteVisitorBtn2ActionPerformed
 
     private void userLogReportTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportTableMousePressed
         // TODO add your handling code here:
@@ -4393,129 +4575,106 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_patientCredintialTableMousePressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            FileService.generateCsvFile(appointmentReportTable.getModel(),"files/report/appointmentReport.csv");
+    private void appointmentReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentReportCsvBtnActionPerformed
+      /*  try {
+            FileService.generateCsvFile(getAppointmentReportTable().getModel(),"files/report/appointmentReport.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }*/
+    }//GEN-LAST:event_appointmentReportCsvBtnActionPerformed
 
     private void jLabel77MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel77MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel77MouseExited
 
-    private void jPanel16MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MousePressed
-         setUserLogReports();
-    }//GEN-LAST:event_jPanel16MousePressed
+    private void userLogReportOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportOptionPanelMousePressed
+         //setUserLogReports();
+    }//GEN-LAST:event_userLogReportOptionPanelMousePressed
 
-    private void jPanel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel16MouseEntered
-
-    private void jPanel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MousePressed
-        setAppoinmentReports();
-        
-    }//GEN-LAST:event_jPanel18MousePressed
-
-    private void jPanel38MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel38MousePressed
-            setPatientCredintialReports();
-    }//GEN-LAST:event_jPanel38MousePressed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-                 FileService.generatePdf(userLogReportTable.getModel(),FileService.getUserLoginReportFilePath());
+    private void userLogReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportPdfBtnActionPerformed
+               //  FileService.generatePdf(getUserLogReportTable().getModel(),FileService.getUserLoginReportFilePath());
 
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_userLogReportPdfBtnActionPerformed
 
-    private void moComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_moComboBoxItemStateChanged
+    private void appointmentReportMoComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_appointmentReportMoComboBoxItemStateChanged
         // TODO add your handling code here:
         
-        setAppointmentReportTable();
+       // setAppointmentReportTable();
         
-    }//GEN-LAST:event_moComboBoxItemStateChanged
+    }//GEN-LAST:event_appointmentReportMoComboBoxItemStateChanged
 
-    private void jDateChooser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser2MouseClicked
+    private void appointmentReportDateChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserMouseClicked
     
          
-    }//GEN-LAST:event_jDateChooser2MouseClicked
+    }//GEN-LAST:event_appointmentReportDateChooserMouseClicked
 
-    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
+    private void appointmentReportDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserPropertyChange
    
-    }//GEN-LAST:event_jDateChooser2PropertyChange
+    }//GEN-LAST:event_appointmentReportDateChooserPropertyChange
 
-    private void jDateChooser2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser2MousePressed
-         setAppointmentReportTable();
-    }//GEN-LAST:event_jDateChooser2MousePressed
+    private void appointmentReportDateChooserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserMousePressed
+        // setAppointmentReportTable();
+    }//GEN-LAST:event_appointmentReportDateChooserMousePressed
 
-    private void jComboBox4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox4ItemStateChanged
-            setUserLoginReportTable();
-    }//GEN-LAST:event_jComboBox4ItemStateChanged
+    private void userLoginReportComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_userLoginReportComboBoxItemStateChanged
+           // setUserLoginReportTable();
+    }//GEN-LAST:event_userLoginReportComboBoxItemStateChanged
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        deleteMail();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void deleteMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMailBtnActionPerformed
+        //deleteMail();
+    }//GEN-LAST:event_deleteMailBtnActionPerformed
 
-    private void editBtn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn6ActionPerformed
-       editMail();
-    }//GEN-LAST:event_editBtn6ActionPerformed
+    private void editMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMailBtnActionPerformed
+       //editMail();
+    }//GEN-LAST:event_editMailBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        deleteAppointment();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void deleteAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentBtnActionPerformed
+        //deleteAppointment();
+    }//GEN-LAST:event_deleteAppointmentBtnActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        FileService.generatePdf(patientCredintialTable.getModel(),FileService.getPatientCredintailReportFilePath());
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void patientCredintialPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialPdfBtnActionPerformed
+       // FileService.generatePdf(getPatientCredintialTable().getModel(),FileService.getPatientCredintailReportFilePath());
+    }//GEN-LAST:event_patientCredintialPdfBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         FileService.generatePdf(appointmentReportTable.getModel(),FileService.getAppoinmentReportFilePath());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void appoinmentReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmentReportPdfBtnActionPerformed
+      //   FileService.generatePdf(getAppointmentReportTable().getModel(),FileService.getAppoinmentReportFilePath());
+    }//GEN-LAST:event_appoinmentReportPdfBtnActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        try {
-            FileService.generateCsvFile(userLogReportTable.getModel(),"files/report/userLogReport.csv");
+    private void userLogReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportCsvBtnActionPerformed
+    /*    try {
+            FileService.generateCsvFile(getUserLogReportTable().getModel(),"files/report/userLogReport.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_userLogReportCsvBtnActionPerformed
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        try {
-            FileService.generateCsvFile(patientCredintialTable.getModel(),"files/reports/patientCredintial.csv");
+    private void patientCredintialCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialCsvBtnActionPerformed
+       /* try {
+            FileService.generateCsvFile(getPatientCredintialTable().getModel(),"files/reports/patientCredintial.csv");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
-    }//GEN-LAST:event_jButton19ActionPerformed
+    }//GEN-LAST:event_patientCredintialCsvBtnActionPerformed
+
+    private void resetPasswordBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPasswordBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetPasswordBtn2ActionPerformed
  
-   
-    
-    
-    
-    
-    
-    
-   
-    
-    
-   
-    
-    private void addNewUser(){
-        AddUser user= new AddUser(1,getUserRole(),this,null,null,null);
-    }
-    private void addRefference(){
+   /*  private void addRefference(){
         AddReference refference= new AddReference(this);
-    }
+    }*/
     
-    private void alterUser( int type){
-       
-        
-        
-        
-        if(moScrollPanel.isShowing()){
-                   Object record= ((DefaultTableModel) moTable.getModel()).getDataVector().elementAt(moTable.getSelectedRow());
+    /*private void addNewUser(){
+        AddUser user= new AddUser(1,getUserRole(),this,null,null,null);
+    }*/
+  
+    
+    private void alterUser( int type){        
+        if(getMoScrollPanel().isShowing()){
+                   Object record= ((DefaultTableModel) getMedicalOfficerTable().getModel()).getDataVector().elementAt(getMedicalOfficerTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getMoFilePath();
                     MedicalOfficer officer=MedicalOfficer.readMoUser(line);
@@ -4528,8 +4687,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                   
                   
         }
-        else if(patientScrollPanel.isShowing()){
-                     Object record= ((DefaultTableModel) patientsTable.getModel()).getDataVector().elementAt(patientsTable.getSelectedRow());
+        else if(getPatientScrollPanel().isShowing()){
+                     Object record= ((DefaultTableModel) getPatientsTable().getModel()).getDataVector().elementAt(getPatientsTable().getSelectedRow());
                      String line= PipeService.formatTableString(record.toString());
                      String path=FileService.getPatientsFilePath();
                      Patient patient=Patient.readPatientUser(line);
@@ -4541,8 +4700,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     }
 
         }
-        else if(receptionistScrollPanel.isShowing()){
-                     Object record= ((DefaultTableModel) receptionistTable.getModel()).getDataVector().elementAt(receptionistTable.getSelectedRow());
+        else if(getReceptionistScrollPanel().isShowing()){
+                     Object record= ((DefaultTableModel) getReceptionistTable().getModel()).getDataVector().elementAt(receptionistTable.getSelectedRow());
                       String line= PipeService.formatTableString(record.toString());
                       String path=FileService.getReceptionistFilePath();
                       Receptionist officer=Receptionist.readReceptionistUser(line);
@@ -4553,23 +4712,16 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                         AddUser edit=new AddUser(2,getUserRole(),this,null,null,officer);
                     }
         }
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       setTables();
+   
+      // setTables();
     }
-    
+    private void userLogOut(){
+        this.dispose();
+        Home home=new Home();
+        home.setVisible(true);
+    }
           
-    
+    /*
     public void setTables(){
         if(getUserRole().equals("Admin")){
             getAllAppointment();
@@ -4577,8 +4729,8 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             getDispatchedMails();
             getVisitorRecords();
             getAllUsers();
-            getComplainRefference();
-            getSpecialityRefference();
+           // getComplainRefference();
+           // getSpecialityRefference();
         }
         else if(getUserRole().equals("Receptionist")){
         getAllAppointment();
@@ -4601,59 +4753,56 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     
     private void setAppointmentOptions(){
           if(getUserRole().equals("Admin")){
-              adminAppointmentOptions.setVisible(true);
-              patientAppointmentOptions.setVisible(false);
-              receptionAppointmentOptions.setVisible(false);
-              moAppointmentOptions.setVisible(false);
+              getAdminAppointmentOptions().setVisible(true);
+              getPatientAppointmentOptions().setVisible(false);
+              getReceptionistAppointmentOptions().setVisible(false);
+              getMoAppointmentOptions().setVisible(false);
             
         }
         else if(getUserRole().equals("Receptionist")){
-             receptionAppointmentOptions.setVisible(true);
-             adminAppointmentOptions.setVisible(false);
-              patientAppointmentOptions.setVisible(false);
-               moAppointmentOptions.setVisible(false);
+            getReceptionistAppointmentOptions().setVisible(true);
+            getAdminAppointmentOptions().setVisible(false);
+            getPatientAppointmentOptions().setVisible(false);
+            getMoAppointmentOptions().setVisible(false);
             
 
         }
         else if(getUserRole().equals("Patient")){
-             adminAppointmentOptions.setVisible(false);
-              patientAppointmentOptions.setVisible(true);
-               receptionAppointmentOptions.setVisible(false);
-                moAppointmentOptions.setVisible(false);
+            getAdminAppointmentOptions().setVisible(false);
+            getPatientAppointmentOptions().setVisible(true);
+            getReceptionistAppointmentOptions().setVisible(false);
+            getMoAppointmentOptions().setVisible(false);
 
         }
         else if(getUserRole().equals("MedicalOfficer")){
-              moAppointmentOptions.setVisible(true);
-            adminAppointmentOptions.setVisible(false);
-              patientAppointmentOptions.setVisible(false);
-               receptionAppointmentOptions.setVisible(false);
-           
-            
-           
+            getMoAppointmentOptions().setVisible(true);
+            getAdminAppointmentOptions().setVisible(false);
+            getPatientAppointmentOptions().setVisible(false);
+            getReceptionistAppointmentOptions().setVisible(false);  
 
         }
         
     }
     private void setMailOptions(){
           if(getUserRole().equals("Admin")){
-              adminMailOptions.setVisible(true);
-              receptionMailOptions.setVisible(false);
+              getAdminMailOptions().setVisible(true);
+              getReceptionMailOptions().setVisible(false);
           
             
         }
         else if(getUserRole().equals("Receptionist")){
-              receptionMailOptions.setVisible(true);
-            adminMailOptions.setVisible(false);
+              getReceptionMailOptions().setVisible(true);
+            getAdminMailOptions().setVisible(false);
             
             
 
         }
         else if(getUserRole().equals("Patient")){
-            adminMailOptions.setVisible(false);
+            getAdminMailOptions().setVisible(false);
 
         }
         else if(getUserRole().equals("MedicalOfficer")){
-            adminMailOptions.setVisible(false);
+            getAdminMailOptions().setVisible(false);
             
            
 
@@ -4662,22 +4811,22 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     private void setComplainOptions(){
           if(getUserRole().equals("Admin")){
-              patientComplaintOptions.setVisible(false);
-            adminComplaintOptions.setVisible(true);
-            receptionComplaintOptions.setVisible(false);
+            getPatientComplaintOptions().setVisible(false);
+            getAdminComplaintOptions().setVisible(true);
+            getReceptionistComplaintOptions().setVisible(false);
             
         }
         else if(getUserRole().equals("Receptionist")){
-             patientComplaintOptions.setVisible(false);
-          adminComplaintOptions.setVisible(false);
-            receptionComplaintOptions.setVisible(true);
+        getPatientComplaintOptions().setVisible(false);
+        getAdminComplaintOptions().setVisible(false);
+        getReceptionistComplaintOptions().setVisible(true);
             
 
         }
         else if(getUserRole().equals("Patient")){
-             patientComplaintOptions.setVisible(true);
-            adminComplaintOptions.setVisible(false);
-              receptionComplaintOptions.setVisible(false);
+            getPatientComplaintOptions().setVisible(true);
+            getAdminComplaintOptions().setVisible(false);
+            getReceptionistComplaintOptions().setVisible(false);
 
         }
         else if(getUserRole().equals("MedicalOfficer")){
@@ -4690,16 +4839,16 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     private void setUserOptions(){
            if(getUserRole().equals("Admin")){
-                adminUserOptions.setVisible(true);
-            receptionUserOptions.setVisible(false);
-            jPanel6.setVisible(true);
+            getAdminUserOptions().setVisible(true);
+            getReceptionistUserOptions().setVisible(false);
+            getJPanel6().setVisible(true);
             setOptionMo();
             
         }
         else if(getUserRole().equals("Receptionist")){
-            receptionUserOptions.setVisible(true);
-            adminUserOptions.setVisible(false);
-             jPanel6.setVisible(false);
+            getReceptionistUserOptions().setVisible(true);
+            getAdminUserOptions().setVisible(false);
+             getJPanel6().setVisible(false);
              setOptionPatient();
             
             
@@ -4709,55 +4858,55 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     private void setRefferenceOption(){
          if(getUserRole().equals("Admin")){
-             adminRefferenceOptions.setVisible(true);
+             getAdminRefferenceOptions().setVisible(true);
             
         }
         
     }
     private void setReportOptions(){
          if(getUserRole().equals("Admin")){
-            appoinmentReportPanel.setVisible(true);
-           userLogReportPanel.setVisible(false);
-            patientCreditialReportPanel.setVisible(false);
+            getAppoinmentReportPanel().setVisible(true);
+           getUserLogReportPanel().setVisible(false);
+            getPatientCreditialReportPanel().setVisible(false);
         }
     
         
     }
+
     private void setVisitorOptions(){
         if(getUserRole().equals("Admin")){
-            adminVisitorOptions.setVisible(true);
-            receptionVisitorOptions.setVisible(false);
+            getAdminVisitorOptions().setVisible(true);
+            getReceptionistVisitorOptions().setVisible(false);
             
         }
         else if(getUserRole().equals("Receptionist")){
-          adminVisitorOptions.setVisible(false);
-            receptionVisitorOptions.setVisible(true);
+          getAdminVisitorOptions().setVisible(false);
+            getReceptionistVisitorOptions().setVisible(true);
             
 
         }
         
         
     }
-    private void setSettingsOptions(){
-        
-    }
+    */
     
-    public void setOptionMo(){
-         resetHoverColor(jPanel7,jLabel66);
+    
+   /* public void setOptionMo(){
+        resetHoverColor(jPanel7,jLabel66);
         setHoverColor(jPanel9,jLabel67);
-         resetHoverColor(jPanel35,jLabel68);
-           moScrollPanel.setVisible(true);
-          receptionistScrollPanel.setVisible(false);
-         patientScrollPanel.setVisible(false);
+        resetHoverColor(jPanel35,jLabel68);
+        getMoScrollPanel().setVisible(true);
+        getReceptionistScrollPanel().setVisible(false);
+        getPatientScrollPanel().setVisible(false);
         
     }
     public void setOptionReceptionist(){
-         setHoverColor(jPanel7,jLabel66);
+        setHoverColor(jPanel7,jLabel66);
         resetHoverColor(jPanel9,jLabel67);
-         resetHoverColor(jPanel35,jLabel68);
-          receptionistScrollPanel.setVisible(true);
-         moScrollPanel.setVisible(false);
-           patientScrollPanel.setVisible(false);
+        resetHoverColor(jPanel35,jLabel68);
+        getReceptionistScrollPanel().setVisible(true);
+        getMoScrollPanel().setVisible(false);
+        getPatientScrollPanel().setVisible(false);
        
         
     }
@@ -4765,28 +4914,27 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
           resetHoverColor(jPanel7,jLabel66);
         resetHoverColor(jPanel9,jLabel67);
          setHoverColor(jPanel35,jLabel68);
-         moScrollPanel.setVisible(false);
-         receptionistScrollPanel.setVisible(false);
-         patientScrollPanel.setVisible(true);
+         getMoScrollPanel().setVisible(false);
+         getReceptionistScrollPanel().setVisible(false);
+         getPatientScrollPanel().setVisible(true);
         
     }
-    
     public void setAppoinmentReports(){
         resetHoverColor(jPanel38,jLabel79);
         setHoverColor(jPanel18,jLabel78);
         resetHoverColor(jPanel16,jLabel77);
-        appoinmentReportPanel.setVisible(true);
-        userLogReportPanel.setVisible(false);
-        patientCreditialReportPanel.setVisible(false);
+        getAppoinmentReportPanel().setVisible(true);
+        getUserLogReportPanel().setVisible(false);
+        getPatientCreditialReportPanel().setVisible(false);
          setAppointmentReportTable();
     }
     public void setUserLogReports(){
         resetHoverColor(jPanel38,jLabel79);
         resetHoverColor(jPanel18,jLabel78);
         setHoverColor(jPanel16,jLabel77);
-        appoinmentReportPanel.setVisible(false);
-        userLogReportPanel.setVisible(true);
-        patientCreditialReportPanel.setVisible(false);
+        getAppoinmentReportPanel().setVisible(false);
+        getUserLogReportPanel().setVisible(true);
+        getPatientCreditialReportPanel().setVisible(false);
         setUserLoginReportTable();
         
     }
@@ -4794,11 +4942,12 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         setHoverColor(jPanel38,jLabel79);
         resetHoverColor(jPanel18,jLabel78);
         resetHoverColor(jPanel16,jLabel77);
-        appoinmentReportPanel.setVisible(false);
-        userLogReportPanel.setVisible(false);
-        patientCreditialReportPanel.setVisible(true);
+        getAppoinmentReportPanel().setVisible(false);
+        getUserLogReportPanel().setVisible(false);
+        getPatientCreditialReportPanel().setVisible(true);
          setPatientCredintialReportTable();
     }
+    */
     
     
     
@@ -4806,8 +4955,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     
     
     
-    
-    public void setHoverColor(JPanel panel,JLabel label){
+  /*  public void setHoverColor(JPanel panel,JLabel label){
                 panel.setBackground(new Color(85,65,118));
                 label.setForeground(Color.white);
 
@@ -4817,12 +4965,12 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                 panel.setBackground(new Color(255,255,255));
                 label.setForeground(new Color(102,0,102));
 
-    }
+    }*/
     
     
     private void getPatientAppointmentTable(String id){
         ArrayList<String> list= FileService.getPatientAppointments(id);
-        TableModel tm = appointmentTable.getModel();
+        TableModel tm = getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
         System.out.println("patient appointments");  
@@ -4836,10 +4984,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             
            }  
     }
-    
-      private void getMOAppointmentTable(String id){
+    private void getMOAppointmentTable(String id){
           ArrayList<String> list= FileService.getMOAppointments(id);
-        TableModel tm = appointmentTable.getModel();
+        TableModel tm = getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -4855,7 +5002,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     private void getAllAppointment(){
         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
-        TableModel tm = appointmentTable.getModel();
+        TableModel tm = getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
        System.out.println("all appointments"); 
@@ -4869,10 +5016,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }  
         
     }
-    
     private void getAllComplaints(){
          ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
-        TableModel tm = complaintTable.getModel();
+        TableModel tm = getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
        System.out.println("all complaints");  
@@ -4886,10 +5032,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }  
         
     }
-    
-     private void getPatientComplains(){
+    private void getPatientComplains(){
           ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
-        TableModel tm = complaintTable.getModel();
+        TableModel tm = getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
             System.out.println("patient complaints");  
@@ -4905,7 +5050,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     private void getDispatchedMails(){
          ArrayList<String> list= FileService.getRecords(FileService.getMailsFile());
-        TableModel tm = dispatchedMailTable.getModel();
+        TableModel tm = getMailsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
             System.out.println("dispatched mails");  
@@ -4919,14 +5064,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }  
         
     }
-    
-    private void getReceivedMails(){
-        
-    }
-    
     private void getVisitorRecords(){
         ArrayList<String> list= FileService.getRecords(FileService.getVisitorsFile());
-        TableModel tm = visitorTable.getModel();
+        TableModel tm = getVisitorsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -4938,7 +5078,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             
            }  
     }
-
     private void getAllUsers(){
        
              getAllMedicalOfficers();
@@ -4948,7 +5087,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     public void getAllMedicalOfficers(){
         ArrayList<String> list= FileService.getRecords(FileService.getMoFile());
-        TableModel tm = moTable.getModel();
+        TableModel tm = getMedicalOfficerTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -4962,10 +5101,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }  
      
     }
-    
     public void getAllReceptionist(){
         ArrayList<String> list= FileService.getRecords(FileService.getReceptionistFile());
-        TableModel tm = receptionistTable.getModel();
+        TableModel tm = getReceptionistTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -4976,10 +5114,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             
            }    
     }
-    
     private void getAllPatients(){
          ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
-        TableModel tm = patientsTable.getModel();
+        TableModel tm = getPatientsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -4993,17 +5130,17 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
         
     }
     private void setComplainRefference(){
-        setColor(jPanel1);
-        resetColor(jPanel2);
+       // setColor(getComplainReferencePanel());
+       // resetColor(getSpecialityReferencePanel());
         getComplainRefference();
         
     }
-     private void setSpecialityRefference(){
-        setColor(jPanel2);
-        resetColor(jPanel1);
+    private void setSpecialityRefference(){
+       // setColor(getSpecialityReferencePanel());
+       // resetColor(getComplainReferencePanel());
         getSpecialityRefference();         
     }
-     private void getComplainRefference(){
+    private void getComplainRefference(){
             ComplainRefference refference = new ComplainRefference();
            ArrayList<String> complainRefferenceList = refference.getComplainTypes();
             DefaultListModel<String> model = new DefaultListModel<String>();
@@ -5012,7 +5149,7 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                  model.addElement(s);
                 }
     }
-      private void getSpecialityRefference(){
+    private void getSpecialityRefference(){
        SpecialityRefference refference=new SpecialityRefference();
        ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
         DefaultListModel<String> model2 = new DefaultListModel<String>();
@@ -5062,57 +5199,57 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     }
     
     
-     void setColor(JPanel panel){
+  /*  public void setColor(JPanel panel){
          panel.setBackground(new Color(85,65,118));
     }
      
-     void resetAllMainPanels(){
-         usersPanel.setVisible(false);
-         complaintPanel.setVisible(false);
-          mailPanel.setVisible(false);
-           appointmentPanel.setVisible(false);
-            reportsPanel.setVisible(false);
-             settingsPanel.setVisible(false);
-              refferencePanel.setVisible(false);
-               visitorsPanel.setVisible(false);
+    public  void resetAllMainPanels(){
+        getUsersPanel().setVisible(false);
+        getComplaintPanel().setVisible(false);
+        getMailPanel().setVisible(false);
+        getAppointmentPanel().setVisible(false);
+        getReportsPanel().setVisible(false);
+        getSettingsPanel().setVisible(false);
+        getRefferencePanel().setVisible(false);
+        getVisitorsPanel().setVisible(false);
      }
-      void resetAllColor(){
-         jPanel23.setBackground(new Color(64,43,100));
-         homeBtnPanel1.setBackground(new Color(64,43,100));
-          homeBtnPanel2.setBackground(new Color(64,43,100));
-           homeBtnPanel3.setBackground(new Color(64,43,100));
-            homeBtnPanel4.setBackground(new Color(64,43,100));
-                         
-        moSettingPanel.setBackground(new Color(64,43,100));
-        jPanel5.setBackground(new Color(64,43,100));
-        jPanel17.setBackground(new Color(64,43,100));
-        patientSettingPanel.setBackground(new Color(64,43,100));
-        jPanel31.setBackground(new Color(64,43,100));
-        jPanel32.setBackground(new Color(64,43,100));
-        jPanel33.setBackground(new Color(64,43,100));
-        visitorBtnPanel2.setBackground(new Color(64,43,100));
-        receptionistSettingPanel.setBackground(new Color(64,43,100));
-        userBtnPanel2.setBackground(new Color(64,43,100));
-        userBtnPanel.setBackground(new Color(64,43,100));
-        reportBtnPanel.setBackground(new Color(64,43,100));
-        appointmentBtnPanel.setBackground(new Color(64,43,100));
-        mailBtnPanel.setBackground(new Color(64,43,100));
-        complaintBtnPanel.setBackground(new Color(64,43,100));
-        visitorBtnPanel.setBackground(new Color(64,43,100));
-        settingBtnPanel.setBackground(new Color(64,43,100));
-        refferenceBtnPanel.setBackground(new Color(64,43,100));
+    public void resetAllColor(){
+        getAppointmentBtnPanel4().setBackground(new Color(64,43,100));
+        getHomeBtnPanel1().setBackground(new Color(64,43,100));
+        getHomeBtnPanel2().setBackground(new Color(64,43,100));
+        getHomeBtnPanel3().setBackground(new Color(64,43,100));
+        getHomeBtnPanel4().setBackground(new Color(64,43,100));            
+        getMoSettingBtnPanel().setBackground(new Color(64,43,100));
+        getAppointmentBtnPanel3().setBackground(new Color(64,43,100));
+        getComplaintBtnPanel2().setBackground(new Color(64,43,100));
+        getPatientSettingBtnPanel().setBackground(new Color(64,43,100));
+        getAppointmentBtnPanel2().setBackground(new Color(64,43,100));
+        getMailBtnPanel2().setBackground(new Color(64,43,100));
+        getComplaintBtnPanel3().setBackground(new Color(64,43,100));
+        getVisitorBtnPanel2().setBackground(new Color(64,43,100));
+        getReceptionistSettingBtnPanel().setBackground(new Color(64,43,100));
+        getUserBtnPanel2().setBackground(new Color(64,43,100));
+        getUserBtnPanel().setBackground(new Color(64,43,100));
+        getReportBtnPanel().setBackground(new Color(64,43,100));
+        getAppointmentBtnPanel1().setBackground(new Color(64,43,100));
+        getMailBtnPanel1().setBackground(new Color(64,43,100));
+        getComplaintBtnPanel1().setBackground(new Color(64,43,100));
+        getVisitorBtnPanel1().setBackground(new Color(64,43,100));
+        getAdminSettingBtnPanel().setBackground(new Color(64,43,100));
+        getRefferenceBtnPanel().setBackground(new Color(64,43,100));
     }
      void resetColor(JPanel panel){
         panel.setBackground(new Color(64,43,100));
        
         
-    }
+    }*/
      
      
      
      //appoinment functions here
-    public void addNewAppointment(){
-         AddAppointment appointment = new AddAppointment(this);
+  /*  public void addNewAppointment(){
+         AddAppointment appointmentView = new AddAppointment(this, new Appointment(),1);
+         appointmentView.setVisible(true);
          
     }
     public void editAppointment(){
@@ -5120,31 +5257,42 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                    String line= PipeService.formatTableString(record.toString());
                     String path=FileService.getAppointmentsFilePath();
                    Appointment appointment=Appointment.readAppoinment(line);
-                    EditAppointment edit=new EditAppointment(appointment,this);
+                   AddAppointment appointmentView = new AddAppointment(this, appointment,2);
+                   appointmentView.setVisible(true);
+                   // EditAppointment edit=new EditAppointment(appointment,this);
                    
-    } 
-     public void deleteAppointment(){
+    } */
+    /* public void deleteAppointment(){
+         
+         
           Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getAppointmentsFilePath();
-                    if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+                   // String path=FileService.getAppointmentsFilePath();
+                    AddAppointment appointmentView = new AddAppointment(this, Appointment.readAppoinment(line),2);
+                    appointmentView.setVisible(true);
+                    appointmentView.getController().deleteAppoinment();
+                   if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(path, line);
-                     this.setTables();}
-    } 
-     public void approveAppoinment(String status){
+                     this.setTables();
+                    }
+    } */
+     /*public void approveAppoinment(String status){
          Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getAppointmentsFilePath();
-                    FileService.deleteRecord(path, line);
+                    //String path=FileService.getAppointmentsFilePath();
+                   // FileService.deleteRecord(path, line);
                     Appointment appointment=Appointment.readAppoinment(line);
-                    appointment.setStatus(status);
-                    FileService.addLine(path, appointment.toString());
-                     this.setTables();
-     }
+                    
+                    //FileService.addLine(path, appointment.toString());
+                    // this.setTables();
+                    AddAppointment appointmentView = new AddAppointment(this, Appointment.readAppoinment(line),2);
+                   appointmentView.setStatus("Approved");
+                    
+     }*/
   
    
      //complaint functions here
-      private void addNewComplaint(){
+   /*   private void addNewComplaint(){
         AddComplaint complaint = new AddComplaint(this.getUserRole(),this);
     }
      private void deleteComplaint(){
@@ -5173,10 +5321,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     FileService.addLine(path, complain.toString());
                     this.setTables();
          
-     }
+     }*/
      
      //mails functions here
-      private void addDispatchedPostal(){
+     /* private void addDispatchedPostal(){
         AddMail mail = new AddMail(this);
     }
      private void deleteMail(){
@@ -5197,10 +5345,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     DispatchedPostal mail= DispatchedPostal.readMail(line);
                     EditMail edit=new EditMail(mail,this);
          
-     }
+     }*/
      
    //visitor records functions here
-    private void addNewVisitorRecord(){
+   /* private void addNewVisitorRecord(){
         AddVisitors record = new AddVisitors(this);
     } 
     private void deleteVisitorRecord(){
@@ -5218,24 +5366,21 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
                     String path=FileService.getVisitorsFilePath();
                     Visitor visitor =Visitor.readVisitor(line) ;
                     EditVisitor edit =new EditVisitor(visitor,this);
-    }
-   //  
+    }*/
+   
     
   //report functons here
     
-    private void setMoComboBox(){      
+/*private void setMoComboBox(){      
     Object[] items=  FileService.getAllMo(FileService.getRecords(FileService.getMoFile())).toArray();     
     DefaultComboBoxModel model = new DefaultComboBoxModel(items);
-    moComboBox.setModel( model );
+    getAppointmentReportMoComboBox().setModel( model );
     }
-    
-    
-    
-    private void setAppointmentReportTable(){
-        String date=PipeService.getDateSimpleFormat(jDateChooser2.getDate());
-        MedicalOfficer officer=(MedicalOfficer) moComboBox.getSelectedItem();
+private void setAppointmentReportTable(){
+        String date=PipeService.getDateSimpleFormat(getAppointmentReportDateChooser().getDate());
+        MedicalOfficer officer=(MedicalOfficer) getAppointmentReportMoComboBox().getSelectedItem();
          ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
-        TableModel tm = appointmentReportTable.getModel();
+        TableModel tm = getAppointmentReportTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
       
@@ -5256,11 +5401,11 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }
         
     }
-     private void setUserLoginReportTable(){
-         String date=PipeService.getDateSimpleFormat(jDateChooser3.getDate());
-         String role =jComboBox4.getSelectedItem().toString();
+private void setUserLoginReportTable(){
+         String date=PipeService.getDateSimpleFormat(getUserLoginReportDateChooser3().getDate());
+         String role =getUserLoginReportComboBox().getSelectedItem().toString();
          ArrayList<String> list= FileService.getRecords(FileService.getUserLoginFile());
-        TableModel tm = userLogReportTable.getModel();
+        TableModel tm = getUserLogReportTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
       
@@ -5281,9 +5426,9 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
            }
         
     }
-     private void setPatientCredintialReportTable(){
+private void setPatientCredintialReportTable(){
          ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
-        TableModel tm = patientCredintialTable.getModel();
+        TableModel tm = getPatientCredintialTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
                 
@@ -5296,102 +5441,92 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
             
            }  
         
-    } 
+    } */
      
-    
-     
-     
+   
      
      
-     
-     
-     
-     
-     
-     
-     
-     
-     
+
+
+       
      
      
      
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea AddressField;
-    private javax.swing.JTextField NICNofield;
-    private javax.swing.JPasswordField Passwordfield;
+    private javax.swing.JTextField Passwordfield;
     private javax.swing.JTextField PhoneNofield;
-    private javax.swing.JButton addBtn10;
-    private javax.swing.JButton addBtn11;
-    private javax.swing.JButton addBtn12;
-    private javax.swing.JButton addBtn13;
+    private javax.swing.JButton addAppointmentBtn;
+    private javax.swing.JButton addAppointmentBtn2;
+    private javax.swing.JButton addComplaintBtn;
+    private javax.swing.JButton addComplaintBtn2;
+    private javax.swing.JButton addMailBtn;
+    private javax.swing.JButton addReferenceBtn;
+    private javax.swing.JButton addUsersBtn;
+    private javax.swing.JButton addUsersBtn2;
+    private javax.swing.JButton addVisitorBtn;
+    private javax.swing.JTextArea addressField;
     private javax.swing.JPanel adminAppointmentOptions;
     private javax.swing.JPanel adminComplaintOptions;
-    private javax.swing.JButton adminDeleteUser;
     private javax.swing.JPanel adminMailOptions;
     private javax.swing.JPanel adminRefferenceOptions;
     private javax.swing.JPanel adminSidePanel;
     private javax.swing.JPanel adminUserOptions;
     private javax.swing.JPanel adminVisitorOptions;
     private javax.swing.JPanel appoinmentReportPanel;
-    private javax.swing.JPanel appointmentBtnPanel;
+    private javax.swing.JButton appoinmentReportPdfBtn;
+    private javax.swing.JPanel appointmentBtnPanel1;
+    private javax.swing.JPanel appointmentBtnPanel2;
+    private javax.swing.JPanel appointmentBtnPanel3;
+    private javax.swing.JPanel appointmentBtnPanel4;
     private javax.swing.JPanel appointmentMainOption;
     private javax.swing.JPanel appointmentPanel;
+    private javax.swing.JButton appointmentReportCsvBtn;
+    private com.toedter.calendar.JDateChooser appointmentReportDateChooser;
+    private javax.swing.JComboBox<String> appointmentReportMoComboBox;
+    private javax.swing.JPanel appointmentReportOptionPanel;
     private javax.swing.JTable appointmentReportTable;
     private javax.swing.JTable appointmentTable;
-    private javax.swing.JButton approveAppoinmentBtn9;
-    private javax.swing.JButton approveBtn3;
+    private javax.swing.JButton approveAppoinmentBtn;
+    private javax.swing.JButton approveComplaintBtn;
     private javax.swing.JPanel bgPanel;
-    private javax.swing.JPanel complaintBtnPanel;
+    private javax.swing.JPanel complainReferenceOptionPanel;
+    private javax.swing.JPanel complaintBtnPanel1;
+    private javax.swing.JPanel complaintBtnPanel2;
+    private javax.swing.JPanel complaintBtnPanel3;
     private javax.swing.JPanel complaintPanel;
     private javax.swing.JTable complaintTable;
     private javax.swing.JPanel complaintsMainOption;
-    private com.toedter.calendar.JDateChooser dateJoinedField;
-    private javax.swing.JButton deleteBtn15;
+    private javax.swing.JButton completedAppointmentBtn;
+    private javax.swing.JButton deleteAppointmentBtn;
+    private javax.swing.JButton deleteComplaintBtn;
+    private javax.swing.JButton deleteMailBtn;
+    private javax.swing.JButton deleteMailBtn2;
+    private javax.swing.JButton deleteReferenceBtn;
+    private javax.swing.JButton deleteUsersBtn;
+    private javax.swing.JButton deleteUsersBtn2;
+    private javax.swing.JButton deleteVisitorBtn;
+    private javax.swing.JButton deleteVisitorBtn2;
     private javax.swing.JTable dispatchedMailTable;
-    private javax.swing.JButton editBtn;
-    private javax.swing.JButton editBtn2;
-    private javax.swing.JButton editBtn3;
-    private javax.swing.JButton editBtn5;
-    private javax.swing.JButton editBtn6;
-    private javax.swing.JButton editBtn7;
-    private javax.swing.JButton editBtn8;
+    private javax.swing.JButton editAppointmentBtn;
+    private javax.swing.JButton editComplaintBtn;
+    private javax.swing.JButton editMailBtn;
+    private javax.swing.JButton editReferenceBtn;
+    private javax.swing.JButton editUsersBtn;
+    private javax.swing.JButton editUsersBtn2;
+    private javax.swing.JButton editVisitorBtn;
+    private javax.swing.JComboBox<String> genderComboBox1;
     private javax.swing.JButton generatePdfBtn;
     private javax.swing.JPanel homeBtnPanel1;
     private javax.swing.JPanel homeBtnPanel2;
     private javax.swing.JPanel homeBtnPanel3;
     private javax.swing.JPanel homeBtnPanel4;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -5402,13 +5537,10 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -5428,7 +5560,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -5444,7 +5575,6 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
@@ -5465,25 +5595,13 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel37;
-    private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -5501,24 +5619,31 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JPanel mailBtnPanel;
+    private javax.swing.JPanel logOutBtnPanel1;
+    private javax.swing.JPanel logOutBtnPanel2;
+    private javax.swing.JPanel logOutBtnPanel3;
+    private javax.swing.JPanel logOutBtnPanel4;
+    private javax.swing.JPanel mailBtnPanel1;
+    private javax.swing.JPanel mailBtnPanel2;
     private javax.swing.JPanel mailMainOption;
     private javax.swing.JPanel mailPanel;
-    private javax.swing.JButton moAppoinmentCompleteBtn;
+    private javax.swing.JComboBox<String> martialStatusComboBox2;
     private javax.swing.JPanel moAppointmentOptions;
-    private javax.swing.JComboBox<String> moComboBox;
     private javax.swing.JScrollPane moScrollPanel;
-    private javax.swing.JPanel moSettingPanel;
+    private javax.swing.JPanel moSettingBtnPanel;
     private javax.swing.JPanel moSidePanel;
-    private javax.swing.JTable moTable;
-    private javax.swing.JTextField namefield;
+    public javax.swing.JTable moTable;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField nicField;
     private javax.swing.JPanel patientAppointmentOptions;
     private javax.swing.JPanel patientComplaintOptions;
+    private javax.swing.JPanel patientCredentialReportOptionPanel;
+    private javax.swing.JButton patientCredintialCsvBtn;
+    private javax.swing.JButton patientCredintialPdfBtn;
     private javax.swing.JTable patientCredintialTable;
     private javax.swing.JPanel patientCreditialReportPanel;
     private javax.swing.JScrollPane patientScrollPanel;
-    private javax.swing.JPanel patientSettingPanel;
-    private javax.swing.JPanel patientSettingPanel1;
+    private javax.swing.JPanel patientSettingBtnPanel;
     private javax.swing.JPanel patientSidePanel;
     private javax.swing.JTable patientsTable;
     private javax.swing.JButton photoAddBtn2;
@@ -5528,41 +5653,44 @@ public class Dashboard extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel profileImg2;
     private javax.swing.JLabel profileImg3;
     private javax.swing.JPanel receptionAppointmentOptions;
-    private javax.swing.JPanel receptionComplaintOptions;
     private javax.swing.JPanel receptionMailOptions;
     private javax.swing.JPanel receptionSidePanel;
-    private javax.swing.JPanel receptionUserOptions;
-    private javax.swing.JPanel receptionVisitorOptions;
+    private javax.swing.JPanel receptionistComplaintOptions;
     private javax.swing.JLabel receptionistPhotoLabel;
     private javax.swing.JScrollPane receptionistScrollPanel;
-    private javax.swing.JPanel receptionistSettingPanel;
-    private javax.swing.JPanel receptionistSettingPanel1;
+    private javax.swing.JPanel receptionistSettingBtnPanel;
     private javax.swing.JTable receptionistTable;
+    private javax.swing.JPanel receptionistUserOptions;
+    private javax.swing.JPanel receptionistVisitorOptions;
     private javax.swing.JPanel refferenceBtnPanel;
     private javax.swing.JList<String> refferenceList;
     private javax.swing.JPanel refferenceMainOption;
     private javax.swing.JPanel refferencePanel;
     private javax.swing.JPanel reportBtnPanel;
     private javax.swing.JPanel reportsPanel;
-    private javax.swing.JPanel settingBtnPanel;
-    private javax.swing.JPanel settingBtnPanel1;
+    private javax.swing.JButton resetPasswordBtn;
+    private javax.swing.JButton resetPasswordBtn2;
+    private javax.swing.JButton saveUserBtn;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel specialityListPanel;
-    private javax.swing.JTextField staffEmailField;
-    private javax.swing.JTextField staffIdField;
+    private javax.swing.JPanel specialityReferenceOptionPanel;
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JPanel userBtnPanel2;
+    private javax.swing.JButton userLogReportCsvBtn;
+    private javax.swing.JPanel userLogReportOptionPanel;
     private javax.swing.JPanel userLogReportPanel;
+    private javax.swing.JButton userLogReportPdfBtn;
     private javax.swing.JTable userLogReportTable;
+    private javax.swing.JComboBox<String> userLoginReportComboBox;
+    private com.toedter.calendar.JDateChooser userLoginReportDateChooser3;
+    private javax.swing.JTextField userNameField;
     private javax.swing.JLabel userNameLabel;
     private javax.swing.JLabel userNameLabel1;
     private javax.swing.JLabel userNameLabel2;
     private javax.swing.JLabel userNameLabel3;
-    private javax.swing.JTextField usernamefield;
     private javax.swing.JPanel usersMainOption;
     private javax.swing.JPanel usersPanel;
-    private javax.swing.JButton viewBtn11;
-    private javax.swing.JPanel visitorBtnPanel;
+    private javax.swing.JPanel visitorBtnPanel1;
     private javax.swing.JPanel visitorBtnPanel2;
     private javax.swing.JTable visitorTable;
     private javax.swing.JPanel visitorsMainOption;

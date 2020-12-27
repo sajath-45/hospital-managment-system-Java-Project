@@ -5,3 +5,5 @@ othopaedic
 ENT
 Hearth specialist
 child specialist
+orthapadic
+type 14

@@ -143,26 +143,29 @@ public class Home extends javax.swing.JFrame {
     private void doctorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorButtonMousePressed
         // TODO add your handling code here:
         int type=1;
-         this.setVisible(false);
+        
         Login doctorSignIn= new Login(type);
         doctorSignIn.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_doctorButtonMousePressed
 
     private void receptionistButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistButtonMousePressed
         // TODO add your handling code here:
         int type=2;
-         this.setVisible(false);
+         
          Login login= new Login(type);
         login.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_receptionistButtonMousePressed
 
     private void adminButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminButtonMousePressed
         // TODO add your handling code here:
         int type=3;
-         this.setVisible(false);
+         
         Login login= new Login(type);
       
         login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_adminButtonMousePressed
 
     private void patientButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientButtonMousePressed

@@ -5,11 +5,15 @@
  */
 package hospital.managment.system;
 
-import java.awt.Color;
+import com.toedter.calendar.JDateChooser;
+import hospital.managment.system.models.PipeService;
+import hospital.managment.system.models.Visitor;
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,29 +22,145 @@ import javax.swing.JFileChooser;
 public class AddVisitors extends javax.swing.JFrame {
     private JFileChooser openFileChooser;
     private File attachment;
-        private Dashboard dashboard;
+    private Dashboard dashboard;
+    private Visitor visitor;
+    private VisitorController controller;
 
     /**
      * Creates new form addVisitors
      */
-    public AddVisitors(Dashboard dash) {
+    public AddVisitors(Dashboard dash,Visitor visitor,int type) {
         initComponents();
-         setDashboard(dash);
-        this.setVisible(true);
-          setFileChooser();
+        setDashboard(dash);
+        setVisitor(visitor);
+        setController(new VisitorController( getVisitor(),this));
+        getController().initController();
+        getAddVisitorBtn().addActionListener(getController());
+        if(type==1){
+            getAddVisitorBtn().setText("Add");
+            getDateChooser().setDate(new Date());
+        }
+        else if(type==2){
+            getAddVisitorBtn().setText("Save");
+            setEditData();
+        }
          
-         Date date = new Date();
-     dateField.setDate(date);
+        
     }
 
-    private AddVisitors() {
+    public AddVisitors() {
     }
     
-     public void setDashboard(Dashboard dash){
+    public void setDashboard(Dashboard dash){
         this.dashboard=dash;
     }
-     public Dashboard getDashboard(){
+    public void setController(VisitorController controller){
+        this.controller=controller;
+    }
+    public void setVisitor(Visitor visitor){
+         this.visitor=visitor;
+     }
+    public void setFileChooser(){
+        this.openFileChooser =new JFileChooser();
+        
+    }
+    public void setAttachment(File file){
+        this.attachment=file;
+    }
+    public void setPurposeField(String purpose){
+         this.purposeField.setText(purpose);
+    }
+    public void setIdCardField(String id){
+         this.idField.setText(id);
+    }
+    public void setNoteField(String note){
+         this.noteField.setText(note);
+    }
+    public void setPhoneNumberField(String number){
+         this.phoneNumberField.setText(number);
+    }
+    public void setNameField(String name){
+         this.nameField.setText(name);
+    }
+    public void setInTimeField(String time){
+         this.inTimeField.setText(time);
+    }
+    public void setOutTimeField(String time){
+         this.outTimeField.setText(time);
+    }
+    public void setDateChooser(String date){
+         this.dateField.setDate(PipeService.getStringToDateFormat(date));
+    }
+    public void setFileLabel(String name){
+         this.fileNameLable.setText(name);
+    } 
+    public void setEditData(){
+        setNameField(getVisitor().getStrName());
+        setNoteField(getVisitor().getStrNote());
+        setIdCardField(getVisitor().getId());
+        setDateChooser(getVisitor().getStrDate());
+        setPhoneNumberField(getVisitor().getPhoneNo());
+        setPurposeField(getVisitor().getStrPurpose());
+        setFileLabel(getVisitor().getAttachment().getName());
+        setAttachment(getVisitor().getAttachment());
+        setOutTimeField(getVisitor().getStrOutTime());
+        setInTimeField(getVisitor().getStrInTime());
+        
+        
+        
+    }
+    
+     
+     
+     
+     
+    public Dashboard getDashboard(){
         return dashboard;
+    }
+    public VisitorController getController(){
+        return this.controller;
+    }
+    public Visitor getVisitor(){
+        return this.visitor;
+    }
+    public JTextField getPurposeField(){
+        return this.purposeField;
+    }
+    public JTextField getIdCardField(){
+        return this.idField;
+    }
+    public JTextField getNoteField(){
+        return this.noteField;
+    }
+    public JTextField getPhoneNumberField(){
+        return this.phoneNumberField;
+    }
+    public JTextField getNameField(){
+        return this.nameField;
+    }
+    public JTextField getInTimeField(){
+        return this.inTimeField;
+    }
+    public JTextField getOutTimeField(){
+        return this.outTimeField;
+    }
+    public JDateChooser getDateChooser(){
+        return this.dateField;
+    }
+    public File getAttachment(){
+        return attachment;
+    }
+    public JLabel getFileLabel(){
+        return this.fileNameLable;
+    }
+    public JFileChooser getFileChooser(){
+        return this.openFileChooser;
+    }
+    public JButton getAddVisitorBtn(){
+        return this.addVisitorBtn;
+    }
+    public JButton getOpenFileChooserBtn(){
+        return this.openFileChooserBtn;
     }
 
     /**
@@ -76,8 +196,8 @@ public class AddVisitors extends javax.swing.JFrame {
         inTimeField = new javax.swing.JTextField();
         outTimeField = new javax.swing.JTextField();
         noteField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        addFileBtn = new javax.swing.JButton();
+        addVisitorBtn = new javax.swing.JButton();
+        openFileChooserBtn = new javax.swing.JButton();
         fileNameLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -219,24 +339,24 @@ public class AddVisitors extends javax.swing.JFrame {
         jPanel1.add(outTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 200, 30));
         jPanel1.add(noteField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 200, 90));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(85, 65, 118));
-        jButton2.setText("Add");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
+        addVisitorBtn.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        addVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
+        addVisitorBtn.setText("Add");
+        addVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addVisitorBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, 40));
+        jPanel1.add(addVisitorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, -1, 40));
 
-        addFileBtn.setText("choose");
-        addFileBtn.addActionListener(new java.awt.event.ActionListener() {
+        openFileChooserBtn.setText("choose");
+        openFileChooserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFileBtnActionPerformed(evt);
+                openFileChooserBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(addFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
+        jPanel1.add(openFileChooserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
         jPanel1.add(fileNameLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,9 +374,9 @@ public class AddVisitors extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFileBtnActionPerformed
+    private void openFileChooserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileChooserBtnActionPerformed
         // TODO add your handling code here:
-        int returnValue =openFileChooser.showOpenDialog(this);
+       /* int returnValue =openFileChooser.showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 attachment = openFileChooser.getSelectedFile();
                 fileNameLable.setText(attachment.getName());
@@ -264,46 +384,43 @@ public class AddVisitors extends javax.swing.JFrame {
             else{
                  attachment = null;
                  fileNameLable.setText("no file choosen");
-            }
-    }//GEN-LAST:event_addFileBtnActionPerformed
+            }*/
+    }//GEN-LAST:event_openFileChooserBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVisitorBtnActionPerformed
         // TODO add your handling code here:
         
-            String purpose=purposeField.getText();
-            String idCard=idField.getText();
-            String name=nameField.getText();
-            String mobile=phoneNumberField.getText();
-            String note=noteField.getText();
-             String inTime=inTimeField.getText();
-              String outTime=outTimeField.getText();
-         String date=PipeService.getDateSimpleFormat(dateField.getDate()); 
-         File file=this.attachment;
-         Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);
-            
-             
-                FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
-                 getDashboard().setTables();
-                  this.dispose();
-           
+     /*   String purpose=getPurposeField().getText();
+        String idCard=getIdCardField().getText();
+        String name=getNameField().getText();
+        String mobile=getPhoneNumberField().getText();
+        String note=getNoteField().getText();
+        String inTime=getInTimeField().getText();
+        String outTime=getOutTimeField().getText();
+        String date=PipeService.getDateSimpleFormat(getDateChooser().getDate()); 
+        File file=this.attachment;
+        Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);            
+        FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
+        getDashboard().setTables();
+        this.dispose();
+           */
         
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addVisitorBtnActionPerformed
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
-        jPanel3.setBackground(new Color(255,255,255));
+        
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
-        jPanel3.setBackground(new Color(85,65,118));
+       
     }//GEN-LAST:event_jPanel3MouseExited
 
     private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
-        jPanel4.setBackground(new Color(255,255,255));
+        
     }//GEN-LAST:event_jPanel4MouseEntered
 
     private void jPanel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseExited
-        jPanel4.setBackground(new Color(85,65,118));
     }//GEN-LAST:event_jPanel4MouseExited
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
@@ -345,18 +462,14 @@ public class AddVisitors extends javax.swing.JFrame {
             }
         });
     }
-      private void setFileChooser(){
-        openFileChooser =new JFileChooser();
-        
-    }
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addFileBtn;
+    private javax.swing.JButton addVisitorBtn;
     private com.toedter.calendar.JDateChooser dateField;
     private javax.swing.JLabel fileNameLable;
     private javax.swing.JTextField idField;
     private javax.swing.JTextField inTimeField;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -375,6 +488,7 @@ public class AddVisitors extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField noteField;
+    private javax.swing.JButton openFileChooserBtn;
     private javax.swing.JTextField outTimeField;
     private javax.swing.JTextField phoneNumberField;
     private javax.swing.JTextField purposeField;
