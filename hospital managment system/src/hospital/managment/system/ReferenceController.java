@@ -21,9 +21,11 @@ import javax.swing.JPanel;
 public  class ReferenceController  {
     private AddReference view;
     private String model;
-    public ReferenceController(AddReference view,String model){
+    private DashboardController dashboard;
+    public ReferenceController(AddReference view,String model,DashboardController dashboard){
         setView(view);
         setModel(model);
+        setDashboardController(dashboard);
     }  
     
     public void setView(AddReference view){
@@ -32,11 +34,17 @@ public  class ReferenceController  {
     public void setModel(String model){
         this.model=model;
     }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public AddReference getView(){
        return this.view;
     }
     public String getModel(){
         return this.model;
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
     
     public void initController(){
@@ -63,14 +71,7 @@ public  class ReferenceController  {
              }
      
      };
-     
-    
-   
-    
-    
-    
-    
-    
+        
  
     public void addSpeciality(){
         if(getView().getSelectionType()==1){
@@ -93,24 +94,20 @@ public  class ReferenceController  {
 
             }
         }
-        
-        
-        
-        
-        
-        
+         
         
     }
-    public void editComplaintReference(){
-        String action=JOptionPane.showInputDialog("Edit Complaint Reference");
+    public void editComplaintReference(String line){
+        String action=JOptionPane.showInputDialog("Edit Complaint Reference",line);
          if( action != null){
         FileService.deleteRecord(FileService.getComplainRefferenceFilePath(),getModel() );
         FileService.addLine(FileService.getComplainRefferenceFilePath(),action );
          }
         
     }
-    public void editSpecialityReference(){
-        String action=JOptionPane.showInputDialog("Edit Speciality Reference");
+    public void editSpecialityReference(String line){
+        
+        String action=JOptionPane.showInputDialog("Edit Speciality Reference",line);
          if( action != null){
          FileService.deleteRecord(FileService.getSpecialityRefferenceFilePath(),getModel() );
          FileService.addLine(FileService.getSpecialityRefferenceFilePath(),action );

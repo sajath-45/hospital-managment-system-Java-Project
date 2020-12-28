@@ -10,6 +10,7 @@ import hospital.managment.system.models.SpecialityRefference;
 import hospital.managment.system.models.MedicalOfficer;
 import hospital.managment.system.models.Patient;
 import hospital.managment.system.models.Appointment;
+import hospital.managment.system.models.CurrentUser;
 import hospital.managment.system.models.PipeService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +24,13 @@ import javax.swing.JOptionPane;
 public class AppointmentController implements ActionListener  {
     private AppointmentView view;
     private Appointment model;
+    private DashboardController dashboard;
+
     
-    public AppointmentController(Appointment model,AppointmentView view){
+    public AppointmentController(Appointment model,AppointmentView view,DashboardController dashboard){
         setModel(model);
         setView(view);
+        setDashboardController(dashboard);
     }
     
     public void setModel(Appointment model){
@@ -35,11 +39,17 @@ public class AppointmentController implements ActionListener  {
     public void setView(AppointmentView view){
         this.view=view;
     }
+     public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public AppointmentView getView(){
         return this.view;
     }
     public Appointment getModel(){
         return this.model;
+    }
+     public DashboardController getDashboardController(){
+        return dashboard;
     }
     public void initController(){
         createSpecialityComboBox();
@@ -87,8 +97,7 @@ public class AppointmentController implements ActionListener  {
          getModel().setStatus(getView().getAppoinmentStatus());
          getModel().setSymtomps(getView().getSysmtompsTextField().getText());
         FileService.addLine(FileService.getAppointmentsFilePath(),getModel().toString());
-       System.out.println("editr data"+getModel().getPatient());
-         System.out.println("editr data"+getModel().getMedicalOfficer());
+      
          this.closeView();
     }
     public  void deleteAppoinment(){
@@ -102,7 +111,8 @@ public class AppointmentController implements ActionListener  {
     }
     public void approveAppointment(){
         FileService.deleteRecord(FileService.getAppointmentsFilePath(),getModel().toString());     
-        addAppoinment();
+        getModel().setStatus("Approved");
+        FileService.addLine(FileService.getAppointmentsFilePath(),getModel().toString());
                     
       
        this.closeView();
@@ -120,6 +130,22 @@ public class AppointmentController implements ActionListener  {
     }
     
     public void closeView(){
+         if(CurrentUser.getUserRole().equalsIgnoreCase("Patient")){
+            getDashboardController().getPatientAppointmentTable(CurrentUser.getUser().getIdCardNo());
+        }
+         else if(CurrentUser.getUserRole().equalsIgnoreCase("Receptionist")){
+             getDashboardController().getAllAppointment();
+            
+        }
+          else if(CurrentUser.getUserRole().equalsIgnoreCase("MedicalOfficer")){
+             getDashboardController().getMOAppointmentTable(CurrentUser.getUser().getIdCardNo());
+            
+        }
+         else if(CurrentUser.getUserRole().equalsIgnoreCase("Admin")){
+              getDashboardController().getAllAppointment();
+            
+        }
+        
         this.getView().dispose();
         
         

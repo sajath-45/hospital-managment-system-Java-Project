@@ -21,10 +21,12 @@ import javax.swing.JOptionPane;
 public class VisitorController implements ActionListener {
     private Visitor model;
     private AddVisitors view;
+    private DashboardController dashboard;
     
-    public VisitorController(Visitor model,AddVisitors view){
+    public VisitorController(Visitor model,AddVisitors view,DashboardController dashboard){
         setModel(model);
         setView(view);
+        setDashboardController(dashboard);
     }
     
      public void setModel(Visitor model){
@@ -33,11 +35,17 @@ public class VisitorController implements ActionListener {
     public void setView(AddVisitors view){
         this.view=view;
     }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public AddVisitors getView(){
         return this.view;
     }
     public Visitor getModel(){
         return this.model;
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
     
     public void initController(){
@@ -62,14 +70,14 @@ public class VisitorController implements ActionListener {
         Visitor newVisitor= new Visitor(purpose,name,date,idCard,mobile,inTime,outTime,note,file);            
         FileService.addLine(FileService.getVisitorsFilePath(),newVisitor.toString());
        
-        closeView();
+        updateView();
     }
     public void editVisitor(){
         if(AlertService.optionalPlane("Would you like to Edit the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getVisitorsFilePath(),getModel().toString());     
             addVisitor();    
       }   
-        closeView();
+        updateView();
         
         
     }
@@ -77,7 +85,7 @@ public class VisitorController implements ActionListener {
           if(AlertService.optionalPlane("Would you like to Delete the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getVisitorsFilePath(),getModel().toString());                  
       }
-       this.closeView(); 
+       this.updateView(); 
         
     }
     
@@ -112,7 +120,8 @@ public class VisitorController implements ActionListener {
                  getView().getFileLabel().setText("no file choosen");
             }
     }  
-    public void closeView(){
+    public void updateView(){
+        getDashboardController().getVisitorRecords();
         this.getView().dispose();
         
         

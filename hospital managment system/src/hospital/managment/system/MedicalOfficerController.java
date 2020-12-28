@@ -29,10 +29,12 @@ import javax.swing.JOptionPane;
 public class MedicalOfficerController implements ActionListener {
     private MedicalOfficer model;
     private AddMedicalOfficer view;
+    private DashboardController dashboard;
     
-    public MedicalOfficerController(MedicalOfficer model,AddMedicalOfficer view){
+    public MedicalOfficerController(MedicalOfficer model,AddMedicalOfficer view,DashboardController dashboard){
         setModel(model);
         setView(view);
+         setDashboardController(dashboard);
         
     }
     public void setModel(MedicalOfficer model){
@@ -41,12 +43,18 @@ public class MedicalOfficerController implements ActionListener {
     public void setView(AddMedicalOfficer view){
         this.view=view;
     }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public MedicalOfficer getModel(){
         return this.model;
     }
     public AddMedicalOfficer getView(){
         return this.view;
         
+    }
+     public DashboardController getDashboardController(){
+        return dashboard;
     }
 
     public void initController(){
@@ -179,6 +187,7 @@ public class MedicalOfficerController implements ActionListener {
         }
     
      public void closeView(){
+         getDashboardController().getAllMedicalOfficers();
         this.getView().dispose();
         
     }

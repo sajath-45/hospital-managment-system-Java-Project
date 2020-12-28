@@ -22,12 +22,14 @@ import javax.swing.JOptionPane;
  * @author sajath
  */
 public class ComplaintController implements ActionListener{
-     private AddComplaint view;
+    private AddComplaint view;
     private Complaint model;
+    private DashboardController dashboard;
     
-    public ComplaintController(Complaint model,AddComplaint view){
+    public ComplaintController(Complaint model,AddComplaint view,DashboardController dashboard){
         setModel(model);
         setView(view);
+        setDashboardController(dashboard);
     }
     
     public void setModel(Complaint model){
@@ -36,11 +38,17 @@ public class ComplaintController implements ActionListener{
     public void setView(AddComplaint view){
         this.view=view;
     }
+     public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public AddComplaint getView(){
         return this.view;
     }
     public Complaint getModel(){
         return this.model;
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
     public void initController(){
         setData();
@@ -98,20 +106,20 @@ public class ComplaintController implements ActionListener{
          Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
          FileService.addLine(FileService.getComplaintsFilePath(),complain.toString());
          
-          
+          updateView();
     } 
     public void editComplaint(){
         if(AlertService.optionalPlane("Would you like to Edit the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());     
         addComplaint();    
       }   
-        closeView();
+        updateView();
     }
     public void deleteComplaint(){
         if(AlertService.optionalPlane("Would you like to Delete the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());                  
       }
-       this.closeView(); 
+       this.updateView(); 
     }
     public void changeActionTakenComplaint(){  
          String action=JOptionPane.showInputDialog("Update  Action Taken");
@@ -137,7 +145,16 @@ public class ComplaintController implements ActionListener{
     }
     
     
-    public void closeView(){
+    public void updateView(){
+       if(CurrentUser.getUserRole().equalsIgnoreCase("Patient")){
+            getDashboardController().getAllComplaints();
+        }
+         else {
+             getDashboardController().getAllComplaints();
+            
+        }
+          
+        
         this.getView().dispose();
         
         

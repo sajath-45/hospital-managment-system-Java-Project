@@ -1,2 +1,4 @@
 y12,yoosuf,Male,7547547,123456,05/12/2020,athulgama western province,Married,123456,A+,omlet,null
 david45,david,Male,0342210910,17829003939,04/12/2020,sm road tricomalee,Married,17829003939,B+,none,null
+ahamed12,ahamed,Male,07785469,12345600,26/12/2020,kalubowla dehiwala colombo,Single,12345600,B-,none,null
+shad,shadd,Male,075454554,88844488,24/12/2012,10 lilly avenue ,Married,88844488,O-,prwns,null

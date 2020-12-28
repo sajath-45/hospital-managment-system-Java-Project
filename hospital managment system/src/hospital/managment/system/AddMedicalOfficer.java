@@ -34,11 +34,11 @@ public class AddMedicalOfficer extends javax.swing.JFrame {
     /**
      * Creates new form AddMedicalOfficer
      */
-    public AddMedicalOfficer(MedicalOfficer officer,int type) {
+    public AddMedicalOfficer(MedicalOfficer officer,DashboardController controller,int type) {
         initComponents();
         setFileChooser();
         setMedicalOfficer(officer);
-        setController( new MedicalOfficerController(getMedicalOfficer(),this) );
+        setController( new MedicalOfficerController(getMedicalOfficer(),this,controller) );
         getAddUserBtn().addActionListener(getController());
         getController().initController();
         if(type==1){

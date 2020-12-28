@@ -25,12 +25,14 @@ import javax.swing.JOptionPane;
  * @author sajath
  */
 public class ReceptionistController implements ActionListener {
-  private Receptionist model;
+    private Receptionist model;
     private AddReceptionist view;
+    private DashboardController dashboard;
     
-    public ReceptionistController(Receptionist model,AddReceptionist view){
+    public ReceptionistController(Receptionist model,AddReceptionist view,DashboardController dashboard){
         setModel(model);
         setView(view);
+        setDashboardController(dashboard);
         
     }
     public void setModel(Receptionist model){
@@ -39,12 +41,18 @@ public class ReceptionistController implements ActionListener {
     public void setView(AddReceptionist view){
         this.view=view;
     }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public Receptionist getModel(){
         return this.model;
     }
     public AddReceptionist getView(){
         return this.view;
         
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
 
     public void initController(){
@@ -131,6 +139,8 @@ public class ReceptionistController implements ActionListener {
         File imageFile=getView().getPhotoAttachment();  
         Receptionist receptionist =new Receptionist(userName,name,gender,mobile,id,dob,address,martialStatus,id,staffId,staffEmail,dateJoined,file,imageFile);
         FileService.addLine(FileService.getReceptionistFilePath(), receptionist.toString2());
+    
+        this.closeView(); 
     }
     public void deleteReceptionist(){
            if(AlertService.optionalPlane("Would you like to Delete the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
@@ -172,6 +182,7 @@ public class ReceptionistController implements ActionListener {
 
     
      public void closeView(){
+         getDashboardController().getAllReceptionist();
         this.getView().dispose();
         
     }

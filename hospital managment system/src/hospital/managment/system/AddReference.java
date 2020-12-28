@@ -25,11 +25,11 @@ public class AddReference extends javax.swing.JFrame {
      * Creates new form AddReference
      * @param type
      */
-    public AddReference(int type) {
+    public AddReference(int type,DashboardController controller) {
         initComponents();
         this.setVisible(true);
         // setDashboard(dash);
-        setController(new ReferenceController( this,null));
+        setController(new ReferenceController( this,null,controller));
         getController().initController();
         
         
