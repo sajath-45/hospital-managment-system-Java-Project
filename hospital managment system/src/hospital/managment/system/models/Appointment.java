@@ -5,8 +5,8 @@
  */
 package hospital.managment.system.models;
 
-import static hospital.managment.system.models.FileService.getMoByStaffId;
 import static hospital.managment.system.models.FileService.getPatientById;
+import static hospital.managment.system.models.FileService.getMoById;
 
 /**
  *
@@ -99,7 +99,7 @@ public class Appointment {
      
     @Override
     public String toString(){
-        return getAppointmentNumber()+","+getAppointmentDate()+","+ getAppointmentTime()+","+getStatus()+","+getPatient().getName()+","+getPatient().getIdCardNo()+","+getMedicalOfficer().getName()+","+getSpeciality()+","+getSymtomps()+","+getMedicalOfficer().getStrStaffId();
+        return getAppointmentNumber()+","+getAppointmentDate()+","+ getAppointmentTime()+","+getStatus()+","+getPatient().getName()+","+getPatient().getIdCardNo()+","+getMedicalOfficer().getName()+","+getSpeciality()+","+getSymtomps()+","+getMedicalOfficer().getIdCardNo();
     }  
    public static Appointment readAppoinment(String line){
 String[] data=line.split(",");
@@ -112,8 +112,8 @@ String date=data[1];
  String moName=data[6];
  String speciality=data[7];
   String sysmtomps=data[8];
-   String staffId=data[9];
+   String moId=data[9];
 
- return new Appointment(appoinmentNo,getPatientById ( patientId ),getMoByStaffId(staffId),date,time,status,sysmtomps,speciality);
+ return new Appointment(appoinmentNo,getPatientById ( patientId ),getMoById(moId),date,time,status,sysmtomps,speciality);
 }  
 }

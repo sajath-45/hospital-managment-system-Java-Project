@@ -19,9 +19,11 @@ import javax.swing.JOptionPane;
 public class PatientController implements ActionListener {
      private Patient model;
     private AddPatient view;
-    public PatientController(Patient model,AddPatient view){
+     private DashboardController dashboard;
+    public PatientController(Patient model,AddPatient view,DashboardController dashboard){
         setModel(model);
         setView(view);
+         setDashboardController(dashboard);
         
     }
     
@@ -34,12 +36,18 @@ public class PatientController implements ActionListener {
     public void setView(AddPatient view){
         this.view=view;
     }
+     public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
     public Patient getModel(){
         return this.model;
     }
     public AddPatient getView(){
         return this.view;
         
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
 
   
@@ -64,6 +72,7 @@ public class PatientController implements ActionListener {
         
         Patient patient =new Patient(userName,name,gender,mobile,id,dob,address,martialStatus,id,blood,allergy,null);
         FileService.addLine(FileService.getPatientsFilePath(), patient.toString2());
+        this.closeView(); 
     }
     public void deletePatient(){
            if(AlertService.optionalPlane("Would you like to Delete Patient  Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
@@ -107,6 +116,8 @@ public class PatientController implements ActionListener {
          }
     
      public void closeView(){
+          getDashboardController().getAllPatients();
+         
         this.getView().dispose();
         
     }

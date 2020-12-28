@@ -29,11 +29,11 @@ public class AddVisitors extends javax.swing.JFrame {
     /**
      * Creates new form addVisitors
      */
-    public AddVisitors(Dashboard dash,Visitor visitor,int type) {
+    public AddVisitors(Dashboard dash,Visitor visitor,DashboardController controller,int type) {
         initComponents();
         setDashboard(dash);
         setVisitor(visitor);
-        setController(new VisitorController( getVisitor(),this));
+        setController(new VisitorController( getVisitor(),this,controller));
         getController().initController();
         getAddVisitorBtn().addActionListener(getController());
         if(type==1){

@@ -1,9 +1,7 @@
 cardio
 dental
 physio
-othopaedic
 ENT
 Hearth specialist
 child specialist
-orthapadic
-type 14
+cancer  and tumour specilist 

@@ -3,3 +3,4 @@ ruwan90,ruwan,Male,7784593,199852652,09/06/2020,galle matara,Married,199852652,1
 sangee11,sangee,Female,12343567,200093457,31/12/2020,jaffna ,Single,200093457,741,sange12g,aivnn,06/12/2020,/home/sajath/202-chatbot-dialogflow/firebase.json,physio,/home/sajath/DOCTORDETAILS (2).png
 ironman,stark,Male,300000300,123456789,12/12/2020,texas america,Married,123456789,3000,strak@gmai.com,04/12/2020,/home/sajath/Driver.java,cardio,/home/sajath/DOCTORDETAILS (2).png
 sammy,samantha,Female,23454657,122346888,25/12/2020,sammudrasanna road,Married,122346888,123,samy@hmail.com,09/12/2020,/home/sajath/Driver.java,Item 1,/home/sajath/DOCTORDETAILS (2).png
+lexi,lexi,Female,034221010,18892049506,19/12/2020,467 jalubowila dehiwala,Married,18892049506,005,lexi@gmail.com,16/12/2020,/home/sajath/202-chatbot-dialogflow/README.md,cardio,/home/sajath/Desktop/java project/usjp-Java-Project/hospital managment system/src/resources/old/doctor (4).png

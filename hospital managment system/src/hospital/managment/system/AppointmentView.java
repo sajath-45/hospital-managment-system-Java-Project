@@ -31,14 +31,14 @@ public class AppointmentView extends javax.swing.JFrame {
     private String appointmentNumber=String.valueOf((FileService.getRecordCount(FileService.getAppointmentsFile())+1));
     private AppointmentView() {
     }
-    public AppointmentView(Dashboard dash,Appointment appointment,int type) {
+    public AppointmentView(Dashboard dash,Appointment appointment,DashboardController controller,int type) {
         
         initComponents();
         setDashboard(dash);
         //createPatientComboBox();
       // createSpecialityComboBox();
         setAppointment(appointment);
-        setController(new AppointmentController( getAppointment(),this));
+        setController(new AppointmentController( getAppointment(),this,controller));
         getController().initController();
         getAddAppoimentBtn().addActionListener(getController());
         
@@ -90,7 +90,7 @@ public class AppointmentView extends javax.swing.JFrame {
         
     }
     public void setMedicalOfficer(MedicalOfficer mo){
-        System.out.println("worls");
+        
         for (int i=0; i<doctorComboBox.getModel().getSize(); i++)
         {
             if (doctorComboBox.getItemAt(i).toString().equals(mo.toString()))
@@ -103,7 +103,7 @@ public class AppointmentView extends javax.swing.JFrame {
         //this.doctorComboBox.setSelectedItem(mo);
     }
     public void setPatient(Patient patient){
-        System.out.println("worls");
+       
         for (int i=0; i<patientComboBox.getModel().getSize(); i++)
         {
             if (patientComboBox.getItemAt(i).toString().equals(patient.toString()))

@@ -343,6 +343,7 @@ public class Login extends javax.swing.JFrame {
                }
                if(isUserValid){
                    CurrentUser user=new CurrentUser(getRole(),line);
+                   break;
                }
             }
             reader.close();

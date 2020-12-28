@@ -31,20 +31,20 @@ public class AddComplaint extends javax.swing.JFrame {
     private Complaint complaint;
     private File attachment;
     private String userRole;
-    private Dashboard dashboard;
+  
 
     /**
      * Creates new form addComplaint
      */
     private AddComplaint() {
     }
-    public AddComplaint(String role,Dashboard dash,Complaint complain,int type) {
+    public AddComplaint(String role,DashboardController controller,Complaint complain,int type) {
         initComponents();
-        setDashboard(dash);
+       
         this.setVisible(true);
         setUserRole(role);
         setComplaint(complain);
-        setController(new ComplaintController( getComplaint(),this));
+        setController(new ComplaintController( getComplaint(),this,controller));
         getController().initController();
         getAddComplaintBtn().addActionListener(getController());
         
@@ -67,9 +67,7 @@ public class AddComplaint extends javax.swing.JFrame {
         
     }
     
-     public void setDashboard(Dashboard dash){
-        this.dashboard=dash;
-    }
+    
     public void setComplaint(Complaint com){
         this.complaint=com;
         
@@ -122,9 +120,7 @@ public class AddComplaint extends javax.swing.JFrame {
     }
      
      //gettrrs
-    public Dashboard getDashboard(){
-        return dashboard;
-    }
+    
     public  ComplaintController getController(){
         return controller;
     }

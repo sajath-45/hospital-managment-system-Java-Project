@@ -33,11 +33,11 @@ public class AddReceptionist extends javax.swing.JFrame {
     /**
      * Creates new form AddReceptionist
      */
-    public AddReceptionist(Receptionist user,int type) {
+    public AddReceptionist(Receptionist user,DashboardController controller,int type) {
          initComponents();
         setFileChooser();
         setReceptionist(user);
-        setController( new ReceptionistController(getReceptionist(),this) );
+        setController( new ReceptionistController(getReceptionist(),this,controller) );
         getAddUserBtn().addActionListener(getController());
         getController().initController();
         if(type==1){

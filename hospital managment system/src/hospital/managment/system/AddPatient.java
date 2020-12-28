@@ -31,10 +31,10 @@ public class AddPatient extends javax.swing.JFrame {
     private AddPatient() {
     }
     
-    public AddPatient(Patient patient,int type) {
+    public AddPatient(Patient patient,DashboardController controller,int type) {
         initComponents();
         setPatient(patient);
-        setController( new PatientController(getPatient(),this) );
+        setController( new PatientController(getPatient(),this,controller) );
         getAddUserBtn().addActionListener(getController());
         getController().initController();
         if(type==1){

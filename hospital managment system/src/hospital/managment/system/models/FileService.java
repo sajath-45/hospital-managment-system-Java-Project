@@ -249,7 +249,7 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println("Doctor"+line);
+               
                  
                 String[] data = line.split(","); //username, password, email, etc
                 if(data[13].equals(speciality)){
@@ -273,16 +273,16 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
        
    }   
    
-public static MedicalOfficer getMoByStaffId(String id){
+public static MedicalOfficer getMoById(String id){
        MedicalOfficer officer=null;
          try {
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println("Doctor"+line);
+                
                  
                 String[] data = line.split(","); //username, password, email, etc
-                if(data[9].equals(id)){
+                if(data[4].equals(id)){
                 
                 
                officer=MedicalOfficer.readMoUser(line);
@@ -502,7 +502,7 @@ public static ArrayList<String> getPatientAppointments(String id){
             String line;
             while ((line = reader.readLine()) != null) {              
                 String[] data = line.split(","); //username, password, email, etc
-                if(data[3].equals(id)){
+                if(data[5].equals(id)){
                     
                
                 appointmentList.add(line);
@@ -531,7 +531,7 @@ public static ArrayList<String> getMOAppointments(String id){
             String line;
             while ((line = reader.readLine()) != null) {              
                 String[] data = line.split(","); //username, password, email, etc
-                if(data[9].equals(id) && data[3].equals("approved")){
+                if(data[9].equals(id) && data[3].equals("Approved")){
                     
                
                 appointmentList.add(line);
@@ -972,7 +972,7 @@ public static void generateApprovedAppoinmentReport(){
         table.addCell("Medical Officer");
         table.addCell("Speciality");
         table.addCell("Systomp");
-        table.addCell("Staff Id");
+        table.addCell("Medical Officer Id");
         ArrayList<String> appointmentList =FileService.getRecords(FileService.getAppointmentsFile());
         
         
@@ -989,7 +989,7 @@ public static void generateApprovedAppoinmentReport(){
             table.addCell(appoinment.getMedicalOfficer().moName());
             table.addCell(appoinment.getSpeciality());
             table.addCell(appoinment.getSymtomps());
-            table.addCell(appoinment.getMedicalOfficer().getStrStaffId());
+            table.addCell(appoinment.getMedicalOfficer().getIdCardNo());
                 
              }
          

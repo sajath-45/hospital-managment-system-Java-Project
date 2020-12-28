@@ -146,11 +146,7 @@ public class MedicalOfficer extends User {
     public String getStrSpecialityArea(){
         return strSpecialityArea;
     }
-    
-    
-    
-    
-    
+        
      public String moName() {
          return "DR."+getName();
      }

@@ -23,18 +23,18 @@ public class AddMail extends javax.swing.JFrame {
 private MailController controller;
 private JFileChooser openFileChooser;
 private File attachment;
-private Dashboard dashboard;
+
 private DispatchedPostal mail;
 
     /**
      * Creates new form addMail
      */
-    public AddMail(Dashboard dash,DispatchedPostal mail,int type) {
+    public AddMail(Dashboard dash,DispatchedPostal mail,DashboardController controller,int type) {
         initComponents();
         setFileChooser();
-        setDashboard(dash);
+        
         setMail(mail);
-        setController(new MailController( getMail(),this));
+        setController(new MailController( getMail(),this,controller));
         getController().initController();
         getSendMailBtn().addActionListener(getController());
         if(type==1){
@@ -56,9 +56,7 @@ private DispatchedPostal mail;
     public void setController(MailController ctrl){
         this.controller=ctrl;
     }
-     public void setDashboard(Dashboard dash){
-        this.dashboard=dash;
-    }
+    
     public void setReferenceField(String no){
         this.refferenceNoField.setText(no);
     }
@@ -95,9 +93,7 @@ private DispatchedPostal mail;
     }
      
      
-    public Dashboard getDashboard(){
-        return dashboard;
-    }
+    
     public DispatchedPostal getMail(){
         return this.mail;
     }

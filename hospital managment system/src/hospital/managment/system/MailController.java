@@ -21,10 +21,12 @@ import javax.swing.JOptionPane;
 public class MailController implements ActionListener {
    private DispatchedPostal model;
    private AddMail view;
+   private DashboardController dashboard;
    
-   public MailController(DispatchedPostal model,AddMail view){
+   public MailController(DispatchedPostal model,AddMail view,DashboardController dashboard){
        this.setModel(model);
        this.setView(view);
+        setDashboardController(dashboard);
    }
    public void setModel(DispatchedPostal model){
        this.model=model;
@@ -32,12 +34,18 @@ public class MailController implements ActionListener {
    public void setView(AddMail view){
        this.view=view;  
    }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
    public DispatchedPostal getModel(){
        return model;
    }
    public AddMail getView(){
        return view;
    }
+   public DashboardController getDashboardController(){
+        return dashboard;
+    }
    
    public void initController(){
         getView().getchooseFileBtn().addActionListener ((ActionEvent e) -> {
@@ -84,14 +92,14 @@ public class MailController implements ActionListener {
         DispatchedPostal mail=new DispatchedPostal(refferenceNumber,note,date,file,name,address); 
         FileService.addLine(FileService.getMailsFilePath(),mail.toString());
         
-       
+       updateView();
    }
    public void editMail(){
        if(AlertService.optionalPlane("Would you like to Edit the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getMailsFilePath(),getModel().toString());     
         addMail();    
       }   
-        closeView();
+        updateView();
        
    }
    public void deleteMail(){
@@ -99,10 +107,11 @@ public class MailController implements ActionListener {
         FileService.deleteRecord(FileService.getMailsFilePath(),getModel().toString());   
         
       }
-       this.closeView(); 
+       this.updateView(); 
     }
    
-   public void closeView(){
+   public void updateView(){
+       getDashboardController().getDispatchedMails();
         this.getView().dispose();
         
         

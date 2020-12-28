@@ -20,14 +20,31 @@ import javax.swing.JPanel;
  */
 public  class ReferenceController  {
     private AddReference view;
-    public ReferenceController(AddReference view){
+    private String model;
+    private DashboardController dashboard;
+    public ReferenceController(AddReference view,String model,DashboardController dashboard){
         setView(view);
+        setModel(model);
+        setDashboardController(dashboard);
     }  
-    public AddReference getView(){
-        return this.view;
-    }
+    
     public void setView(AddReference view){
         this.view=view;
+    }
+    public void setModel(String model){
+        this.model=model;
+    }
+    public void setDashboardController(DashboardController dash){
+        this.dashboard=dash;
+    }
+    public AddReference getView(){
+       return this.view;
+    }
+    public String getModel(){
+        return this.model;
+    }
+    public DashboardController getDashboardController(){
+        return dashboard;
     }
     
     public void initController(){
@@ -54,14 +71,7 @@ public  class ReferenceController  {
              }
      
      };
-     
-    
-   
-    
-    
-    
-    
-    
+        
  
     public void addSpeciality(){
         if(getView().getSelectionType()==1){
@@ -84,13 +94,34 @@ public  class ReferenceController  {
 
             }
         }
+         
         
+    }
+    public void editComplaintReference(String line){
+        String action=JOptionPane.showInputDialog("Edit Complaint Reference",line);
+         if( action != null){
+        FileService.deleteRecord(FileService.getComplainRefferenceFilePath(),getModel() );
+        FileService.addLine(FileService.getComplainRefferenceFilePath(),action );
+         }
         
+    }
+    public void editSpecialityReference(String line){
         
-        
-        
-        
-        
+        String action=JOptionPane.showInputDialog("Edit Speciality Reference",line);
+         if( action != null){
+         FileService.deleteRecord(FileService.getSpecialityRefferenceFilePath(),getModel() );
+         FileService.addLine(FileService.getSpecialityRefferenceFilePath(),action );
+         
+         }
+    }
+    public void deleteComplaintReference(){
+    if(AlertService.optionalPlane("Would you like to Delete the Complaint Reference Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+        FileService.deleteRecord(FileService.getComplainRefferenceFilePath(),getModel() );}
+    }
+    public void deleteSpecialityReference(){
+        if(AlertService.optionalPlane("Would you like to Delete the Speciality Reference Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+         FileService.deleteRecord(FileService.getSpecialityRefferenceFilePath(),getModel() );
+        }
     }
     
     

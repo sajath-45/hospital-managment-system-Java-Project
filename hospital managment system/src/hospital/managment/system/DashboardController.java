@@ -565,17 +565,17 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         
     }
         else if(getView().getUserRole().equals("Patient")){
-            getPatientAppointmentTable("199829003939");
+            getPatientAppointmentTable(CurrentUser.getUser().getIdCardNo());
             getAllComplaints();
             
     }
         else if(getView().getUserRole().equals("MedicalOfficer")){
-        getMOAppointmentTable("dr001");
+        getMOAppointmentTable(CurrentUser.getUser().getIdCardNo());
     }
         
     }
     
-    private void setAppointmentOptions(){
+    public void setAppointmentOptions(){
           if(getView().getUserRole().equals("Admin")){
               getView().getAdminAppointmentOptions().setVisible(true);
               getView().getPatientAppointmentOptions().setVisible(false);
@@ -819,37 +819,41 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
     private void setComplainRefference(){
         setHoverColor(getView().getComplainReferencePanel(),getView().getjLabel28());
         resetHoverColor(getView().getSpecialityReferencePanel(),getView().getjLabel31());
+        getView().getComplaintReferencejScrollPanel().setVisible(true);
+        getView().getSpecialityReferenceJScrollPanel().setVisible(false);
         getComplainRefference();
     }
     private void setSpecialityRefference(){
         setHoverColor(getView().getSpecialityReferencePanel(),getView().getjLabel31());
         resetHoverColor(getView().getComplainReferencePanel(),getView().getjLabel28());
+         getView().getComplaintReferencejScrollPanel().setVisible(false);
+        getView().getSpecialityReferenceJScrollPanel().setVisible(true);
         getSpecialityRefference();         
     }
-    private void getComplainRefference(){
+    public void getComplainRefference(){
             ComplainRefference refference = new ComplainRefference();
            ArrayList<String> complainRefferenceList = refference.getComplainTypes();
             DefaultListModel<String> model = new DefaultListModel<String>();
-             getView().getReferenceList().setModel(model);
+             getView().getComplaintReferenceList().setModel(model);
           for(String s:complainRefferenceList){
                  model.addElement(s);
                 }
     }
-    private void getSpecialityRefference(){
+    public void getSpecialityRefference(){
        SpecialityRefference refference=new SpecialityRefference();
        ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
         DefaultListModel<String> model2 = new DefaultListModel<String>();
-        getView().getReferenceList().setModel(model2);
+        getView().getSpecialityRefferenceList().setModel(model2);
         for(String s:specialityRefferenceList){
                  model2.addElement(s);
                 }          
          }
-    private void setMoComboBox(){      
+    public void setMoComboBox(){      
     Object[] items=  FileService.getAllMo(FileService.getRecords(FileService.getMoFile())).toArray();     
     DefaultComboBoxModel model = new DefaultComboBoxModel(items);
     getView().getAppointmentReportMoComboBox().setModel( model );
     }
-    private void setAppointmentReportTable(){
+    public void setAppointmentReportTable(){
         String date=PipeService.getDateSimpleFormat(getView().getAppointmentReportDateChooser().getDate());
         MedicalOfficer officer=(MedicalOfficer) getView().getAppointmentReportMoComboBox().getSelectedItem();
          ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
@@ -874,7 +878,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }
         
     }
-    private void setUserLoginReportTable(){
+    public void setUserLoginReportTable(){
          String date=PipeService.getDateSimpleFormat(getView().getUserLoginReportDateChooser3().getDate());
          String role =getView().getUserLoginReportComboBox().getSelectedItem().toString();
          ArrayList<String> list= FileService.getRecords(FileService.getUserLoginFile());
@@ -899,7 +903,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }
         
     }
-    private void setPatientCredintialReportTable(){
+    public void setPatientCredintialReportTable(){
          ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
         TableModel tm = getView().getPatientCredintialTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -916,12 +920,13 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         
     } 
 //getters
-    private void getPatientAppointmentTable(String id){
+    public void  getPatientAppointmentTable(String id){
+        System.out.println("patient id"+id);
         ArrayList<String> list= FileService.getPatientAppointments(id);
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
-        System.out.println("patient appointments");  
+          
              for(int i=0;i<list.size();i++)  
            {  
             
@@ -932,7 +937,8 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
             
            }  
     }
-    private void getMOAppointmentTable(String id){
+    public void getMOAppointmentTable(String id){
+         System.out.println("patient id"+id);
           ArrayList<String> list= FileService.getMOAppointments(id);
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -948,7 +954,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void  getAllAppointment(){
+    public void  getAllAppointment(){
         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -963,7 +969,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void getAllComplaints(){
+    public void getAllComplaints(){
          ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
         TableModel tm = getView().getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -979,7 +985,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void getPatientComplains(){
+    public void getPatientComplains(){
           ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
         TableModel tm = getView().getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -995,7 +1001,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void getDispatchedMails(){
+    public void getDispatchedMails(){
          ArrayList<String> list= FileService.getRecords(FileService.getMailsFile());
         TableModel tm = getView().getMailsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1011,7 +1017,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    private void getVisitorRecords(){
+    public void getVisitorRecords(){
         ArrayList<String> list= FileService.getRecords(FileService.getVisitorsFile());
         TableModel tm = getView().getVisitorsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1025,7 +1031,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
             
            }  
     }
-    private void getAllUsers(){
+    public void getAllUsers(){
        
              getAllMedicalOfficers();
            getAllReceptionist();
@@ -1061,7 +1067,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
             
            }    
     }
-    private void getAllPatients(){
+    public void getAllPatients(){
          ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
         TableModel tm = getView().getPatientsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1093,7 +1099,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
 /*other functions*/
 //appointment
 public void addNewAppointment(){
-         AppointmentView appointmentView = new AppointmentView(getView(), new Appointment(),1);
+         AppointmentView appointmentView = new AppointmentView(getView(), new Appointment(),this,1);
          appointmentView.setVisible(true);
          
     }
@@ -1103,7 +1109,7 @@ public void generateApprovedAppointmentPdf(){
 public void editAppointment(){
         Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                   AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),2);
+                   AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
                    appointmentView.setVisible(true);
                    // EditAppointment edit=new EditAppointment(appointment,this);
                    
@@ -1113,7 +1119,7 @@ public void deleteAppointment(){
          
           Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                    AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),2);
+                    AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
                     appointmentView.setVisible(true);
                     appointmentView.getController().deleteAppoinment();
                     /*if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
@@ -1124,7 +1130,7 @@ public void deleteAppointment(){
 public void approveAppointment(String status){
          Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());             
-                    AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),2);
+                    AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
                     if(AlertService.optionalPlane("Would you like to Approve the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(FileService.getAppointmentsFilePath(), line);
                     appointmentView.setStatus(status);
@@ -1134,60 +1140,60 @@ public void approveAppointment(String status){
 //complaint
 
 private void addNewComplaint(){
-        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),getView(),new Complaint(),1);
+        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),this,new Complaint(),1);
         complaintView.setVisible(true);
     }
 private void deleteComplaint(){
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
-        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),getView(), Complaint.readComplaint(line),2);
+        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),this, Complaint.readComplaint(line),2);
         complaintView.setVisible(true);
         complaintView.getController().deleteComplaint();                 
      } 
 public void editComplaint(){
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
-        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),getView(), Complaint.readComplaint(line),2);
+        AddComplaint complaintView = new AddComplaint(getView().getUserRole(),this, Complaint.readComplaint(line),2);
         complaintView.setVisible(true);
      }
 public void editActionTaken( ){
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
-        ComplaintController controller=new ComplaintController(Complaint.readComplaint(line),null);
+        ComplaintController controller=new ComplaintController(Complaint.readComplaint(line),null,this);
         controller.changeActionTakenComplaint();
          
      }
      
 //mails
 private void addDispatchedPostal(){
-        AddMail mail = new AddMail(getView(),null,1);
+        AddMail mail = new AddMail(getView(),null,this,1);
         mail.setVisible(true);
         
     }
 private void deleteMail(){
           Object record= ((DefaultTableModel) getView().getMailsTable().getModel()).getDataVector().elementAt(getView().getMailsTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                   AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),2);
+                   AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),this,2);
                     mail.setVisible(true);
                     mail.getController().deleteMail();
      }
 private void editMail(){
           Object record= ((DefaultTableModel) getView().getMailsTable().getModel()).getDataVector().elementAt(getView().getMailsTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                    AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),2);
+                    AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),this,2);
                     mail.setVisible(true);
          
      }
      
 //visitor function
 private void addNewVisitorRecord(){
-        AddVisitors record = new AddVisitors(getView(),null,1);
+        AddVisitors record = new AddVisitors(getView(),null,this,1);
         record.setVisible(true);
     } 
 private void deleteVisitorRecord(){
         Object record= ((DefaultTableModel) getView().getVisitorsTable().getModel()).getDataVector().elementAt(getView().getVisitorsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
-        AddVisitors deleteView = new AddVisitors(getView(),Visitor.readVisitor(line),2);
+        AddVisitors deleteView = new AddVisitors(getView(),Visitor.readVisitor(line),this,2);
         deleteView.setVisible(true);
         deleteView.getController().deleteVisitor();
         
@@ -1195,22 +1201,48 @@ private void deleteVisitorRecord(){
 private void editVisitorRecord(){
         Object record= ((DefaultTableModel) getView().getVisitorsTable().getModel()).getDataVector().elementAt(getView().getVisitorsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
-        AddVisitors edit =new AddVisitors(getView(),Visitor.readVisitor(line),2);
+        AddVisitors edit =new AddVisitors(getView(),Visitor.readVisitor(line),this,2);
         edit.setVisible(true);
     }
 
 //reference
 private void addNewReference(){
      
-        AddReference refference= new AddReference(1);
+        AddReference refference= new AddReference(1,this);
         refference.setVisible(true);
     
 }
 private void deleteReference(){
+    if(getView().getComplaintReferencejScrollPanel().isShowing()){
+        String selected = getView().getComplaintReferenceList().getSelectedValue();
+        ReferenceController reference = new ReferenceController(null,selected,this);
+        reference.deleteComplaintReference();
+        
+    }
+    else if(getView().getSpecialityReferenceJScrollPanel().isShowing()){
+                String selected = getView().getSpecialityRefferenceList().getSelectedValue();
+                ReferenceController reference = new ReferenceController(null,selected,this);
+                reference.deleteSpecialityReference();
+
+    }
     
     
 }
 private void editReference(){
+    if(getView().getComplaintReferencejScrollPanel().isShowing()){
+        String selected = getView().getComplaintReferenceList().getSelectedValue();
+        ReferenceController reference = new ReferenceController(null,selected,this);
+        reference.editComplaintReference(selected);
+        
+    }
+    else if(getView().getSpecialityReferenceJScrollPanel().isShowing()){
+                String selected = getView().getSpecialityRefferenceList().getSelectedValue();
+                ReferenceController reference = new ReferenceController(null,selected,this);
+                reference.editSpecialityReference(selected);
+
+    }
+    
+    
     
 }
 
@@ -1259,7 +1291,7 @@ private void generateUserLoginReportCsv(){
         getView().getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
         getView().getAddressField().setText(user.getAddress());
         Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
-         getView().getDobDateChooser().setDate(dob);
+        getView().getDobDateChooser().setDate(dob);
      }
  public  void saveUser(){
          String role=CurrentUser.getUserRole();
@@ -1294,15 +1326,15 @@ private void generateUserLoginReportCsv(){
  //user functions
  private void addUser(){
       if(getView().getMoScrollPanel().isShowing()){
-          AddMedicalOfficer newOfficer=new  AddMedicalOfficer(null,1);  
+          AddMedicalOfficer newOfficer=new  AddMedicalOfficer(null,this,1);  
           newOfficer.setVisible(true);
         }
         else if(getView().getPatientScrollPanel().isShowing()){
-                     AddPatient newPatient=new  AddPatient(null,1); 
+                     AddPatient newPatient=new  AddPatient(null,this,1); 
                      newPatient.setVisible(true);
         }
         else if(getView().getReceptionistScrollPanel().isShowing()){
-                   AddReceptionist newReceptionist=new  AddReceptionist(null,1);
+                   AddReceptionist newReceptionist=new  AddReceptionist(null,this,1);
                    newReceptionist.setVisible(true);
         }
      
@@ -1311,19 +1343,19 @@ private void generateUserLoginReportCsv(){
       if(getView().getMoScrollPanel().isShowing()){
           Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
-                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),this,2);  
                     editOfficer.setVisible(true);
         }
         else if(getView().getPatientScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),this,2); 
                     editPatient.setVisible(true);
         }
         else if(getView().getReceptionistScrollPanel().isShowing()){
             Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),this,1);
                     editReceptionist.setVisible(true);
                    
         }
@@ -1334,19 +1366,19 @@ private void generateUserLoginReportCsv(){
      if(getView().getMoScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),this,2);  
                     editOfficer.getController().deleteMedicalOfficer();
         }
         else if(getView().getPatientScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),this,2); 
                     editPatient.getController().deletePatient();
         }
         else if(getView().getReceptionistScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),this,1);
                     editReceptionist.getController().deleteReceptionist();
                    
         }
@@ -1356,19 +1388,19 @@ private void generateUserLoginReportCsv(){
      if(getView().getMoScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),2);  
+                    AddMedicalOfficer editOfficer=new  AddMedicalOfficer(MedicalOfficer.readMoUser(line),this,2);  
                     editOfficer.getController().resetMedicalOfficerPassword();
         }
         else if(getView().getPatientScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getPatientsTable().getModel()).getDataVector().elementAt(getView().getPatientsTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),2); 
+                    AddPatient editPatient=new  AddPatient(Patient.readPatientUser(line),this,2); 
                     editPatient.getController().resetMedicalOfficerPassword();
         }
         else if(getView().getReceptionistScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getReceptionistTable().getModel()).getDataVector().elementAt(getView().getReceptionistTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
-                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),1);
+                    AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),this,1);
                     editReceptionist.getController().resetReceptionistPassword();
                    
         }

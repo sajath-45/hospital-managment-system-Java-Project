@@ -1,8 +1,8 @@
 type 1
 type 2
 type 3
-type 6
 type 11
 type 12
-type 18
 type 21
+type 66
+type 80
