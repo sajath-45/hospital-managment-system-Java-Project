@@ -231,11 +231,11 @@ public  static ArrayList<Patient> getAllPatients(){
 
 
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
 
@@ -262,11 +262,11 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
             return specialityOfficer;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
 
@@ -292,11 +292,11 @@ public static MedicalOfficer getMoById(String id){
             return officer;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
        
@@ -320,11 +320,11 @@ public static Patient getPatientById(String id){
             return patient;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
        
@@ -478,17 +478,17 @@ public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){
 public static void writeLoginRecord(String filePath,String line)throws IOException {
              String[] lineList=line.split(",");
            if(isRecordExist(filePath,lineList[0])){ 
-                            System.out.println("key"+lineList[0]);
+                            
 
            removeLine(filePath,lineList[0]);
-             System.out.println("removing");
+            
               addLine(filePath,line);
 
        
        }
        else{
            addLine(filePath,line);
-          System.out.println("adding");
+          
        }
     
 
@@ -513,11 +513,11 @@ public static ArrayList<String> getPatientAppointments(String id){
            return appointmentList;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
           
@@ -542,11 +542,11 @@ public static ArrayList<String> getMOAppointments(String id){
            return appointmentList;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
           
@@ -710,7 +710,7 @@ public static ArrayList<String> getRecords(File file){
              BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) { 
-                               System.out.println(" record-"+line);  
+                               
 
                 //String[] data = line.split(","); //username, password, email, etc
                   
@@ -725,11 +725,11 @@ public static ArrayList<String> getRecords(File file){
            return recordList;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         }
      
@@ -750,11 +750,11 @@ public static int getRecordCount(File file){
            return count;
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return 0;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             return 0;
         }
           
@@ -769,7 +769,6 @@ public static boolean isRecordExist(String filePath,String key){//can be used fo
             while ((line = reader.readLine()) != null) { 
               
                 String[] data = line.split(",");
-                  System.out.println("value"+data[0]);System.out.println("key"+key);
                 if(data[0].toLowerCase().equals(key.toLowerCase())){
                     
                     isExist=true;
@@ -781,11 +780,11 @@ public static boolean isRecordExist(String filePath,String key){//can be used fo
           
             
         } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
+         catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
            
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, ex.getMessage());
             
         }
          return isExist;
@@ -836,10 +835,10 @@ public static void removeLine(String filePath,String lineToRemove){
 
     }
     catch (FileNotFoundException ex) {
-      ex.printStackTrace();
+       JOptionPane.showMessageDialog(null, ex.getMessage());
     }
     catch (IOException ex) {
-      ex.printStackTrace();
+       JOptionPane.showMessageDialog(null, ex.getMessage());
     }  
        
    }
@@ -873,7 +872,9 @@ public static void deleteRecord(String filePath,String lineToRemove){
       File inFile = new File(filePath);
 
       if (!inFile.isFile()) {
-        System.out.println("Parameter is not an existing file");
+       
+                JOptionPane.showMessageDialog(null, "Parameter is not an existing file");
+
         return;
       }
 
@@ -888,9 +889,9 @@ public static void deleteRecord(String filePath,String lineToRemove){
       //Read from the original file and write to the new
       //unless content matches data to be removed.
       while ((line = br.readLine()) != null) {
-            System.out.println("line to be removed "+lineToRemove);
+           
         if (!line.toLowerCase().equals(lineToRemove.toLowerCase())) {
-            System.out.println("line "+line);
+            
           pw.println(line);
           pw.flush();
         }
@@ -900,20 +901,21 @@ public static void deleteRecord(String filePath,String lineToRemove){
 
       //Delete the original file
       if (!inFile.delete()) {
-        System.out.println("Could not delete file");
+        JOptionPane.showMessageDialog(null, "Could not delete file");
         return;
       }
 
       //Rename the new file to the filename the original file had.
       if (!tempFile.renameTo(inFile))
-        System.out.println("Could not rename file");
+        
+      JOptionPane.showMessageDialog(null, "Could not delete file");
 
     }
     catch (FileNotFoundException ex) {
-      ex.printStackTrace();
+       JOptionPane.showMessageDialog(null, ex.getMessage());
     }
     catch (IOException ex) {
-      ex.printStackTrace();
+       JOptionPane.showMessageDialog(null, ex.getMessage());
     }
        
    }
@@ -929,7 +931,7 @@ public static void generatePdf( TableModel model,String path){
                 pdfTable.addCell(model.getColumnName(i));
             }
             //extracting data from the JTable and inserting it to PdfPTable
-            for (int rows = 0; rows < model.getRowCount() - 1; rows++) {
+            for (int rows = 0; rows < model.getRowCount() ; rows++) {
                 for (int cols = 0; cols < model.getColumnCount(); cols++) {
                     pdfTable.addCell(model.getValueAt(rows, cols).toString());
 
@@ -939,9 +941,9 @@ public static void generatePdf( TableModel model,String path){
             doc.close();
              JOptionPane.showMessageDialog(null, "Sucessfully Generated PDF");
         } catch (DocumentException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Document Not Found");
         } catch (FileNotFoundException ex) {
-           
+           JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     
@@ -1004,7 +1006,7 @@ public static void generateApprovedAppoinmentReport(){
         
     } catch (Exception e)
     {
-        e.printStackTrace();
+         JOptionPane.showMessageDialog(null, "File Not Found");
     }
     
          
@@ -1029,7 +1031,7 @@ public static void generateCsvFile(TableModel model,String path) throws IOExcept
 
 
     } catch (FileNotFoundException e) {
-        System.out.println(e.getMessage());
+        JOptionPane.showMessageDialog(null, e.getMessage());
         }    
     }
     

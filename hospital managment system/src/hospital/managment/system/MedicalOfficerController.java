@@ -12,6 +12,9 @@ import hospital.managment.system.models.SpecialityRefference;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -60,11 +63,29 @@ public class MedicalOfficerController implements ActionListener {
     public void initController(){
         getView().getChooseFileBtn().addActionListener(e->openFileChooser());
         getView().getPhotoAddBtn().addActionListener(e->addPhoto());
+         getView().getphotoLabel().addMouseListener(labelListner);
+       getView().getphotoLabel().setName("changePhoto");
 
 }
 
     
     //methods
+    
+     MouseListener labelListner =new MouseAdapter(){
+     @Override
+     public void mouseClicked(MouseEvent e) { 
+     if( ((JLabel)e.getSource()).getName().equalsIgnoreCase("changePhoto")){
+            addPhoto();
+       }
+     
+     
+    
+ }
+   };
+   
+    
+    
+    
      public void createSpecialityComboBox(){
         SpecialityRefference refference=new SpecialityRefference();
         DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getSpecialityTypes().toArray());

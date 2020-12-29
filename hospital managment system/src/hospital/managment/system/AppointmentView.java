@@ -28,7 +28,7 @@ public class AppointmentView extends javax.swing.JFrame {
     private AppointmentController controller;
     private Appointment appointment;
     private String status="Pending";
-    private String appointmentNumber=String.valueOf((FileService.getRecordCount(FileService.getAppointmentsFile())+1));
+    private String appointmentNumber=null;
     private AppointmentView() {
     }
     public AppointmentView(Dashboard dash,Appointment appointment,DashboardController controller,int type) {

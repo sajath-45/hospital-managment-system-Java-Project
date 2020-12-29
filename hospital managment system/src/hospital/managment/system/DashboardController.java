@@ -26,8 +26,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -106,6 +104,8 @@ public void initController(String role){
     getView().getEditReferenceBtn().addActionListener(e->editReference());
     getView().getdeleteReferenceBtn().addActionListener(e->deleteReference());
     //report btns
+    getView().getAppointmentReportPrepareBtn().addActionListener(e->setAppointmentReportTable());
+    getView().getUserLogPrepareBtn().addActionListener(e->setUserLoginReportTable());
     getView().getGenerateAppointmentReportPdfBtn().addActionListener(e->generateAppointmentsPdf());
     getView().getGeneratePatientCredintialPdfBtn().addActionListener(e->generatePatientCredintialReportPdf());
     getView().getGenerateUserLogReportPdfBtn().addActionListener(e->generateUserLoginReportPdf());
@@ -113,7 +113,7 @@ public void initController(String role){
     getView().getGeneratePatientCredintialCsvBtn().addActionListener(e->generatePatientCredintialReportCsv());
     getView().getGenerateUserLogReportCsvBtn().addActionListener(e->generateUserLoginReportCsv());
     //settings btne
-    getView().getSaveUserBtn().addActionListener(e->saveUser());
+   // getView().getSaveUserBtn().addActionListener(e->saveUser());
     
     
 }
@@ -385,7 +385,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
                      else if(((JPanel)e.getSource()).getName().equals("settingBtn")){
                         setColor(getView().getReceptionistSettingBtnPanel());
                         setColor(getView().getMoSettingBtnPanel());
-                        loadUserDetails();
+                       // loadUserDetails();
                         setColor(getView().getPatientSettingBtnPanel());
                         getView().getHomePanel().setVisible(false);
                         getView().getUsersPanel().setVisible(false);
@@ -727,7 +727,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         getView().getRefferencePanel().setVisible(false);
         getView().getVisitorsPanel().setVisible(false);
      }
-    public void resetAllColor(){
+    public  void resetAllColor(){
         getView().getAppointmentBtnPanel4().setBackground(new Color(64,43,100));
         getView().getHomeBtnPanel1().setBackground(new Color(64,43,100));
         getView().getHomeBtnPanel2().setBackground(new Color(64,43,100));
@@ -855,10 +855,10 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
     }
     public void setAppointmentReportTable(){
         String date=PipeService.getDateSimpleFormat(getView().getAppointmentReportDateChooser().getDate());
-        MedicalOfficer officer=(MedicalOfficer) getView().getAppointmentReportMoComboBox().getSelectedItem();
-         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
-        TableModel tm = getView().getAppointmentReportTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
+            MedicalOfficer officer=(MedicalOfficer) getView().getAppointmentReportMoComboBox().getSelectedItem();
+             ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
+            TableModel tm = getView().getAppointmentReportTable().getModel();
+            DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
       
              for(int i=0;i<list.size();i++)  
@@ -922,34 +922,36 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
 //getters
     public void  getPatientAppointmentTable(String id){
         System.out.println("patient id"+id);
-        ArrayList<String> list= FileService.getPatientAppointments(id);
+        ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
           
              for(int i=0;i<list.size();i++)  
            {  
+                
+                Appointment appoinment=Appointment.readAppoinment(list.get(i));
             
-            String [] data=list.get(i).split(",");
-            
-             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+            if(appoinment.getPatient().getIdCardNo().equals(id)){
+             Object[] row = {appoinment.getAppointmentNumber(), appoinment.getAppointmentDate(), appoinment.getAppointmentTime(), appoinment.getStatus(), appoinment.getPatient().getName(), appoinment.getPatient().getIdCardNo(), appoinment.getMedicalOfficer().getName(), appoinment.getSpeciality(),appoinment.getSymtomps(),appoinment.getMedicalOfficer().getIdCardNo()};
                     model.addRow(row);
-            
+            }
            }  
     }
     public void getMOAppointmentTable(String id){
-         System.out.println("patient id"+id);
-          ArrayList<String> list= FileService.getMOAppointments(id);
+       
+          ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
            {  
+             Appointment appoinment=Appointment.readAppoinment(list.get(i));
             
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
+            if(appoinment.getMedicalOfficer().getIdCardNo().equals(id) && appoinment.getStatus().equalsIgnoreCase("Approved") ){
+             Object[] row = {appoinment.getAppointmentNumber(), appoinment.getAppointmentDate(), appoinment.getAppointmentTime(), appoinment.getStatus(), appoinment.getPatient().getName(), appoinment.getPatient().getIdCardNo(), appoinment.getMedicalOfficer().getName(), appoinment.getSpeciality(),appoinment.getSymtomps(),appoinment.getMedicalOfficer().getIdCardNo()};
                     model.addRow(row);
+            }
             
            }  
         
@@ -1131,9 +1133,15 @@ public void approveAppointment(String status){
          Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());             
                     AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
+                   appointmentView.setVisible(true);
                     if(AlertService.optionalPlane("Would you like to Approve the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(FileService.getAppointmentsFilePath(), line);
                     appointmentView.setStatus(status);
+                    if(status.equalsIgnoreCase("Approve")){
+                        String number=String.valueOf((FileService.getRecordCount(FileService.getAppointmentsFile())+1));
+                        appointmentView.setAppoinmentNumber(number);
+                    }
+                    
                      appointmentView.getController().addAppoinment();
                     }              
      }
@@ -1259,27 +1267,27 @@ private void generateUserLoginReportPdf(){
 }
 private void generateAppointmentsReportCsv(){
  try {
-            FileService.generateCsvFile(getView().getAppointmentReportTable().getModel(),"files/report/appointmentReport.csv");
+            FileService.generateCsvFile(getView().getAppointmentReportTable().getModel(),"files/reports/appointmentReport.csv");
         } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 }
 private void generatePatientCredintialReportCsv(){
 try {
-            FileService.generateCsvFile(getView().getUserLogReportTable().getModel(),"files/report/userLogReport.csv");
+            FileService.generateCsvFile(getView().getUserLogReportTable().getModel(),"files/reports/userLogReport.csv");
         } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 }
 private void generateUserLoginReportCsv(){
  try {
             FileService.generateCsvFile(getView().getPatientCredintialTable().getModel(),"files/reports/patientCredintial.csv");
         } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 }
 //settings panel functions
- public void loadUserDetails(){
+/* public void loadUserDetails(){
        User user=CurrentUser.getUser();
        System.out.println("user "+user.toString2());
        getView().getUserNameField().setText(user.getUserName());
@@ -1292,6 +1300,7 @@ private void generateUserLoginReportCsv(){
         getView().getAddressField().setText(user.getAddress());
         Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
         getView().getDobDateChooser().setDate(dob);
+        
      }
  public  void saveUser(){
          String role=CurrentUser.getUserRole();
@@ -1321,7 +1330,7 @@ private void generateUserLoginReportCsv(){
         CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat( getView().getDobDateChooser().getDate()));
          
          FileService.addLine(path,  CurrentUser.getUser().toString2());
-     }
+     }*/
 
  //user functions
  private void addUser(){
