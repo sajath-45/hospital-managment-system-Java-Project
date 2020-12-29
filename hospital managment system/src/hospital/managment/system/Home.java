@@ -36,31 +36,29 @@ public class Home extends javax.swing.JFrame {
         patientButton = new javax.swing.JButton();
         receptionistButton = new javax.swing.JButton();
         adminButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 500));
-        jPanel2.setLayout(null);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         doctorIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/doctor (1).png"))); // NOI18N
-        jPanel2.add(doctorIcon);
-        doctorIcon.setBounds(550, 40, 120, 150);
+        jPanel2.add(doctorIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 120, 150));
 
         patientIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/patient.png"))); // NOI18N
-        jPanel2.add(patientIcon);
-        patientIcon.setBounds(790, 40, 130, 130);
+        jPanel2.add(patientIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 130, 130));
 
         receptionistIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/receptionist.png"))); // NOI18N
-        jPanel2.add(receptionistIcon);
-        receptionistIcon.setBounds(570, 250, 120, 130);
+        jPanel2.add(receptionistIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, 120, 130));
 
         adminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/unauthorized-person.png"))); // NOI18N
-        jPanel2.add(adminIcon);
-        adminIcon.setBounds(800, 260, 130, 120);
+        jPanel2.add(adminIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 290, 130, 120));
 
         doctorButton.setBackground(new java.awt.Color(204, 204, 204));
-        doctorButton.setText("Doctor");
+        doctorButton.setText("Medical Officer");
         doctorButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 doctorButtonMousePressed(evt);
@@ -71,8 +69,7 @@ public class Home extends javax.swing.JFrame {
                 doctorButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(doctorButton);
-        doctorButton.setBounds(570, 200, 81, 25);
+        jPanel2.add(doctorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 150, -1));
 
         patientButton.setBackground(new java.awt.Color(204, 204, 204));
         patientButton.setText("Patient");
@@ -81,8 +78,7 @@ public class Home extends javax.swing.JFrame {
                 patientButtonMousePressed(evt);
             }
         });
-        jPanel2.add(patientButton);
-        patientButton.setBounds(830, 200, 86, 25);
+        jPanel2.add(patientButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 240, -1, -1));
 
         receptionistButton.setBackground(new java.awt.Color(204, 204, 204));
         receptionistButton.setText("Receptionist");
@@ -96,8 +92,7 @@ public class Home extends javax.swing.JFrame {
                 receptionistButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(receptionistButton);
-        receptionistButton.setBounds(570, 400, 123, 25);
+        jPanel2.add(receptionistButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, -1, -1));
 
         adminButton.setBackground(new java.awt.Color(204, 204, 204));
         adminButton.setText("Admin");
@@ -106,12 +101,18 @@ public class Home extends javax.swing.JFrame {
                 adminButtonMousePressed(evt);
             }
         });
-        jPanel2.add(adminButton);
-        adminButton.setBounds(820, 400, 94, 25);
+        jPanel2.add(adminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 94, -1));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setText("Welcome to Sri Jayewardenepura Hospital ");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 590, 40));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jLabel3.setText("Continue as:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/new/home.png"))); // NOI18N
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 460);
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +122,7 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         pack();
@@ -143,26 +141,29 @@ public class Home extends javax.swing.JFrame {
     private void doctorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorButtonMousePressed
         // TODO add your handling code here:
         int type=1;
-         this.setVisible(false);
+        
         Login doctorSignIn= new Login(type);
         doctorSignIn.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_doctorButtonMousePressed
 
     private void receptionistButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistButtonMousePressed
         // TODO add your handling code here:
         int type=2;
-         this.setVisible(false);
+         
          Login login= new Login(type);
         login.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_receptionistButtonMousePressed
 
     private void adminButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminButtonMousePressed
         // TODO add your handling code here:
         int type=3;
-         this.setVisible(false);
+         
         Login login= new Login(type);
       
         login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_adminButtonMousePressed
 
     private void patientButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientButtonMousePressed
@@ -218,6 +219,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton doctorButton;
     private javax.swing.JLabel doctorIcon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton patientButton;
     private javax.swing.JLabel patientIcon;

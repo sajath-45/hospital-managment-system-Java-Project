@@ -1,7 +1,13 @@
 sajath,Admin,16/12/2020,19:22:24
 cena123,Receptionist,17/12/2020,12:04:45
-saju,MedicalOfficer,17/12/2020,17:46:26
 saji,Patient,17/12/2020,19:20:02
 rec1,Receptionist,17/12/2020,19:24:12
-rec2,Receptionist,20/12/2020,09:52:06
-admin,Admin,20/12/2020,22:21:09
+david45,Patient,21/12/2020,18:32:08
+ironman,MedicalOfficer,21/12/2020,18:38:22
+rec2,Receptionist,21/12/2020,21:41:33
+shad,Patient,28/12/2020,12:55:05
+lm10,Receptionist,28/12/2020,20:05:04
+rec,Receptionist,29/12/2020,21:31:43
+saju,MedicalOfficer,29/12/2020,21:41:36
+y12,Patient,29/12/2020,21:47:01
+admin,Admin,29/12/2020,22:00:57

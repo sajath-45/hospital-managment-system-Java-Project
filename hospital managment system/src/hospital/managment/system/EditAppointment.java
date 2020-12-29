@@ -5,6 +5,12 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.SpecialityRefference;
+import hospital.managment.system.models.MedicalOfficer;
+import hospital.managment.system.models.Patient;
+import hospital.managment.system.models.Appointment;
+import hospital.managment.system.models.PipeService;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +50,6 @@ public class EditAppointment extends javax.swing.JFrame {
     }
 
     private EditAppointment() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public void  setAppointment(Appointment appointment){
         this.appointment=appointment;
@@ -68,19 +73,18 @@ public class EditAppointment extends javax.swing.JFrame {
     
     public void setEditView() throws ParseException{
        
-       specialityComboBox.setSelectedItem(getAppointment().getSpeciality());
-         doctorComboBox.setSelectedItem(getAppointment().getMedicalOfficer());
-          patientComboBox.setSelectedItem(getAppointment().getPatient());
-            sysmtompsField.setText(getAppointment().getSymtomps());
-            statusComboBox.setSelectedItem(getAppointment().getStatus());
-            java.util.Date date=new SimpleDateFormat("dd/MM/yyyy").parse(getAppointment().getAppointmentDate());
-           jDateChooser.setDate(date);
-           String time=getAppointment().getAppointmentTime();
-           String[] timeSplit=time.split(" ");
-           
-           timeHour.setValue(Integer.parseInt(timeSplit[0]));
-            timeMinute.setValue(Integer.parseInt(timeSplit[1]));
-             timeComboBox.setSelectedItem(timeSplit[2]);
+        specialityComboBox.setSelectedItem(getAppointment().getSpeciality());
+        doctorComboBox.setSelectedItem(getAppointment().getMedicalOfficer());
+        patientComboBox.setSelectedItem(getAppointment().getPatient());
+        sysmtompsField.setText(getAppointment().getSymtomps());
+        statusComboBox.setSelectedItem(getAppointment().getStatus());
+        jDateChooser.setDate(PipeService.getStringToDateFormat(getAppointment().getAppointmentDate()));
+        String time=getAppointment().getAppointmentTime();
+        String[] timeSplit=time.split(" "); 
+        timeHour.setValue(Integer.parseInt(timeSplit[0]));
+        timeMinute.setValue(Integer.parseInt(timeSplit[1]));
+        timeComboBox.setSelectedItem(timeSplit[2]);
+        statusComboBox.setSelectedItem(getAppointment().getStatus());
              
             
            
@@ -104,7 +108,6 @@ public class EditAppointment extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -204,12 +207,6 @@ public class EditAppointment extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jButton1.setText("Back");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
-
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(85, 65, 118));
         jLabel4.setText("Patient ");
@@ -288,16 +285,17 @@ public class EditAppointment extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(85, 65, 118));
         jLabel11.setText("Status");
 
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pending", "approved" }));
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Approved" }));
+        statusComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,17 +323,21 @@ public class EditAppointment extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(symtompslabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(specialityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(doctorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(141, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(specialityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(doctorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(63, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(137, 137, 137))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,15 +359,15 @@ public class EditAppointment extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(doctorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(39, 39, 39)
+                        .addGap(45, 45, 45)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
+                        .addGap(66, 66, 66)
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(179, 179, 179)
+                        .addGap(172, 172, 172)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,7 +378,7 @@ public class EditAppointment extends javax.swing.JFrame {
                             .addComponent(timeMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(timeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(symtompslabel))
-                        .addGap(42, 42, 42)
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(statusComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -387,7 +389,7 @@ public class EditAppointment extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 911, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -461,7 +463,7 @@ public class EditAppointment extends javax.swing.JFrame {
             FileService.addLine(FileService.getAppointmentsFilePath(),newAppoinment.toString());
            
             }
-            this.dashboard.setTables();
+           // this.dashboard.setTables();
             this.dispose();
 
         
@@ -480,6 +482,10 @@ public class EditAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_timeComboBoxActionPerformed
 
+    private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusComboBoxActionPerformed
+
     
     
      private void createSpecialityComboBox(){
@@ -491,11 +497,9 @@ public class EditAppointment extends javax.swing.JFrame {
          this.createDoctorComboBox(specialityComboBox.getSelectedItem().toString());
     }
     private void createPatientComboBox(){
-        
         Object[] items= FileService.getAllPatients().toArray();
-  
-         DefaultComboBoxModel newModel = new DefaultComboBoxModel(items);
-         patientComboBox.setModel( newModel );     
+        DefaultComboBoxModel newModel = new DefaultComboBoxModel(items);
+        patientComboBox.setModel( newModel );     
         
         
     }
@@ -556,7 +560,6 @@ public class EditAppointment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<MedicalOfficer> doctorComboBox;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;

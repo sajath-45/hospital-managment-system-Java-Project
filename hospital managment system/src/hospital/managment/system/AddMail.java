@@ -5,42 +5,132 @@
  */
 package hospital.managment.system;
 
-import java.awt.Color;
+import com.toedter.calendar.JDateChooser;
+import hospital.managment.system.models.DispatchedPostal;
+import hospital.managment.system.models.PipeService;
 import java.io.File;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Sangeerthana
  */
 public class AddMail extends javax.swing.JFrame {
- private JFileChooser openFileChooser;
-    private File attachment;
-        private Dashboard dashboard;
+private MailController controller;
+private JFileChooser openFileChooser;
+private File attachment;
+
+private DispatchedPostal mail;
 
     /**
      * Creates new form addMail
      */
-    public AddMail(Dashboard dash) {
+    public AddMail(Dashboard dash,DispatchedPostal mail,DashboardController controller,int type) {
         initComponents();
-        this.setVisible(true);
-         setFileChooser();
-          setDashboard(dash);
-         Date date = new Date();
-     mailDate.setDate(date);
+        setFileChooser();
+        
+        setMail(mail);
+        setController(new MailController( getMail(),this,controller));
+        getController().initController();
+        getSendMailBtn().addActionListener(getController());
+        if(type==1){
+            getSendMailBtn().setText("Add");
+            getDateChooser().setDate(new Date());
+        }
+        else if(type==2){
+            getSendMailBtn().setText("Save");
+            setEditData();
+        }
+      
     }
 
     private AddMail() {
     }
+    public void setMail(DispatchedPostal mail){
+        this.mail=mail;
+    }
+    public void setController(MailController ctrl){
+        this.controller=ctrl;
+    }
     
-     public void setDashboard(Dashboard dash){
-        this.dashboard=dash;
+    public void setReferenceField(String no){
+        this.refferenceNoField.setText(no);
     }
-     public Dashboard getDashboard(){
-        return dashboard;
+    public void setToNameField(String name){
+        this.toNameField.setText(name);
     }
-
+    public void setNoteField(String note){
+        this.noteField.setText(note);
+    }
+    public void setAttachment(File file){
+        this.attachment=file;
+    }
+    public void setDate(String date){
+        this.mailDate.setDate(PipeService.getStringToDateFormat(date));
+    }
+    public void setAddressField(String address){
+        this.toAddressField.setText(address);
+    }
+    private void setFileChooser(){
+        openFileChooser =new JFileChooser();   
+    }
+    public void setAttachmentName(String name){
+        this.attachmentName.setText(name);
+    }
+    public void setEditData(){
+        this.setAddressField(getMail().getStrToAddress());
+        this.setDate(getMail().getStrDate());
+        this.setToNameField(getMail().getStrToName());
+        this.setReferenceField(getMail().getReferenceNo());
+        this.setNoteField(getMail().getStrNote());
+        this.setAttachment(getMail().getAttachment());
+        this.setAttachmentName(getMail().getAttachment().getName());
+        
+    }
+     
+     
+    
+    public DispatchedPostal getMail(){
+        return this.mail;
+    }
+    public MailController getController(){
+         return controller;
+     }
+    public JDateChooser getDateChooser(){
+        return this.mailDate;
+    }
+    public JTextField getReferenceField(){
+        return this.refferenceNoField;
+    }
+    public JTextField getToNameField(){
+        return this.toNameField;
+    }
+    public JTextField getNoteField(){
+        return this.noteField;
+    }
+    public JTextField getAddressField(){
+        return this.toAddressField;
+    }
+    public File getAttachment(){
+       return this.attachment;
+    }
+    public JButton getSendMailBtn(){
+        return this.sendMailBtn;
+    }
+    public JLabel getAttachmentName(){
+        return this.attachmentName;
+    }
+    public JButton getchooseFileBtn(){
+        return this.chooseFileBtn;
+    }
+    public JFileChooser getFileChooser(){
+        return this.openFileChooser;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +148,6 @@ public class AddMail extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -71,7 +160,7 @@ public class AddMail extends javax.swing.JFrame {
         toNameField = new javax.swing.JTextField();
         sendMailBtn = new javax.swing.JButton();
         noteField = new javax.swing.JTextField();
-        addFileBtn = new javax.swing.JButton();
+        chooseFileBtn = new javax.swing.JButton();
         attachmentName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,18 +255,12 @@ public class AddMail extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Add Mail");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(204, 0, 51));
-        jButton3.setText("Back");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 340, Short.MAX_VALUE)
+                .addContainerGap(413, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(216, 216, 216)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,9 +269,7 @@ public class AddMail extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -243,13 +324,13 @@ public class AddMail extends javax.swing.JFrame {
         jPanel1.add(sendMailBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, 40));
         jPanel1.add(noteField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 200, 80));
 
-        addFileBtn.setText("add");
-        addFileBtn.addActionListener(new java.awt.event.ActionListener() {
+        chooseFileBtn.setText("add");
+        chooseFileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFileBtnActionPerformed(evt);
+                chooseFileBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(addFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        jPanel1.add(chooseFileBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
         jPanel1.add(attachmentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,50 +352,43 @@ public class AddMail extends javax.swing.JFrame {
 
     private void sendMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailBtnActionPerformed
         // TODO add your handling code here:
-        String refferenceNumber=refferenceNoField.getText();
-        String name=toNameField.getText();
-        String address=toAddressField.getText();
-        String note=noteField.getText();
-         String date=PipeService.getDateSimpleFormat(mailDate.getDate());  
-          File file=this.attachment;
+       /* String refferenceNumber=getReferenceField().getText();
+        String name=getNoteField().getText();
+        String address=getAddressField().getText();
+        String note=getNoteField().getText();
+        String date=PipeService.getDateSimpleFormat(getDateChooser().getDate());  
+        File file=this.attachment;
         DispatchedPostal mail=new DispatchedPostal(refferenceNumber,note,date,file,name,address); 
-       FileService.addLine(FileService.getMailsFilePath(),mail.toString());
+        FileService.addLine(FileService.getMailsFilePath(),mail.toString());
         this.dashboard.setTables();
-          this.dispose();
+        this.dispose();*/
         
     }//GEN-LAST:event_sendMailBtnActionPerformed
 
-     private void setFileChooser(){
-        openFileChooser =new JFileChooser();
-        
-    }
-    private void addFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFileBtnActionPerformed
+     
+    private void chooseFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileBtnActionPerformed
         // TODO add your handling code here:
-         int returnValue =openFileChooser.showOpenDialog(this);
+      /*   int returnValue =openFileChooser.showOpenDialog(this);
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 attachment = openFileChooser.getSelectedFile();
-                attachmentName.setText(attachment.getName());
+                attachmentName.setText(getAttachment().getName());
             }
             else{
                  attachment = null;
                  attachmentName.setText("no file choosen");
-            }
-    }//GEN-LAST:event_addFileBtnActionPerformed
+            }*/
+    }//GEN-LAST:event_chooseFileBtnActionPerformed
 
     private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
-         jPanel4.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_jPanel4MouseEntered
 
     private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
-       jPanel5.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_jPanel5MouseEntered
 
     private void jPanel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseExited
-        jPanel4.setBackground(new Color(85,65,118));
     }//GEN-LAST:event_jPanel4MouseExited
 
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
-        jPanel5.setBackground(new Color(85,65,118));
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
@@ -359,9 +433,8 @@ public class AddMail extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addFileBtn;
     private javax.swing.JLabel attachmentName;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton chooseFileBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

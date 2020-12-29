@@ -5,6 +5,10 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.CurrentUser;
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.UserLogin;
+import hospital.managment.system.models.PipeService;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -105,15 +109,17 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Medical Officer Login");
         jLabel2.setOpaque(true);
 
-        userNameField.setBorder(null);
-        userNameField.setPreferredSize(new java.awt.Dimension(4, 19));
+        userNameField.setColumns(1);
+        userNameField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        userNameField.setMargin(new java.awt.Insets(0, 10, 0, 0));
         userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameFieldActionPerformed(evt);
             }
         });
 
-        passwordField.setBorder(null);
+        passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        passwordField.setMargin(new java.awt.Insets(0, 10, 0, 0));
         passwordField.setMinimumSize(new java.awt.Dimension(4, 19));
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,21 +242,18 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
                 if(this.validateFields()){
                     if(this.validateLogin()){
-                         JOptionPane.showMessageDialog(null, "login sucessful");
-                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");  
+                         
 
-                           String date=formatter.format(new Date()); 
-                           String time=timeFormatter.format(new Date());
-                         UserLogin newLogin=new UserLogin(userNameField.getText(),this.getRole(),date,time);
+                         
+                         UserLogin newLogin=new UserLogin(userNameField.getText(),this.getRole(),PipeService.getDateSimpleFormat(new Date()),PipeService.getTimeSipleFormat(new Date()));
                         
                           try {
-                                  FileService.writeLoginRecord(FileService.getUserLoginFilePath(),newLogin.toString());
-                                  this.setVisible(false);
+                                  FileService.writeLoginRecord(FileService.getUserLoginFilePath(),newLogin.toString());                               
                                   Dashboard dashboard=new Dashboard(newLogin.getRole()); 
-                                  
+                                  this.dispose();
                               } catch (IOException ex) {
-                                 Logger.getLogger(AddVisitors.class.getName()).log(Level.SEVERE, null, ex);
+                                 JOptionPane.showMessageDialog(null, "user login file not available");
+                                 this.dispose();
                               }
                           
                     }
@@ -310,18 +313,18 @@ public class Login extends javax.swing.JFrame {
     public boolean validateLogin(){
         boolean isUserValid=false;
         File loginFile=null;
-        if(getRole().equals("Admin")){
+        if(getRole().equalsIgnoreCase("Admin")){
             loginFile=FileService.getAdminFile();
         }
-        else if(getRole().equals("MedicalOfficer")){
+        else if(getRole().equalsIgnoreCase("MedicalOfficer")){
              loginFile=FileService.getMoFile();
             
         }
-        else if(getRole().equals("Patient")){
+        else if(getRole().equalsIgnoreCase("Patient")){
              loginFile=FileService.getPatientsFile();
             
         }
-         else if(getRole().equals("Receptionist")){
+         else if(getRole().equalsIgnoreCase("Receptionist")){
              loginFile=FileService.getReceptionistFile();
             
         }
@@ -337,6 +340,10 @@ public class Login extends javax.swing.JFrame {
                  System.out.println("pass"+data[8]);
                if(data[userNameIndex].equals(this.userNameField.getText()) && this.passwordField.getText().equals(data[passwordIndex])){
                     isUserValid=true;
+               }
+               if(isUserValid){
+                   CurrentUser user=new CurrentUser(getRole(),line);
+                   break;
                }
             }
             reader.close();

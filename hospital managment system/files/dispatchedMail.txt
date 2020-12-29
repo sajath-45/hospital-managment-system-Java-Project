@@ -1,3 +1,1 @@
-1,10/12/2020,sajah,45 candada,hello my fiend,/home/sajath/exercise 2/break.c
-2,10/12/2020,lathusan,45 africa,hello my fiend,/home/sajath/exercise 2/sa.c
-5,13/12/2020,sajath,47 wijayabawamath,kalubowila,dehwiwala,hi we welocome you to are new building,/home/sajath/exercise 2/break.c
+as8569,28/12/2020,to my friend,india and paskdtan,to my friend,/home/sajath/202-chatbot-dialogflow/README.md

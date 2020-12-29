@@ -1,0 +1,3 @@
+type 80,28/12/2020,sajath,21345657,bad servcies,none,mistake,/home/sajath/202-chatbot-dialogflow/README.md
+type 80,28/12/2020,sajath,21345657,bad servcies,none,mistake,/home/sajath/202-chatbot-dialogflow/README.md
+type 1,28/12/2020,shadd,45678,fcghvjb,,xfgchvbjn,null

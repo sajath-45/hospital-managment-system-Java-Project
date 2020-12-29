@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class AlertService {
     
-    public static int optionalPlane(String message,String header){
-         int dialogButton = JOptionPane.YES_NO_OPTION;
+    public static int optionalPlane(String message,String header){//this function creates Joptional plane
+         int dialogButton = JOptionPane.YES_NO_OPTION;//stores int value of the response by user if its yes or no
        int dialogResult = JOptionPane.showConfirmDialog (null,message,header,dialogButton);
        
        return dialogResult;

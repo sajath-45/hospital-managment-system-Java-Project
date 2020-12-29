@@ -6,8 +6,12 @@
 
 package hospital.managment.system;
 
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.SpecialityRefference;
+import hospital.managment.system.models.MedicalOfficer;
+import hospital.managment.system.models.Patient;
+import hospital.managment.system.models.Receptionist;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -1065,12 +1069,12 @@ public class AddUser extends javax.swing.JFrame {
             String alleries=allergiesField.getText();
             String bloodGroup=bloodComboBox.getSelectedItem().toString();
             
-            Patient patient =new Patient(userName,name,gender,mobile,id,dob,address,martialStatus,id,bloodGroup,alleries);
+            Patient patient =new Patient(userName,name,gender,mobile,id,dob,address,martialStatus,id,bloodGroup,alleries,null);
             FileService.addLine(FileService.getPatientsFilePath(), patient.toString2());
             System.out.println(patient.toString2());
             System.out.println("dob"+dob+"martial"+martialStatus);
         }
-        getDashboard().setTables();
+       // getDashboard().setTables();
         this.dispose();
         
         

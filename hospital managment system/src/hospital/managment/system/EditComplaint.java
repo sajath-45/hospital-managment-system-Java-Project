@@ -5,11 +5,12 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.models.ComplainRefference;
+import hospital.managment.system.models.Complaint;
+import hospital.managment.system.models.FileService;
+import hospital.managment.system.models.PipeService;
 import java.io.File;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -30,7 +31,7 @@ public class EditComplaint extends javax.swing.JFrame {
      * @param dash
      */
     public EditComplaint(Complaint complaint,Dashboard dash) {
-        try {
+      
             System.out.println(complaint.toString());
             initComponents();
             setDashboard(dash);
@@ -40,9 +41,7 @@ public class EditComplaint extends javax.swing.JFrame {
             setEditData();
        
             setFileChooser();
-        } catch (ParseException ex) {
-            Logger.getLogger(EditComplaint.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
        
         
     }
@@ -75,7 +74,7 @@ public class EditComplaint extends javax.swing.JFrame {
     }
       
       
-    private void setEditData() throws ParseException{
+    private void setEditData() {
         
         actionTakenField.setEditable(true);  
         complainByText.setText(getComplaint().getStrComplaintBy());
@@ -84,10 +83,10 @@ public class EditComplaint extends javax.swing.JFrame {
         actionTakenField.setText(getComplaint().getStrActionTaken());
         noteField.setText(getComplaint().getStrNote());
         complainTypeComboBox.setSelectedItem(getComplaint().getStrType());
-        java.util.Date date=new SimpleDateFormat("dd/MM/yyyy").parse(getComplaint().getStrDate());
-        complainDate.setDate(date);
+        
+        complainDate.setDate(PipeService.getStringToDateFormat(getComplaint().getStrDate()));
         setAttachment(getComplaint().getAttachment());
-        if(getAttachment().equals(null)){
+        if(getAttachment() == null){
         fileNameLabel.setText("no file choosen");
         }
         else{
@@ -117,7 +116,6 @@ public class EditComplaint extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -213,12 +211,6 @@ public class EditComplaint extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jButton1.setText("Back");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
 
         jPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 40));
 
@@ -360,7 +352,7 @@ public class EditComplaint extends javax.swing.JFrame {
         Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
         FileService.addLine(FileService.getComplaintsFilePath(),complain.toString());
                     }
-        getDashboard().setTables();
+        //getDashboard().setTables();
         this.dispose();
 
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -420,7 +412,6 @@ public class EditComplaint extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> complainTypeComboBox;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel fileNameLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
