@@ -21,16 +21,16 @@ public class Admin {
         setPassword(password);
     }
     
-    public void setUserName(String name){
+    public void setUserName(String name){//Method to set the user name of admin
         this.userName=name;
     }
-    public void setPassword(String password){
+    public void setPassword(String password){//Method to set the password of admin
         this.password=password;
     }
-    public String getUserName(){
+    public String getUserName(){//get method to get the user name of admin
         return this.userName;
     }
-     public String getPassword(){
+     public String getPassword(){//get method to get the password of admin
         return this.password;
     }
     static Admin read(BufferedReader reader) throws IOException {

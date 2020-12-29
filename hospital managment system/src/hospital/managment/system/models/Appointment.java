@@ -22,7 +22,7 @@ public class Appointment {
     private String symtomps;
     private String speciality;
 
-    public Appointment(){
+    public Appointment(){//default constructor to appointment method
         
     }
     
@@ -40,60 +40,60 @@ public class Appointment {
     }
     
     
-    public void setPatient(Patient patient){
+    public void setPatient(Patient patient){//method to set the patient of appoinment
         this.patient=patient;
         
     }
-    public void setMedicalOfficer(MedicalOfficer officer){
+    public void setMedicalOfficer(MedicalOfficer officer){//method to set the Medical officer of appoinment
         this.officer=officer;
         
     }
-    public void setAppointmentDate(String appointmentDate){
+    public void setAppointmentDate(String appointmentDate){//method to set the date of appoinment
         this.appointmentDate=appointmentDate;
         
     }
-    public void setAppointmentTime(String appointmentTime){
+    public void setAppointmentTime(String appointmentTime){//method to set the time of appoinment
         this.appointmentTime=appointmentTime;
         
     }
-    public void setStatus(String status){
+    public void setStatus(String status){//method to set the status of appoinment
         this.status=status;  
     }
-    public void setAppointmentNumber(String appointmentNumber){
+    public void setAppointmentNumber(String appointmentNumber){//method to set the number of appoinment
         this.appointmentNumber=appointmentNumber;
         
     }
-    public void setSymtomps(String symtomps){
+    public void setSymtomps(String symtomps){//method to set the symtomps of appoinment
         this.symtomps=symtomps;
         
     }
-    public void setSpeciality(String speciality){
+    public void setSpeciality(String speciality){//method to set the speciality of appoinment
         this.speciality=speciality;
     }
     
     
-    public Patient getPatient(){
+    public Patient getPatient(){//get method to get the patient of appoinment
         return this.patient;
     }
-      public MedicalOfficer getMedicalOfficer(){
+      public MedicalOfficer getMedicalOfficer(){//get method to get the medical officer of appoinment
         return this.officer;
     }
-      public String getAppointmentDate(){
+      public String getAppointmentDate(){//get method to get the date of appoinment
         return this.appointmentDate;
     }
-      public String getAppointmentTime(){
+      public String getAppointmentTime(){//get method to get the time of appoinment
         return this.appointmentTime;
     }
-      public String getStatus(){
+      public String getStatus(){//get method to get the status of appoinment
         return this.status;
     }
-      public String getAppointmentNumber(){
+      public String getAppointmentNumber(){//get method to get the number of appoinment
         return this.appointmentNumber;
     }      
-     public String getSymtomps(){
+     public String getSymtomps(){//get method to get the symtomps of appoinment
         return this.symtomps;
     }
-     public String getSpeciality(){
+     public String getSpeciality(){//get method to get the speciality of appoinment
          return this.speciality;
      }
      

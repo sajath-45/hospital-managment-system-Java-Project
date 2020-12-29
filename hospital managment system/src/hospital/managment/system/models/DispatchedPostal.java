@@ -25,19 +25,19 @@ public class DispatchedPostal extends PostalMail {
         
     }
     
-    public String getStrToName(){
+    public String getStrToName(){//get method to get the name of dispatched postal
         return strToName;
     }
-    public String getStrToAddress(){
+    public String getStrToAddress(){//get method to get the address of dispatched postal
         return strToAddress;
     }
     
     
     
-    public void setStrToName(String name){
+    public void setStrToName(String name){//method to set the name of dispatched postal
         this.strToName=name;
     }
-    public void setStrToAddress(String address){
+    public void setStrToAddress(String address){//method to set the address of dispatched postal
         this.strToAddress=address;
     }
     

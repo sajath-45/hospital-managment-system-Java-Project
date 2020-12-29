@@ -27,31 +27,31 @@ public class PostalMail {
         
     }
     
-    public String getReferenceNo(){
+    public String getReferenceNo(){//get method to get the reference no of postal mail
         return referenceNo;
     }
-    public String getStrNote(){
+    public String getStrNote(){//get method to get the note of postal mail
         return strNote;    
      }
-    public String getStrDate(){
+    public String getStrDate(){//get method to get the date of postal mail
         return strDate;
         
     }
-    public File getAttachment(){
+    public File getAttachment(){//get method to get the attachment of postal mail
         return strAttachment;
     }
   
-   public void setReferenceNo(String reference){
+   public void setReferenceNo(String reference){//method to set the reference no of postal mail
        this.referenceNo=reference;
    }
     
-    public void setStrNote(String note){
+    public void setStrNote(String note){//method to set the note of postal mail
         this.strNote = note;
     }
-    public void setStrDate(String date){
+    public void setStrDate(String date){//method to set the date of postal mail
         this.strDate=date;
     }
-    public void setAttachment(File attach){
+    public void setAttachment(File attach){//method to set the attachment of postal mail
         this.strAttachment=attach;
     }
     

@@ -48,92 +48,92 @@ public class Receptionist extends User {
    
     }
      // getters setters 
-      public void  setUserName(String userName){
+      public void  setUserName(String userName){//method to set the user name of receptionist
         this. userName=userName;
     }
-    public void setName(String name){
+    public void setName(String name){//method to set the name of receptionist
         this.name=name;
     }
-    public void setGender(String gender){
+    public void setGender(String gender){//method to set the gender of receptionist
          this.gender=gender;
     }
-    public void setphoneNumber(String phoneNumber){
+    public void setphoneNumber(String phoneNumber){//method to set the phone number of receptionist
          this.phoneNumber=phoneNumber;
     }
-    public void setIdCardNo(String idCardNo){
+    public void setIdCardNo(String idCardNo){//method to set the id card no of receptionist
           this.idCardNo=idCardNo;
     }
-    public void setDateOfBirth(String dateOfBirth){
+    public void setDateOfBirth(String dateOfBirth){//method to set the date of birth of receptionist
          this.dateOfBirth=dateOfBirth;
     }
-    public void setAddress(String address){
+    public void setAddress(String address){//method to set the address of receptionist
          this.address=address;
     }
-    public void setMaritalStatus(String status){
+    public void setMaritalStatus(String status){//method to set the marital status of receptionist
          this.maritalStatus=status;
     }
-    public void setStrPassword(String password){
+    public void setStrPassword(String password){//method to set the password of receptionist
         this.password=password;
     }
-    public void setStaffId(String id){
+    public void setStaffId(String id){//method to set the staff id of receptionist
         this.staffId=id;
     }
-    public void setStrMailAddress(String mail){
+    public void setStrMailAddress(String mail){//method to set the mail address of receptionist
         this.strMailAddress=mail;
     }
-    public void setStrDateOfJoining(String date){
+    public void setStrDateOfJoining(String date){//method to set the date of joining of receptionist
         this.strDateOfJoining=date;
     }
-    public void setFileCv(File cv){
+    public void setFileCv(File cv){//method to set the file cv of receptionist
         this.fileCv=cv;
     }
     
-     public void setPhoto(File photo){
+     public void setPhoto(File photo){//method to set the photo of receptionist
         this.photo=photo;
     }
     //getters
-       public  String getUserName(){
+       public  String getUserName(){//get method to get the user name of receptionist
         return userName;
     }
-    public String getName(){
+    public String getName(){//get method to get the name of receptionist
         return name;
     }
-    public String getGender(){
+    public String getGender(){//get method to get the gender of receptionist
         return gender;
     }
-    public String getphoneNumber(){
+    public String getphoneNumber(){//get method to get the phone number of receptionist
         return phoneNumber;
     }
-    public String getIdCardNo(){
+    public String getIdCardNo(){//get method to get the id card no of receptionist
         return idCardNo;
     }
-    public String getDateOfBirth(){
+    public String getDateOfBirth(){//get method to get the date of birth of receptionist
         return dateOfBirth;
     }
-    public String getAddress(){
+    public String getAddress(){//get method to get the address of receptionist
         return address;
     }
-    public String getMaritalStatus(){
+    public String getMaritalStatus(){//get method to get the marital status of receptionist
         return maritalStatus;
     }
-    public String getPassword(){
+    public String getPassword(){//get method to get the password of receptionist
         return this.password;
     }
-    public String getStrStaffId(){
+    public String getStrStaffId(){//get method to get the staff id of receptionist
         return staffId;
     }
     
-    public String getStrEmailAddress(){
+    public String getStrEmailAddress(){//get method to get the email address of receptionist
         return strMailAddress;
         
     }
-    public String getStrDateOfJoining(){
+    public String getStrDateOfJoining(){//get method to get the date of joining of receptionist
         return strDateOfJoining;
     }
-    public File getCvFile(){
+    public File getCvFile(){//get method to get the cv file of receptionist
         return fileCv;
     }
-     public File getPhoto(){
+     public File getPhoto(){//get method to get the photo of receptionist
         return photo;
     }
    

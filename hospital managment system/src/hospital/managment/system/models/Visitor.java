@@ -37,60 +37,60 @@ public class Visitor {
     }
     
     
-    public String getStrPurpose(){
+    public String getStrPurpose(){//get method to get the purpose of visitor
         return strPurpose;
     }
-    public String getStrName(){
+    public String getStrName(){//get method to get the name of visitor
         return strName;
     }
-    public String getStrDate(){
+    public String getStrDate(){//get method to get the date of visitor
         return strDate;
     }
-    public String getId(){
+    public String getId(){//get method to get the id of visitor
         return intId;
     }
-    public String getPhoneNo(){
+    public String getPhoneNo(){//get method to get the phone no of visitor
         return phoneNo;
     }
-    public String getStrInTime(){
+    public String getStrInTime(){//get method to get the intime of visitor
         return strInTime;
     }
-    public String getStrOutTime(){
+    public String getStrOutTime(){//get method to get the outtime of visitor
         return strOutTime;
     }
-    public String getStrNote(){
+    public String getStrNote(){//get method to get the note of visitor
         return strNote;
     }
-    public File getAttachment(){
+    public File getAttachment(){//get method to get the attachment of visitor
         return attachment;
     }
     
     
-    public void setStrPurpose(String purpose){
+    public void setStrPurpose(String purpose){//method to set the purpose of visitor
         this .strPurpose=purpose;
     }
-    public void setStrName(String name){
+    public void setStrName(String name){//method to set the name of visitor
         this .strName=name;
     }
-    public void setStrDate(String date){
+    public void setStrDate(String date){//method to set the date of visitor
         this .strDate=date;
     }
-    public void setId(String id){
+    public void setId(String id){//method to set the id of visitor
         this. intId=id;
     }
-    public void setPhoneNo(String phone){
+    public void setPhoneNo(String phone){//method to set the phone no of visitor
         this .phoneNo=phone;
     }
-    public void setStrInTime(String in){
+    public void setStrInTime(String in){//method to set the intime of visitor
         this. strInTime=in;
     }
-    public void setStrOutTime(String out){
+    public void setStrOutTime(String out){//method to set the outtime of visitor
         this. strOutTime=out;
     }
-    public void setStrNote(String note){
+    public void setStrNote(String note){//method to set the note of visitor
         this. strNote=note;
     }
-    public void setStrAttachment(File attach){
+    public void setStrAttachment(File attach){//method to set the attachment of visitor
         this. attachment=attach;
     }
     

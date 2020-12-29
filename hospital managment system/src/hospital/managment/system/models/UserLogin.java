@@ -24,31 +24,31 @@ public class UserLogin {
             
             
             
-    public void setUserName(String name){
+    public void setUserName(String name){//method to set the user name of user login
         this.userName=name;
     }
-    public void setDate(String date){
+    public void setDate(String date){//method to set the date of user login
          this.date=date;
         
     }
-    public void setTime(String time){
+    public void setTime(String time){//method to set the time of user login
         this.time=time;
     }
-    public void setRole(String role){
+    public void setRole(String role){//method to set the role of user login
            this.role=role;
         
     }
-    public String getUserName(){
+    public String getUserName(){//get method to get the user name of user login
            return userName;
        }
-    public String getDate(){
+    public String getDate(){//get method to get the date of user login
             return date;
            
        }
-    public String getTime(){
+    public String getTime(){//get method to get the time of user login
            return time;
        }
-    public String getRole(){
+    public String getRole(){//get method to get the role of user login
                return role;
        }
     public String toString(){
