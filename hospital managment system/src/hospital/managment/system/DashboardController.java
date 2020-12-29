@@ -20,14 +20,20 @@ import hospital.managment.system.models.User;
 import hospital.managment.system.models.UserLogin;
 import hospital.managment.system.models.Visitor;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -118,36 +124,9 @@ public void initController(String role){//this function adds action listeners to
     
 }
  
- public void initTables(){
-        if(getView().getUserRole().equals("Admin")){
-            getAllAppointment();
-            getAllComplaints();
-            getDispatchedMails();
-            getVisitorRecords();
-            getAllUsers();
-            getComplainRefference();
-            getSpecialityRefference();
-        }
-        else if(getView().getUserRole().equals("Receptionist")){
-        getAllAppointment();
-        getAllComplaints();
-        getDispatchedMails();
-        getVisitorRecords();
-        getAllPatients();
-        
-    }
-        else if(getView().getUserRole().equals("Patient")){
-            getPatientAppointmentTable("199829003939");
-            getAllComplaints();
-            
-    }
-        else if(getView().getUserRole().equals("MedicalOfficer")){
-        getMOAppointmentTable("dr001");
-    }
-        
-    }
+ 
  //other methods
-public void setSidePanel(String role){
+public void setSidePanel(String role){//shows the correct options and side panel according to logged user
         if(getView().getUserRole().equals("Admin")){
             getView().getReceptionSidePanel().setVisible(false);
             getView().getAdminSidePanel().setVisible(true);
@@ -160,7 +139,15 @@ public void setSidePanel(String role){
             getView().getAdminSidePanel().setVisible(false);
             getView().getPatientSidePanel().setVisible(false);
             getView().getMoSidePanel().setVisible(false);
-            
+            if(CurrentUser.getUser().getPhoto().isFile()){
+            setStaffPhoto(getView().getReceptionistPhotoLabel(),CurrentUser.getUser().getPhoto());
+            }
+            else {
+                getView().getReceptionistPhotoLabel().setText("no-image");
+                getView().getReceptionistPhotoLabel().setForeground(Color.white);
+                getView().getReceptionistPhotoLabel().setBorder((BorderFactory.createLineBorder(Color.WHITE, 2)));
+            }
+             getView().getReceptionistNameLabel().setText(CurrentUser.getUser().getName());
 
         }
         else if(getView().getUserRole().equals("Patient")){
@@ -168,15 +155,31 @@ public void setSidePanel(String role){
             getView().getMoSidePanel().setVisible(false);
             getView().getReceptionSidePanel().setVisible(false);
             getView().getAdminSidePanel().setVisible(false);
-
+            getView().getPatientNameLabel().setText(CurrentUser.getUser().getName());
+            if(CurrentUser.getUser().getPhoto().isFile()){
+            setStaffPhoto(getView().getPatientPhotoLabel(),CurrentUser.getUser().getPhoto());
+            }
+            else {
+                getView().getPatientPhotoLabel().setText("no-image");
+                getView().getPatientPhotoLabel().setForeground(Color.white);
+                 getView().getPatientPhotoLabel().setBorder((BorderFactory.createLineBorder(Color.WHITE, 2)));
+            }
         }
         else if(getView().getUserRole().equals("MedicalOfficer")){
             getView().getPatientSidePanel().setVisible(false);
             getView().getMoSidePanel().setVisible(true);
             getView().getReceptionSidePanel().setVisible(false);
             getView().getAdminSidePanel().setVisible(false);
+           getView().getMedicalOfficerNameLabel().setText(CurrentUser.getUser().getName());
+            if(CurrentUser.getUser().getPhoto().isFile()){
+            setStaffPhoto(getView().getMoPhotoLabel(),CurrentUser.getUser().getPhoto());
+            }
+            else {
+                getView().getMoPhotoLabel().setText("no-image");
+                getView().getMoPhotoLabel().setForeground(Color.white);
+                 getView().getMoPhotoLabel().setBorder((BorderFactory.createLineBorder(Color.WHITE, 2)));
+            }
             
-           
 
         }
         
@@ -277,7 +280,7 @@ public void setSideBarPanels(){//add mouse listener to the panels in all side ba
                   
         
     }
-MouseListener sideBarPanelListener = new MouseAdapter() {
+MouseListener sideBarPanelListener = new MouseAdapter() {//this function occurs when a option in the side panel is clicked
                     public void mouseClicked(MouseEvent e) {
                         resetAllColor();
                         //
@@ -712,6 +715,25 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         
     }
     
+    public void setStaffPhoto(JLabel label,File imageFile){//this function helps to bind the image as a icon to the photo label
+       
+
+        BufferedImage img = null;
+            try {
+                img = ImageIO.read(imageFile);//Image I/O recognises the contents of the file as a JPEG format image, and decodes it into a BufferedImage which can be directly used by Java 2D.
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
+        Image.SCALE_SMOOTH);
+        
+        
+            ImageIcon icon = new ImageIcon(dimg);
+            icon.getImage().flush();
+            label.setIcon(icon);
+        
+    }
+    
 
     public void setColor(JPanel panel){
          panel.setBackground(new Color(85,65,118));
@@ -920,7 +942,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
         
     } 
 //getters
-    public void  getPatientAppointmentTable(String id){
+    public void  getPatientAppointmentTable(String id){//this functions binds the Appointment table with all appointments of patient in the system by reading from appointments.txt file
         System.out.println("patient id"+id);
         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
@@ -938,7 +960,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
             }
            }  
     }
-    public void getMOAppointmentTable(String id){
+    public void getMOAppointmentTable(String id){//this functions binds the Appointment table with all appointments assigned to the medical officer in the system by reading from appointments.txt file
        
           ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
@@ -956,7 +978,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    public void  getAllAppointment(){
+    public void  getAllAppointment(){//this functions binds the Appointment table with all appontments in the system by reading from appointments.txt file
         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
         TableModel tm = getView().getAppointmentTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -971,7 +993,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    public void getAllComplaints(){
+    public void getAllComplaints(){//this functions binds the Complaints table with all complaint in the system by reading from Complaints.txt file
          ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
         TableModel tm = getView().getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -987,7 +1009,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    public void getPatientComplains(){
+    public void getPatientComplains(){//this functions binds the Complaints table with all complaint in the system by reading from Complaints.txt file
           ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
         TableModel tm = getView().getComplaintsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1003,7 +1025,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    public void getDispatchedMails(){
+    public void getDispatchedMails(){//this functions binds the DispatchedMail table with all Mails in the system by reading from DispatchedMails .txt file
          ArrayList<String> list= FileService.getRecords(FileService.getMailsFile());
         TableModel tm = getView().getMailsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1019,9 +1041,9 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
         
     }
-    public void getVisitorRecords(){
+    public void getVisitorRecords(){//this functions binds the visitor record table with all Visitor record in the system by reading from  Visitors.txt file
         ArrayList<String> list= FileService.getRecords(FileService.getVisitorsFile());
-        TableModel tm = getView().getVisitorsTable().getModel();
+        TableModel tm = getView().getVisitorsTable().getModel();//gets the model of table
                 DefaultTableModel model = (DefaultTableModel) tm;
                 model.setRowCount(0);
              for(int i=0;i<list.size();i++)  
@@ -1069,7 +1091,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
             
            }    
     }
-    public void getAllPatients(){
+    public void getAllPatients(){//this functions binds the patients table with all Patients in the system by reading from medical officepatient.txt file
          ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
         TableModel tm = getView().getPatientsTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1109,15 +1131,19 @@ public void generateApprovedAppointmentPdf(){
     FileService.generateApprovedAppoinmentReport();
 }
 public void editAppointment(){
+    try{
         Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                    AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
                    appointmentView.setVisible(true);
                    // EditAppointment edit=new EditAppointment(appointment,this);
-                   
+    }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
     } 
 public void deleteAppointment(){
-         
+         try{
          
           Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
@@ -1127,9 +1153,13 @@ public void deleteAppointment(){
                     /*if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
                     FileService.deleteRecord(path, line);
                      this.setTables();
-                    }*/
+                    }*/}
+         catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
     } 
 public void approveAppointment(String status){
+    try{
          Object record= ((DefaultTableModel) getView().getAppointmentTable().getModel()).getDataVector().elementAt(getView().getAppointmentTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());             
                     AppointmentView appointmentView = new AppointmentView(getView(), Appointment.readAppoinment(line),this,2);
@@ -1143,7 +1173,10 @@ public void approveAppointment(String status){
                     }
                     
                      appointmentView.getController().addAppoinment();
-                    }              
+                    }            }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      }
 //complaint
 
@@ -1152,23 +1185,37 @@ private void addNewComplaint(){
         complaintView.setVisible(true);
     }
 private void deleteComplaint(){
+    try{
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
         AddComplaint complaintView = new AddComplaint(getView().getUserRole(),this, Complaint.readComplaint(line),2);
         complaintView.setVisible(true);
-        complaintView.getController().deleteComplaint();                 
+        complaintView.getController().deleteComplaint();   
+    }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      } 
 public void editComplaint(){
+    try{
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
         AddComplaint complaintView = new AddComplaint(getView().getUserRole(),this, Complaint.readComplaint(line),2);
-        complaintView.setVisible(true);
+        complaintView.setVisible(true);}
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      }
 public void editActionTaken( ){
+    try{
         Object record= ((DefaultTableModel) getView().getComplaintsTable().getModel()).getDataVector().elementAt(getView().getComplaintsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
         ComplaintController controller=new ComplaintController(Complaint.readComplaint(line),null,this);
         controller.changeActionTakenComplaint();
+    }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
          
      }
      
@@ -1179,19 +1226,30 @@ private void addDispatchedPostal(){
         
     }
 private void deleteMail(){
+    try{
           Object record= ((DefaultTableModel) getView().getMailsTable().getModel()).getDataVector().elementAt(getView().getMailsTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                    AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),this,2);
                     mail.setVisible(true);
                     mail.getController().deleteMail();
+    }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      }
 private void editMail(){
+    try{
           Object record= ((DefaultTableModel) getView().getMailsTable().getModel()).getDataVector().elementAt(getView().getMailsTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
                     AddMail mail = new AddMail(getView(),DispatchedPostal.readMail(line),this,2);
                     mail.setVisible(true);
          
      }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+    
+}
      
 //visitor function
 private void addNewVisitorRecord(){
@@ -1199,19 +1257,28 @@ private void addNewVisitorRecord(){
         record.setVisible(true);
     } 
 private void deleteVisitorRecord(){
+    try{
         Object record= ((DefaultTableModel) getView().getVisitorsTable().getModel()).getDataVector().elementAt(getView().getVisitorsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
         AddVisitors deleteView = new AddVisitors(getView(),Visitor.readVisitor(line),this,2);
         deleteView.setVisible(true);
         deleteView.getController().deleteVisitor();
-        
+    }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
     }
 private void editVisitorRecord(){
+    try{
         Object record= ((DefaultTableModel) getView().getVisitorsTable().getModel()).getDataVector().elementAt(getView().getVisitorsTable().getSelectedRow());
         String line= PipeService.formatTableString(record.toString());
         AddVisitors edit =new AddVisitors(getView(),Visitor.readVisitor(line),this,2);
         edit.setVisible(true);
     }
+    catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+}
 
 //reference
 private void addNewReference(){
@@ -1221,6 +1288,7 @@ private void addNewReference(){
     
 }
 private void deleteReference(){
+    try{
     if(getView().getComplaintReferencejScrollPanel().isShowing()){
         String selected = getView().getComplaintReferenceList().getSelectedValue();
         ReferenceController reference = new ReferenceController(null,selected,this);
@@ -1231,12 +1299,16 @@ private void deleteReference(){
                 String selected = getView().getSpecialityRefferenceList().getSelectedValue();
                 ReferenceController reference = new ReferenceController(null,selected,this);
                 reference.deleteSpecialityReference();
-
     }
+    }
+    catch(NullPointerException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
     
     
 }
 private void editReference(){
+     try{
     if(getView().getComplaintReferencejScrollPanel().isShowing()){
         String selected = getView().getComplaintReferenceList().getSelectedValue();
         ReferenceController reference = new ReferenceController(null,selected,this);
@@ -1249,7 +1321,10 @@ private void editReference(){
                 reference.editSpecialityReference(selected);
 
     }
-    
+     }
+    catch(NullPointerException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
     
     
 }
@@ -1286,54 +1361,11 @@ private void generateUserLoginReportCsv(){
              JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 }
-//settings panel functions
-/* public void loadUserDetails(){
-       User user=CurrentUser.getUser();
-       System.out.println("user "+user.toString2());
-       getView().getUserNameField().setText(user.getUserName());
-       getView().getPasswordField().setText(user.getPassword());
-        getView().getPhoneNumberField().setText(user.getphoneNumber());
-        getView().getNameField().setText(user.getName());
-        getView().getNicField().setText(user.getIdCardNo());
-        getView().getGenderComboBox().setSelectedItem(user.getGender());
-        getView().getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
-        getView().getAddressField().setText(user.getAddress());
-        Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
-        getView().getDobDateChooser().setDate(dob);
-        
-     }
- public  void saveUser(){
-         String role=CurrentUser.getUserRole();
-         String path=null;
-          if(role.equalsIgnoreCase("Patient")){
-              path=FileService.getPatientsFilePath();
-             
-         }
-         else if(role.equalsIgnoreCase("MedicalOfficer")){
-               path=FileService.getMoFilePath();
-         }
-         else if(role.equalsIgnoreCase("Receptionist")){
-               path=FileService.getReceptionistFilePath();
-         }
-        
-         FileService.deleteRecord(path, CurrentUser.getUser().toString2());
-         
-         
-        CurrentUser.getUser().setIdCardNo( getView().getNicField().getText());
-        CurrentUser.getUser().setGender( getView().getGenderComboBox().getSelectedItem().toString());
-        CurrentUser.getUser().setName( getView().getNameField().getText());
-        CurrentUser.getUser().setUserName( getView().getUserNameField().getText());
-        CurrentUser.getUser().setMaritalStatus( getView().getMartialStatusComboBoxField().getSelectedItem().toString());
-        CurrentUser.getUser().setAddress( getView().getAddressField().getText());
-        CurrentUser.getUser().setStrPassword( getView().getPasswordField().getText());
-        CurrentUser.getUser().setphoneNumber( getView().getPhoneNumberField().getText());
-        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat( getView().getDobDateChooser().getDate()));
-         
-         FileService.addLine(path,  CurrentUser.getUser().toString2());
-     }*/
+
 
  //user functions
  private void addUser(){
+     try{
       if(getView().getMoScrollPanel().isShowing()){
           AddMedicalOfficer newOfficer=new  AddMedicalOfficer(null,this,1);  
           newOfficer.setVisible(true);
@@ -1346,9 +1378,14 @@ private void generateUserLoginReportCsv(){
                    AddReceptionist newReceptionist=new  AddReceptionist(null,this,1);
                    newReceptionist.setVisible(true);
         }
+     }
+     catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      
  }
  private void editUser(){
+     try{
       if(getView().getMoScrollPanel().isShowing()){
           Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                    String line= PipeService.formatTableString(record.toString());
@@ -1368,10 +1405,15 @@ private void generateUserLoginReportCsv(){
                     editReceptionist.setVisible(true);
                    
         }
+     }
+     catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
      
      
  }
  private void deleteUser(){
+     try{
      if(getView().getMoScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
@@ -1391,9 +1433,16 @@ private void generateUserLoginReportCsv(){
                     editReceptionist.getController().deleteReceptionist();
                    
         }
+     }
+      catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+     
+     
      
  } 
  private void resetPassword(){
+     try{
      if(getView().getMoScrollPanel().isShowing()){
                     Object record= ((DefaultTableModel) getView().getMedicalOfficerTable().getModel()).getDataVector().elementAt(getView().getMedicalOfficerTable().getSelectedRow());
                     String line= PipeService.formatTableString(record.toString());
@@ -1412,6 +1461,10 @@ private void generateUserLoginReportCsv(){
                     AddReceptionist editReceptionist=new  AddReceptionist(Receptionist.readReceptionistUser(line),this,1);
                     editReceptionist.getController().resetReceptionistPassword();
                    
+        }
+     }
+     catch(ArrayIndexOutOfBoundsException exception) {
+                JOptionPane.showMessageDialog(null, "Please select a record");
         }
      
  } 
