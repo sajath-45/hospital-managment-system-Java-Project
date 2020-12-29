@@ -5,6 +5,8 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.DashboardController;
+import hospital.managment.system.controllers.ReferenceController;
 import hospital.managment.system.models.FileService;
 import java.awt.Color;
 import javax.swing.JButton;

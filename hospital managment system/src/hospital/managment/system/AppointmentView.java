@@ -5,6 +5,8 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.AppointmentController;
+import hospital.managment.system.controllers.DashboardController;
 import hospital.managment.system.models.FileService;
 import hospital.managment.system.models.MedicalOfficer;
 import hospital.managment.system.models.Patient;

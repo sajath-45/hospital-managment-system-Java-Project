@@ -9,5 +9,5 @@ shad,Patient,28/12/2020,12:55:05
 lm10,Receptionist,28/12/2020,20:05:04
 saju,MedicalOfficer,29/12/2020,21:41:36
 y12,Patient,29/12/2020,21:47:01
-admin,Admin,29/12/2020,22:00:57
-rec,Receptionist,29/12/2020,22:11:16
+admin,Admin,29/12/2020,23:28:04
+rec,Receptionist,29/12/2020,23:33:20

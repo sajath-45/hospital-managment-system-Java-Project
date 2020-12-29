@@ -5,6 +5,8 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.DashboardController;
+import hospital.managment.system.controllers.ReceptionistController;
 import com.toedter.calendar.JDateChooser;
 import hospital.managment.system.models.PipeService;
 import hospital.managment.system.models.Receptionist;
@@ -249,6 +251,11 @@ public class AddReceptionist extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/icons8_delete1_32.png"))); // NOI18N
         jLabel13.setPreferredSize(new java.awt.Dimension(40, 40));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -507,6 +514,11 @@ public class AddReceptionist extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jLabel13MousePressed
 
     /**
      * @param args the command line arguments

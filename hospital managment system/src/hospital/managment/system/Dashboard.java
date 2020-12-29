@@ -5,28 +5,12 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.DashboardController;
+import hospital.managment.system.controllers.SettingsController;
 import com.toedter.calendar.JDateChooser;
-import hospital.managment.system.models.ComplainRefference;
 import hospital.managment.system.models.CurrentUser;
-import hospital.managment.system.models.FileService;
-import hospital.managment.system.models.SpecialityRefference;
-import hospital.managment.system.models.MedicalOfficer;
-import hospital.managment.system.models.Patient;
-import hospital.managment.system.models.UserLogin;
-import hospital.managment.system.models.Appointment;
-import hospital.managment.system.models.PipeService;
-import hospital.managment.system.models.Receptionist;
-import hospital.managment.system.models.User;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -902,9 +886,9 @@ public class Dashboard extends javax.swing.JFrame  {
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(244, 244, 244)
+                .addGap(370, 370, 370)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addContainerGap(436, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

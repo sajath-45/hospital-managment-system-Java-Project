@@ -5,6 +5,8 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.DashboardController;
+import hospital.managment.system.controllers.VisitorController;
 import com.toedter.calendar.JDateChooser;
 import hospital.managment.system.models.PipeService;
 import hospital.managment.system.models.Visitor;

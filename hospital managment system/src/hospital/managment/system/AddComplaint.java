@@ -5,6 +5,8 @@
  */
 package hospital.managment.system;
 
+import hospital.managment.system.controllers.ComplaintController;
+import hospital.managment.system.controllers.DashboardController;
 import com.toedter.calendar.JDateChooser;
 import hospital.managment.system.models.ComplainRefference;
 import hospital.managment.system.models.Complaint;
