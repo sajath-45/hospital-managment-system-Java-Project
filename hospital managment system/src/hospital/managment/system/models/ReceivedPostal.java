@@ -23,18 +23,18 @@ public class ReceivedPostal extends PostalMail{
         this.setStrFromAddress(address);
         this.setStrFromName(fromName);
     }
-    public String getStrFromName(){
+    public String getStrFromName(){//get method to get the name to received postal
         return strFromName;
     }
-    public String getStrFromAddress(){
+    public String getStrFromAddress(){//get method to get the address to received postal
         return strFromAddress;
     }
     
     
-    public void setStrFromName(String name){
+    public void setStrFromName(String name){//method to set the name to received postal
         this.strFromName=name;
     }
-    public void setStrFromAddress(String address){
+    public void setStrFromAddress(String address){//method to set the address to received postal
         this.strFromAddress=address;
     }
     public String toString(){

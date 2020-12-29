@@ -21,11 +21,11 @@ public class patientCredentialReport {
         setLoginList(loginList);
     }
     
-    public ArrayList getLoginlist(){
+    public ArrayList getLoginlist(){//get method to get the loginlist of patientcredentialreport
         return loginList;
     }
     
-    public void setLoginList(ArrayList<User> loginList) {
+    public void setLoginList(ArrayList<User> loginList) {//method to set the loginlist of patientcredentialreport
         this.loginList=loginList;
     }
      

@@ -26,23 +26,23 @@ public class AppointmentReport {
         setMedicalOfficer(medicalOfficer);
     }
     
-    public ArrayList getAppoinmentList(){
+    public ArrayList getAppoinmentList(){//get method to get the list of appointment report
         return appointmentList;
     }
-    public String getStrDate(){
+    public String getStrDate(){//get method to get the date of appointment report
         return strDate;
     }
-    public MedicalOfficer getMedicalOfficer(){
+    public MedicalOfficer getMedicalOfficer(){//get method to get the medical officer of appointment report
         return medicalOfficer;
     }
     
-    public void setAppointment(ArrayList<Appointment> appointmentList) {
+    public void setAppointment(ArrayList<Appointment> appointmentList) {//method to set the list of appointment report
         this.appointmentList=appointmentList;
     }
-    public void setStrDate(String Date) {
+    public void setStrDate(String Date) {//method to set the date of appointment report
         this.strDate=Date;
     }
-    public void setMedicalOfficer(MedicalOfficer medicalOfficer) {
+    public void setMedicalOfficer(MedicalOfficer medicalOfficer) {//method to set the medical officer of appointment report
         this.medicalOfficer=medicalOfficer;
     }
     

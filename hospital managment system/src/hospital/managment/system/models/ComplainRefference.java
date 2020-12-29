@@ -29,11 +29,11 @@ public class ComplainRefference {
     }
     
     
-    public void setComplainTypes(ArrayList<String>  types){
+    public void setComplainTypes(ArrayList<String>  types){//method to set the type of complain refference
         this.complainTypes=types;
         
     }
-    public ArrayList<String> getComplainTypes(){
+    public ArrayList<String> getComplainTypes(){//get method to get the type of complain refference
         return this.complainTypes;
     }
     

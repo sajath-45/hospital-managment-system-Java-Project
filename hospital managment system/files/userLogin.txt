@@ -8,6 +8,6 @@ rec2,Receptionist,21/12/2020,21:41:33
 shad,Patient,28/12/2020,12:55:05
 y12,Patient,28/12/2020,16:03:58
 saju,MedicalOfficer,28/12/2020,16:09:30
-rec,Receptionist,28/12/2020,19:07:01
 lm10,Receptionist,28/12/2020,20:05:04
 admin,Admin,28/12/2020,20:09:56
+rec,Receptionist,28/12/2020,20:54:14

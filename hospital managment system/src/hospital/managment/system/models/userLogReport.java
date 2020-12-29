@@ -24,23 +24,23 @@ public class userLogReport {
         setStrUserType(userType);
     }
     
-    public ArrayList<UserLogin> getUserLogInList(){
+    public ArrayList<UserLogin> getUserLogInList(){//get method to get the userloginlist of userlogreport
         return userLoginList;
     }
-    public String getStrDate(){
+    public String getStrDate(){//get method to get the date of userlogreport
         return strDate;
     }
-    public String getStrUserType(){
+    public String getStrUserType(){//get method to get the usertype of userlogreport
         return strUserType;
     }
     
-    public void setUserLogIn(ArrayList<UserLogin> userLogInList) {
+    public void setUserLogIn(ArrayList<UserLogin> userLogInList) {//method to set the userloginlist of userlogreport
         this.userLoginList=userLogInList;
     }
-    public void setStrDate(String date) {
+    public void setStrDate(String date) {//method to set the date of userlogreport
         this.strDate=date;
     }
-    public void setStrUserType(String userType) {
+    public void setStrUserType(String userType) {//method to set the usertype of userlogreport
         this.strUserType=userType;
     }
     

@@ -51,99 +51,99 @@ public class MedicalOfficer extends User {
     }
     
     
-     public void  setUserName(String userName){
+     public void  setUserName(String userName){//method to set the user name of medical officer
         this. userName=userName;
     }
-    public void setName(String name){
+    public void setName(String name){//method to set the name of medical officer
         this.name=name;
     }
-    public void setGender(String gender){
+    public void setGender(String gender){//method to set the gender of medical officer
          this.gender=gender;
     }
-    public void setphoneNumber(String phoneNumber){
+    public void setphoneNumber(String phoneNumber){//method to set the phone number of medical officer
          this.phoneNumber=phoneNumber;
     }
-    public void setIdCardNo(String idCardNo){
+    public void setIdCardNo(String idCardNo){//method to set the id card no of medical officer
           this.idCardNo=idCardNo;
     }
-    public void setDateOfBirth(String dateOfBirth){
+    public void setDateOfBirth(String dateOfBirth){//method to set the date of birth of medical officer
          this.dateOfBirth=dateOfBirth;
     }
-    public void setAddress(String address){
+    public void setAddress(String address){//method to set the address of medical officer
          this.address=address;
     }
-    public void setMaritalStatus(String status){
+    public void setMaritalStatus(String status){//method to set the marital status of medical officer
          this.maritalStatus=status;
     }
-    public void setStrPassword(String password){
+    public void setStrPassword(String password){//method to set password of medical officer
         this.password=password;
     }
-    public void setStrStaffId(String id){
+    public void setStrStaffId(String id){//method to set the staff id of medical officer
         this.strStaffId=id;
         
     }
-    public void setStrEmailAddress(String email){
+    public void setStrEmailAddress(String email){//method to set the email address of medical officer
         this.strEmailAddress=email;
     }
-    public void setStrDateOfJoining(String date){
+    public void setStrDateOfJoining(String date){//method to set the date of joining of medical officer
         this.strDateOfJoining=date;
     }
-    public void setCvFile(File cv){
+    public void setCvFile(File cv){//method to set the cv file of medical officer
         this.cv=cv;
     }
-     public void setPhoto(File file){
+     public void setPhoto(File file){//method to set the photo of medical officer
         this.photo=file;
     }
-    public void setStrSpecialityArea(String speciality){
+    public void setStrSpecialityArea(String speciality){//method to set the speciality area of medical officer
         this.strSpecialityArea=speciality;
     }
     
     
     
     //setters
-    public  String getUserName(){
+    public  String getUserName(){//get method to get the user name of medical officer
         return userName;
     }
-    public String getName(){
+    public String getName(){//get method to get the name of medical officer
         return name;
     }
-    public String getGender(){
+    public String getGender(){//get method to get the gender of medical officer
         return gender;
     }
-    public String getphoneNumber(){
+    public String getphoneNumber(){//get method to get the phone number of medical officer
         return phoneNumber;
     }
-    public String getIdCardNo(){
+    public String getIdCardNo(){//get method to get the id card no of medical officer
         return idCardNo;
     }
-    public String getDateOfBirth(){
+    public String getDateOfBirth(){////get method to get the date of birth of medical officer
         return dateOfBirth;
     }
-    public String getAddress(){
+    public String getAddress(){//get method to get the address of medical officer
         return address;
     }
-    public String getMaritalStatus(){
+    public String getMaritalStatus(){////get method to get the marital status of medical officer
         return maritalStatus;
     }
-    public String getPassword(){
+    public String getPassword(){//get method to get the password of medical officer
         return this.password;
     }
-    public String getStrStaffId(){
+    public String getStrStaffId(){//get method to get the staff id of medical officer
         return strStaffId;
     }
-    public String getStrEmailAddress(){
+    public String getStrEmailAddress(){//get method to get the email address of medical officer
         return strEmailAddress;
     }
-    public String getStrDateOfJoining(){
+    public String getStrDateOfJoining(){//get method to get the date of joining of medical officer
         return strDateOfJoining;
     }
-    public File getCvFile(){
+    public File getCvFile(){//get method to get the cv file of medical officer
         return cv;
     }
-    public File getPhoto(){
+    public File getPhoto(){//get method to get the photo of medical officer
         return photo;
     }
-    public String getStrSpecialityArea(){
+    public String getStrSpecialityArea(){//get method to get the speciality area of medical officer
         return strSpecialityArea;
     }
         

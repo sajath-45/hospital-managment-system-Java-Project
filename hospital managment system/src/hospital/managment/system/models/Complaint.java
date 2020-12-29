@@ -22,7 +22,7 @@ public class Complaint {
     private String strNote;
     private File attachment;
     
-    public Complaint(){
+    public Complaint(){//default constructor to complaint method
     
     }
     public Complaint(String type,String date,String complainBy,String number,String description,String actionTaken,String note,File file ) {
@@ -37,53 +37,53 @@ public class Complaint {
            
     }
     
-    public String getStrType() {
+    public String getStrType() {//get method to get the type of complaint
             return strType;
     }
-    public String getStrComplaintBy() {
+    public String getStrComplaintBy() {//get method to get the by of complaint
         return strComplaintBy;
     }
-    public String getPhoneNumber() {
+    public String getPhoneNumber() {//get method to get the phone number of complaint
             return phoneNumber;
     }
-    public String getStrDate() {
+    public String getStrDate() {//get method to get the date of complaint
             return strDate;
     }
-    public String getStrDescription() {
+    public String getStrDescription() {//get method to get the description of complaint
             return strDescription;
     }
-    public String getStrActionTaken() {
+    public String getStrActionTaken() {//get method to get the action taken of complaint
             return strActionTaken;
     }
-    public String getStrNote() {
+    public String getStrNote() {//get method to get the note of complaint
             return strNote;
     }
-    public File getAttachment() {
+    public File getAttachment() {//get method to get the attachment of complaint
             return attachment;
     }
     
-    public void setStrType(String type){
+    public void setStrType(String type){//method to set the type of complaint
         this.strType=type;
     }
-    public void setStrComplaintBy(String ComplaintBy){
+    public void setStrComplaintBy(String ComplaintBy){//method to set the by of complaint
         this.strComplaintBy=ComplaintBy;
     }
-    public void setPhoneNumber(String PhoneNumber){
+    public void setPhoneNumber(String PhoneNumber){//method to set the phone number of complaint
         this.phoneNumber=PhoneNumber;
     }
-    public void setStrDate(String Date){
+    public void setStrDate(String Date){//method to set the date of complaint
         this.strDate=Date;
     }
-    public void setStrDescription(String Description){
+    public void setStrDescription(String Description){//method to set the description of complaint
         this.strDescription=Description;
     }
-    public void setStrActionTaken(String ActionTaken){
+    public void setStrActionTaken(String ActionTaken){//method to set the action taken of complaint
         this.strActionTaken=ActionTaken;
     }
-    public void setStrNote(String Note){
+    public void setStrNote(String Note){//method to set the note of complaint
         this.strNote=Note;
     }
-    public void setAttachment(File attachment){
+    public void setAttachment(File attachment){//method to set the attachment of complaint
         this.attachment=attachment;
     }
     

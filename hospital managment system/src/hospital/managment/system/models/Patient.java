@@ -44,87 +44,87 @@ public class Patient extends User {
     }
     
     //getters and setters
-    public void setStrBloodGrp(String blood){
+    public void setStrBloodGrp(String blood){//method to set the blood grp of patient
         this.strBloodGrp=blood;
     }
-    public void setStrAllergies(String allergy){
+    public void setStrAllergies(String allergy){//method to set the allergies of patient
         this.strAllergies=allergy;
     }
-    public void  setUserName(String userName){
+    public void  setUserName(String userName){//method to set the user name of patient
         this. userName=userName;
     }
-    public void setName(String name){
+    public void setName(String name){//method to set the name of patient
         this.name=name;
     }
-    public void setGender(String gender){
+    public void setGender(String gender){//method to set the gender of patient
          this.gender=gender;
     }
-    public void setphoneNumber(String phoneNumber){
+    public void setphoneNumber(String phoneNumber){//method to set the phone number of patient
          this.phoneNumber=phoneNumber;
     }
-    public void setIdCardNo(String idCardNo){
+    public void setIdCardNo(String idCardNo){//method to set the id card no of patient
           this.idCardNo=idCardNo;
     }
-    public void setDateOfBirth(String dateOfBirth){
+    public void setDateOfBirth(String dateOfBirth){//method to set the date of birth of patient
          this.dateOfBirth=dateOfBirth;
     }
-    public void setAddress(String address){
+    public void setAddress(String address){//method to set the address of patient
          this.address=address;
     }
-    public void setMaritalStatus(String status){
+    public void setMaritalStatus(String status){//method to set the marital status of patient
          this.maritalStatus=status;
     }
-    public void setStrPassword(String password){
+    public void setStrPassword(String password){//method to set the password of patient
         this.password=password;
     }
-     public void setPhoto(File file){
+     public void setPhoto(File file){//method to set the photo of patient
         this.photo=file;
     }
     
     //getters
     
     
-     public  String getUserName(){
+     public  String getUserName(){//get method to get the user name of patient
         return userName;
     }
-    public String getName(){
+    public String getName(){//get method to get the name of patient
         return name;
     }
-    public String getGender(){
+    public String getGender(){//get method to get the gender of patient
         return gender;
     }
     @Override
-    public String getphoneNumber(){
+    public String getphoneNumber(){//get method to get the phone number of patient
         return phoneNumber;
     }
     @Override
-    public String getIdCardNo(){
+    public String getIdCardNo(){//get method to get the id card no of patient
         return idCardNo;
     }
     @Override
-    public String getDateOfBirth(){
+    public String getDateOfBirth(){//get method to get the date of birth of patient
         return dateOfBirth;
     }
     @Override
-    public String getAddress(){
+    public String getAddress(){//get method to get the address of patient
         return address;
     }
     @Override
-    public String getMaritalStatus(){
+    public String getMaritalStatus(){//get method to get the marital status of patient
         return maritalStatus;
     }
     @Override
-    public String getPassword(){
+    public String getPassword(){//get method to get the password of patient
         return this.password;
     }
-    public String getStrBloodGrp(){
+    public String getStrBloodGrp(){//get method to get the bloodgrp of patient
         return strBloodGrp;
     }
-    public String getStrAllergies(){
+    public String getStrAllergies(){//get method to get the allergies of patient
         return strAllergies;
     }
     @Override
-     public File getPhoto(){
+     public File getPhoto(){//get method to get the photo of patient
         return photo;
     }
     

@@ -31,19 +31,19 @@ public class CurrentUser {
                 setUser(Receptionist.readReceptionistUser(line));
         }
    }
-    private void setUser(User newUser){
+    private void setUser(User newUser){//method to set the user of current user
         user=newUser;
         
     }
-    private void setUserRole(String role){
+    private void setUserRole(String role){//method to set the role of current user
         userRole=role;
     }
 	
-   public static User getUser(){
+   public static User getUser(){//get method to get the user of current user
        return user;
        
    }
-   public static String getUserRole(){
+   public static String getUserRole(){//get method to get the role of current user
        return userRole;
    }
    //methods
