@@ -54,7 +54,7 @@ public class ComplaintController implements ActionListener{
         setData();
         setComplainTypeComboBox();
         getView().setFileChooser();
-        getView().getOpenFileChooserBtn().addActionListener ((ActionEvent e) -> {
+        getView().getOpenFileChooserBtn().addActionListener ((ActionEvent e) -> {//actionListeners check if the open file btn is pressed
             
             openFileBtn();
         });
@@ -62,13 +62,13 @@ public class ComplaintController implements ActionListener{
     
     
     private void setData(){
-        if(getView().getUserRole().equalsIgnoreCase("Patient")){
+        if(getView().getUserRole().equalsIgnoreCase("Patient")){//the complain by is default set to patients name if the user role is patient
             getView().getComplainByTextField().setText(CurrentUser.getUser().getName());
              getView().getComplainActionTaken().setEditable(false);
 
         }
     }
-    private void setComplainTypeComboBox(){
+    private void setComplainTypeComboBox(){//populates the complain combo box with all the complain refference types
         ComplainRefference refference = new ComplainRefference();
         DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getComplainTypes().toArray());
          getView().getComplainTypeComboBox().setModel( newModel );
@@ -76,7 +76,7 @@ public class ComplaintController implements ActionListener{
     }
     
       @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {//this function listens to a action preformed in the view eg: adding new Complaint or editing it
         System.out.print(e.getActionCommand());
         if(e.getActionCommand().equalsIgnoreCase("add")){
             addComplaint();
@@ -91,8 +91,7 @@ public class ComplaintController implements ActionListener{
           
          }
     //methods
-    public void addComplaint() {                                                
-        // TODO add your handling code here:
+    public void addComplaint() {     //this fucntion gets the all information for new Complaint from the  view and create a new Complaint object                                           
         String complainType=getView().getComplainTypeComboBox().getSelectedItem().toString();
         String complainBy=getView().getComplainByTextField().getText();
         String mobile=getView().getPhoneNumberTextField().getText();
@@ -100,30 +99,30 @@ public class ComplaintController implements ActionListener{
          String date=PipeService.getDateSimpleFormat(getView().getComplainDateChooser().getDate());  
          String actionTaken=getView().getComplainActionTaken().getText();
          String note=getView().getComplainNoteField().getText();
-         File file=getView().getAttachment();
+         File file=getView().getAttachment();//gets the attached file from view
          
-         //validate needed
+       
          Complaint complain =new Complaint(complainType,date,complainBy,mobile,description,actionTaken,note,file);
          FileService.addLine(FileService.getComplaintsFilePath(),complain.toString());
          
-          updateView();
+          updateView();//update table
     } 
     public void editComplaint(){
-        if(AlertService.optionalPlane("Would you like to Edit the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-        FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());     
-        addComplaint();    
+        if(AlertService.optionalPlane("Would you like to Edit the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of editrecord and checks if its a yes or no
+        FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());  //delete prevoius record      
+        addComplaint();    //add new record
       }   
-        updateView();
+        updateView();//update table
     }
-    public void deleteComplaint(){
-        if(AlertService.optionalPlane("Would you like to Delete the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+    public void deleteComplaint(){//deletes complaint from the complaint.txt file
+        if(AlertService.optionalPlane("Would you like to Delete the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of edit record and checks if its a yes or no
         FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());                  
       }
-       this.updateView(); 
+       this.updateView(); //update table
     }
-    public void changeActionTakenComplaint(){  
-         String action=JOptionPane.showInputDialog("Update  Action Taken");
-         if( action != null){
+    public void changeActionTakenComplaint(){ //updates the action taken field for th complaint onlu done by admin 
+         String action=JOptionPane.showInputDialog("Update  Action Taken");//stores value of action taken
+         if( action != null){//if value of action taken is not null then tha action taken is updated
             FileService.deleteRecord(FileService.getComplaintsFilePath(),getModel().toString());
             getModel().setStrActionTaken(action);
             FileService.addLine(FileService.getComplaintsFilePath(),getModel().toString());
@@ -131,21 +130,21 @@ public class ComplaintController implements ActionListener{
        
        
     }
-    public void openFileBtn(){
+    public void openFileBtn(){//function to open the file chooser plane to select attachment file for complaint
           int returnValue =getView().getFileChooser().showOpenDialog(getView());
-            if(returnValue==JFileChooser.APPROVE_OPTION){
+            if(returnValue==JFileChooser.APPROVE_OPTION){//checks if a file is choosen
                  getView().setAttachment(getView().getFileChooser().getSelectedFile());
-                getView().getFileLabel().setText(getView().getAttachment().getName());
+                getView().getFileLabel().setText(getView().getAttachment().getName());//showing the name of file in the view
             }
             else{
-                getView().setAttachment(null);
+                getView().setAttachment(null);//attachment set to null if file not choosen or attached
                  
                  getView().getFileLabel().setText("no file choosen");
             }
     }
     
     
-    public void updateView(){
+    public void updateView(){//updates the complaint table after a new complaint is added or a complaint is edited
        if(CurrentUser.getUserRole().equalsIgnoreCase("Patient")){
             getDashboardController().getAllComplaints();
         }

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  * @author sajath
  */
 public class AddReference extends javax.swing.JFrame {
-    private int selectionType;
+    private int selectionType;//selection type 1 is for complain refference and selection type 2 is for speciality reference
      private Dashboard dashboard;
      private ReferenceController controller;
     /**

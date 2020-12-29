@@ -86,26 +86,12 @@ public class FileService {
     
     
       public FileService(){
-          this.getAllPatients();
+          
           
       }
       
-      public void setPatientList(ArrayList<Patient> list){
-          this.patientList=list;
-          
-      }
-      public void setOfficerList(ArrayList<MedicalOfficer> list){
-          this.officerList=list;
-          
-      }
-      public void setReceptionistList(ArrayList<Receptionist> list){
-          this.receptionistList=list;
-          
-      }
-      
-      public ArrayList<Patient> getPatientList(){
-          return this.patientList;
-      }
+    
+     
       
      //files
       public static File getUserFile(){
@@ -212,7 +198,7 @@ public class FileService {
       
       //getters here
  
-public  static ArrayList<Patient> getAllPatients(){
+public  static ArrayList<Patient> getAllPatients(){//function to read all the patients frompatients.txt file and reurn as a array list
              ArrayList<Patient> allPatientList= new ArrayList<Patient>();
             try {
              BufferedReader reader = new BufferedReader(new FileReader(PATIENTS_FILE));
@@ -243,7 +229,7 @@ public  static ArrayList<Patient> getAllPatients(){
 
       }
 
-public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
+public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){//function to read all the Medical Officer from MedicalOfficer.txt file by filtering through speciality and return as a array list
        ArrayList<MedicalOfficer> specialityOfficer= new ArrayList<MedicalOfficer>();
          try {
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
@@ -262,7 +248,7 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
             return specialityOfficer;
             
         } 
-         catch (FileNotFoundException ex) {
+         catch (FileNotFoundException ex) {//code for handing file not founnd exception
              JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         } catch (IOException ex) {
@@ -273,7 +259,7 @@ public static ArrayList<MedicalOfficer> getMoBySpeciality(String speciality){
        
    }   
    
-public static MedicalOfficer getMoById(String id){
+public static MedicalOfficer getMoById(String id){//function to get medical officer by his/her id card
        MedicalOfficer officer=null;
          try {
              BufferedReader reader = new BufferedReader(new FileReader(MO_FILE));
@@ -281,8 +267,8 @@ public static MedicalOfficer getMoById(String id){
             while ((line = reader.readLine()) != null) {
                 
                  
-                String[] data = line.split(","); //username, password, email, etc
-                if(data[4].equals(id)){
+                String[] data = line.split(","); //breaking the line into array of substrings
+                if(data[4].equals(id)){//checks if the medical officer id is equal to the id in record
                 
                 
                officer=MedicalOfficer.readMoUser(line);
@@ -302,7 +288,7 @@ public static MedicalOfficer getMoById(String id){
        
    }
  
-public static Patient getPatientById(String id){
+public static Patient getPatientById(String id){//function to get Patient by his/her id card
        Patient patient=null;
          try {
              BufferedReader reader = new BufferedReader(new FileReader(PATIENTS_FILE));
@@ -317,7 +303,7 @@ public static Patient getPatientById(String id){
                 }
             }
             reader.close();
-            return patient;
+            return patient;// return the matched patient
             
         } 
          catch (FileNotFoundException ex) {
@@ -330,7 +316,7 @@ public static Patient getPatientById(String id){
        
    }
  
-public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){
+public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){// a function to get all the medical officer as a arraylist
       ArrayList<MedicalOfficer> moOfficerList= new ArrayList<MedicalOfficer>();
     for(String line:list){
         MedicalOfficer officer=MedicalOfficer.readMoUser(line);
@@ -339,149 +325,15 @@ public static ArrayList<MedicalOfficer> getAllMo(ArrayList<String> list){
     return moOfficerList;
 }
     
-  /*  public static void writeAppoinment(Appointment appointment)throws IOException {
-        
-        try
-        {
-            System.out.println("works");
-        FileWriter writer=new FileWriter(APPOINTMENTS_FILE_PATH,true);
-        PrintWriter out =new PrintWriter(writer);
-
-        if(appointment!=null){
-            out.print(appointment.getAppointmentNumber());
-            out.print(","+appointment.getStatus());
-             out.print(","+appointment.getPatient().toString());
-            out.print(","+appointment.getAppointmentDate());
-            out.print(","+appointment.getAppointmentTime());
-            out.print(","+appointment.getMedicalOfficer().toString());
-            out.print(","+appointment.getSpeciality());
-            out.println(","+appointment.getSymtomps());
-             Appointment.increment();
-
-        }    
-        writer.close();
-        out.close();
-           
-        }
-    catch(IOException exception){
-        System.out.println(exception);
-    }
-    
-
-    
-    }*/
-    
-  /* public static void writeComplaint(Complaint compain)throws IOException {
-        
-        try
-        {
-            System.out.println("works");
-        FileWriter writer=new FileWriter(COMPLAINT_FILE_PATH,true);
-        PrintWriter out =new PrintWriter(writer);
-
-        if(compain!=null){
-            out.print(compain.getStrType());
-            out.print(","+compain.getStrDate());
-            out.print(","+compain.getStrComplaintBy());
-            out.print(","+compain.getStrDescription());
-            out.print(","+compain.getIntPhonrNumber());
-            out.print(","+compain.getStrActionTaken());
-             out.print(","+compain.getStrNote());
-             out.println(","+compain.getAttachment());
-             
-    
-           
-            
-
-        }    
-        writer.close();
-        out.close();
-           
-        }
-    catch(IOException exception){
-        System.out.println(exception);
-    }
-    
-
-    
-    }*/
-    
-  /*   public static void writeMail(DispatchedPostal mail)throws IOException {
-        
-        try
-        {
-            System.out.println("works");
-        FileWriter writer=new FileWriter(getMailsFilePath(),true);
-        PrintWriter out =new PrintWriter(writer);
-
-        if(mail!=null){
-            out.print(mail.getIntReferenceNo());
-            out.print(","+mail.getStrDate());
-            out.print(","+mail.getStrToName());
-            out.print(","+mail.getStrToAddress());
-            out.print(","+mail.getStrNote());
-             out.println(","+mail.getAttachment());
-             
-    
-           PostalMail.incrementRefferenceCount();
-            
-
-        }    
-        writer.close();
-        out.close();
-           
-        }
-    catch(IOException exception){
-        System.out.println(exception);
-    }
-    
-
-    
-    }*/
-    
- /*    public static void writeVisitorRecord(Visitor record)throws IOException {
-        
-        try
-        {
-            System.out.println("works");
-        FileWriter writer=new FileWriter(getVisitorsFilePath(),true);
-        PrintWriter out =new PrintWriter(writer);
-
-        if(record!=null){
-            out.print(record.getStrDate());
-             out.print(","+record.getIntId());
-            out.print(","+record.getStrName());
-            out.print(","+record.getStrPurpose());
-            out.print(","+record.getIntPhoneNo());
-            out.print(","+record.getStrInTime());
-            out.print(","+record.getStrOutTime());
-             out.print(","+record.getStrNote());
-             out.println(","+record.getAttachment());
-             
-    
-          
-            
-
-        }    
-        writer.close();
-        out.close();
-            
-        }
-    catch(IOException exception){
-        System.out.println(exception);
-    }
-    
-
-    
-    }*/
+  
      
-public static void writeLoginRecord(String filePath,String line)throws IOException {
+public static void writeLoginRecord(String filePath,String line)throws IOException {//this function is used to write a record to userLogin.txt and its parameter are the file path and line to be written
              String[] lineList=line.split(",");
-           if(isRecordExist(filePath,lineList[0])){ 
+           if(isRecordExist(filePath,lineList[0])){ //checking if the user login record exist if it exist the record will be removed
                             
 
-           removeLine(filePath,lineList[0]);
-            
+           removeLine(filePath,lineList[0]);/*the record will be removed if it exist and new record will be added this function is used when a user logs into the system 
+                                              and to store the information of thier login time and date including thier role*/
               addLine(filePath,line);
 
        
@@ -495,7 +347,7 @@ public static void writeLoginRecord(String filePath,String line)throws IOExcepti
     
     }
      
-public static ArrayList<String> getPatientAppointments(String id){
+public static ArrayList<String> getPatientAppointments(String id){//this function returns a arraylist of appointment which belongs to specific patient
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
@@ -513,7 +365,7 @@ public static ArrayList<String> getPatientAppointments(String id){
            return appointmentList;
             
         } 
-         catch (FileNotFoundException ex) {
+         catch (FileNotFoundException ex) {//code for handing file not founnd exception
              JOptionPane.showMessageDialog(null, ex.getMessage());
             return null;
         } catch (IOException ex) {
@@ -524,14 +376,14 @@ public static ArrayList<String> getPatientAppointments(String id){
     
     }
       
-public static ArrayList<String> getMOAppointments(String id){
+public static ArrayList<String> getMOAppointments(String id){//function returns a arraylist of string record of the appoinments assigned to Medical Officer
          ArrayList<String> appointmentList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
             String line;
             while ((line = reader.readLine()) != null) {              
                 String[] data = line.split(","); //username, password, email, etc
-                if(data[9].equals(id) && data[3].equals("Approved")){
+                if(data[9].equals(id) && data[3].equals("Approved")){//checks if the medical officer id card no is equal to id card of the appoinments's medical officer and appoinment is approved
                     
                
                 appointmentList.add(line);
@@ -555,170 +407,16 @@ public static ArrayList<String> getMOAppointments(String id){
        
    
     
-   /* public static ArrayList<String> getAllAppointments(){
-         ArrayList<String> appointmentList= new ArrayList<String>();
-          try {
-             BufferedReader reader = new BufferedReader(new FileReader(APPOINTMENTS_FILE));
-            String line;
-            while ((line = reader.readLine()) != null) {              
-                String[] data = line.split(","); //username, password, email, etc
-                
-                    
-               
-                appointmentList.add(line);
-                
-                
-            }
-            reader.close();
-           return appointmentList;
-            
-        } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    
-    }*/
-    
-    /* public static ArrayList<String> getAllComplaints(){
-         ArrayList<String> complainList= new ArrayList<String>();
-          try {
-             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
-            String line;
-            while ((line = reader.readLine()) != null) {              
-                String[] data = line.split(","); //username, password, email, etc
-                
-                    
-               
-                complainList.add(line);
-                
-                
-            }
-            reader.close();
-           return complainList;
-            
-        } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    
-    }*/
-          
-   /*  public static ArrayList<String> getPatientComplaints(){
-         ArrayList<String> complaintList= new ArrayList<String>();
-          try {
-               System.out.println("patient complaints");  
-             BufferedReader reader = new BufferedReader(new FileReader(COMPLAINT_FILE));
-            String line;
-            while ((line = reader.readLine()) != null) {              
-                String[] data = line.split(","); //username, password, email, etc
-                
-               
-                    
-               
-                complaintList.add(line);
-                
-                
-            }
-            reader.close();
-           return complaintList;
-            
-        } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-          
-    
-    }*/
-   /*  public static ArrayList<String> getDispatchedMails(){
-            ArrayList<String> mailList= new ArrayList<String>();
-          try {
-               System.out.println("mails");  
-             BufferedReader reader = new BufferedReader(new FileReader(MAIL_FILE));
-            String line;
-            while ((line = reader.readLine()) != null) {              
-                String[] data = line.split(","); //username, password, email, etc
-                  
-              
-                    
-               
-                mailList.add(line);
-                
-                
-            }
-            reader.close();
-           return mailList;
-            
-        } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+  
      
-     
-     }*/
-     
-  /*   public static ArrayList<String> getVisitorRecords(){
-            ArrayList<String> recordList= new ArrayList<String>();
-          try {
-             BufferedReader reader = new BufferedReader(new FileReader(VISITOR_FILE));
-            String line;
-            while ((line = reader.readLine()) != null) { 
-                               System.out.println("visitor record"+line);  
-
-                String[] data = line.split(","); //username, password, email, etc
-                  
-              
-                    
-               
-                recordList.add(line);
-                
-                
-            }
-            reader.close();
-           return recordList;
-            
-        } 
-         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-     
-     
-     }*/
-     
-public static ArrayList<String> getRecords(File file){
+public static ArrayList<String> getRecords(File file){//this function is ued to get record used for tables by reading lines from a file and it return arraylist of records of type string
             ArrayList<String> recordList= new ArrayList<String>();
           try {
              BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) { 
-                               
-
-                //String[] data = line.split(","); //username, password, email, etc
-                  
-              
-                    
-               
-                recordList.add(line);
-                
+                              
+                recordList.add(line);    
                 
             }
             reader.close();
@@ -736,7 +434,7 @@ public static ArrayList<String> getRecords(File file){
      
      }
 
-public static int getRecordCount(File file){
+public static int getRecordCount(File file){//this function returns the number of records in a file 
           int count=0;
            try {
              BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -750,7 +448,7 @@ public static int getRecordCount(File file){
            return count;
             
         } 
-         catch (FileNotFoundException ex) {
+         catch (FileNotFoundException ex) {//code for handing file not founnd exception
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return 0;
         } catch (IOException ex) {
@@ -761,7 +459,7 @@ public static int getRecordCount(File file){
       }
     
     
-public static boolean isRecordExist(String filePath,String key){//can be used for user name validation
+public static boolean isRecordExist(String filePath,String key){//this function checks if a record exist in a gien file and it returns a boolean value
       boolean isExist=false;
          try {
              BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
@@ -791,7 +489,7 @@ public static boolean isRecordExist(String filePath,String key){//can be used fo
          
    }
    
-public static void removeLine(String filePath,String lineToRemove){
+public static void removeLine(String filePath,String lineToRemove){//this function removes a single line from a file
          
      try {
 
@@ -864,7 +562,7 @@ public static void addLine(String filePath,String line){
        
    }
    
-public static void deleteRecord(String filePath,String lineToRemove){
+public static void deleteRecord(String filePath,String lineToRemove){// this function deletes or removes a record from a file its paramters are the file path and line to be removed
        
    
          try {
@@ -919,7 +617,7 @@ public static void deleteRecord(String filePath,String lineToRemove){
     }
        
    }
-public static void generatePdf( TableModel model,String path){
+public static void generatePdf( TableModel model,String path){//this function generate pdf for the reports module such as appoinments report,user login report and patient credintial report
         
         try {
             Document doc = new Document();
@@ -950,7 +648,7 @@ public static void generatePdf( TableModel model,String path){
         
         
     } 
-public static void generateApprovedAppoinmentReport(){
+public static void generateApprovedAppoinmentReport(){//this function generates a pdf for only approved appointments
           Document document = new Document();
     try
     {
@@ -965,7 +663,7 @@ public static void generateApprovedAppoinmentReport(){
         //Set Column widths
         float[] columnWidths = {1f, 1f, 1f,1f, 1f, 1f,1f, 1f, 1f,1f};
         table.setWidths(columnWidths);
-        table.addCell("number");
+        table.addCell("number");//adding columns
         table.addCell("Date");
         table.addCell("Time");
         table.addCell("Status");
@@ -980,7 +678,7 @@ public static void generateApprovedAppoinmentReport(){
         
          for(int i=0; i<appointmentList.size(); i++){
              Appointment appoinment=Appointment.readAppoinment(appointmentList.get(i));
-             if(appoinment.getStatus().equals("Approved")){
+             if(appoinment.getStatus().equals("Approved")){//adding cells to the tables rows
                  
             table.addCell(appoinment.getAppointmentNumber());
             table.addCell(appoinment.getAppointmentDate());
@@ -1012,10 +710,10 @@ public static void generateApprovedAppoinmentReport(){
          
          
      }   
-public static void generateCsvFile(TableModel model,String path) throws IOException{
+public static void generateCsvFile(TableModel model,String path) throws IOException{//this function generate Csv file for the reports module such as appoinments report,user login report and patient credintial report
        try  {
            
-          // File file =new File(path);
+          
           FileWriter fileWriter = new FileWriter(path, true);
         BufferedWriter bw = new BufferedWriter(fileWriter);
            

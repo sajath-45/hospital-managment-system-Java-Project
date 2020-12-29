@@ -688,9 +688,6 @@
                       </Border>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logOutBtnPanel1MousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="0" y="400" width="250" height="50"/>
@@ -1277,9 +1274,6 @@
                       </Border>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logOutBtnPanel3MousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="0" y="100" width="250" height="50"/>
@@ -1911,9 +1905,6 @@
                       </Border>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logOutBtnPanel4MousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="0" y="300" width="250" height="50"/>
@@ -2144,9 +2135,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appointmentTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2291,9 +2279,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="visitorTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2408,9 +2393,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dispatchedMailTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2537,9 +2519,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="complaintTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2717,9 +2696,6 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appointmentReportTableMousePressed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -2727,24 +2703,13 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in PDF"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appoinmentReportPdfBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="appointmentReportCsvBtn">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in CSV"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appointmentReportCsvBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="appointmentReportDateChooser">
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appointmentReportDateChooserMousePressed"/>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appointmentReportDateChooserMouseClicked"/>
-                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="appointmentReportDateChooserPropertyChange"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="appointmentReportMoComboBox">
                   <Properties>
@@ -2752,9 +2717,6 @@
                       <StringArray count="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="appointmentReportMoComboBoxItemStateChanged"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -2889,9 +2851,6 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userLogReportTableMousePressed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -2918,9 +2877,6 @@
                       <Dimension value="[100, 20]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="userLoginReportComboBoxItemStateChanged"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -2929,17 +2885,11 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in PDF"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userLogReportPdfBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="userLogReportCsvBtn">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in CSV"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userLogReportCsvBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="userLogPrepareBtn">
                   <Properties>
@@ -3050,9 +3000,6 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="patientCredintialTableMousePressed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -3060,17 +3007,11 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in PDF"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientCredintialPdfBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="patientCredintialCsvBtn">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Generate Report in CSV"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientCredintialCsvBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -3110,9 +3051,6 @@
                       <Dimension value="[363, 40]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userLogReportOptionPanelMousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="363" y="0" width="370" height="70"/>
@@ -3633,9 +3571,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="nameField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel42">
               <Properties>
@@ -3722,9 +3657,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="martialStatusComboBox2ActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -3748,9 +3680,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveUserBtnActionPerformed"/>
-              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel4">
 
@@ -3800,9 +3729,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="userNameField">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userNameFieldActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel41">
                   <Properties>
@@ -3823,9 +3749,6 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="userPhotoLabel">
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userPhotoLabelMousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="0" y="0" width="150" height="150"/>
@@ -3836,9 +3759,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="add"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="photoAddBtnActionPerformed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="40" y="60" width="-1" height="-1"/>
@@ -4009,9 +3929,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="moTableMousePressed"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -4136,9 +4053,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="patientsTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4272,9 +4186,6 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="receptionistTableMousePressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4314,10 +4225,6 @@
                       <Dimension value="[363, 40]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel7MousePressed"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel7MouseEntered"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="363" y="0" width="370" height="40"/>
@@ -4371,9 +4278,6 @@
                       <Color blue="66" green="0" red="66" type="rgb"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel9MousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="0" y="0" width="363" height="40"/>
@@ -4424,9 +4328,6 @@
                       <Color blue="66" green="0" red="66" type="rgb"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel35MousePressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="730" y="0" width="360" height="40"/>
@@ -4560,9 +4461,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteAppointmentBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4621,9 +4519,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="approveAppoinmentBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="addAppointmentBtn">
                   <Properties>
@@ -4638,9 +4533,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Add"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAppointmentBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="generatePdfBtn">
                   <Properties>
@@ -4658,9 +4550,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generatePdfBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editAppointmentBtn">
                   <Properties>
@@ -4678,9 +4567,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editAppointmentBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4731,9 +4617,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAppointmentBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4778,9 +4661,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Complete"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completedAppointmentBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -4883,9 +4763,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Delete"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUsersBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editUsersBtn">
                   <Properties>
@@ -4903,9 +4780,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editUsersBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="resetPasswordBtn">
                   <Properties>
@@ -4940,9 +4814,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUsersBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5001,9 +4872,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUsersBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editUsersBtn2">
                   <Properties>
@@ -5021,9 +4889,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editUsersBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="addUsersBtn2">
                   <Properties>
@@ -5041,9 +4906,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUsersBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="resetPasswordBtn2">
                   <Properties>
@@ -5061,9 +4923,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetPasswordBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5158,9 +5017,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteMailBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5216,9 +5072,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteMailBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editMailBtn">
                   <Properties>
@@ -5236,9 +5089,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editMailBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="addMailBtn">
                   <Properties>
@@ -5256,9 +5106,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMailBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5363,9 +5210,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteComplaintBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editComplaintBtn">
                   <Properties>
@@ -5383,9 +5227,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editComplaintBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="approveComplaintBtn">
                   <Properties>
@@ -5403,9 +5244,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="approveComplaintBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5420,9 +5258,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                           <Component id="addComplaintBtn2" min="-2" pref="155" max="-2" attributes="0"/>
-                          <EmptySpace pref="685" max="32767" attributes="0"/>
+                          <EmptySpace pref="830" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5453,9 +5291,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addComplaintBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5470,9 +5305,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                           <Component id="addComplaintBtn" min="-2" pref="152" max="-2" attributes="0"/>
-                          <EmptySpace pref="758" max="32767" attributes="0"/>
+                          <EmptySpace pref="847" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5503,9 +5338,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addComplaintBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5608,9 +5440,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteVisitorBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="editVisitorBtn">
                   <Properties>
@@ -5628,9 +5457,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editVisitorBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="addVisitorBtn">
                   <Properties>
@@ -5648,9 +5474,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addVisitorBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5698,9 +5521,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteVisitorBtn2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -5735,7 +5555,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="adminRefferenceOptions" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -5764,14 +5584,9 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="addReferenceBtn" alignment="0" pref="95" max="32767" attributes="0"/>
-                              <Component id="editReferenceBtn" alignment="0" max="32767" attributes="0"/>
-                              <Component id="deleteReferenceBtn" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="addReferenceBtn" alignment="0" pref="95" max="32767" attributes="0"/>
+                      <Component id="editReferenceBtn" alignment="0" max="32767" attributes="0"/>
+                      <Component id="deleteReferenceBtn" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -5826,9 +5641,6 @@
                       <Dimension value="[67, 31]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addReferenceBtnActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

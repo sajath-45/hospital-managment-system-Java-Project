@@ -72,13 +72,13 @@ public class PatientController implements ActionListener {
         
         Patient patient =new Patient(userName,name,gender,mobile,id,dob,address,martialStatus,id,blood,allergy,null);
         FileService.addLine(FileService.getPatientsFilePath(), patient.toString2());
-        this.closeView(); 
+        this.updateView(); 
     }
     public void deletePatient(){
            if(AlertService.optionalPlane("Would you like to Delete Patient  Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
              FileService.deleteRecord(FileService.getPatientsFilePath(),getModel().toString2());   
             }
-       this.closeView(); 
+       this.updateView(); 
         
     }
     public void editPatient(){
@@ -86,7 +86,7 @@ public class PatientController implements ActionListener {
         FileService.deleteRecord(FileService.getPatientsFilePath(),getModel().toString2());     
         addPatient();    
       }   
-        closeView();
+        updateView();
         
     }
     
@@ -96,7 +96,7 @@ public class PatientController implements ActionListener {
         getModel().setStrPassword(getModel().getIdCardNo());
           FileService.addLine(FileService.getPatientsFilePath(), getModel().toString2());  
       }   
-        closeView();
+        updateView();
         
     }
     
@@ -115,10 +115,10 @@ public class PatientController implements ActionListener {
           
          }
     
-     public void closeView(){
+     public void updateView(){ // updates the patients table if a new record is added or edited or deleted
           getDashboardController().getAllPatients();
          
-        this.getView().dispose();
+        this.getView().dispose();//close the view
         
     }
     

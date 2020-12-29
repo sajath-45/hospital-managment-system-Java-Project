@@ -599,384 +599,7 @@ public class Dashboard extends javax.swing.JFrame  {
      
      
      
-     //others methods
-   /* public void setSidePanel(String role){
-        if(getUserRole().equals("Admin")){
-            getReceptionSidePanel().setVisible(false);
-            getAdminSidePanel().setVisible(true);
-            getPatientSidePanel().setVisible(false);
-            getMoSidePanel().setVisible(false);
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-            getReceptionSidePanel().setVisible(true);
-            getAdminSidePanel().setVisible(false);
-              getPatientSidePanel().setVisible(false);
-            getMoSidePanel().setVisible(false);
-            
-
-        }
-        else if(getUserRole().equals("Patient")){
-             getPatientSidePanel().setVisible(true);
-            getMoSidePanel().setVisible(false);
-            getReceptionSidePanel().setVisible(false);
-            getAdminSidePanel().setVisible(false);
-
-        }
-        else if(getUserRole().equals("MedicalOfficer")){
-            getPatientSidePanel().setVisible(false);
-            getMoSidePanel().setVisible(true);
-            getReceptionSidePanel().setVisible(false);
-            getAdminSidePanel().setVisible(false);
-            
-           
-
-        }
-        
-    }
-    public void  setHome(){
-         resetAllMainPanels();
-        getHomePanel().setVisible(true);
-        getComplaintsMainOptionPanel().setVisible(false);
-        getAppoinmentsMainOptionsPanel().setVisible(false);
-        getVisitorsMainOptionPanel().setVisible(false);
-        getMailsMainOptionsPanel().setVisible(false);
-        getUsersMainOptionsPanel().setVisible(false);
-        getRefferenceOptionsMainPanel().setVisible(false);
-       
-    }
-    public void setSideBarPanels(){
-        getHomeBtnPanel1().addMouseListener(listener);
-        getHomeBtnPanel2().addMouseListener(listener);
-        getHomeBtnPanel3().addMouseListener(listener);
-        getHomeBtnPanel4().addMouseListener(listener);
-        getAppointmentBtnPanel4().addMouseListener(listener);
-        getMoSettingBtnPanel().addMouseListener(listener);
-        getAppointmentBtnPanel3().addMouseListener(listener);
-        getComplaintBtnPanel2().addMouseListener(listener);
-        getPatientSettingBtnPanel().addMouseListener(listener);
-        getAppointmentBtnPanel2().addMouseListener(listener);
-        getMailBtnPanel2().addMouseListener(listener);
-        getComplaintBtnPanel1().addMouseListener(listener);
-        getVisitorBtnPanel2().addMouseListener(listener);
-        getReceptionistSettingBtnPanel().addMouseListener(listener);
-        getUserBtnPanel2().addMouseListener(listener);
-        getUserBtnPanel().addMouseListener(listener);
-        getReportBtnPanel().addMouseListener(listener);
-        getAppointmentBtnPanel1().addMouseListener(listener);
-        getMailBtnPanel1().addMouseListener(listener);
-        getComplaintBtnPanel3().addMouseListener(listener);
-        getVisitorBtnPanel1().addMouseListener(listener);
-        getAdminSettingBtnPanel().addMouseListener(listener);
-        getRefferenceBtnPanel().addMouseListener(listener);
-        
-        getHomeBtnPanel1().setName("homeBtn");
-        getHomeBtnPanel2().setName("homeBtn");
-        getHomeBtnPanel3().setName("homeBtn");
-        getHomeBtnPanel4().setName("homeBtn");
-        
-        getAppointmentBtnPanel2().setName("appointmentBtnPanel");//recep
-        getAppointmentBtnPanel1().setName("appointmentBtnPanel");//admin
-        getAppointmentBtnPanel4().setName("appointmentBtnPanel");
-        getAppointmentBtnPanel3().setName("appointmentBtnPanel");
-        
-        getMailBtnPanel2().setName("mailBtn");
-        getMailBtnPanel1().setName("mailBtn");
-       
-        
-        getComplaintBtnPanel1().setName("complaintBtn");
-        getComplaintBtnPanel2().setName("complaintBtn");
-        getComplaintBtnPanel3().setName("complaintBtn");
-        
-         getVisitorBtnPanel2().setName("visitorBtn");
-         getVisitorBtnPanel1().setName("visitorBtn");
-        
-        getAdminSettingBtnPanel().setName("settingBtn");
-        getReceptionistSettingBtnPanel().setName("settingBtn");
-        getMoSettingBtnPanel().setName("settingBtn");
-        getPatientSettingBtnPanel().setName("settingBtn");
-        
-         getUserBtnPanel().setName("userBtn");
-        getUserBtnPanel2().setName("userBtn");
-        
-        getReportBtnPanel().setName("reportBtn");
-        
-        getRefferenceBtnPanel().setName("refferenceBtn");
-        
-                  
-        
-    }
-    MouseListener listener = new MouseAdapter() {
-                    public void mouseClicked(MouseEvent e) {
-                        resetAllColor();
-                        //
-                     
-                        System.out.println(((JPanel)e.getSource()).getName());
-                     if( ((JPanel)e.getSource()).getName().equals("complaintBtn")){
-                        setColor(getComplaintBtnPanel1());
-                        setColor(getComplaintBtnPanel2());
-                        setColor(getComplaintBtnPanel3());
-                        setTables();
-                        getHomePanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);                        
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getComplaintPanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(true);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                        setComplainOptions();
-
-                         
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("appointmentBtnPanel")){
-                        setColor(getAppointmentBtnPanel1());
-                        setColor(getAppointmentBtnPanel2());
-                        setColor(getAppointmentBtnPanel3());
-                        setColor(getAppointmentBtnPanel4());
-                        setTables();
-                        getHomePanel().setVisible(false); 
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);                        
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(true);
-    
-                         getComplaintsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(true);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                               
-
-                        setAppointmentOptions();
-
-                         
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("mailBtn")){
-                        setColor(getMailBtnPanel1());
-                        setColor(getMailBtnPanel2());
-                        setTables();
-                        getHomePanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);                        
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getMailPanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(true);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                        setMailOptions();
-
-                         
-                         
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("userBtn")){
-                        setColor(getUserBtnPanel());
-                        setColor(getUserBtnPanel2());
-                        setTables();
-                        getHomePanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);                        
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getUsersPanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(true);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                        setUserOptions();
-                         
-                         
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("settingBtn")){
-                        setColor(getAdminSettingBtnPanel());
-                        setColor(getReceptionistSettingBtnPanel());
-                        setColor(getMoSettingBtnPanel());
-                        setTables();
-                        setColor(getPatientSettingBtnPanel());
-                        getHomePanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);                        
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getSettingsPanel().setVisible(true);
-                        loadUserDetails();
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                          
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("visitorBtn")){
-                        setTables();
-                        setColor(getVisitorBtnPanel1());
-                        setColor(getVisitorBtnPanel2());        
-                        getHomePanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getVisitorsPanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(true);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                        setVisitorOptions();
-                     }
-                      else if(((JPanel)e.getSource()).getName().equals("refferenceBtn")){
-                        setColor(getRefferenceBtnPanel());    
-                        setTables();
-                        setComplainRefference();
-                        getHomePanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getRefferencePanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getMailPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(true);
-                        setRefferenceOption();
-                     }
-                      else if(((JPanel)e.getSource()).getName().equals("reportBtn")){
-                        setColor(getReportBtnPanel());
-                        setTables();
-                        getHomePanel().setVisible(false);
-                        getVisitorsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(true); 
-                        getMailPanel().setVisible(false);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                        setMoComboBox();
-                        setReportOptions();
-                     }
-                     else if(((JPanel)e.getSource()).getName().equals("homeBtn")){
-                        setColor(getHomeBtnPanel1());
-                        setColor(getHomeBtnPanel2());
-                        setColor(getHomeBtnPanel3());
-                        setColor(getHomeBtnPanel4());
-                        setTables();
-                        
-                          
-                        getVisitorsPanel().setVisible(false);
-                        getUsersPanel().setVisible(false);
-                        getAppointmentPanel().setVisible(false);
-                        getComplaintPanel().setVisible(false);
-                        getRefferencePanel().setVisible(false);
-                        getSettingsPanel().setVisible(false);
-                        getMailPanel().setVisible(false);
-                        getReportsPanel().setVisible(false);
-                        getHomePanel().setVisible(true);
-                        getComplaintsMainOptionPanel().setVisible(false);
-                        getVisitorsMainOptionPanel().setVisible(false);
-                        getAppoinmentsMainOptionsPanel().setVisible(false);
-                        getMailsMainOptionsPanel().setVisible(false);
-                        getUsersMainOptionsPanel().setVisible(false);
-                        getRefferenceOptionsMainPanel().setVisible(false);
-                         
-                     } 
-                     
-                    }
-                };
-    
-    */
-   
-    /* public void loadUserDetails(){
-       
-       User user=CurrentUser.getUser();
-       System.out.println("user "+user.toString2());
-       getUserNameField().setText(user.getUserName());
-       getPasswordField().setText(user.getPassword());
-        getPhoneNumberField().setText(user.getphoneNumber());
-        getNameField().setText(user.getName());
-        getNicField().setText(user.getIdCardNo());
-        getGenderComboBox().setSelectedItem(user.getGender());
-        getMartialStatusComboBoxField().setSelectedItem(user.getMaritalStatus());
-        getAddressField().setText(user.getAddress());
-        Date dob=PipeService.getStringToDateFormat(user.getDateOfBirth());
-         getDobDateChooser().setDate(dob);
-        
-         
-         
-
-     }*/
-   /*  public  void saveUser(){
-         String role=CurrentUser.getUserRole();
-         String path=null;
-          if(role.equalsIgnoreCase("Patient")){
-              path=FileService.getPatientsFilePath();
-             
-         }
-         else if(role.equalsIgnoreCase("MedicalOfficer")){
-               path=FileService.getMoFilePath();
-         }
-         else if(role.equalsIgnoreCase("Receptionist")){
-               path=FileService.getReceptionistFilePath();
-         }
-        
-         FileService.deleteRecord(path, CurrentUser.getUser().toString2());
-         
-         
-        CurrentUser.getUser().setIdCardNo(getNicField().getText());
-        CurrentUser.getUser().setGender(getGenderComboBox().getSelectedItem().toString());
-        CurrentUser.getUser().setName(getNameField().getText());
-        CurrentUser.getUser().setUserName(getUserNameField().getText());
-        CurrentUser.getUser().setMaritalStatus(getMartialStatusComboBoxField().getSelectedItem().toString());
-        CurrentUser.getUser().setAddress(getAddressField().getText());
-        CurrentUser.getUser().setStrPassword(getPasswordField().getText());
-        CurrentUser.getUser().setphoneNumber(getPhoneNumberField().getText());
-        CurrentUser.getUser().setDateOfBirth(PipeService.getDateSimpleFormat(getDobDateChooser().getDate()));
-         
-         FileService.addLine(path,  CurrentUser.getUser().toString2());
-     }*/
+  
      
 
     /**
@@ -1533,11 +1156,6 @@ public class Dashboard extends javax.swing.JFrame  {
 
         logOutBtnPanel1.setBackground(new java.awt.Color(64, 43, 100));
         logOutBtnPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        logOutBtnPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                logOutBtnPanel1MousePressed(evt);
-            }
-        });
 
         jLabel75.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel75.setForeground(new java.awt.Color(255, 255, 255));
@@ -1835,11 +1453,6 @@ public class Dashboard extends javax.swing.JFrame  {
 
         logOutBtnPanel3.setBackground(new java.awt.Color(64, 43, 100));
         logOutBtnPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        logOutBtnPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                logOutBtnPanel3MousePressed(evt);
-            }
-        });
 
         jLabel71.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel71.setForeground(new java.awt.Color(255, 255, 255));
@@ -2159,11 +1772,6 @@ public class Dashboard extends javax.swing.JFrame  {
 
         logOutBtnPanel4.setBackground(new java.awt.Color(64, 43, 100));
         logOutBtnPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        logOutBtnPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                logOutBtnPanel4MousePressed(evt);
-            }
-        });
 
         jLabel73.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel73.setForeground(new java.awt.Color(255, 255, 255));
@@ -2289,11 +1897,6 @@ public class Dashboard extends javax.swing.JFrame  {
         appointmentTable.setGridColor(new java.awt.Color(255, 255, 255));
         appointmentTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         appointmentTable.setRowHeight(20);
-        appointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentTableMousePressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(appointmentTable);
         if (appointmentTable.getColumnModel().getColumnCount() > 0) {
             appointmentTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2353,11 +1956,6 @@ public class Dashboard extends javax.swing.JFrame  {
         visitorTable.setGridColor(new java.awt.Color(255, 255, 255));
         visitorTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         visitorTable.setRowHeight(20);
-        visitorTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                visitorTableMousePressed(evt);
-            }
-        });
         jScrollPane5.setViewportView(visitorTable);
         if (visitorTable.getColumnModel().getColumnCount() > 0) {
             visitorTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2419,11 +2017,6 @@ public class Dashboard extends javax.swing.JFrame  {
         dispatchedMailTable.setGridColor(new java.awt.Color(255, 255, 255));
         dispatchedMailTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         dispatchedMailTable.setRowHeight(20);
-        dispatchedMailTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                dispatchedMailTableMousePressed(evt);
-            }
-        });
         jScrollPane2.setViewportView(dispatchedMailTable);
         if (dispatchedMailTable.getColumnModel().getColumnCount() > 0) {
             dispatchedMailTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2485,11 +2078,6 @@ public class Dashboard extends javax.swing.JFrame  {
         complaintTable.setGridColor(new java.awt.Color(255, 255, 255));
         complaintTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         complaintTable.setRowHeight(20);
-        complaintTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                complaintTableMousePressed(evt);
-            }
-        });
         jScrollPane3.setViewportView(complaintTable);
         if (complaintTable.getColumnModel().getColumnCount() > 0) {
             complaintTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2547,11 +2135,6 @@ public class Dashboard extends javax.swing.JFrame  {
         appointmentReportTable.setGridColor(new java.awt.Color(255, 255, 255));
         appointmentReportTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         appointmentReportTable.setRowHeight(20);
-        appointmentReportTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentReportTableMousePressed(evt);
-            }
-        });
         jScrollPane4.setViewportView(appointmentReportTable);
         if (appointmentReportTable.getColumnModel().getColumnCount() > 0) {
             appointmentReportTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2570,38 +2153,8 @@ public class Dashboard extends javax.swing.JFrame  {
         }
 
         appoinmentReportPdfBtn.setText("Generate Report in PDF");
-        appoinmentReportPdfBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appoinmentReportPdfBtnActionPerformed(evt);
-            }
-        });
 
         appointmentReportCsvBtn.setText("Generate Report in CSV");
-        appointmentReportCsvBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appointmentReportCsvBtnActionPerformed(evt);
-            }
-        });
-
-        appointmentReportDateChooser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                appointmentReportDateChooserMousePressed(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                appointmentReportDateChooserMouseClicked(evt);
-            }
-        });
-        appointmentReportDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                appointmentReportDateChooserPropertyChange(evt);
-            }
-        });
-
-        appointmentReportMoComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                appointmentReportMoComboBoxItemStateChanged(evt);
-            }
-        });
 
         appointmentReportPrepareBtn.setText("Prepare");
 
@@ -2682,11 +2235,6 @@ public class Dashboard extends javax.swing.JFrame  {
         userLogReportTable.setGridColor(new java.awt.Color(255, 255, 255));
         userLogReportTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         userLogReportTable.setRowHeight(20);
-        userLogReportTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userLogReportTableMousePressed(evt);
-            }
-        });
         jScrollPane8.setViewportView(userLogReportTable);
         if (userLogReportTable.getColumnModel().getColumnCount() > 0) {
             userLogReportTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2699,25 +2247,10 @@ public class Dashboard extends javax.swing.JFrame  {
 
         userLoginReportComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Receptionist", "MedicalOfficer", "Patient", " ", " " }));
         userLoginReportComboBox.setPreferredSize(new java.awt.Dimension(100, 20));
-        userLoginReportComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                userLoginReportComboBoxItemStateChanged(evt);
-            }
-        });
 
         userLogReportPdfBtn.setText("Generate Report in PDF");
-        userLogReportPdfBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userLogReportPdfBtnActionPerformed(evt);
-            }
-        });
 
         userLogReportCsvBtn.setText("Generate Report in CSV");
-        userLogReportCsvBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userLogReportCsvBtnActionPerformed(evt);
-            }
-        });
 
         userLogPrepareBtn.setText("Prepare");
 
@@ -2797,11 +2330,6 @@ public class Dashboard extends javax.swing.JFrame  {
         patientCredintialTable.setGridColor(new java.awt.Color(255, 255, 255));
         patientCredintialTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         patientCredintialTable.setRowHeight(20);
-        patientCredintialTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                patientCredintialTableMousePressed(evt);
-            }
-        });
         jScrollPane9.setViewportView(patientCredintialTable);
         if (patientCredintialTable.getColumnModel().getColumnCount() > 0) {
             patientCredintialTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -2810,18 +2338,8 @@ public class Dashboard extends javax.swing.JFrame  {
         }
 
         patientCredintialPdfBtn.setText("Generate Report in PDF");
-        patientCredintialPdfBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientCredintialPdfBtnActionPerformed(evt);
-            }
-        });
 
         patientCredintialCsvBtn.setText("Generate Report in CSV");
-        patientCredintialCsvBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientCredintialCsvBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout patientCreditialReportPanelLayout = new javax.swing.GroupLayout(patientCreditialReportPanel);
         patientCreditialReportPanel.setLayout(patientCreditialReportPanelLayout);
@@ -2862,11 +2380,6 @@ public class Dashboard extends javax.swing.JFrame  {
         userLogReportOptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         userLogReportOptionPanel.setForeground(new java.awt.Color(102, 0, 102));
         userLogReportOptionPanel.setPreferredSize(new java.awt.Dimension(363, 40));
-        userLogReportOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userLogReportOptionPanelMousePressed(evt);
-            }
-        });
 
         jLabel77.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel77.setForeground(new java.awt.Color(102, 0, 102));
@@ -3038,12 +2551,6 @@ public class Dashboard extends javax.swing.JFrame  {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setText("setting ");
 
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
-
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel42.setText("Name");
 
@@ -3068,31 +2575,15 @@ public class Dashboard extends javax.swing.JFrame  {
         jLabel63.setText("Marital status");
 
         martialStatusComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "Single" }));
-        martialStatusComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                martialStatusComboBox2ActionPerformed(evt);
-            }
-        });
 
         addressField.setColumns(20);
         addressField.setRows(5);
         jScrollPane6.setViewportView(addressField);
 
         saveUserBtn.setText("Save");
-        saveUserBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveUserBtnActionPerformed(evt);
-            }
-        });
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel38.setText("Username");
-
-        userNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameFieldActionPerformed(evt);
-            }
-        });
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel41.setText("Password");
@@ -3127,20 +2618,9 @@ public class Dashboard extends javax.swing.JFrame  {
         );
 
         photoUploadedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        userPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userPhotoLabelMousePressed(evt);
-            }
-        });
         photoUploadedPanel1.add(userPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
 
         photoAddBtn.setText("add");
-        photoAddBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                photoAddBtnActionPerformed(evt);
-            }
-        });
         photoUploadedPanel1.add(photoAddBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         jLabel65.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -3297,11 +2777,6 @@ public class Dashboard extends javax.swing.JFrame  {
         moTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         moTable.setGridColor(new java.awt.Color(255, 255, 255));
         moTable.setRowHeight(20);
-        moTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                moTableMousePressed(evt);
-            }
-        });
         moScrollPanel.setViewportView(moTable);
         if (moTable.getColumnModel().getColumnCount() > 0) {
             moTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -3352,11 +2827,6 @@ public class Dashboard extends javax.swing.JFrame  {
         patientsTable.setGridColor(new java.awt.Color(255, 255, 255));
         patientsTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         patientsTable.setRowHeight(20);
-        patientsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                patientsTableMousePressed(evt);
-            }
-        });
         patientScrollPanel.setViewportView(patientsTable);
         if (patientsTable.getColumnModel().getColumnCount() > 0) {
             patientsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -3413,11 +2883,6 @@ public class Dashboard extends javax.swing.JFrame  {
         receptionistTable.setGridColor(new java.awt.Color(255, 255, 255));
         receptionistTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
         receptionistTable.setRowHeight(20);
-        receptionistTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistTableMousePressed(evt);
-            }
-        });
         receptionistScrollPanel.setViewportView(receptionistTable);
         if (receptionistTable.getColumnModel().getColumnCount() > 0) {
             receptionistTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -3443,14 +2908,6 @@ public class Dashboard extends javax.swing.JFrame  {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setForeground(new java.awt.Color(102, 0, 102));
         jPanel7.setPreferredSize(new java.awt.Dimension(363, 40));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel7MousePressed(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
-            }
-        });
 
         jLabel66.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel66.setForeground(new java.awt.Color(102, 0, 102));
@@ -3480,11 +2937,6 @@ public class Dashboard extends javax.swing.JFrame  {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel9.setForeground(new java.awt.Color(102, 0, 102));
-        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel9MousePressed(evt);
-            }
-        });
 
         jLabel67.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel67.setForeground(new java.awt.Color(102, 0, 102));
@@ -3509,11 +2961,6 @@ public class Dashboard extends javax.swing.JFrame  {
         jPanel35.setBackground(new java.awt.Color(255, 255, 255));
         jPanel35.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel35.setForeground(new java.awt.Color(102, 0, 102));
-        jPanel35.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel35MousePressed(evt);
-            }
-        });
 
         jLabel68.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel68.setForeground(new java.awt.Color(102, 0, 102));
@@ -3548,11 +2995,6 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
         deleteAppointmentBtn.setText("Delete");
         deleteAppointmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteAppointmentBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminAppointmentOptionsLayout = new javax.swing.GroupLayout(adminAppointmentOptions);
         adminAppointmentOptions.setLayout(adminAppointmentOptionsLayout);
@@ -3578,43 +3020,23 @@ public class Dashboard extends javax.swing.JFrame  {
         approveAppoinmentBtn.setForeground(new java.awt.Color(85, 65, 118));
         approveAppoinmentBtn.setText("Approve");
         approveAppoinmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        approveAppoinmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveAppoinmentBtnActionPerformed(evt);
-            }
-        });
 
         addAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
         addAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
         addAppointmentBtn.setText("Add");
-        addAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAppointmentBtnActionPerformed(evt);
-            }
-        });
 
         generatePdfBtn.setBackground(new java.awt.Color(255, 255, 255));
         generatePdfBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         generatePdfBtn.setForeground(new java.awt.Color(85, 65, 118));
         generatePdfBtn.setText("Generate PDF");
         generatePdfBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        generatePdfBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generatePdfBtnActionPerformed(evt);
-            }
-        });
 
         editAppointmentBtn.setBackground(new java.awt.Color(255, 255, 255));
         editAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
         editAppointmentBtn.setText("Edit");
         editAppointmentBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editAppointmentBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout receptionAppointmentOptionsLayout = new javax.swing.GroupLayout(receptionAppointmentOptions);
         receptionAppointmentOptions.setLayout(receptionAppointmentOptionsLayout);
@@ -3651,11 +3073,6 @@ public class Dashboard extends javax.swing.JFrame  {
         addAppointmentBtn2.setForeground(new java.awt.Color(85, 65, 118));
         addAppointmentBtn2.setText("Add");
         addAppointmentBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        addAppointmentBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAppointmentBtn2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout patientAppointmentOptionsLayout = new javax.swing.GroupLayout(patientAppointmentOptions);
         patientAppointmentOptions.setLayout(patientAppointmentOptionsLayout);
@@ -3680,11 +3097,6 @@ public class Dashboard extends javax.swing.JFrame  {
         completedAppointmentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         completedAppointmentBtn.setForeground(new java.awt.Color(85, 65, 118));
         completedAppointmentBtn.setText("Complete");
-        completedAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                completedAppointmentBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout moAppointmentOptionsLayout = new javax.swing.GroupLayout(moAppointmentOptions);
         moAppointmentOptions.setLayout(moAppointmentOptionsLayout);
@@ -3742,22 +3154,12 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         deleteUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
         deleteUsersBtn.setText("Delete");
-        deleteUsersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUsersBtnActionPerformed(evt);
-            }
-        });
 
         editUsersBtn.setBackground(new java.awt.Color(255, 255, 255));
         editUsersBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
         editUsersBtn.setText("Edit");
         editUsersBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editUsersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUsersBtnActionPerformed(evt);
-            }
-        });
 
         resetPasswordBtn.setBackground(new java.awt.Color(255, 255, 255));
         resetPasswordBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -3770,11 +3172,6 @@ public class Dashboard extends javax.swing.JFrame  {
         addUsersBtn.setForeground(new java.awt.Color(85, 65, 118));
         addUsersBtn.setText("Add");
         addUsersBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        addUsersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUsersBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminUserOptionsLayout = new javax.swing.GroupLayout(adminUserOptions);
         adminUserOptions.setLayout(adminUserOptionsLayout);
@@ -3810,44 +3207,24 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
         deleteUsersBtn2.setText("Delete");
         deleteUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUsersBtn2ActionPerformed(evt);
-            }
-        });
 
         editUsersBtn2.setBackground(new java.awt.Color(255, 255, 255));
         editUsersBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
         editUsersBtn2.setText("Edit");
         editUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        editUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUsersBtn2ActionPerformed(evt);
-            }
-        });
 
         addUsersBtn2.setBackground(new java.awt.Color(255, 255, 255));
         addUsersBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addUsersBtn2.setForeground(new java.awt.Color(85, 65, 118));
         addUsersBtn2.setText("add");
         addUsersBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        addUsersBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUsersBtn2ActionPerformed(evt);
-            }
-        });
 
         resetPasswordBtn2.setBackground(new java.awt.Color(255, 255, 255));
         resetPasswordBtn2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         resetPasswordBtn2.setForeground(new java.awt.Color(85, 65, 118));
         resetPasswordBtn2.setText("Reset Password");
         resetPasswordBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        resetPasswordBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetPasswordBtn2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout receptionistUserOptionsLayout = new javax.swing.GroupLayout(receptionistUserOptions);
         receptionistUserOptions.setLayout(receptionistUserOptionsLayout);
@@ -3912,11 +3289,6 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteMailBtn.setForeground(new java.awt.Color(85, 65, 118));
         deleteMailBtn.setText("Delete");
         deleteMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteMailBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMailBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminMailOptionsLayout = new javax.swing.GroupLayout(adminMailOptions);
         adminMailOptions.setLayout(adminMailOptionsLayout);
@@ -3942,33 +3314,18 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteMailBtn2.setForeground(new java.awt.Color(85, 65, 118));
         deleteMailBtn2.setText("Delete");
         deleteMailBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteMailBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMailBtn2ActionPerformed(evt);
-            }
-        });
 
         editMailBtn.setBackground(new java.awt.Color(255, 255, 255));
         editMailBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editMailBtn.setForeground(new java.awt.Color(85, 65, 118));
         editMailBtn.setText("Edit");
         editMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editMailBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editMailBtnActionPerformed(evt);
-            }
-        });
 
         addMailBtn.setBackground(new java.awt.Color(255, 255, 255));
         addMailBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addMailBtn.setForeground(new java.awt.Color(85, 65, 118));
         addMailBtn.setText("Add");
         addMailBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        addMailBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMailBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout receptionMailOptionsLayout = new javax.swing.GroupLayout(receptionMailOptions);
         receptionMailOptions.setLayout(receptionMailOptionsLayout);
@@ -4030,33 +3387,18 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
         deleteComplaintBtn.setText("Delete");
         deleteComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteComplaintBtnActionPerformed(evt);
-            }
-        });
 
         editComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
         editComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
         editComplaintBtn.setText("Edit Complaint");
         editComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editComplaintBtnActionPerformed(evt);
-            }
-        });
 
         approveComplaintBtn.setBackground(new java.awt.Color(255, 255, 255));
         approveComplaintBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         approveComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
         approveComplaintBtn.setText("set Action Taken");
         approveComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        approveComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                approveComplaintBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminComplaintOptionsLayout = new javax.swing.GroupLayout(adminComplaintOptions);
         adminComplaintOptions.setLayout(adminComplaintOptionsLayout);
@@ -4089,20 +3431,15 @@ public class Dashboard extends javax.swing.JFrame  {
         addComplaintBtn2.setForeground(new java.awt.Color(85, 65, 118));
         addComplaintBtn2.setText("Add Complain");
         addComplaintBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        addComplaintBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addComplaintBtn2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout patientComplaintOptionsLayout = new javax.swing.GroupLayout(patientComplaintOptions);
         patientComplaintOptions.setLayout(patientComplaintOptionsLayout);
         patientComplaintOptionsLayout.setHorizontalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientComplaintOptionsLayout.createSequentialGroup()
-                .addGap(248, 248, 248)
+                .addGap(103, 103, 103)
                 .addComponent(addComplaintBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(685, Short.MAX_VALUE))
+                .addContainerGap(830, Short.MAX_VALUE))
         );
         patientComplaintOptionsLayout.setVerticalGroup(
             patientComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4119,20 +3456,15 @@ public class Dashboard extends javax.swing.JFrame  {
         addComplaintBtn.setForeground(new java.awt.Color(85, 65, 118));
         addComplaintBtn.setText("Add Complaint");
         addComplaintBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        addComplaintBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addComplaintBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout receptionistComplaintOptionsLayout = new javax.swing.GroupLayout(receptionistComplaintOptions);
         receptionistComplaintOptions.setLayout(receptionistComplaintOptionsLayout);
         receptionistComplaintOptionsLayout.setHorizontalGroup(
             receptionistComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receptionistComplaintOptionsLayout.createSequentialGroup()
-                .addGap(173, 173, 173)
+                .addGap(84, 84, 84)
                 .addComponent(addComplaintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(758, Short.MAX_VALUE))
+                .addContainerGap(847, Short.MAX_VALUE))
         );
         receptionistComplaintOptionsLayout.setVerticalGroup(
             receptionistComplaintOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4180,33 +3512,18 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
         deleteVisitorBtn.setText("Delete");
         deleteVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteVisitorBtnActionPerformed(evt);
-            }
-        });
 
         editVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
         editVisitorBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
         editVisitorBtn.setText("Edit");
         editVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        editVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editVisitorBtnActionPerformed(evt);
-            }
-        });
 
         addVisitorBtn.setBackground(new java.awt.Color(255, 255, 255));
         addVisitorBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         addVisitorBtn.setForeground(new java.awt.Color(85, 65, 118));
         addVisitorBtn.setText("Add");
         addVisitorBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        addVisitorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addVisitorBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout receptionistVisitorOptionsLayout = new javax.swing.GroupLayout(receptionistVisitorOptions);
         receptionistVisitorOptions.setLayout(receptionistVisitorOptionsLayout);
@@ -4239,11 +3556,6 @@ public class Dashboard extends javax.swing.JFrame  {
         deleteVisitorBtn2.setForeground(new java.awt.Color(85, 65, 118));
         deleteVisitorBtn2.setText("Delete");
         deleteVisitorBtn2.setPreferredSize(new java.awt.Dimension(67, 31));
-        deleteVisitorBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteVisitorBtn2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminVisitorOptionsLayout = new javax.swing.GroupLayout(adminVisitorOptions);
         adminVisitorOptions.setLayout(adminVisitorOptionsLayout);
@@ -4311,11 +3623,6 @@ public class Dashboard extends javax.swing.JFrame  {
         addReferenceBtn.setForeground(new java.awt.Color(85, 65, 118));
         addReferenceBtn.setText("Add");
         addReferenceBtn.setPreferredSize(new java.awt.Dimension(67, 31));
-        addReferenceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addReferenceBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout adminRefferenceOptionsLayout = new javax.swing.GroupLayout(adminRefferenceOptions);
         adminRefferenceOptions.setLayout(adminRefferenceOptionsLayout);
@@ -4332,12 +3639,9 @@ public class Dashboard extends javax.swing.JFrame  {
         );
         adminRefferenceOptionsLayout.setVerticalGroup(
             adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminRefferenceOptionsLayout.createSequentialGroup()
-                .addGroup(adminRefferenceOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(addReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(editReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteReferenceBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(addReferenceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+            .addComponent(editReferenceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deleteReferenceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout refferenceMainOptionLayout = new javax.swing.GroupLayout(refferenceMainOption);
@@ -4373,329 +3677,15 @@ public class Dashboard extends javax.swing.JFrame  {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void appointmentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentTableMousePressed
-
-        if (getAppointmentTable().getSelectedRow() > -1) {
-            // print first column value from selected row
-           
-            getEditUsersBtn().setEnabled(true);
-        }
-    }//GEN-LAST:event_appointmentTableMousePressed
-
   
-    private void approveComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveComplaintBtnActionPerformed
-        // TODO add your handling code here:
-      // UpdateComplaintActionTaken action = new UpdateComplaintActionTaken(this);
-        
-    }//GEN-LAST:event_approveComplaintBtnActionPerformed
-
-    private void dispatchedMailTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dispatchedMailTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dispatchedMailTableMousePressed
-
-    private void complaintTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaintTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_complaintTableMousePressed
-
-    private void appointmentReportTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentReportTableMousePressed
-
-    private void visitorTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_visitorTableMousePressed
-
-    private void moTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_moTableMousePressed
-
-    private void addAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentBtnActionPerformed
-        // TODO add your handling code here:
-        //addNewAppointment();
-        
-    }//GEN-LAST:event_addAppointmentBtnActionPerformed
-
-    private void generatePdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePdfBtnActionPerformed
-        // TODO add your handling code here:
-       // FileService.generateApprovedAppoinmentReport();
-    }//GEN-LAST:event_generatePdfBtnActionPerformed
-
-    private void addAppointmentBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentBtn2ActionPerformed
-        // TODO add your handling code here:
-        //addNewAppointment();
-    }//GEN-LAST:event_addAppointmentBtn2ActionPerformed
-
-    private void completedAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completedAppointmentBtnActionPerformed
-        // TODO add your handling code here:
-        // approveAppoinment("Completed");
-    }//GEN-LAST:event_completedAppointmentBtnActionPerformed
-
-    private void addMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMailBtnActionPerformed
-        //addDispatchedPostal();
-    }//GEN-LAST:event_addMailBtnActionPerformed
-
-    private void addComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComplaintBtnActionPerformed
-        // TODO add your handling code here:
-        //addNewComplaint();
-    }//GEN-LAST:event_addComplaintBtnActionPerformed
-
-    private void addComplaintBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComplaintBtn2ActionPerformed
-        // TODO add your handling code here:
-        //addNewComplaint();
-    }//GEN-LAST:event_addComplaintBtn2ActionPerformed
-
-    private void addUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersBtn2ActionPerformed
-        // TODO add your handling code here:
-        // addNewUser();
-    }//GEN-LAST:event_addUsersBtn2ActionPerformed
-
-    private void addVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVisitorBtnActionPerformed
-        // TODO add your handling code here:
-       // addNewVisitorRecord();
-    }//GEN-LAST:event_addVisitorBtnActionPerformed
-
-    private void addUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsersBtnActionPerformed
-        // TODO add your handling code here:
-        //addNewUser();
-    }//GEN-LAST:event_addUsersBtnActionPerformed
-
-    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNameFieldActionPerformed
-
-    private void martialStatusComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_martialStatusComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_martialStatusComboBox2ActionPerformed
-
-    private void saveUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUserBtnActionPerformed
-      // saveUser();
-    }//GEN-LAST:event_saveUserBtnActionPerformed
-
-    private void photoAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtnActionPerformed
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_photoAddBtnActionPerformed
-
-    private void userPhotoLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPhotoLabelMousePressed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_userPhotoLabelMousePressed
-
-    private void patientsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientsTableMousePressed
-
     private void jLabel66MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel66MouseExited
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jLabel66MouseExited
 
-    private void jPanel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MousePressed
-        // TODO add your handling code here:
-      //  setOptionReceptionist();
-       
-
-    }//GEN-LAST:event_jPanel7MousePressed
-
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jPanel7MouseEntered
-
-    private void jPanel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MousePressed
-        // TODO add your handling code here:
-        //setOptionMo();
-        
-        
-    }//GEN-LAST:event_jPanel9MousePressed
-
-    private void jPanel35MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel35MousePressed
-        // TODO add your handling code here:
-       // setOptionPatient();
-        
-
-    }//GEN-LAST:event_jPanel35MousePressed
-
-    private void receptionistTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_receptionistTableMousePressed
-
-    private void logOutBtnPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel3MousePressed
-       // userLogOut();
-    }//GEN-LAST:event_logOutBtnPanel3MousePressed
-
-    private void logOutBtnPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel4MousePressed
-       // userLogOut();
-    }//GEN-LAST:event_logOutBtnPanel4MousePressed
-
-    private void logOutBtnPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnPanel1MousePressed
-        // TODO add your handling code here:
-       // userLogOut();
-    }//GEN-LAST:event_logOutBtnPanel1MousePressed
-
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
-
-    private void deleteUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtnActionPerformed
-       // alterUser(1);
-        
-    }//GEN-LAST:event_deleteUsersBtnActionPerformed
-
-    private void addReferenceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addReferenceBtnActionPerformed
-        // TODO add your handling code here:
-       // addRefference();
-    }//GEN-LAST:event_addReferenceBtnActionPerformed
-
-    private void editUsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtnActionPerformed
-        // TODO add your handling code here:
-       //  alterUser(2);
-    }//GEN-LAST:event_editUsersBtnActionPerformed
-
-    private void editUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsersBtn2ActionPerformed
-        // TODO add your handling code here:
-       // alterUser(2);//2 for edit
-    }//GEN-LAST:event_editUsersBtn2ActionPerformed
-
-    private void deleteUsersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUsersBtn2ActionPerformed
-        // TODO add your handling code here:
-       // alterUser(1);//1 for edit
-    }//GEN-LAST:event_deleteUsersBtn2ActionPerformed
-
-    private void editAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentBtnActionPerformed
-        // TODO add your handling code here:
-        //editAppointment();
-        
-    }//GEN-LAST:event_editAppointmentBtnActionPerformed
-
-    private void approveAppoinmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveAppoinmentBtnActionPerformed
-        // TODO add your handling code here:
-        //approveAppoinment("Approved");
-    }//GEN-LAST:event_approveAppoinmentBtnActionPerformed
-
-    private void deleteMailBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMailBtn2ActionPerformed
-        // TODO add your handling code here:
-        //deleteMail();
-        
-    }//GEN-LAST:event_deleteMailBtn2ActionPerformed
-
-    private void editComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComplaintBtnActionPerformed
-        // TODO add your handling code here:
-        //editComplaint();
-    }//GEN-LAST:event_editComplaintBtnActionPerformed
-
-    private void deleteComplaintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteComplaintBtnActionPerformed
-        // TODO add your handling code here:
-       // deleteComplaint();
-    }//GEN-LAST:event_deleteComplaintBtnActionPerformed
-
-    private void deleteVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVisitorBtnActionPerformed
-        //deleteVisitorRecord();
-    }//GEN-LAST:event_deleteVisitorBtnActionPerformed
-
-    private void editVisitorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVisitorBtnActionPerformed
-        //editVisitorRecord();
-    }//GEN-LAST:event_editVisitorBtnActionPerformed
-
-    private void deleteVisitorBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVisitorBtn2ActionPerformed
-          //deleteVisitorRecord();
-    }//GEN-LAST:event_deleteVisitorBtn2ActionPerformed
-
-    private void userLogReportTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userLogReportTableMousePressed
-
-    private void patientCredintialTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientCredintialTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientCredintialTableMousePressed
-
-    private void appointmentReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentReportCsvBtnActionPerformed
-      /*  try {
-            FileService.generateCsvFile(getAppointmentReportTable().getModel(),"files/report/appointmentReport.csv");
-        } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//GEN-LAST:event_appointmentReportCsvBtnActionPerformed
-
     private void jLabel77MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel77MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel77MouseExited
-
-    private void userLogReportOptionPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogReportOptionPanelMousePressed
-         //setUserLogReports();
-    }//GEN-LAST:event_userLogReportOptionPanelMousePressed
-
-    private void userLogReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportPdfBtnActionPerformed
-               //  FileService.generatePdf(getUserLogReportTable().getModel(),FileService.getUserLoginReportFilePath());
-
-        
-    }//GEN-LAST:event_userLogReportPdfBtnActionPerformed
-
-    private void appointmentReportMoComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_appointmentReportMoComboBoxItemStateChanged
-        // TODO add your handling code here:
-        
-       // setAppointmentReportTable();
-        
-    }//GEN-LAST:event_appointmentReportMoComboBoxItemStateChanged
-
-    private void appointmentReportDateChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserMouseClicked
-    
-         
-    }//GEN-LAST:event_appointmentReportDateChooserMouseClicked
-
-    private void appointmentReportDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserPropertyChange
-   
-    }//GEN-LAST:event_appointmentReportDateChooserPropertyChange
-
-    private void appointmentReportDateChooserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentReportDateChooserMousePressed
-        // setAppointmentReportTable();
-    }//GEN-LAST:event_appointmentReportDateChooserMousePressed
-
-    private void userLoginReportComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_userLoginReportComboBoxItemStateChanged
-           // setUserLoginReportTable();
-    }//GEN-LAST:event_userLoginReportComboBoxItemStateChanged
-
-    private void deleteMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMailBtnActionPerformed
-        //deleteMail();
-    }//GEN-LAST:event_deleteMailBtnActionPerformed
-
-    private void editMailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMailBtnActionPerformed
-       //editMail();
-    }//GEN-LAST:event_editMailBtnActionPerformed
-
-    private void deleteAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentBtnActionPerformed
-        //deleteAppointment();
-    }//GEN-LAST:event_deleteAppointmentBtnActionPerformed
-
-    private void patientCredintialPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialPdfBtnActionPerformed
-       // FileService.generatePdf(getPatientCredintialTable().getModel(),FileService.getPatientCredintailReportFilePath());
-    }//GEN-LAST:event_patientCredintialPdfBtnActionPerformed
-
-    private void appoinmentReportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmentReportPdfBtnActionPerformed
-      //   FileService.generatePdf(getAppointmentReportTable().getModel(),FileService.getAppoinmentReportFilePath());
-    }//GEN-LAST:event_appoinmentReportPdfBtnActionPerformed
-
-    private void userLogReportCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userLogReportCsvBtnActionPerformed
-    /*    try {
-            FileService.generateCsvFile(getUserLogReportTable().getModel(),"files/report/userLogReport.csv");
-        } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
-    }//GEN-LAST:event_userLogReportCsvBtnActionPerformed
-
-    private void patientCredintialCsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientCredintialCsvBtnActionPerformed
-       /* try {
-            FileService.generateCsvFile(getPatientCredintialTable().getModel(),"files/reports/patientCredintial.csv");
-        } catch (IOException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
-    }//GEN-LAST:event_patientCredintialCsvBtnActionPerformed
-
-    private void resetPasswordBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPasswordBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resetPasswordBtn2ActionPerformed
  
    /*  private void addRefference(){
         AddReference refference= new AddReference(this);
@@ -4706,783 +3696,15 @@ public class Dashboard extends javax.swing.JFrame  {
     }*/
   
     
-    private void alterUser( int type){        
-        if(getMoScrollPanel().isShowing()){
-                   Object record= ((DefaultTableModel) getMedicalOfficerTable().getModel()).getDataVector().elementAt(getMedicalOfficerTable().getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getMoFilePath();
-                    MedicalOfficer officer=MedicalOfficer.readMoUser(line);
-                    if(type==1){
-                         FileService.deleteRecord(path, line);
-                    }
-                    else if(type==2){
-                        AddUser edit=new AddUser(2,getUserRole(),this,null,officer,null);
-                    }
-                  
-                  
-        }
-        else if(getPatientScrollPanel().isShowing()){
-                     Object record= ((DefaultTableModel) getPatientsTable().getModel()).getDataVector().elementAt(getPatientsTable().getSelectedRow());
-                     String line= PipeService.formatTableString(record.toString());
-                     String path=FileService.getPatientsFilePath();
-                     Patient patient=Patient.readPatientUser(line);
-                    if(type==1){
-                         FileService.deleteRecord(path, line);
-                    }
-                    else if(type==2){
-                        AddUser edit=new AddUser(2,getUserRole(),this,patient,null,null);
-                    }
-
-        }
-        else if(getReceptionistScrollPanel().isShowing()){
-                     Object record= ((DefaultTableModel) getReceptionistTable().getModel()).getDataVector().elementAt(receptionistTable.getSelectedRow());
-                      String line= PipeService.formatTableString(record.toString());
-                      String path=FileService.getReceptionistFilePath();
-                      Receptionist officer=Receptionist.readReceptionistUser(line);
-                    if(type==1){
-                         FileService.deleteRecord(path, line);
-                    }
-                    else if(type==2){
-                        AddUser edit=new AddUser(2,getUserRole(),this,null,null,officer);
-                    }
-        }
-   
-      // setTables();
-    }
-    private void userLogOut(){
-        this.dispose();
-        Home home=new Home();
-        home.setVisible(true);
-    }
-          
-    /*
-    public void setTables(){
-        if(getUserRole().equals("Admin")){
-            getAllAppointment();
-            getAllComplaints();
-            getDispatchedMails();
-            getVisitorRecords();
-            getAllUsers();
-           // getComplainRefference();
-           // getSpecialityRefference();
-        }
-        else if(getUserRole().equals("Receptionist")){
-        getAllAppointment();
-        getAllComplaints();
-        getDispatchedMails();
-        getVisitorRecords();
-        getAllPatients();
-        
-    }
-        else if(getUserRole().equals("Patient")){
-            getPatientAppointmentTable("199829003939");
-            getAllComplaints();
-            
-    }
-        else if(getUserRole().equals("MedicalOfficer")){
-        getMOAppointmentTable("dr001");
-    }
-        
-    }
-    
-    private void setAppointmentOptions(){
-          if(getUserRole().equals("Admin")){
-              getAdminAppointmentOptions().setVisible(true);
-              getPatientAppointmentOptions().setVisible(false);
-              getReceptionistAppointmentOptions().setVisible(false);
-              getMoAppointmentOptions().setVisible(false);
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-            getReceptionistAppointmentOptions().setVisible(true);
-            getAdminAppointmentOptions().setVisible(false);
-            getPatientAppointmentOptions().setVisible(false);
-            getMoAppointmentOptions().setVisible(false);
-            
-
-        }
-        else if(getUserRole().equals("Patient")){
-            getAdminAppointmentOptions().setVisible(false);
-            getPatientAppointmentOptions().setVisible(true);
-            getReceptionistAppointmentOptions().setVisible(false);
-            getMoAppointmentOptions().setVisible(false);
-
-        }
-        else if(getUserRole().equals("MedicalOfficer")){
-            getMoAppointmentOptions().setVisible(true);
-            getAdminAppointmentOptions().setVisible(false);
-            getPatientAppointmentOptions().setVisible(false);
-            getReceptionistAppointmentOptions().setVisible(false);  
-
-        }
-        
-    }
-    private void setMailOptions(){
-          if(getUserRole().equals("Admin")){
-              getAdminMailOptions().setVisible(true);
-              getReceptionMailOptions().setVisible(false);
-          
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-              getReceptionMailOptions().setVisible(true);
-            getAdminMailOptions().setVisible(false);
-            
-            
-
-        }
-        else if(getUserRole().equals("Patient")){
-            getAdminMailOptions().setVisible(false);
-
-        }
-        else if(getUserRole().equals("MedicalOfficer")){
-            getAdminMailOptions().setVisible(false);
-            
-           
-
-        }
-        
-    }
-    private void setComplainOptions(){
-          if(getUserRole().equals("Admin")){
-            getPatientComplaintOptions().setVisible(false);
-            getAdminComplaintOptions().setVisible(true);
-            getReceptionistComplaintOptions().setVisible(false);
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-        getPatientComplaintOptions().setVisible(false);
-        getAdminComplaintOptions().setVisible(false);
-        getReceptionistComplaintOptions().setVisible(true);
-            
-
-        }
-        else if(getUserRole().equals("Patient")){
-            getPatientComplaintOptions().setVisible(true);
-            getAdminComplaintOptions().setVisible(false);
-            getReceptionistComplaintOptions().setVisible(false);
-
-        }
-        else if(getUserRole().equals("MedicalOfficer")){
-           
-            
-           
-
-        }
-        
-    }
-    private void setUserOptions(){
-           if(getUserRole().equals("Admin")){
-            getAdminUserOptions().setVisible(true);
-            getReceptionistUserOptions().setVisible(false);
-            getJPanel6().setVisible(true);
-            setOptionMo();
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-            getReceptionistUserOptions().setVisible(true);
-            getAdminUserOptions().setVisible(false);
-             getJPanel6().setVisible(false);
-             setOptionPatient();
-            
-            
-
-        }
-        
-    }
-    private void setRefferenceOption(){
-         if(getUserRole().equals("Admin")){
-             getAdminRefferenceOptions().setVisible(true);
-            
-        }
-        
-    }
-    private void setReportOptions(){
-         if(getUserRole().equals("Admin")){
-            getAppoinmentReportPanel().setVisible(true);
-           getUserLogReportPanel().setVisible(false);
-            getPatientCreditialReportPanel().setVisible(false);
-        }
-    
-        
-    }
-
-    private void setVisitorOptions(){
-        if(getUserRole().equals("Admin")){
-            getAdminVisitorOptions().setVisible(true);
-            getReceptionistVisitorOptions().setVisible(false);
-            
-        }
-        else if(getUserRole().equals("Receptionist")){
-          getAdminVisitorOptions().setVisible(false);
-            getReceptionistVisitorOptions().setVisible(true);
-            
-
-        }
-        
-        
-    }
-    */
-    
-    
-   /* public void setOptionMo(){
-        resetHoverColor(jPanel7,jLabel66);
-        setHoverColor(jPanel9,jLabel67);
-        resetHoverColor(jPanel35,jLabel68);
-        getMoScrollPanel().setVisible(true);
-        getReceptionistScrollPanel().setVisible(false);
-        getPatientScrollPanel().setVisible(false);
-        
-    }
-    public void setOptionReceptionist(){
-        setHoverColor(jPanel7,jLabel66);
-        resetHoverColor(jPanel9,jLabel67);
-        resetHoverColor(jPanel35,jLabel68);
-        getReceptionistScrollPanel().setVisible(true);
-        getMoScrollPanel().setVisible(false);
-        getPatientScrollPanel().setVisible(false);
-       
-        
-    }
-    public void setOptionPatient(){
-          resetHoverColor(jPanel7,jLabel66);
-        resetHoverColor(jPanel9,jLabel67);
-         setHoverColor(jPanel35,jLabel68);
-         getMoScrollPanel().setVisible(false);
-         getReceptionistScrollPanel().setVisible(false);
-         getPatientScrollPanel().setVisible(true);
-        
-    }
-    public void setAppoinmentReports(){
-        resetHoverColor(jPanel38,jLabel79);
-        setHoverColor(jPanel18,jLabel78);
-        resetHoverColor(jPanel16,jLabel77);
-        getAppoinmentReportPanel().setVisible(true);
-        getUserLogReportPanel().setVisible(false);
-        getPatientCreditialReportPanel().setVisible(false);
-         setAppointmentReportTable();
-    }
-    public void setUserLogReports(){
-        resetHoverColor(jPanel38,jLabel79);
-        resetHoverColor(jPanel18,jLabel78);
-        setHoverColor(jPanel16,jLabel77);
-        getAppoinmentReportPanel().setVisible(false);
-        getUserLogReportPanel().setVisible(true);
-        getPatientCreditialReportPanel().setVisible(false);
-        setUserLoginReportTable();
-        
-    }
-    public void setPatientCredintialReports(){
-        setHoverColor(jPanel38,jLabel79);
-        resetHoverColor(jPanel18,jLabel78);
-        resetHoverColor(jPanel16,jLabel77);
-        getAppoinmentReportPanel().setVisible(false);
-        getUserLogReportPanel().setVisible(false);
-        getPatientCreditialReportPanel().setVisible(true);
-         setPatientCredintialReportTable();
-    }
-    */
-    
-    
-    
-    
-    
-    
-    
-  /*  public void setHoverColor(JPanel panel,JLabel label){
-                panel.setBackground(new Color(85,65,118));
-                label.setForeground(Color.white);
-
-    }
-    
-    public void resetHoverColor(JPanel panel,JLabel label){
-                panel.setBackground(new Color(255,255,255));
-                label.setForeground(new Color(102,0,102));
-
-    }*/
-    
-    
-    private void getPatientAppointmentTable(String id){
-        ArrayList<String> list= FileService.getPatientAppointments(id);
-        TableModel tm = getAppointmentTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-        System.out.println("patient appointments");  
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            String [] data=list.get(i).split(",");
-            
-             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
-                    model.addRow(row);
-            
-           }  
-    }
-    private void getMOAppointmentTable(String id){
-          ArrayList<String> list= FileService.getMOAppointments(id);
-        TableModel tm = getAppointmentTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
-                    model.addRow(row);
-            
-           }  
-        
-    }
-    private void getAllAppointment(){
-        ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
-        TableModel tm = getAppointmentTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-       System.out.println("all appointments"); 
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = {data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8],data[9]};
-                    model.addRow(row);
-            
-           }  
-        
-    }
-    private void getAllComplaints(){
-         ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
-        TableModel tm = getComplaintsTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-       System.out.println("all complaints");  
-             for(int i=0;i<list.size();i++)  
-           {  
-             String [] data=list.get(i).split(",");
-            
-             Object[] row = { data[0],data[1], data[2], data[3], data[4], data[5], data[6], data[7]};
-                    model.addRow(row);
-            
-           }  
-        
-    }
-    private void getPatientComplains(){
-          ArrayList<String> list= FileService.getRecords(FileService.getComplaintsFile());
-        TableModel tm = getComplaintsTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-            System.out.println("patient complaints");  
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = { data[1], data[2], data[3], data[4], data[5], data[6], data[7],data[8]};
-                    model.addRow(row);
-            
-           }  
-        
-    }
-    private void getDispatchedMails(){
-         ArrayList<String> list= FileService.getRecords(FileService.getMailsFile());
-        TableModel tm = getMailsTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-            System.out.println("dispatched mails");  
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = { data[0], data[1], data[2], data[3], data[4], data[5]};
-                    model.addRow(row);
-            
-           }  
-        
-    }
-    private void getVisitorRecords(){
-        ArrayList<String> list= FileService.getRecords(FileService.getVisitorsFile());
-        TableModel tm = getVisitorsTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            String [] data=list.get(i).split(",");
-             Object[] row = { data[0], data[1], data[2], data[3], data[4], data[5],data[6], data[7], data[8]};
-                    model.addRow(row);
-            
-           }  
-    }
-    private void getAllUsers(){
-       
-             getAllMedicalOfficers();
-           getAllReceptionist();
-           getAllPatients();
-        
-    }
-    public void getAllMedicalOfficers(){
-        ArrayList<String> list= FileService.getRecords(FileService.getMoFile());
-        TableModel tm = getMedicalOfficerTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            MedicalOfficer officer=MedicalOfficer.readMoUser(list.get(i));
-           
-             Object[] row = {officer.getUserName(),officer.getName(),officer.getGender(),officer.getphoneNumber(),officer.getIdCardNo(),officer.getDateOfBirth(),officer.getAddress(),officer.getMaritalStatus(),officer.getPassword(),officer.getStrStaffId(),officer.getStrEmailAddress(),officer.getStrDateOfJoining(),officer.getCvFile(),officer.getStrSpecialityArea(),officer.getPhoto()};
-                    model.addRow(row);
-            
-           }  
-     
-    }
-    public void getAllReceptionist(){
-        ArrayList<String> list= FileService.getRecords(FileService.getReceptionistFile());
-        TableModel tm = getReceptionistTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-             for(int i=0;i<list.size();i++)  
-           {   
-        Receptionist officer=Receptionist.readReceptionistUser(list.get(i));
-             Object[] row = { officer.getUserName(),officer.getName(),officer.getGender(),officer.getphoneNumber(),officer.getIdCardNo(),officer.getDateOfBirth(),officer.getAddress(),officer.getMaritalStatus(),officer.getPassword(),officer.getStrStaffId(),officer.getStrEmailAddress(),officer.getStrDateOfJoining(),officer.getCvFile(),officer.getPhoto()};
-                    model.addRow(row);
-            
-           }    
-    }
-    private void getAllPatients(){
-         ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
-        TableModel tm = getPatientsTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            Patient patient=Patient.readPatientUser(list.get(i));
-             Object[] row = {patient.getUserName(),patient.getName(),patient.getGender(),patient.getphoneNumber(),patient.getIdCardNo(),patient.getDateOfBirth(),patient.getAddress(),patient.getMaritalStatus(),patient.getPassword(),patient.getStrBloodGrp(),patient.getStrAllergies()};
-             model.addRow(row);
-            
-           }  
-        
-    }
-    private void setComplainRefference(){
-       // setColor(getComplainReferencePanel());
-       // resetColor(getSpecialityReferencePanel());
-        getComplainRefference();
-        
-    }
-    private void setSpecialityRefference(){
-       // setColor(getSpecialityReferencePanel());
-       // resetColor(getComplainReferencePanel());
-        getSpecialityRefference();         
-    }
-    private void getComplainRefference(){
-            ComplainRefference refference = new ComplainRefference();
-           ArrayList<String> complainRefferenceList = refference.getComplainTypes();
-            DefaultListModel<String> model = new DefaultListModel<String>();
-             getComplaintReferenceList().setModel(model);
-          for(String s:complainRefferenceList){
-                 model.addElement(s);
-                }
-    }
-    private void getSpecialityRefference(){
-       SpecialityRefference refference=new SpecialityRefference();
-       ArrayList<String> specialityRefferenceList = refference.getSpecialityTypes();
-        DefaultListModel<String> model2 = new DefaultListModel<String>();
-        getSpecialityRefferenceList().setModel(model2);
-        for(String s:specialityRefferenceList){
-                 model2.addElement(s);
-                }          
-         }
-     
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
-            }
-        });
-    }
-    
-    
-  /*  public void setColor(JPanel panel){
-         panel.setBackground(new Color(85,65,118));
-    }
-     
-    public  void resetAllMainPanels(){
-        getUsersPanel().setVisible(false);
-        getComplaintPanel().setVisible(false);
-        getMailPanel().setVisible(false);
-        getAppointmentPanel().setVisible(false);
-        getReportsPanel().setVisible(false);
-        getSettingsPanel().setVisible(false);
-        getRefferencePanel().setVisible(false);
-        getVisitorsPanel().setVisible(false);
-     }
-    public void resetAllColor(){
-        getAppointmentBtnPanel4().setBackground(new Color(64,43,100));
-        getHomeBtnPanel1().setBackground(new Color(64,43,100));
-        getHomeBtnPanel2().setBackground(new Color(64,43,100));
-        getHomeBtnPanel3().setBackground(new Color(64,43,100));
-        getHomeBtnPanel4().setBackground(new Color(64,43,100));            
-        getMoSettingBtnPanel().setBackground(new Color(64,43,100));
-        getAppointmentBtnPanel3().setBackground(new Color(64,43,100));
-        getComplaintBtnPanel2().setBackground(new Color(64,43,100));
-        getPatientSettingBtnPanel().setBackground(new Color(64,43,100));
-        getAppointmentBtnPanel2().setBackground(new Color(64,43,100));
-        getMailBtnPanel2().setBackground(new Color(64,43,100));
-        getComplaintBtnPanel3().setBackground(new Color(64,43,100));
-        getVisitorBtnPanel2().setBackground(new Color(64,43,100));
-        getReceptionistSettingBtnPanel().setBackground(new Color(64,43,100));
-        getUserBtnPanel2().setBackground(new Color(64,43,100));
-        getUserBtnPanel().setBackground(new Color(64,43,100));
-        getReportBtnPanel().setBackground(new Color(64,43,100));
-        getAppointmentBtnPanel1().setBackground(new Color(64,43,100));
-        getMailBtnPanel1().setBackground(new Color(64,43,100));
-        getComplaintBtnPanel1().setBackground(new Color(64,43,100));
-        getVisitorBtnPanel1().setBackground(new Color(64,43,100));
-        getAdminSettingBtnPanel().setBackground(new Color(64,43,100));
-        getRefferenceBtnPanel().setBackground(new Color(64,43,100));
-    }
-     void resetColor(JPanel panel){
-        panel.setBackground(new Color(64,43,100));
-       
-        
-    }*/
-     
-     
-     
-     //appoinment functions here
-  /*  public void addNewAppointment(){
-         AddAppointment appointmentView = new AddAppointment(this, new Appointment(),1);
-         appointmentView.setVisible(true);
-         
-    }
-    public void editAppointment(){
-        Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getAppointmentsFilePath();
-                   Appointment appointment=Appointment.readAppoinment(line);
-                   AddAppointment appointmentView = new AddAppointment(this, appointment,2);
-                   appointmentView.setVisible(true);
-                   // EditAppointment edit=new EditAppointment(appointment,this);
-                   
-    } */
-    /* public void deleteAppointment(){
-         
-         
-          Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                   // String path=FileService.getAppointmentsFilePath();
-                    AddAppointment appointmentView = new AddAppointment(this, Appointment.readAppoinment(line),2);
-                    appointmentView.setVisible(true);
-                    appointmentView.getController().deleteAppoinment();
-                   if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-                    FileService.deleteRecord(path, line);
-                     this.setTables();
-                    }
-    } */
-     /*public void approveAppoinment(String status){
-         Object record= ((DefaultTableModel) appointmentTable.getModel()).getDataVector().elementAt(appointmentTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    //String path=FileService.getAppointmentsFilePath();
-                   // FileService.deleteRecord(path, line);
-                    Appointment appointment=Appointment.readAppoinment(line);
-                    
-                    //FileService.addLine(path, appointment.toString());
-                    // this.setTables();
-                    AddAppointment appointmentView = new AddAppointment(this, Appointment.readAppoinment(line),2);
-                   appointmentView.setStatus("Approved");
-                    
-     }*/
   
-   
-     //complaint functions here
-   /*   private void addNewComplaint(){
-        AddComplaint complaint = new AddComplaint(this.getUserRole(),this);
-    }
-     private void deleteComplaint(){
-          Object record= ((DefaultTableModel) complaintTable.getModel()).getDataVector().elementAt(complaintTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getComplaintsFilePath();
-                    if(AlertService.optionalPlane("Would you like to Delete the Complaint Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-                    FileService.deleteRecord(path, line);
-                    this.setTables();}
-         
-     }
-     private void editComplaint(){
-          Object record= ((DefaultTableModel) complaintTable.getModel()).getDataVector().elementAt(complaintTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getComplaintsFilePath();
-                    Complaint complain= Complaint.readComplaint(line);
-                    EditComplaint edit=new EditComplaint(complain,this);
-     }
-     public void editApproveAction(String action){
-           Object record= ((DefaultTableModel) complaintTable.getModel()).getDataVector().elementAt(complaintTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getComplaintsFilePath();
-                    FileService.deleteRecord(path,line);
-                    Complaint complain= Complaint.readComplaint(line);
-                    complain.setStrActionTaken(action);
-                    FileService.addLine(path, complain.toString());
-                    this.setTables();
-         
-     }*/
-     
-     //mails functions here
-     /* private void addDispatchedPostal(){
-        AddMail mail = new AddMail(this);
-    }
-     private void deleteMail(){
-          Object record= ((DefaultTableModel) dispatchedMailTable.getModel()).getDataVector().elementAt(dispatchedMailTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getMailsFilePath();
-            if(AlertService.optionalPlane("Would you like to Delete the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-
-                    FileService.deleteRecord(path, line);
-                    this.setTables();
-                    }
-         
-     }
-     private void editMail(){
-          Object record= ((DefaultTableModel) dispatchedMailTable.getModel()).getDataVector().elementAt(dispatchedMailTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getMailsFilePath();
-                    DispatchedPostal mail= DispatchedPostal.readMail(line);
-                    EditMail edit=new EditMail(mail,this);
-         
-     }*/
-     
-   //visitor records functions here
-   /* private void addNewVisitorRecord(){
-        AddVisitors record = new AddVisitors(this);
-    } 
-    private void deleteVisitorRecord(){
-        Object record= ((DefaultTableModel) visitorTable.getModel()).getDataVector().elementAt(visitorTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getVisitorsFilePath();
-                    if(AlertService.optionalPlane("Would you like to Delete the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-                    FileService.deleteRecord(path, line);
-                    this.setTables();}
-        
-    }
-    private void editVisitorRecord(){
-        Object record= ((DefaultTableModel) visitorTable.getModel()).getDataVector().elementAt(visitorTable.getSelectedRow());
-                   String line= PipeService.formatTableString(record.toString());
-                    String path=FileService.getVisitorsFilePath();
-                    Visitor visitor =Visitor.readVisitor(line) ;
-                    EditVisitor edit =new EditVisitor(visitor,this);
-    }*/
-   
-    
-  //report functons here
-    
-/*private void setMoComboBox(){      
-    Object[] items=  FileService.getAllMo(FileService.getRecords(FileService.getMoFile())).toArray();     
-    DefaultComboBoxModel model = new DefaultComboBoxModel(items);
-    getAppointmentReportMoComboBox().setModel( model );
-    }
-private void setAppointmentReportTable(){
-        String date=PipeService.getDateSimpleFormat(getAppointmentReportDateChooser().getDate());
-        MedicalOfficer officer=(MedicalOfficer) getAppointmentReportMoComboBox().getSelectedItem();
-         ArrayList<String> list= FileService.getRecords(FileService.getAppointmentsFile());
-        TableModel tm = getAppointmentReportTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-      
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            Appointment appoinment=Appointment.readAppoinment(list.get(i));
-            try{
-            if(appoinment.getAppointmentDate().equals(date) && appoinment.getMedicalOfficer().getIdCardNo().equals(officer.getIdCardNo())){
-             Object[] row = {appoinment.getAppointmentNumber(), appoinment.getStatus(), appoinment.getPatient().getName(), appoinment.getPatient().getIdCardNo(), appoinment.getAppointmentDate(), appoinment.getAppointmentTime(), appoinment.getMedicalOfficer().getName(), appoinment.getSpeciality(),appoinment.getSymtomps()};
-                    model.addRow(row);
-            }
-           }
-            catch(NullPointerException e){
-                   JOptionPane.showMessageDialog(null, "enter all fields");
-            }
-            
-           }
-        
-    }
-private void setUserLoginReportTable(){
-         String date=PipeService.getDateSimpleFormat(getUserLoginReportDateChooser3().getDate());
-         String role =getUserLoginReportComboBox().getSelectedItem().toString();
-         ArrayList<String> list= FileService.getRecords(FileService.getUserLoginFile());
-        TableModel tm = getUserLogReportTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-      
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            UserLogin login=UserLogin.readLogin(list.get(i));
-            try{
-            if(login.getDate().equals(date) && login.getRole().equals(role)){
-             Object[] row = {login.getUserName(),login.getRole(),login.getDate(),login.getTime()};
-                    model.addRow(row);
-            }
-           }
-            catch(NullPointerException e){
-                   JOptionPane.showMessageDialog(null, "enter all fields");
-            }
-            
-           }
-        
-    }
-private void setPatientCredintialReportTable(){
-         ArrayList<String> list= FileService.getRecords(FileService.getPatientsFile());
-        TableModel tm = getPatientCredintialTable().getModel();
-                DefaultTableModel model = (DefaultTableModel) tm;
-                model.setRowCount(0);
-                
-             for(int i=0;i<list.size();i++)  
-           {  
-            
-            Patient patient=Patient.readPatientUser(list.get(i));
-             Object[] row = {patient.getUserName(),patient.getName(),patient.getPassword()};
-             model.addRow(row);
-            
-           }  
-        
-    } */
-     
-   
-     
-     
-
-
        
+  
+    
+    
+    
+    
+    
+ 
      
      
      

@@ -48,27 +48,27 @@ public class MailController implements ActionListener {
     }
    
    public void initController(){
-        getView().getchooseFileBtn().addActionListener ((ActionEvent e) -> {
+        getView().getchooseFileBtn().addActionListener ((ActionEvent e) -> {//getting the getChooseBtn and adding a action listener to it
             
             openFileBtn();
         });
        
    }
-     public void openFileBtn(){
+     public void openFileBtn(){//function to open the file chooser plane to select attachment file for mail
           int returnValue =getView().getFileChooser().showOpenDialog(getView());
-            if(returnValue==JFileChooser.APPROVE_OPTION){
+            if(returnValue==JFileChooser.APPROVE_OPTION){//checks if a file is choosen
                  getView().setAttachment(getView().getFileChooser().getSelectedFile());
-                getView().getAttachmentName().setText(getView().getAttachment().getName());
+                getView().getAttachmentName().setText(getView().getAttachment().getName());//showing the name of file in the view
             }
             else{
-                getView().setAttachment(null);
+                getView().setAttachment(null);//attachment set to null if file not choosen or attached
                  
                  getView().getAttachmentName().setText("no file choosen");
             }
     }
      
    @Override
-     public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {//this function listens to a action preformed in the view eg: adding new Mail or editing it
         System.out.print(e.getActionCommand());
         if(e.getActionCommand().equalsIgnoreCase("add")){
             addMail();
@@ -82,7 +82,7 @@ public class MailController implements ActionListener {
         
           
          }
-   public void addMail(){
+   public void addMail(){  //this fucntion gets the all information for new Mail from the  view and create a new Mail object 
        String refferenceNumber=getView().getReferenceField().getText();
         String name=getView().getNoteField().getText();
         String address=getView().getAddressField().getText();
@@ -90,30 +90,30 @@ public class MailController implements ActionListener {
         String date=PipeService.getDateSimpleFormat(getView().getDateChooser().getDate());  
         File file=getView().getAttachment();
         DispatchedPostal mail=new DispatchedPostal(refferenceNumber,note,date,file,name,address); 
-        FileService.addLine(FileService.getMailsFilePath(),mail.toString());
+        FileService.addLine(FileService.getMailsFilePath(),mail.toString());//add the new mail to DispatchedMail.txt
         
        updateView();
    }
-   public void editMail(){
-       if(AlertService.optionalPlane("Would you like to Edit the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-        FileService.deleteRecord(FileService.getMailsFilePath(),getModel().toString());     
-        addMail();    
+   public void editMail(){//function which edit a mail and save its
+       if(AlertService.optionalPlane("Would you like to Edit the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of editrecord and checks if its a yes or no
+        FileService.deleteRecord(FileService.getMailsFilePath(),getModel().toString());  //delete prevoius record   
+        addMail();    //add new record
       }   
         updateView();
        
    }
-   public void deleteMail(){
-        if(AlertService.optionalPlane("Would you like to Delete the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+   public void deleteMail(){//function to deletes a mail
+        if(AlertService.optionalPlane("Would you like to Delete the Mail Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of delete
         FileService.deleteRecord(FileService.getMailsFilePath(),getModel().toString());   
         
       }
        this.updateView(); 
     }
    
-   public void updateView(){
+   public void updateView(){//updates the Mails table after a new Mail is added or a Mail is edited
        getDashboardController().getDispatchedMails();
         this.getView().dispose();
-        
+        //close the view
         
         
     }

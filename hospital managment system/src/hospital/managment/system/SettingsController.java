@@ -83,17 +83,16 @@ public class SettingsController {
    public void initController(){
        addActionListners();
        setFileChooser();
-      // loadUserDetails();
-       
+     
        
    }
-   public void addActionListners(){
+   public void addActionListners(){//adding mouse listeners and action listeners 
        
        getView().getPhotoAddBtn().addActionListener(e->addPhoto());
        getView().getSaveUserBtn().addActionListener(e->saveUser());
        
        
-       getView().getReceptionistSettingBtnPanel().addMouseListener(listner);
+       getView().getReceptionistSettingBtnPanel().addMouseListener(listner);//adding mouselistners to buttons in the view and setting up names to group them up easily
         getView().getMoSettingBtnPanel().addMouseListener(listner);
         getView().getPatientSettingBtnPanel().addMouseListener(listner);
         getView().getReceptionistSettingBtnPanel().setName("settingBtn");
@@ -103,11 +102,11 @@ public class SettingsController {
        getView().getUserPhotoLabel().setName("changePhoto");
 
    }
-   MouseListener listner =new MouseAdapter(){
+   MouseListener listner =new MouseAdapter(){//runs when a mouse event has occured
      @Override
      public void mouseClicked(MouseEvent e) { 
       if( ((JPanel)e.getSource()).getName().equalsIgnoreCase("settingBtn")){
-         loadUserDetails();
+         loadUserDetails(); //each time the settings is clicked in dashbaord the details of the logged in user is loaded
          
      }
      
@@ -131,11 +130,10 @@ public class SettingsController {
    
    
    
-    public void addPhoto(){
+    public void addPhoto(){//this functions helps to change the current photo of theuser by providing a fle chooser panel
          int returnValue =getFileChooser().showOpenDialog(getView());
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 setPhotoAttachment(getFileChooser().getSelectedFile());
-               // this. photoAttachment = getFileChooser().getSelectedFile();
               setphotoChoosen(true);
                
             }
@@ -147,19 +145,19 @@ public class SettingsController {
              checkPhoto();
         
     }
-    public void checkPhoto(){
+    public void checkPhoto(){//function checks if a photo attachment is available to user if so it binds the photo in the view
         if(getphotoChoosen()){ 
-           getView().getPhotoAddBtn().setVisible(false);
+           getView().getPhotoAddBtn().setVisible(false);//hiding the add photo button
            setStaffPhoto( getView().getUserPhotoLabel(),getPhotoAttachment());
            
         }
     }
-    public void setStaffPhoto(JLabel label,File imageFile){
+    public void setStaffPhoto(JLabel label,File imageFile){//this function helps to bind the image as a icon to the photo label
        
 
         BufferedImage img = null;
             try {
-                img = ImageIO.read(imageFile);
+                img = ImageIO.read(imageFile);//Image I/O recognises the contents of the file as a JPEG format image, and decodes it into a BufferedImage which can be directly used by Java 2D.
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -176,7 +174,7 @@ public class SettingsController {
      
      
      
-    public void loadUserDetails(){
+    public void loadUserDetails(){//loads the details of the logged in user 
        
        getView().getUserNameField().setText(getModel().getUserName());
        getView().getPasswordField().setText(getModel().getPassword());
@@ -189,24 +187,24 @@ public class SettingsController {
         Date dob=PipeService.getStringToDateFormat(getModel().getDateOfBirth());
         getView().getDobDateChooser().setDate(dob);
         setPhotoAttachment(getModel().getPhoto());
-        System.out.println("phot of user"+getModel().getPhoto());
+        
         
         if(getModel().getPhoto().isFile()){
-            setphotoChoosen(true);
+            setphotoChoosen(true);//if the photo of user exist then photo choosen boolean variable will be set to true
             checkPhoto();
             
            
         }
         else {
              
-             setphotoChoosen(false);
+             setphotoChoosen(false);//if the photo of user exist then photo choosen boolean variable will be set to false
             
          
         }
         
         
      }
- public  void saveUser(){
+ public  void saveUser(){//save the user details after editing the details 
          String role=CurrentUser.getUserRole();
          String path=null;
           if(role.equalsIgnoreCase("Patient")){
@@ -220,7 +218,7 @@ public class SettingsController {
                path=FileService.getReceptionistFilePath();
          }
         
-         FileService.deleteRecord(path, CurrentUser.getUser().toString2());
+         FileService.deleteRecord(path, CurrentUser.getUser().toString2());//deleting the previous details of the user
          
          
         getModel().setIdCardNo( getView().getNicField().getText());
@@ -234,7 +232,7 @@ public class SettingsController {
         getModel().setDateOfBirth(PipeService.getDateSimpleFormat( getView().getDobDateChooser().getDate()));
         getModel().setPhoto(getPhotoAttachment());
          
-         FileService.addLine(path,  getModel().toString2());
+         FileService.addLine(path,  getModel().toString2());//adding the new details of the user
      }
     
 }

@@ -60,7 +60,7 @@ public Dashboard getView(){
 public DefaultTableModel getModel(){
     return model;
 }
-public void initController(String role){
+public void initController(String role){//this function adds action listeners to buttons and panel avvailabe in the dashboard view 
     setSidePanel(role);
     setTables();
     setSideBarPanels();
@@ -181,7 +181,7 @@ public void setSidePanel(String role){
         }
         
     }
-public void  setHome(){
+public void  setHome(){//
          resetAllMainPanels();
         getView().getHomePanel().setVisible(true);
         getView().getComplaintsMainOptionPanel().setVisible(false);
@@ -192,7 +192,7 @@ public void  setHome(){
         getView().getRefferenceOptionsMainPanel().setVisible(false);
        
     }
-public void setSideBarPanels(){
+public void setSideBarPanels(){//add mouse listener to the panels in all side bar panels and grouping them by setting names
         getView().getHomeBtnPanel1().addMouseListener(sideBarPanelListener);
         getView().getHomeBtnPanel2().addMouseListener(sideBarPanelListener);
         getView().getHomeBtnPanel3().addMouseListener(sideBarPanelListener);
@@ -546,7 +546,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
  
  
  
-    public  void setTables(){
+    public  void setTables(){//binds data to the tables according to the type of user logged in
         if(getView().getUserRole().equals("Admin")){
             getAllAppointment();
             getAllComplaints();
@@ -717,7 +717,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
          panel.setBackground(new Color(85,65,118));
     }
      
-    public  void resetAllMainPanels(){
+    public  void resetAllMainPanels(){//hiding all the main panels in the dashboard
         getView().getUsersPanel().setVisible(false);
         getView().getComplaintPanel().setVisible(false);
         getView().getMailPanel().setVisible(false);
@@ -1040,7 +1040,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            getAllPatients();
         
     }
-    public void getAllMedicalOfficers(){
+    public void getAllMedicalOfficers(){//this functions binds the medical officer table with all medical officers in the system by reading from medical officer txt file
         ArrayList<String> list= FileService.getRecords(FileService.getMoFile());
         TableModel tm = getView().getMedicalOfficerTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;
@@ -1056,7 +1056,7 @@ MouseListener sideBarPanelListener = new MouseAdapter() {
            }  
      
     }
-    public void getAllReceptionist(){
+    public void getAllReceptionist(){//this functions binds the receptionist table with all medical officers in the system by reading from receptionist txt file
         ArrayList<String> list= FileService.getRecords(FileService.getReceptionistFile());
         TableModel tm = getView().getReceptionistTable().getModel();
                 DefaultTableModel model = (DefaultTableModel) tm;

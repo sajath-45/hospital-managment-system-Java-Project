@@ -63,21 +63,21 @@ public class AppointmentController implements ActionListener  {
     }
     
       
-    private void createSpecialityComboBox(){
+    private void createSpecialityComboBox(){//populates the speciality combo box (drop down) by the available speciality reffrence in te view 
         SpecialityRefference refference=new SpecialityRefference();
         DefaultComboBoxModel newModel = new DefaultComboBoxModel(refference.getSpecialityTypes().toArray());
          getView().getSpecialityComboBox().setModel( newModel );
          this.createDoctorComboBox(getView().getSpecialityComboBox().getSelectedItem().toString());
          
     }
-    private void createPatientComboBox(){
+    private void createPatientComboBox(){////populates the patient combo box(drop down) by the available patients
         Object[] items= FileService.getAllPatients().toArray();
          DefaultComboBoxModel newModel = new DefaultComboBoxModel(items);
          getView().getPatientComboBox().setModel( newModel );     
         
         
     }
-    private void  createDoctorComboBox(String speciality){
+    private void  createDoctorComboBox(String speciality){//populates the Medical officer combo box (drop down)by the available medical oficer 
         if(!"".equals(speciality)){
         Object[] items= FileService.getMoBySpeciality(speciality).toArray();     
                getView().getMedicalOfficerComboBox().setModel( new DefaultComboBoxModel(items) );
@@ -86,7 +86,7 @@ public class AppointmentController implements ActionListener  {
     }
     
     
-    public void addAppoinment(){
+    public void addAppoinment(){//this fucntion gets the all information for new appointment from the add view and create a new appoinment object
         getModel().setAppointmentNumber(getView().getAppointmentNumber());
          getModel().setAppointmentDate(PipeService.getDateSimpleFormat(getView().getDateChooser().getDate()));
          getModel().setPatient((Patient) getView().getPatientComboBox().getSelectedItem());
@@ -96,17 +96,17 @@ public class AppointmentController implements ActionListener  {
          getModel().setSpeciality(getView().getSpecialityComboBox().getSelectedItem().toString());
          getModel().setStatus(getView().getAppoinmentStatus());
          getModel().setSymtomps(getView().getSysmtompsTextField().getText());
-        FileService.addLine(FileService.getAppointmentsFilePath(),getModel().toString());
+        FileService.addLine(FileService.getAppointmentsFilePath(),getModel().toString());//adding the appointment record to file
       
-         this.closeView();
+         this.updateView();
     }
-    public  void deleteAppoinment(){
+    public  void deleteAppoinment(){//delete appointment from appointment txt file
       if(AlertService.optionalPlane("Would you like to Delete the Appoinment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getAppointmentsFilePath(),getModel().toString());     
         
                     
       }
-       this.closeView();              
+       this.updateView();              
     
     }
     public void approveAppointment(){
@@ -115,21 +115,21 @@ public class AppointmentController implements ActionListener  {
         FileService.addLine(FileService.getAppointmentsFilePath(),getModel().toString());
                     
       
-       this.closeView();
+       this.updateView();
         
         
     }
-    public void editAppointment(){
+    public void editAppointment(){//function to edit the appointment
         if(AlertService.optionalPlane("Would you like to Edit the Appointment Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getAppointmentsFilePath(),getModel().toString());     
         
                 addAppoinment();    
       }
-        closeView();
+        updateView();
         
     }
     
-    public void closeView(){
+    public void updateView(){// function which updates the appointment table after a appointment is added,deleted or edited or changes status
          if(CurrentUser.getUserRole().equalsIgnoreCase("Patient")){
             getDashboardController().getPatientAppointmentTable(CurrentUser.getUser().getIdCardNo());
         }
@@ -152,8 +152,8 @@ public class AppointmentController implements ActionListener  {
     }
     
       @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.print(e.getActionCommand());
+    public void actionPerformed(ActionEvent e) {//this function listens to a action preformed in the view eg adding new appointment or editing it
+        
         if(e.getActionCommand().equalsIgnoreCase("add")){
             addAppoinment();
         }

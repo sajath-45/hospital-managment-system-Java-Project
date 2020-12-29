@@ -49,7 +49,7 @@ public class VisitorController implements ActionListener {
     }
     
     public void initController(){
-        getView().setFileChooser();
+        getView().setFileChooser();//intialzing the file chooser
          getView().getOpenFileChooserBtn().addActionListener ((ActionEvent e) -> {
             
             openFileBtn();
@@ -57,7 +57,7 @@ public class VisitorController implements ActionListener {
     }
     
     
-    public void addVisitor(){
+    public void addVisitor(){//adding new visitor record by obtaining the details from the view
          String purpose= getView().getPurposeField().getText();
         String idCard= getView().getIdCardField().getText();
         String name= getView().getNameField().getText();
@@ -72,7 +72,7 @@ public class VisitorController implements ActionListener {
        
         updateView();
     }
-    public void editVisitor(){
+    public void editVisitor(){//function to edit a Visitor record 
         if(AlertService.optionalPlane("Would you like to Edit the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getVisitorsFilePath(),getModel().toString());     
             addVisitor();    
@@ -81,7 +81,7 @@ public class VisitorController implements ActionListener {
         
         
     }
-    public void deleteVisitor(){
+    public void deleteVisitor(){//function to deletes a Visitor record
           if(AlertService.optionalPlane("Would you like to Delete the Visitor Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
         FileService.deleteRecord(FileService.getVisitorsFilePath(),getModel().toString());                  
       }
@@ -95,7 +95,7 @@ public class VisitorController implements ActionListener {
     
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {//this function listens to a action preformed in the view eg: adding new Visitor or editing it
         System.out.print(e.getActionCommand());
         if(e.getActionCommand().equalsIgnoreCase("add")){
             addVisitor();
@@ -103,26 +103,24 @@ public class VisitorController implements ActionListener {
         else if(e.getActionCommand().equalsIgnoreCase("Save")){
            editVisitor();
         }
-        else if(e.getActionCommand().equalsIgnoreCase("update")){
-            
-        }
+       
      }
       
-    public void openFileBtn(){
+    public void openFileBtn(){//function opens up the file chooser panel to select the visitor record attachment
           int returnValue =getView().getFileChooser().showOpenDialog(getView());
             if(returnValue==JFileChooser.APPROVE_OPTION){
                  getView().setAttachment(getView().getFileChooser().getSelectedFile());
                 getView().getFileLabel().setText(getView().getAttachment().getName());
             }
             else{
-                getView().setAttachment(null);
+                getView().setAttachment(null);//attachmentt set to null if no attachment is selected
                  
                  getView().getFileLabel().setText("no file choosen");
             }
     }  
-    public void updateView(){
+    public void updateView(){//functions updates the visitor table after a new visitor recordhas been added or edited or deleted
         getDashboardController().getVisitorRecords();
-        this.getView().dispose();
+        this.getView().dispose();//closes the view
         
         
         

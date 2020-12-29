@@ -58,8 +58,8 @@ public class ReceptionistController implements ActionListener {
         return dashboard;
     }
 
-    public void initController(){
-        getView().getChooseFileBtn().addActionListener(e->openFileChooser());
+    public void initController(){//this is called when this controller is created and this method contains all the functions required to display the view
+        getView().getChooseFileBtn().addActionListener(e->openFileChooser());//adding function listner s to buttons available in the view
         getView().getPhotoAddBtn().addActionListener(e->addPhoto());
          getView().getphotoLabel().addMouseListener(labelListner);
        getView().getphotoLabel().setName("changePhoto");
@@ -68,7 +68,7 @@ public class ReceptionistController implements ActionListener {
     
     //methods
     
-      MouseListener labelListner =new MouseAdapter(){
+      MouseListener labelListner =new MouseAdapter(){//methods checks and run if any mouse event has occured in the view eg:mouse clicked or mouse pressed
      @Override
      public void mouseClicked(MouseEvent e) { 
      if( ((JLabel)e.getSource()).getName().equalsIgnoreCase("changePhoto")){
@@ -81,7 +81,7 @@ public class ReceptionistController implements ActionListener {
    };
    
      
-    public void openFileChooser(){
+    public void openFileChooser(){//opens the file chooser panel to choose cv attachment for the user
         
         int returnValue =getView().getFileChooser().showOpenDialog(getView());
             if(returnValue==JFileChooser.APPROVE_OPTION){
@@ -97,7 +97,7 @@ public class ReceptionistController implements ActionListener {
             }
         
     }
-    public void addPhoto(){
+    public void addPhoto(){//opens the file chooser panel to choose photo for the user
          int returnValue =getView().getFileChooser().showOpenDialog(getView());
             if(returnValue==JFileChooser.APPROVE_OPTION){
                 getView().setPhotoAttachment(getView().getFileChooser().getSelectedFile());
@@ -113,33 +113,33 @@ public class ReceptionistController implements ActionListener {
              checkPhoto();
         
     }
-    public void checkPhoto(){
+    public void checkPhoto(){//this function checks if a photo is already selected
         if(getView().getphotoChoosen()){ 
            getView().getPhotoAddBtn().setVisible(false);
            setStaffPhoto( getView().getphotoLabel(),getView().getPhotoAttachment());
            
         }
     }
-    public void setStaffPhoto(JLabel label,File imageFile){
+    public void setStaffPhoto(JLabel label,File imageFile){//this function helps to bind the image as a icon to the photo label
        
 
         BufferedImage img = null;
             try {
-                img = ImageIO.read(imageFile);
+                img = ImageIO.read(imageFile);//Image I/O recognises the contents of the file as a JPEG format image, and decodes it into a BufferedImage which can be directly used by Java 2D.
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
-        Image.SCALE_SMOOTH);
+        Image.SCALE_SMOOTH);// sets the photos image height and width to same a the size of label
         
         
             ImageIcon icon = new ImageIcon(dimg);
             icon.getImage().flush();
-            label.setIcon(icon);
+            label.setIcon(icon);//the photo attachment is set as a icon to the label
         
     }
     
-    public void addReceptionist(){
+    public void addReceptionist(){//function to gett all the fields from view and create a new Rceptionist user
         String name=getView().getNameField().getText();
         String gender=getView().getGenderComboBox().getSelectedItem().toString();
         String mobile=getView().getPhoneNumberField().getText();
@@ -156,35 +156,35 @@ public class ReceptionistController implements ActionListener {
         Receptionist receptionist =new Receptionist(userName,name,gender,mobile,id,dob,address,martialStatus,id,staffId,staffEmail,dateJoined,file,imageFile);
         FileService.addLine(FileService.getReceptionistFilePath(), receptionist.toString2());
     
-        this.closeView(); 
+        this.updateView(); 
     }
-    public void deleteReceptionist(){
-           if(AlertService.optionalPlane("Would you like to Delete the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+    public void deleteReceptionist(){//function to delete  the Receptionist record
+           if(AlertService.optionalPlane("Would you like to Delete the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of delete receptionist record and checks if its a yes or no
              FileService.deleteRecord(FileService.getReceptionistFilePath(),getModel().toString2());   
             }
-       this.closeView(); 
+       this.updateView(); 
         
     }
-    public void editReceptionist(){
-        if(AlertService.optionalPlane("Would you like to Edit the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
+    public void editReceptionist(){//function to edit the values of the Receptionist
+        if(AlertService.optionalPlane("Would you like to Edit the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of edit receptionist record and checks if its a yes or no
         FileService.deleteRecord(FileService.getReceptionistFilePath(),getModel().toString2());     
-        addReceptionist();    
+        addReceptionist();    //adding the latest records
       }   
-        closeView();
+        updateView();
         
     }
-    public void resetReceptionistPassword(){
-        if(AlertService.optionalPlane("Would you like to Reset Password of the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){
-        FileService.deleteRecord(FileService.getReceptionistFilePath(),getModel().toString2());  
+    public void resetReceptionistPassword(){//resets the password of the user to his id card number
+        if(AlertService.optionalPlane("Would you like to Reset Password of the Receptionist Record?", "Warning!")==JOptionPane.YES_NO_OPTION){//prompt for confirmation of reset password of user record and checks if its a yes or no
+        FileService.deleteRecord(FileService.getReceptionistFilePath(),getModel().toString2()); //remove the previos record 
         getModel().setStrPassword(getModel().getIdCardNo());
-          FileService.addLine(FileService.getReceptionistFilePath(), getModel().toString2());  
+          FileService.addLine(FileService.getReceptionistFilePath(), getModel().toString2());  //add new record with new password
       }   
-        closeView();
+        updateView();
         
     }
     
       @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {//this function listens to a action preformed in the view eg: adding new Receptionist or editing it
         System.out.print(e.getActionCommand());
         if(e.getActionCommand().equalsIgnoreCase("add")){
             addReceptionist();
@@ -197,7 +197,7 @@ public class ReceptionistController implements ActionListener {
          }
 
     
-     public void closeView(){
+     public void updateView(){// updates the Receptionist table if a new record is added or edited or deleted
          getDashboardController().getAllReceptionist();
         this.getView().dispose();
         

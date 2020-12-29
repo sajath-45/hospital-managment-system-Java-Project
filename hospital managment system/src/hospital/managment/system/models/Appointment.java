@@ -22,7 +22,7 @@ public class Appointment {
     private String symtomps;
     private String speciality;
 
-    public Appointment(){
+    public Appointment(){//default constructor
         
     }
     
@@ -40,11 +40,11 @@ public class Appointment {
     }
     
     
-    public void setPatient(Patient patient){
+    public void setPatient(Patient patient){//method to set the patient of appoinment
         this.patient=patient;
         
     }
-    public void setMedicalOfficer(MedicalOfficer officer){
+    public void setMedicalOfficer(MedicalOfficer officer){//method to set the Medical Officer of appointment
         this.officer=officer;
         
     }
@@ -72,7 +72,7 @@ public class Appointment {
     }
     
     
-    public Patient getPatient(){
+    public Patient getPatient(){//get method to get the patient of appointment
         return this.patient;
     }
       public MedicalOfficer getMedicalOfficer(){
@@ -101,7 +101,7 @@ public class Appointment {
     public String toString(){
         return getAppointmentNumber()+","+getAppointmentDate()+","+ getAppointmentTime()+","+getStatus()+","+getPatient().getName()+","+getPatient().getIdCardNo()+","+getMedicalOfficer().getName()+","+getSpeciality()+","+getSymtomps()+","+getMedicalOfficer().getIdCardNo();
     }  
-   public static Appointment readAppoinment(String line){
+   public static Appointment readAppoinment(String line){// method to return the new appoinment after reading from file
 String[] data=line.split(",");
 String appoinmentNo=data[0];
 String date=data[1];
