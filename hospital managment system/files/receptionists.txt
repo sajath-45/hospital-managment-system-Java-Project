@@ -1,3 +1,3 @@
 cena123,john cena,Male,789789789,199929003399,11/12/1998,10 wijayab mawatha,Single,199929003399,456,john@gmail.com,17/12/2020,README.md,null
-lm10,messo,Male,01145763,2003939851,25/12/2020,spain barcelona,Married,envil123,124,messi@gmail.com,09/12/2020,null,/home/sajath/Desktop/java project/usjp-Java-Project/hospital managment system/src/resources/old/doctor (4).png
-rec,old rec,Male,0785469,78787878,26/12/2020,45 kalubowila,Married,78787878,789,nreo@gmail.com,03/12/2020,null,null
+rec,bucky,Male,0785469,78787878,26/12/2020,45 kalubowila,Married,78787878,789,nreo@gmail.com,03/12/2020,null,null
+lm10,messo,Male,01145763,2003939851,25/12/2020,spain barcelona,Married,envil123,124,messi@gmail.com,09/12/2020,null,/home/sajath/DOCTORDETAILS (2).png

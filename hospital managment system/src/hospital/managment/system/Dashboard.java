@@ -17,20 +17,16 @@ import hospital.managment.system.models.Appointment;
 import hospital.managment.system.models.PipeService;
 import hospital.managment.system.models.Receptionist;
 import hospital.managment.system.models.User;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -54,11 +50,10 @@ public class Dashboard extends javax.swing.JFrame  {
     public Dashboard(String role) {
         initComponents();
         this.setVisible(true);
-        //setHome();
+        
         setRole(role);
-        //setSidePanel(role);
-        //setTables();
-        //setSideBarPanels();
+        SettingsController settingsController = new SettingsController(CurrentUser.getUser(),this);
+        settingsController.initController();
         setController(new DashboardController(null,this));
         getController().initController(role);
         
@@ -522,6 +517,13 @@ public class Dashboard extends javax.swing.JFrame  {
     public JButton getGenerateAppointmentReportPdfBtn(){
         return this.appoinmentReportPdfBtn;
     }
+    public JButton getAppointmentReportPrepareBtn(){
+        return this.appointmentReportPrepareBtn;
+    }
+    
+    public JButton getUserLogPrepareBtn(){
+        return this.userLogPrepareBtn;
+    }
     public JButton getGenerateAppointmentReportCsvBtn(){
         return this.appointmentReportCsvBtn;
     }
@@ -582,6 +584,16 @@ public class Dashboard extends javax.swing.JFrame  {
     public JButton getSaveUserBtn(){
         return saveUserBtn;
     }
+    public JButton getPhotoAddBtn(){
+        return photoAddBtn;
+    }
+    public JLabel getUserPhotoLabel(){
+        return this.userPhotoLabel;
+    }
+    public JPanel getPhotoUploadedPanel(){
+      return  this.photoUploadedPanel1;
+    }
+    
     
    
      
@@ -1097,6 +1109,7 @@ public class Dashboard extends javax.swing.JFrame  {
         appointmentReportCsvBtn = new javax.swing.JButton();
         appointmentReportDateChooser = new com.toedter.calendar.JDateChooser();
         appointmentReportMoComboBox = new javax.swing.JComboBox<>();
+        appointmentReportPrepareBtn = new javax.swing.JButton();
         userLogReportPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         userLogReportTable = new javax.swing.JTable();
@@ -1104,6 +1117,7 @@ public class Dashboard extends javax.swing.JFrame  {
         userLoginReportComboBox = new javax.swing.JComboBox<>();
         userLogReportPdfBtn = new javax.swing.JButton();
         userLogReportCsvBtn = new javax.swing.JButton();
+        userLogPrepareBtn = new javax.swing.JButton();
         patientCreditialReportPanel = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         patientCredintialTable = new javax.swing.JTable();
@@ -1151,8 +1165,8 @@ public class Dashboard extends javax.swing.JFrame  {
         jLabel41 = new javax.swing.JLabel();
         Passwordfield = new javax.swing.JTextField();
         photoUploadedPanel1 = new javax.swing.JPanel();
-        photoAddBtn2 = new javax.swing.JButton();
-        receptionistPhotoLabel = new javax.swing.JLabel();
+        userPhotoLabel = new javax.swing.JLabel();
+        photoAddBtn = new javax.swing.JButton();
         jLabel65 = new javax.swing.JLabel();
         usersPanel = new javax.swing.JPanel();
         moScrollPanel = new javax.swing.JScrollPane();
@@ -1561,8 +1575,7 @@ public class Dashboard extends javax.swing.JFrame  {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminSidePanelLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(adminSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminSidePanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(adminSidePanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(profileImg)))
@@ -2255,11 +2268,11 @@ public class Dashboard extends javax.swing.JFrame  {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Appointment No", "Date", "Time", "Status", "Patient Name", "Id Card No", "Medical Officer", "Speciality", "Sysmtomps", "Staff Id"
+                "Appointment No", "Date", "Time", "Status", "Patient Name", "Patient Id", "Medical Officer", "Speciality", "Sysmtomps", "Medical Officer Id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
@@ -2289,6 +2302,7 @@ public class Dashboard extends javax.swing.JFrame  {
             appointmentTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             appointmentTable.getColumnModel().getColumn(6).setPreferredWidth(100);
             appointmentTable.getColumnModel().getColumn(8).setPreferredWidth(120);
+            appointmentTable.getColumnModel().getColumn(9).setPreferredWidth(120);
         }
 
         javax.swing.GroupLayout appointmentPanelLayout = new javax.swing.GroupLayout(appointmentPanel);
@@ -2589,6 +2603,8 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
+        appointmentReportPrepareBtn.setText("Prepare");
+
         javax.swing.GroupLayout appoinmentReportPanelLayout = new javax.swing.GroupLayout(appoinmentReportPanel);
         appoinmentReportPanel.setLayout(appoinmentReportPanelLayout);
         appoinmentReportPanelLayout.setHorizontalGroup(
@@ -2601,16 +2617,18 @@ public class Dashboard extends javax.swing.JFrame  {
                     .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
                         .addGroup(appoinmentReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
-                                .addGap(188, 188, 188)
-                                .addComponent(appointmentReportDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(127, 127, 127)
-                                .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
                                 .addGap(120, 120, 120)
                                 .addComponent(appoinmentReportPdfBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(188, 188, 188)
-                                .addComponent(appointmentReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(appointmentReportCsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(appoinmentReportPanelLayout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(appointmentReportDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86)
+                                .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(appointmentReportPrepareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 164, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         appoinmentReportPanelLayout.setVerticalGroup(
@@ -2619,7 +2637,8 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addGap(32, 32, 32)
                 .addGroup(appoinmentReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(appointmentReportDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(appointmentReportMoComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(appointmentReportPrepareBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
@@ -2700,6 +2719,8 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
+        userLogPrepareBtn.setText("Prepare");
+
         javax.swing.GroupLayout userLogReportPanelLayout = new javax.swing.GroupLayout(userLogReportPanel);
         userLogReportPanel.setLayout(userLogReportPanelLayout);
         userLogReportPanelLayout.setHorizontalGroup(
@@ -2710,10 +2731,12 @@ public class Dashboard extends javax.swing.JFrame  {
                         .addContainerGap()
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE))
                     .addGroup(userLogReportPanelLayout.createSequentialGroup()
-                        .addGap(169, 169, 169)
+                        .addGap(88, 88, 88)
                         .addComponent(userLoginReportDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(225, 225, 225)
+                        .addGap(131, 131, 131)
                         .addComponent(userLoginReportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(userLogPrepareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(userLogReportPanelLayout.createSequentialGroup()
@@ -2729,7 +2752,8 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addGap(24, 24, 24)
                 .addGroup(userLogReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userLoginReportComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(userLoginReportDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(userLoginReportDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userLogPrepareBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
@@ -3020,27 +3044,27 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
-        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel42.setText("Name");
 
-        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel50.setText("Gender");
 
         genderComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Neutral" }));
 
-        jLabel59.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel59.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel59.setText("Date of birth");
 
-        jLabel60.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel60.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel60.setText("Phone no");
 
-        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel61.setText("NIC no");
 
-        jLabel62.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel62.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel62.setText("Address");
 
-        jLabel63.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel63.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel63.setText("Marital status");
 
         martialStatusComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Married", "Single" }));
@@ -3061,7 +3085,7 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
-        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel38.setText("Username");
 
         userNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -3070,7 +3094,7 @@ public class Dashboard extends javax.swing.JFrame  {
             }
         });
 
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel41.setText("Password");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -3081,7 +3105,7 @@ public class Dashboard extends javax.swing.JFrame  {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel41))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
@@ -3104,21 +3128,22 @@ public class Dashboard extends javax.swing.JFrame  {
 
         photoUploadedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        photoAddBtn2.setText("add");
-        photoAddBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                photoAddBtn2ActionPerformed(evt);
-            }
-        });
-        photoUploadedPanel1.add(photoAddBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
-
-        receptionistPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        userPhotoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                receptionistPhotoLabelMousePressed(evt);
+                userPhotoLabelMousePressed(evt);
             }
         });
-        photoUploadedPanel1.add(receptionistPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
+        photoUploadedPanel1.add(userPhotoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 150));
 
+        photoAddBtn.setText("add");
+        photoAddBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                photoAddBtnActionPerformed(evt);
+            }
+        });
+        photoUploadedPanel1.add(photoAddBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jLabel65.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel65.setText("Photo");
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
@@ -3128,14 +3153,14 @@ public class Dashboard extends javax.swing.JFrame  {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel63, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(jLabel63, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel62, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel59))
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -3153,7 +3178,7 @@ public class Dashboard extends javax.swing.JFrame  {
                                     .addGroup(settingsPanelLayout.createSequentialGroup()
                                         .addGap(187, 187, 187)
                                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(24, 24, 24)
                                 .addComponent(photoUploadedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
@@ -3170,7 +3195,7 @@ public class Dashboard extends javax.swing.JFrame  {
                         .addGap(6, 6, 6)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
                                 .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(142, 142, 142))
                             .addGroup(settingsPanelLayout.createSequentialGroup()
@@ -3189,14 +3214,15 @@ public class Dashboard extends javax.swing.JFrame  {
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PhoneNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(39, 39, 39)
+                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PhoneNofield, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -3220,11 +3246,11 @@ public class Dashboard extends javax.swing.JFrame  {
                             .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(196, 196, 196)
                         .addComponent(saveUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         bgPanel.add(settingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1090, 1000));
@@ -4445,15 +4471,15 @@ public class Dashboard extends javax.swing.JFrame  {
       // saveUser();
     }//GEN-LAST:event_saveUserBtnActionPerformed
 
-    private void photoAddBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtn2ActionPerformed
+    private void photoAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoAddBtnActionPerformed
         // TODO add your handling code here:
      
-    }//GEN-LAST:event_photoAddBtn2ActionPerformed
+    }//GEN-LAST:event_photoAddBtnActionPerformed
 
-    private void receptionistPhotoLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistPhotoLabelMousePressed
+    private void userPhotoLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPhotoLabelMousePressed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_receptionistPhotoLabelMousePressed
+    }//GEN-LAST:event_userPhotoLabelMousePressed
 
     private void patientsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsTableMousePressed
         // TODO add your handling code here:
@@ -5493,6 +5519,7 @@ private void setPatientCredintialReportTable(){
     private com.toedter.calendar.JDateChooser appointmentReportDateChooser;
     private javax.swing.JComboBox<String> appointmentReportMoComboBox;
     private javax.swing.JPanel appointmentReportOptionPanel;
+    private javax.swing.JButton appointmentReportPrepareBtn;
     private javax.swing.JTable appointmentReportTable;
     private javax.swing.JTable appointmentTable;
     private javax.swing.JButton approveAppoinmentBtn;
@@ -5655,7 +5682,7 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel patientSettingBtnPanel;
     private javax.swing.JPanel patientSidePanel;
     private javax.swing.JTable patientsTable;
-    private javax.swing.JButton photoAddBtn2;
+    private javax.swing.JButton photoAddBtn;
     private javax.swing.JPanel photoUploadedPanel1;
     private javax.swing.JLabel profileImg;
     private javax.swing.JLabel profileImg1;
@@ -5665,7 +5692,6 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JPanel receptionMailOptions;
     private javax.swing.JPanel receptionSidePanel;
     private javax.swing.JPanel receptionistComplaintOptions;
-    private javax.swing.JLabel receptionistPhotoLabel;
     private javax.swing.JScrollPane receptionistScrollPanel;
     private javax.swing.JPanel receptionistSettingBtnPanel;
     private javax.swing.JTable receptionistTable;
@@ -5686,6 +5712,7 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JList<String> specialityRefferenceList;
     private javax.swing.JPanel userBtnPanel;
     private javax.swing.JPanel userBtnPanel2;
+    private javax.swing.JButton userLogPrepareBtn;
     private javax.swing.JButton userLogReportCsvBtn;
     private javax.swing.JPanel userLogReportOptionPanel;
     private javax.swing.JPanel userLogReportPanel;
@@ -5698,6 +5725,7 @@ private void setPatientCredintialReportTable(){
     private javax.swing.JLabel userNameLabel1;
     private javax.swing.JLabel userNameLabel2;
     private javax.swing.JLabel userNameLabel3;
+    private javax.swing.JLabel userPhotoLabel;
     private javax.swing.JPanel usersMainOption;
     private javax.swing.JPanel usersPanel;
     private javax.swing.JPanel visitorBtnPanel1;

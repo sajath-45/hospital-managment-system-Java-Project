@@ -2,9 +2,9 @@
 3,23/12/2020,9 0 P.M,Approved,david,17829003939,ruwan,dental,tooth birtness,199852652
 1,21/12/2020,2 0 P.M,Approved,david,17829003939,sajath,cardio,fever and cough,199829003939
 6,05/12/2020,8 0 P.M,Approved,david,17829003939,sajath,cardio,s,199829003939
-5,18/12/2020,1 45 P.M,Approved,david,17829003939,sajath,cardio,chest brea,199829003939
 8,18/12/2020,1 30 A.M,Approved,yoosuf,123456,stark,cardio,ghjk,123456789
 7,26/12/2020,1 0 A.M,Approved,yoosuf,123456,lexi,cardio,asdsad,18892049506
 8,17/12/2020,5 0 P.M,Approved,yoosuf,123456,ruwan,dental,tooth pain,199852652
 9,24/12/2020,1 0 A.M,Approved,shadd,88844488,lexi,cardio,trdfyghj,18892049506
-10,16/12/2020,1 0 A.M,Pending,shadd,88844488,sajath,cardio,dsad,199829003939
+10,16/12/2020,1 0 A.M,Approved,shadd,88844488,sajath,cardio,dsad,199829003939
+5,18/12/2020,1 45 P.M,Completed,david,17829003939,sajath,cardio,chest brea,199829003939
